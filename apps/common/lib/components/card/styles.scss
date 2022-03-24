@@ -1,0 +1,29 @@
+@import "~lbh-frontend/lbh/base";
+@import "~govuk-frontend/govuk/helpers/media-queries";
+
+.mtfh-card {
+  padding: 10px;
+  border: 1px solid rgba(173, 171, 171, 0.4);
+  border-radius: 3px;
+
+  > * {
+    margin: 6px 0 0;
+  }
+
+  dd {
+    color: lbh-colour("lbh-grey-1");
+  }
+
+  a {
+    @include lbh-heading-h4;
+    margin: 0;
+  }
+
+  &-break {
+    border: none;
+    border-bottom: 1px solid #bfc1c3;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 160px;
+  }
+}

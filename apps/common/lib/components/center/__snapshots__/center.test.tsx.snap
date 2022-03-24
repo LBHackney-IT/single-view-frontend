@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders with both vertical and horizontal by default 1`] = `
+<div>
+  <div
+    class="mtfh-center mtfh-center--horizontal mtfh-center--vertical"
+  >
+    <div />
+  </div>
+</div>
+`;
+
+exports[`it renders with horizontal only 1`] = `
+<div>
+  <div
+    class="mtfh-center mtfh-center--horizontal"
+  >
+    <div />
+  </div>
+</div>
+`;
+
+exports[`it renders with vertical only 1`] = `
+<div>
+  <div
+    class="mtfh-center mtfh-center--vertical"
+  >
+    <div />
+  </div>
+</div>
+`;

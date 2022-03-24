@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders a icon with defaults 1`] = `
+<div>
+  <svg
+    class="mtfh-icon"
+    focusable="false"
+    height="1em"
+    viewBox="0 0 200 200"
+    width="1em"
+  >
+    <path
+      d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+      fill="currentColor"
+    />
+  </svg>
+</div>
+`;
+
+exports[`it renders a icon with inline color 1`] = `
+<div>
+  <svg
+    class="mtfh-icon"
+    focusable="false"
+    height="1em"
+    style="color: red;"
+    viewBox="0 0 200 200"
+    width="1em"
+  >
+    <path
+      d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+      fill="currentColor"
+    />
+  </svg>
+</div>
+`;

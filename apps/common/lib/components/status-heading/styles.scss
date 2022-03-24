@@ -1,0 +1,13 @@
+@import "~lbh-frontend/lbh/base";
+
+.mtfh-status-heading {
+  display: flex;
+  align-items: center;
+
+  &__title {
+    margin-top: 0;
+  }
+  > svg {
+    margin-right: 15px;
+  }
+}

@@ -1,0 +1,275 @@
+@import "~lbh-frontend/lbh/base";
+@import "~govuk-frontend/govuk/helpers/media-queries";
+@import "~govuk-frontend/govuk/helpers/focused";
+@import "~govuk-frontend/govuk/helpers/visually-hidden";
+@import "~govuk-frontend/govuk/helpers/links";
+
+$stroke-width: 2px;
+$stroke-width-large: 3px;
+$number-circle-size: 26px;
+$number-circle-size-large: 35px;
+$top-border: solid 2px govuk-colour("mid-grey");
+
+@mixin mtfh-stepper-vertical-line($line-style: solid) {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: 0;
+  height: 100%;
+  border-left: $line-style $stroke-width govuk-colour("mid-grey");
+  background: govuk-colour("white");
+}
+
+@mixin mtfh-stepper-line-position {
+  left: 0;
+  margin-left: ($number-circle-size / 2) - ($stroke-width / 2);
+}
+
+@mixin mtfh-stepper-line-position-large {
+  left: 0;
+  margin-left: ($number-circle-size-large / 2) - ($stroke-width-large / 2);
+  border-width: $stroke-width-large;
+}
+
+@mixin mtfh-stepper-font(
+  $size,
+  $tablet-size: $size,
+  $weight: normal,
+  $line-height: 1.3,
+  $tablet-line-height: $line-height
+) {
+  @include lbh-typography-common();
+  font-size: $size + px;
+  font-weight: $weight;
+  line-height: $line-height;
+
+  @include govuk-media-query($from: tablet) {
+    font-size: $tablet-size + px;
+    line-height: $tablet-line-height;
+  }
+}
+
+.mtfh-stepper {
+  margin-top: 0;
+  margin-bottom: govuk-spacing(6);
+
+  &.mtfh-stepper--large {
+    @include govuk-media-query($from: tablet) {
+      margin-bottom: govuk-spacing(9);
+    }
+  }
+}
+
+.mtfh-stepper__button {
+  color: $govuk-link-colour;
+  background: none;
+  border: 0;
+  margin: 0;
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+}
+
+.mtfh-stepper__button::-moz-focus-inner {
+  border: 0;
+}
+
+.mtfh-stepper__main-title {
+  margin: govuk-spacing(5) 0;
+}
+
+.mtfh-stepper__top-border {
+  border-top: 2px solid lbh-colour("lbh-primary-button");
+}
+
+.mtfh-stepper__button--title {
+  @include mtfh-stepper-font(19, $weight: bold, $line-height: 1.4);
+  display: inline-block;
+  padding: 0;
+  text-align: left;
+  color: govuk-colour("black");
+
+  .mtfh-stepper--large & {
+    @include mtfh-stepper-font(19, $tablet-size: 22, $weight: bold, $line-height: 1.4);
+  }
+}
+
+.mtfh-stepper__steps {
+  padding: 0;
+  margin: 0;
+}
+
+.mtfh-stepper__step {
+  position: relative;
+  padding-left: govuk-spacing(6) + govuk-spacing(3);
+  list-style: none;
+  margin: 0;
+
+  &:after {
+    @include mtfh-stepper-vertical-line;
+    @include mtfh-stepper-line-position;
+    top: govuk-spacing(3);
+  }
+
+  .mtfh-stepper--large & {
+    @include govuk-media-query($from: tablet) {
+      padding-left: govuk-spacing(9);
+
+      &:after {
+        @include mtfh-stepper-line-position-large;
+        top: govuk-spacing(6);
+      }
+    }
+  }
+}
+
+.mtfh-stepper__step:last-child {
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: 6;
+    bottom: 0;
+    left: 0;
+    margin-left: $number-circle-size / 4;
+    width: $number-circle-size / 2;
+    height: 0;
+    border-bottom: solid $stroke-width govuk-colour("mid-grey");
+  }
+
+  &:after {
+    height: -webkit-calc(100% - #{govuk-spacing(3)}); // fallback for iphone 4
+    height: calc(100% - #{govuk-spacing(3)});
+  }
+
+  .mtfh-stepper__help:after {
+    height: 100%;
+  }
+
+  .mtfh-stepper--large & {
+    @include govuk-media-query($from: tablet) {
+      &:before {
+        margin-left: $number-circle-size-large / 4;
+        width: $number-circle-size-large / 2;
+        border-width: $stroke-width-large;
+      }
+
+      &:after {
+        height: calc(100% - #{govuk-spacing(6)});
+      }
+    }
+  }
+}
+
+.mtfh-stepper__step--active {
+  &:last-child:before,
+  .mtfh-stepper__circle--number,
+  &:after,
+  .mtfh-stepper__help:after {
+    border-color: govuk-colour("black");
+  }
+}
+
+.mtfh-stepper__circle {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 5;
+  top: govuk-spacing(3);
+  left: 0;
+  width: $number-circle-size;
+  height: $number-circle-size;
+  color: govuk-colour("black");
+  background: govuk-colour("white");
+  border-radius: 100px;
+  text-align: center;
+
+  .mtfh-stepper--large & {
+    @include govuk-media-query($from: tablet) {
+      top: govuk-spacing(6);
+      width: $number-circle-size-large;
+      height: $number-circle-size-large;
+    }
+  }
+}
+
+.mtfh-stepper__circle--number {
+  @include mtfh-stepper-font(16, $weight: bold, $line-height: 23px);
+  border: solid $stroke-width govuk-colour("mid-grey");
+
+  .mtfh-stepper--large & {
+    @include mtfh-stepper-font(
+      16,
+      $tablet-size: 19,
+      $weight: bold,
+      $line-height: 23px,
+      $tablet-line-height: 30px
+    );
+
+    @include govuk-media-query($from: tablet) {
+      border-width: $stroke-width-large;
+    }
+  }
+}
+
+.mtfh-stepper__circle--logic {
+  @include mtfh-stepper-font(16, $weight: bold, $line-height: 28px);
+
+  .mtfh-stepper--large & {
+    @include mtfh-stepper-font(
+      16,
+      $tablet-size: 19,
+      $weight: bold,
+      $line-height: 28px,
+      $tablet-line-height: 34px
+    );
+  }
+}
+
+.mtfh-stepper__circle-inner {
+  float: right;
+  min-width: 100%;
+}
+
+.mtfh-stepper__circle-background {
+  $shadow-offset: 0.1em;
+  $shadow-colour: govuk-colour("white");
+
+  text-shadow: 0 -#{$shadow-offset} 0 $shadow-colour, $shadow-offset 0 0 $shadow-colour,
+    0 $shadow-offset 0 $shadow-colour, -#{$shadow-offset} 0 0 $shadow-colour;
+}
+
+.mtfh-stepper__circle-step-label,
+.mtfh-stepper__circle-step-colon {
+  @include govuk-visually-hidden;
+}
+
+.mtfh-stepper__header {
+  padding: govuk-spacing(3) 0;
+  border-top: $top-border;
+
+  .mtfh-stepper__button {
+    &:focus {
+      @include govuk-focused-text;
+
+      .mtfh-stepper__toggle-link {
+        @include govuk-focused-text;
+      }
+    }
+  }
+
+  .mtfh-stepper--large & {
+    @include govuk-media-query($from: tablet) {
+      padding: govuk-spacing(5) 0;
+    }
+  }
+}
+
+.mtfh-stepper__title {
+  @include govuk-text-colour;
+  @include mtfh-stepper-font(19, $weight: bold, $line-height: 1.4);
+  margin: 0;
+
+  .mtfh-stepper--large & {
+    @include mtfh-stepper-font(19, $tablet-size: 24, $weight: bold, $line-height: 1.4);
+  }
+}

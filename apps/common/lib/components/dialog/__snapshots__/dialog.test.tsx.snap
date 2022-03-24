@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<div>
+  <button
+    type="button"
+  >
+    Toggle
+  </button>
+</div>
+`;
+
+exports[`it renders correctly 2`] = `
+<div
+  aria-hidden="true"
+>
+  <button
+    type="button"
+  >
+    Toggle
+  </button>
+</div>
+`;
+
+exports[`it renders correctly with actions 1`] = `
+<div
+  aria-hidden="true"
+>
+  <button
+    type="button"
+  >
+    Toggle
+  </button>
+</div>
+`;

@@ -1,0 +1,14 @@
+{
+  "name": "single-view-frontend",
+  "scripts": {
+    "start": "concurrently \"yarn root\" \"yarn common\" \"yarn auth\" \"yarn header\" \"yarn single_view\"",
+    "root": "cd apps/root && yarn start",
+    "common": "cd apps/common && yarn start",
+    "auth": "cd apps/auth && yarn start",
+    "header": "cd apps/header && yarn start",
+    "single_view": "cd apps/single-view && yarn start"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}

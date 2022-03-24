@@ -1,0 +1,221 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it passes a11y on checkbox group 1`] = `
+<div>
+  <div
+    class="govuk-form-group lbh-form-group"
+    id="test"
+  >
+    <label
+      class="govuk-label lbh-label"
+      for="test-field"
+    >
+      Checkbox Test
+      
+    </label>
+    <div
+      class="govuk-checkboxes lbh-checkboxes"
+      id="test-field"
+    >
+      <div
+        class="govuk-checkboxes__item"
+      >
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-1"
+          name="test-1"
+          type="checkbox"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-1"
+        >
+          Label
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
+      >
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-2"
+          name="test-2"
+          type="checkbox"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-2"
+        >
+          Label2
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`it passes a11y on single checkbox 1`] = `
+<div>
+  <div
+    class="govuk-form-group lbh-form-group"
+    id="test"
+  >
+    <label
+      class="govuk-label lbh-label"
+      for="test-field"
+    >
+      Checkbox Test
+      
+    </label>
+    <div
+      class="govuk-checkboxes__item"
+    >
+      <input
+        class="govuk-checkboxes__input"
+        id="radio"
+        name="test"
+        type="checkbox"
+      />
+      <label
+        class="govuk-label govuk-checkboxes__label"
+        for="radio"
+      >
+        Label
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`it renders a checkbox 1`] = `
+<div>
+  <div
+    class="govuk-checkboxes__item"
+  >
+    <input
+      class="govuk-checkboxes__input"
+      id="test"
+      type="checkbox"
+    />
+    <label
+      class="govuk-label govuk-checkboxes__label"
+      for="test"
+    >
+      Label
+    </label>
+  </div>
+</div>
+`;
+
+exports[`it renders a checkbox with a hint 1`] = `
+<div>
+  <div
+    class="govuk-checkboxes__item"
+  >
+    <input
+      aria-describedby="test-hint"
+      class="govuk-checkboxes__input"
+      id="test"
+      type="checkbox"
+    />
+    <label
+      class="govuk-label govuk-checkboxes__label"
+      for="test"
+    >
+      Label
+    </label>
+    <span
+      class="govuk-hint govuk-checkboxes__hint lbh-hint"
+      id="test-hint"
+    >
+      A short description
+    </span>
+  </div>
+</div>
+`;
+
+exports[`it renders a group of checkboxes 1`] = `
+<div>
+  <div
+    class="govuk-checkboxes lbh-checkboxes"
+  >
+    <div
+      class="govuk-checkboxes__item"
+    >
+      <input
+        class="govuk-checkboxes__input"
+        id="test"
+        type="checkbox"
+      />
+      <label
+        class="govuk-label govuk-checkboxes__label"
+        for="test"
+      >
+        Label
+      </label>
+    </div>
+    <div
+      class="govuk-checkboxes__item"
+    >
+      <input
+        class="govuk-checkboxes__input"
+        id="test2"
+        type="checkbox"
+      />
+      <label
+        class="govuk-label govuk-checkboxes__label"
+        for="test2"
+      >
+        Label2
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`it renders a group of checkboxes with a conditional 1`] = `
+<div>
+  <div
+    class="govuk-checkboxes govuk-checkboxes--conditionals lbh-checkboxes"
+  >
+    <div
+      class="govuk-checkboxes__item"
+    >
+      <input
+        aria-controls="conditional"
+        aria-expanded="false"
+        class="govuk-checkboxes__input"
+        id="test"
+        type="checkbox"
+      />
+      <label
+        class="govuk-label govuk-checkboxes__label"
+        for="test"
+      >
+        Label
+      </label>
+    </div>
+    <div
+      class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden"
+      id="conditional"
+    >
+      Hello
+    </div>
+    <div
+      class="govuk-checkboxes__item"
+    >
+      <input
+        class="govuk-checkboxes__input"
+        id="test2"
+        type="checkbox"
+      />
+      <label
+        class="govuk-label govuk-checkboxes__label"
+        for="test2"
+      >
+        Label2
+      </label>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,27 @@
+@import "~lbh-frontend/lbh/base";
+@import "~lbh-frontend/lbh/components/lbh-fieldset/fieldset";
+
+.govuk-fieldset > .govuk-visually-hidden + .mtfh-fieldset__content {
+  &,
+  & > *:first-child {
+    margin-top: 0;
+  }
+}
+
+.mtfh-fieldset {
+  &--indent > .mtfh-fieldset__content {
+    padding-left: govuk-spacing(3);
+    border-left: $govuk-border-width-form-group-error solid lbh-colour("lbh-grey-2");
+  }
+
+  &--error > .mtfh-fieldset__content {
+    padding-left: govuk-spacing(3);
+    border-left: $govuk-border-width-form-group-error solid lbh-colour("lbh-error");
+  }
+
+  &__content {
+    &:empty {
+      margin-top: 0;
+    }
+  }
+}

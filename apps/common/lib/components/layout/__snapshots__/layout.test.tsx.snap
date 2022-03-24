@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders a side on the right 1`] = `
+<div>
+  <div
+    class="mtfh-layout mtfh-layout--right"
+  >
+    <div
+      id="content"
+    />
+    <div
+      class="mtfh-layout__container"
+    >
+      <div
+        class="mtfh-layout__aside"
+      >
+        <div
+          id="side"
+        >
+          Side Bar
+        </div>
+      </div>
+      <div
+        class="mtfh-layout__main"
+      >
+        <div
+          id="main"
+        >
+          Main
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`it renders correctly 1`] = `
+<div>
+  <div
+    class="mtfh-layout"
+  >
+    <div
+      id="backLink"
+    >
+      Back Link
+    </div>
+    <div
+      id="content"
+    />
+    <div
+      id="top"
+    >
+      Top
+    </div>
+    <div
+      class="mtfh-layout__container"
+    >
+      <div
+        class="mtfh-layout__aside"
+      >
+        <div
+          id="side"
+        >
+          Side Bar
+        </div>
+      </div>
+      <div
+        class="mtfh-layout__main"
+      >
+        <div
+          id="main"
+        >
+          Main
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`it renders correctly without a side 1`] = `
+<div>
+  <div
+    class="mtfh-layout mtfh-layout--narrow"
+  >
+    <div
+      id="content"
+    />
+    <div
+      class="mtfh-layout__container"
+    >
+      <div
+        class="mtfh-layout__main"
+      >
+        <div
+          id="main"
+        >
+          Main
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it can render a 'chevron' variant 1`] = `
+<div>
+  <button
+    class="govuk-button lbh-button lbh-button--chevron"
+    type="button"
+  >
+    Chevron icon variant
+    <svg
+      fill="none"
+      height="22"
+      viewBox="0 0 20 22"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clip-rule="evenodd"
+        d="M0 0H8.54573L20 10H11.4543L0 0Z"
+        fill="white"
+        fill-rule="evenodd"
+      />
+      <path
+        clip-rule="evenodd"
+        d="M0 22L8.54573 22L20 10H11.4543L0 22Z"
+        fill="#96CCAE"
+        fill-rule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`it can render an 'add' variant (without icon if loading) 1`] = `
+<div>
+  <button
+    aria-disabled="true"
+    class="govuk-button lbh-button govuk-button--primary lbh-button--add"
+    disabled=""
+    type="button"
+  >
+    <span
+      class="button-loading-indicator"
+    >
+      <span>
+        Loading...
+      </span>
+    </span>
+    Add icon variant
+  </button>
+</div>
+`;
+
+exports[`it can render an 'add' variant 1`] = `
+<div>
+  <button
+    class="govuk-button lbh-button govuk-button--primary lbh-button--add"
+    type="button"
+  >
+    <svg
+      height="12"
+      viewBox="0 0 12 12"
+      width="12"
+    >
+      <path
+        d="M6.94 0L5 0V12H6.94V0Z"
+      />
+      <path
+        d="M12 5H0V7H12V5Z"
+      />
+    </svg>
+    Add icon variant
+  </button>
+</div>
+`;
+
+exports[`it can render as a link 1`] = `
+<div>
+  <a
+    class="govuk-button lbh-button"
+    href="/"
+  >
+    Test Link
+  </a>
+</div>
+`;
+
+exports[`it renders correctly 1`] = `
+<div>
+  <button
+    class="govuk-button lbh-button"
+    type="button"
+  >
+    Test Button
+  </button>
+</div>
+`;
+
+exports[`it renders the correct variant 1`] = `
+<div>
+  <button
+    class="govuk-button lbh-button govuk-button--secondary lbh-button--secondary"
+    type="button"
+  >
+    Test Link
+  </button>
+</div>
+`;
+
+exports[`it shows a loading state 1`] = `
+<div>
+  <button
+    aria-disabled="true"
+    class="govuk-button lbh-button"
+    disabled=""
+    type="button"
+  >
+    <span
+      class="button-loading-indicator"
+    >
+      <span>
+        Loading...
+      </span>
+    </span>
+    Test Button
+  </button>
+</div>
+`;

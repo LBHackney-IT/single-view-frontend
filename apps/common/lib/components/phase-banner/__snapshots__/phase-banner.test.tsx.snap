@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders a default blue variant of the Phase Banner 1`] = `
+<div>
+  <div
+    class="container-max-width lbh-phase-banner"
+  >
+    <p
+      class="govuk-phase-banner__content"
+    >
+      <strong
+        class="lbh-tag--grey govuk-phase-banner__content__tag govuk-tag lbh-tag"
+      >
+        DEV
+      </strong>
+      <span
+        class="govuk-phase-banner__text"
+      >
+        <span>
+          Development Environment
+        </span>
+      </span>
+    </p>
+  </div>
+</div>
+`;
+
+exports[`it renders a green variant of the Phase Banner 1`] = `
+<div>
+  <div
+    class="container-max-width lbh-phase-banner"
+  >
+    <p
+      class="govuk-phase-banner__content"
+    >
+      <strong
+        class="lbh-tag--green govuk-phase-banner__content__tag govuk-tag lbh-tag"
+      >
+        BETA
+      </strong>
+      <span
+        class="govuk-phase-banner__text"
+      >
+        <span>
+          Production / Beta Environment
+        </span>
+      </span>
+    </p>
+  </div>
+</div>
+`;
+
+exports[`it renders a red variant of the Phase Banner 1`] = `
+<div>
+  <div
+    class="container-max-width lbh-phase-banner"
+  >
+    <p
+      class="govuk-phase-banner__content"
+    >
+      <strong
+        class="lbh-tag--green govuk-phase-banner__content__tag govuk-tag lbh-tag"
+      >
+        TEST
+      </strong>
+      <span
+        class="govuk-phase-banner__text"
+      >
+        <span>
+          Test Environment
+        </span>
+      </span>
+    </p>
+  </div>
+</div>
+`;
+
+exports[`it renders a yellow variant of the Phase Banner 1`] = `
+<div>
+  <div
+    class="container-max-width lbh-phase-banner"
+  >
+    <p
+      class="govuk-phase-banner__content"
+    >
+      <strong
+        class="lbh-tag--yellow govuk-phase-banner__content__tag govuk-tag lbh-tag"
+      >
+        STAGING
+      </strong>
+      <span
+        class="govuk-phase-banner__text"
+      >
+        <span>
+          Staging Environment
+        </span>
+      </span>
+    </p>
+  </div>
+</div>
+`;

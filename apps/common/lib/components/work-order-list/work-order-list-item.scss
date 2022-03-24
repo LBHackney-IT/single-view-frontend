@@ -1,0 +1,16 @@
+@import "~lbh-frontend/lbh/base";
+@import "~lbh-frontend/lbh/settings/colour-palette";
+
+.work-order-list-item {
+  a.repair-list__link:link {
+    color: lbh-colour(lbh-a01);
+  }
+  &__status {
+    font-weight: $lbh-font-weight-bold;
+  }
+  &__trim {
+    &::after {
+      content: "...";
+    }
+  }
+}

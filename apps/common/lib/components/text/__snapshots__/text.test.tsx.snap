@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<div>
+  <p
+    class="lbh-body-m"
+  >
+    Hello World
+  </p>
+</div>
+`;
+
+exports[`it renders with variants and sizes 1`] = `
+<div>
+  <p
+    class="lbh-body-l lbh-!-font-weight-bold"
+  >
+    Hello World
+  </p>
+</div>
+`;

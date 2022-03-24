@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it applies the correct variant 1`] = `
+<div>
+  <section
+    class="lbh-page-announcement lbh-page-announcement--warning"
+    role="alert"
+  >
+    <h3
+      class="lbh-page-announcement__title"
+    >
+      Announcement
+    </h3>
+  </section>
+</div>
+`;
+
+exports[`it does not render if no context or heading 1`] = `<div />`;
+
+exports[`it renders correctly 1`] = `
+<div>
+  <section
+    class="lbh-page-announcement"
+    role="alert"
+  >
+    <h3
+      class="lbh-page-announcement__title"
+    >
+      Announcement
+    </h3>
+    <div
+      class="lbh-page-announcement__content"
+    >
+      A description
+    </div>
+  </section>
+</div>
+`;
+
+exports[`it wont render if session storage is empty 1`] = `<div />`;

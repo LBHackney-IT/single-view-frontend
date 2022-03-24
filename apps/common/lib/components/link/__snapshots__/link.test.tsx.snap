@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it adds the correct attributes for external links 1`] = `
+<div>
+  <a
+    class="govuk-link lbh-link"
+    href="http://localhost"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    Test Link
+  </a>
+</div>
+`;
+
+exports[`it renders a back link 1`] = `
+<div>
+  <a
+    class="govuk-back-link lbh-back-link lbh-link--no-visited-state"
+    href="http://localhost"
+  >
+    Test Link
+  </a>
+</div>
+`;
+
+exports[`it renders a variant 1`] = `
+<div>
+  <a
+    class="govuk-link lbh-link lbh-link--muted lbh-link--no-visited-state"
+    href="http://localhost"
+  >
+    Test Link
+  </a>
+</div>
+`;
+
+exports[`it renders correctly 1`] = `
+<div>
+  <a
+    class="govuk-link lbh-link lbh-link--no-visited-state"
+    href="http://localhost"
+  >
+    Test Link
+  </a>
+</div>
+`;

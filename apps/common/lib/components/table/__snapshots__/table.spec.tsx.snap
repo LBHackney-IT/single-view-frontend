@@ -1,0 +1,728 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it displays a basic table passes a11y 1`] = `
+<div>
+  <table
+    class="govuk-table lbh-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          January
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £85
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £95
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          February
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £75
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £55
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          March
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £165
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £125
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`it displays a custom styled basic table passes a11y 1`] = `
+<div>
+  <table
+    class="govuk-table lbh-table customTableClass"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          January
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £85
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £95
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          February
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £75
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £55
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          March
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £165
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £125
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`it displays a table with a caption and header and passes a11y 1`] = `
+<div>
+  <table
+    class="govuk-table lbh-table"
+  >
+    <caption
+      class="govuk-table__caption lbh-table__caption"
+    >
+      Caption 1: Months and rates
+    </caption>
+    <thead
+      class="govuk-table__head"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Month you apply
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for bicycles
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for vehicles
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          January
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £85
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £95
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          February
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £75
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £55
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          March
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £165
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £125
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`it displays a table with a header and passes a11y 1`] = `
+<div>
+  <table
+    class="govuk-table lbh-table"
+  >
+    <thead
+      class="govuk-table__head"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Month you apply
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for bicycles
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for vehicles
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          January
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £85
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £95
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          February
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £75
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £55
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          March
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £165
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £125
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`it displays a table with a large caption and header and passes a11y 1`] = `
+<div>
+  <table
+    class="govuk-table lbh-table"
+  >
+    <caption
+      class="govuk-table__caption lbh-table__caption"
+    >
+      large
+       Caption 1: Months and rates
+    </caption>
+    <thead
+      class="govuk-table__head"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Month you apply
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for bicycles
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for vehicles
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          January
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £85
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £95
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          February
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £75
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £55
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          March
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £165
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £125
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`it displays a table with a medium caption and header and passes a11y 1`] = `
+<div>
+  <table
+    class="govuk-table lbh-table"
+  >
+    <caption
+      class="govuk-table__caption lbh-table__caption"
+    >
+      medium
+       Caption 1: Months and rates
+    </caption>
+    <thead
+      class="govuk-table__head"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Month you apply
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for bicycles
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for vehicles
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          January
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £85
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £95
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          February
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £75
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £55
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          March
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £165
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £125
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`it displays a table with a small caption and header and passes a11y 1`] = `
+<div>
+  <table
+    class="govuk-table lbh-table"
+  >
+    <caption
+      class="govuk-table__caption lbh-table__caption"
+    >
+      small
+       Caption 1: Months and rates
+    </caption>
+    <thead
+      class="govuk-table__head"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Month you apply
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for bicycles
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for vehicles
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          January
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £85
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £95
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          February
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £75
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £55
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          March
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £165
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £125
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`it displays a table with a xlarge caption and header and passes a11y 1`] = `
+<div>
+  <table
+    class="govuk-table lbh-table"
+  >
+    <caption
+      class="govuk-table__caption lbh-table__caption"
+    >
+      xlarge
+       Caption 1: Months and rates
+    </caption>
+    <thead
+      class="govuk-table__head"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Month you apply
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for bicycles
+        </th>
+        <th
+          class="govuk-table__cell govuk-table__header"
+        >
+          Rate for vehicles
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          January
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £85
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £95
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          February
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £75
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £55
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          March
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £165
+        </td>
+        <td
+          class="govuk-table__cell govuk-table__cell--numeric"
+        >
+          £125
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

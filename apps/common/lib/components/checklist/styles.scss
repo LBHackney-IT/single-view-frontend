@@ -1,0 +1,29 @@
+@import "~lbh-frontend/lbh/base";
+
+.mtfh-checklist {
+  list-style: none;
+
+  &__tick-icon {
+    stroke: lbh-colour("lbh-a01");
+  }
+
+  &__cross-icon {
+    stroke: lbh-colour("lbh-f02");
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    margin-top: 1em;
+
+    svg {
+      margin-top: 0;
+      margin-right: 27px;
+      height: 21px;
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}

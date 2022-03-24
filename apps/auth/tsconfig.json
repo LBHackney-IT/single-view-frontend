@@ -1,0 +1,13 @@
+{
+  "extends": "ts-config-single-spa",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react",
+    "target": "es2016",
+    "noEmit": false,
+    "baseUrl": "src",
+    "composite": true,
+    "esModuleInterop": true
+  }
+}

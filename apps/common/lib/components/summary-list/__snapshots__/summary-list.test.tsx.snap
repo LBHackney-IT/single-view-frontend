@@ -1,0 +1,288 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<div>
+  <dl
+    class="govuk-summary-list govuk-summary-list--no-border lbh-summary-list"
+  >
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key"
+      >
+        Person
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+      >
+        Test
+      </dd>
+    </div>
+  </dl>
+</div>
+`;
+
+exports[`it renders correctly with columns 1`] = `
+<div>
+  <dl
+    class="govuk-summary-list govuk-summary-list--no-border lbh-summary-list"
+  >
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key govuk-!-width-one-half"
+      >
+        First Name
+      </dt>
+      <dd
+        class="govuk-summary-list__value govuk-!-width-one-quarter"
+      >
+        John
+      </dd>
+      <dd
+        class="govuk-summary-list__actions govuk-!-width-one-half"
+      >
+        <ul
+          class="govuk-summary-list__actions-list"
+        >
+          <li
+            class="govuk-summary-list__actions-list-item"
+          >
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state"
+              href="/edit"
+            >
+              Edit
+            </a>
+          </li>
+          <li
+            class="govuk-summary-list__actions-list-item"
+          >
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state"
+              href="/remove"
+            >
+              Remove
+            </a>
+          </li>
+        </ul>
+      </dd>
+    </div>
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key"
+      >
+        Last Name
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+      >
+        Smith
+      </dd>
+    </div>
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key"
+      >
+        Gender
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+      >
+        M
+      </dd>
+    </div>
+  </dl>
+</div>
+`;
+
+exports[`it renders correctly with fallback 1`] = `
+<div>
+  <dl
+    class="govuk-summary-list govuk-summary-list--no-border lbh-summary-list"
+  >
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key"
+      >
+        Email
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+      >
+        N/A
+      </dd>
+    </div>
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key"
+      >
+        Mobile
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+      >
+        N/A
+      </dd>
+    </div>
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key"
+      >
+        Phone
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+      >
+        N/A
+      </dd>
+    </div>
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key"
+      >
+        Address
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+      >
+        N/A
+      </dd>
+    </div>
+  </dl>
+</div>
+`;
+
+exports[`it renders correctly with multiple action 1`] = `
+<div>
+  <dl
+    class="govuk-summary-list govuk-summary-list--no-border lbh-summary-list"
+  >
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key"
+      >
+        First Name
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+      >
+        John
+      </dd>
+      <dd
+        class="govuk-summary-list__actions"
+      >
+        <ul
+          class="govuk-summary-list__actions-list"
+        >
+          <li
+            class="govuk-summary-list__actions-list-item"
+          >
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state"
+              href="/edit"
+            >
+              Edit
+            </a>
+          </li>
+          <li
+            class="govuk-summary-list__actions-list-item"
+          >
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state"
+              href="/remove"
+            >
+              Remove
+            </a>
+          </li>
+        </ul>
+      </dd>
+    </div>
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key"
+      >
+        Last Name
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+      >
+        Smith
+      </dd>
+    </div>
+  </dl>
+</div>
+`;
+
+exports[`it renders correctly with single action 1`] = `
+<div>
+  <dl
+    class="govuk-summary-list govuk-summary-list--no-border lbh-summary-list"
+  >
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key"
+      >
+        First Name
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+      >
+        John
+      </dd>
+      <dd
+        class="govuk-summary-list__actions"
+      >
+        <ul
+          class="govuk-summary-list__actions-list"
+        >
+          <li
+            class="govuk-summary-list__actions-list-item"
+          >
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state"
+              href="/"
+            >
+              Edit
+            </a>
+          </li>
+        </ul>
+      </dd>
+    </div>
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        class="govuk-summary-list__key"
+      >
+        Last Name
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+      >
+        Smith
+      </dd>
+    </div>
+  </dl>
+</div>
+`;

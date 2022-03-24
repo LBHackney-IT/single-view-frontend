@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardList renders 1`] = `
+<div>
+  <div
+    class="mtfh-card-list"
+  >
+    <div
+      class="mtfh-card"
+    >
+      <dl
+        class="govuk-summary-list govuk-summary-list--no-border mtfh-summary-list--inline lbh-summary-list"
+      >
+        <div
+          class="govuk-summary-list__row"
+        >
+          <dt
+            class="govuk-summary-list__key"
+          >
+            Label 1:
+          </dt>
+          <dd
+            class="govuk-summary-list__value"
+          >
+            value1
+          </dd>
+        </div>
+        <div
+          class="govuk-summary-list__row"
+        >
+          <dt
+            class="govuk-summary-list__key"
+          >
+            Label 2:
+          </dt>
+          <dd
+            class="govuk-summary-list__value"
+          >
+            value2
+          </dd>
+        </div>
+      </dl>
+      <hr
+        class="mtfh-card-break"
+      />
+      <p>
+        Additional content
+      </p>
+    </div>
+  </div>
+</div>
+`;

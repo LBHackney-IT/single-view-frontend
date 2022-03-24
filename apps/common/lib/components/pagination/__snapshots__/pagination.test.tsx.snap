@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders control as buttons 1`] = `
+<div>
+  <nav
+    class="lbh-pagination"
+  >
+    <ul
+      class="lbh-pagination__list"
+    >
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link"
+          href="/2"
+          rel="previous"
+        >
+          <span
+            aria-hidden="true"
+            role="presentation"
+          >
+            «
+             
+          </span>
+          Previous
+        </a>
+      </li>
+      <li
+        class="lbh-pagination__item"
+      >
+        <button
+          class="lbh-pagination__link"
+        >
+          1
+        </button>
+      </li>
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link lbh-pagination__link--next"
+          href="/4"
+          rel="next"
+        >
+          Next
+          <span
+            aria-hidden="true"
+            role="presentation"
+          >
+             
+            »
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;
+
+exports[`it renders correctly 1`] = `
+<div>
+  <nav
+    class="lbh-pagination"
+  >
+    <div
+      class="lbh-pagination__summary"
+    >
+      Showing 101—150 of 246 results
+    </div>
+    <ul
+      class="lbh-pagination__list"
+    >
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link"
+          href="/2"
+          rel="previous"
+        >
+          <span
+            aria-hidden="true"
+            role="presentation"
+          >
+            «
+             
+          </span>
+          Previous
+        </a>
+      </li>
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link"
+          href="/1"
+        >
+          1
+        </a>
+      </li>
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link"
+          href="/2"
+        >
+          2
+        </a>
+      </li>
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link lbh-pagination__link--current"
+          href="/3"
+        >
+          3
+        </a>
+      </li>
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link"
+          href="/4"
+        >
+          4
+        </a>
+      </li>
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link"
+          href="/5"
+        >
+          5
+        </a>
+      </li>
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link lbh-pagination__link--next"
+          href="/4"
+          rel="next"
+        >
+          Next
+          <span
+            aria-hidden="true"
+            role="presentation"
+          >
+             
+            »
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;
+
+exports[`it renders without a summary 1`] = `
+<div>
+  <nav
+    class="lbh-pagination"
+  >
+    <ul
+      class="lbh-pagination__list"
+    >
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link"
+          href="/2"
+          rel="previous"
+        >
+          <span
+            aria-hidden="true"
+            role="presentation"
+          >
+            «
+             
+          </span>
+          Previous
+        </a>
+      </li>
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link"
+          href="/1"
+        >
+          1
+        </a>
+      </li>
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link"
+          href="/2"
+        >
+          2
+        </a>
+      </li>
+      <li
+        class="lbh-pagination__item"
+      >
+        <a
+          class="lbh-pagination__link lbh-pagination__link--next"
+          href="/4"
+          rel="next"
+        >
+          Next
+          <span
+            aria-hidden="true"
+            role="presentation"
+          >
+             
+            »
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

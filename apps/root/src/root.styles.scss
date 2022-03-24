@@ -1,0 +1,98 @@
+@import "~lbh-frontend/lbh/base";
+@import "~lbh-frontend/lbh/settings/colour-palette";
+@import "~lbh-frontend/lbh/core/all";
+@import "~lbh-frontend/lbh/helpers/colour";
+@import "~lbh-frontend/lbh/components/lbh-header/header";
+@import "~lbh-frontend/lbh/components/lbh-skip-link/skip-link";
+@import "~govuk-frontend/govuk/objects/width-container";
+@import "~lbh-frontend/lbh/objects/width-container";
+@import "~lbh-frontend/lbh/objects/main-wrapper";
+
+html {
+  height: 100%;
+}
+
+header {
+  margin: 0;
+}
+
+body,
+.mtfh,
+.mtfh-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 100%;
+  margin: 0;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.container-max-width {
+  @include govuk-width-container(1280px);
+}
+
+.mtfh-main-wrapper {
+  padding-top: 0;
+  padding-bottom: 3.75rem;
+}
+
+.mtfh-footer {
+  &__menu {
+    text-align: center;
+  }
+
+  &__menu-item {
+    display: inline-block;
+    margin: 0 3rem 0 0;
+
+    .lbh-link:link,
+    .lbh-link:visited {
+      color: lbh-colour("lbh-text-white");
+    }
+    .lbh-link:focus {
+      color: lbh-colour("lbh-text");
+    }
+  }
+
+  &__section {
+    min-height: 3rem;
+    margin: 0;
+    color: lbh-colour("lbh-text-white");
+    line-height: 3rem;
+    background-color: lbh-colour("lbh-black");
+
+    &.--primary {
+      background-color: lbh-colour("lbh-a01");
+    }
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mtfh-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+
+  svg {
+    display: inline-block;
+    flex-shrink: 0;
+    color: currentColor;
+    line-height: 1rem;
+    vertical-align: middle;
+    transform-origin: center center;
+    animation: rotate 1s linear infinite;
+  }
+}

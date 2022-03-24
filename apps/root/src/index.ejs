@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Single View - Hackney Council</title>
+
+  <!--
+    Remove this if you only support browsers that support async/await.
+    This is needed by babel to share largeish helper code for compiling async/await in older
+    browsers. More information at https://github.com/single-spa/create-single-spa/issues/112
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
+
+  <!--
+    This CSP allows any SSL-enabled host and for arbitrary eval(), but you should limit these directives further to increase your app's security.
+    Learn more about CSP policies at https://content-security-policy.com/#directive
+  -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';"> -->
+  <meta name="importmap-type" content="systemjs-importmap" />
+  <!-- If you wish to turn off import-map-overrides for specific environments (prod), uncomment the line below -->
+  <!-- More info at https://github.com/joeldenning/import-map-overrides/blob/master/docs/configuration.md#domain-list -->
+  <!-- <meta name="import-map-overrides-domains" content="denylist:prod.example.com" /> -->
+
+  <!-- Shared dependencies go into this import map. Your shared dependencies must be of one of the following formats:
+
+    1. System.register (preferred when possible) - https://github.com/systemjs/systemjs/blob/master/docs/system-register.md
+    2. UMD - https://github.com/umdjs/umd
+    3. Global variable
+
+    More information about shared dependencies can be found at https://single-spa.js.org/docs/recommended-setup#sharing-with-import-maps.
+  -->
+
+  <link rel="stylesheet" href="/<%= htmlWebpackPlugin.files.css[0] %>">
+
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "@mtfh/root-config": "/<%= htmlWebpackPlugin.files.js[0] %>",
+        "formik": "/<%= htmlWebpackPlugin.files.js[1] %>",
+        "date-fns": "/<%= htmlWebpackPlugin.files.js[2] %>",
+        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
+    }
+    }
+  </script>
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
+
+  <!-- Add your organization's prod import map URL to this script's src  -->
+  <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
+
+  <% if (isLocal) { %>
+    <script type="systemjs-importmap">
+        {
+            "imports": {
+                "@single-spa/welcome": "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js",
+                "react": "https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.development.js",
+                "react-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js",
+                "react-router-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.js"
+            }
+        }
+    </script>
+  <% } %>
+
+  <script type="systemjs-importmap" src="<%= COMMON_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
+  <script type="systemjs-importmap" src="<%= AUTH_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
+  <script type="systemjs-importmap" src="<%= HEADER_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
+  <script type="systemjs-importmap" src="<%= NOTES_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
+
+  <!--
+    If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
+    Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
+  -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/zone.js@0.11.3/dist/zone.min.js"></script> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
+  <% if (isLocal) { %>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
+  <% } else { %>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+  <% } %>
+
+  <template id="single-spa-layout-authorised">
+    <main class="mtfh-main-wrapper" id="main-content">
+        <div class="container-max-width">
+                <route default>
+                    <application name="@mtfh/app" loader="spinner"></application>
+                </route>
+            </div>
+        </main>
+</template>
+
+<template id="single-spa-layout-public">
+    <main class="mtfh-main-wrapper" id="main-content">
+        <div class="container-max-width">
+        <route default>
+            <application name="@mtfh/auth" loader="spinner"></application>
+        </route>
+            </div>
+        </main>
+</template>
+
+
+  <template id="single-spa-layout-header">
+    <a
+    href="#content"
+    class="govuk-skip-link lbh-skip-link">
+        Skip to main content
+    </a>
+    <header>
+        <application name="@mtfh/header-sv" loader="header"></application>
+    </header>
+</template>
+<template id="single-spa-layout-footer">
+    <footer class="mtfh-footer">
+        <div class="mtfh-footer__section --primary">
+            <ul class="mtfh-footer__menu">
+                <!-- <li class="mtfh-footer__menu-item"><a class="lbh-link" href="https://forms.gle/5kUGcRYFwwaZWrGs8" target="_blank" rel="noopener">Report an issue</a></li>
+                <li class="mtfh-footer__menu-item"><a class="lbh-link" href="https://forms.gle/yM7zCKYZcuVzSXkC6" target="_blank" rel="noopener">Make a suggestion</a></li>
+                <li class="mtfh-footer__menu-item"><a class="lbh-link" href="https://drive.google.com/file/d/19VOGIul60kxv79VuSu9CEZfnJR-HB0hY/view?usp=sharing" target="_blank" rel="noopener">Accessibility statement</a></li> -->
+            </ul>
+        </div>
+        <div class="mtfh-footer__section"></div>
+    </footer>
+</template>
+
+</head>
+<body class="govuk-template__body js-enabled">
+    <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <script>
+    System.import('@mtfh/root-config');
+  </script>
+  <!-- <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full> -->
+</body>
+</html>

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders a back link 1`] = `
+<div>
+  <button
+    class="govuk-back-link lbh-back-link"
+    type="button"
+  >
+    Test Button
+  </button>
+</div>
+`;
+
+exports[`it renders a variant 1`] = `
+<div>
+  <button
+    class="govuk-link lbh-link lbh-link--muted"
+    type="button"
+  >
+    Test Button
+  </button>
+</div>
+`;
+
+exports[`it renders correctly 1`] = `
+<div>
+  <button
+    class="govuk-link lbh-link"
+    type="button"
+  >
+    Test Button
+  </button>
+</div>
+`;

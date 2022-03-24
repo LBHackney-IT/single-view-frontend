@@ -1,0 +1,32 @@
+@import "~lbh-frontend/lbh/base";
+@import "~lbh-frontend/lbh/components/lbh-summary-list/summary-list";
+
+.govuk-summary-list.mtfh-summary-list--inline {
+  font-size: 100%;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+
+  .govuk-summary-list__row {
+    display: flex;
+    margin: 0;
+  }
+
+  .govuk-summary-list__key,
+  .govuk-summary-list__value,
+  .govuk-summary-list__actions {
+    width: auto;
+  }
+
+  .govuk-summary-list__key,
+  .govuk-summary-list__value,
+  .govuk-summary-list__actions {
+    padding: 0;
+  }
+
+  .govuk-summary-list__value,
+  .govuk-summary-list__actions {
+    margin-left: 0.5rem;
+  }
+}

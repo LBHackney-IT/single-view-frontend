@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it applies an error 1`] = `
+<div>
+  <fieldset
+    class="govuk-fieldset lbh-fieldset mtfh-fieldset--error"
+  >
+    <legend
+      class="govuk-fieldset__legend govuk-fieldset__legend--l"
+    >
+      heading
+      <div
+        class="govuk-visually-hidden"
+      >
+         
+        This is an error
+      </div>
+    </legend>
+    <div
+      class="mtfh-fieldset__content"
+    >
+      <span
+        aria-hidden="true"
+        class="govuk-error-message lbh-error-message"
+      >
+        This is an error
+      </span>
+      <div
+        class="govuk-form-group lbh-form-group"
+        id="test"
+      >
+        <label
+          class="govuk-label lbh-label"
+          for="test-field"
+        >
+          Test
+          
+        </label>
+        <input
+          class="govuk-input lbh-input"
+          id="test-field"
+          name="test"
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`it applies the correct variant styling 1`] = `
+<div>
+  <fieldset
+    class="govuk-fieldset lbh-fieldset"
+  >
+    <legend
+      class="govuk-fieldset__legend govuk-fieldset__legend--l"
+    >
+      <h1
+        class="govuk-fieldset__heading"
+      >
+        Heading
+      </h1>
+    </legend>
+    <div
+      class="mtfh-fieldset__content"
+    >
+      <div
+        class="govuk-form-group lbh-form-group"
+        id="test"
+      >
+        <label
+          class="govuk-label lbh-label"
+          for="test-field"
+        >
+          Test
+          
+        </label>
+        <input
+          class="govuk-input lbh-input"
+          id="test-field"
+          name="test"
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`it renders correctly 1`] = `
+<div>
+  <fieldset
+    class="govuk-fieldset lbh-fieldset"
+  >
+    <legend
+      class="govuk-fieldset__legend"
+    >
+      Group name
+    </legend>
+    <div
+      class="mtfh-fieldset__content"
+    >
+      <div
+        class="govuk-form-group lbh-form-group"
+        id="test"
+      >
+        <label
+          class="govuk-label lbh-label"
+          for="test-field"
+        >
+          Test
+          
+        </label>
+        <input
+          class="govuk-input lbh-input"
+          id="test-field"
+          name="test"
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`it renders correctly with an h tag 1`] = `
+<div>
+  <fieldset
+    class="govuk-fieldset lbh-fieldset"
+  >
+    <legend
+      class="govuk-fieldset__legend"
+    >
+      <h1
+        class="govuk-fieldset__heading"
+      >
+        Heading
+      </h1>
+    </legend>
+    <div
+      class="mtfh-fieldset__content"
+    >
+      <div
+        class="govuk-form-group lbh-form-group"
+        id="test"
+      >
+        <label
+          class="govuk-label lbh-label"
+          for="test-field"
+        >
+          Test
+          
+        </label>
+        <input
+          class="govuk-input lbh-input"
+          id="test-field"
+          name="test"
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;

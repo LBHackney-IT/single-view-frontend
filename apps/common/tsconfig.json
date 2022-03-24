@@ -1,0 +1,14 @@
+{
+  "extends": "ts-config-single-spa",
+  "include": ["lib/**/*"],
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react",
+    "target": "es2016",
+    "baseUrl": "lib",
+    "esModuleInterop": true,
+    "paths": {
+      "@mtfh/common/lib/*": ["*"]
+    }
+  }
+}

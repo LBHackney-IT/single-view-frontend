@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders the heading 1`] = `
+<div>
+  <h1
+    class="lbh-heading-h1"
+  >
+    Heading
+  </h1>
+</div>
+`;
+
+exports[`it renders the heading as h2 styles 1`] = `
+<div>
+  <h2
+    class="lbh-heading-h1"
+  >
+    Heading
+  </h2>
+</div>
+`;
+
+exports[`it renders the heading as h2 with h3 styles 1`] = `
+<div>
+  <h2
+    class="lbh-heading-h3"
+  >
+    Heading
+  </h2>
+</div>
+`;

@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<div>
+  <div>
+    <h3
+      class="lbh-heading-h3 mtfh-stepper__main-title"
+    >
+      Stepper title
+    </h3>
+    <div
+      class="mtfh-stepper mtfh-stepper--large mtfh-stepper--active"
+    >
+      <ol
+        class="mtfh-stepper"
+      >
+        <li
+          class="mtfh-stepper__step mtfh-stepper__step--active"
+        >
+          <div
+            class="mtfh-stepper__header"
+          >
+            <h4
+              class="lbh-heading-h4 mtfh-stepper__title"
+            >
+              <span
+                class="mtfh-stepper__circle mtfh-stepper__circle--number"
+              >
+                <span
+                  class="mtfh-stepper__circle-inner"
+                >
+                  <span
+                    class="mtfh-stepper__circle-background"
+                  >
+                    <span
+                      class="govuk-visually-hidden"
+                    >
+                      Step
+                    </span>
+                    1
+                  </span>
+                </span>
+              </span>
+              <span>
+                <button
+                  class="mtfh-stepper__button mtfh-stepper__button--title"
+                >
+                  <span>
+                    Tenure details
+                  </span>
+                </button>
+              </span>
+            </h4>
+          </div>
+        </li>
+        <li
+          class="mtfh-stepper__step"
+        >
+          <div
+            class="mtfh-stepper__header"
+          >
+            <h4
+              class="lbh-heading-h4 mtfh-stepper__title"
+            >
+              <span
+                class="mtfh-stepper__circle mtfh-stepper__circle--number"
+              >
+                <span
+                  class="mtfh-stepper__circle-inner"
+                >
+                  <span
+                    class="mtfh-stepper__circle-background"
+                  >
+                    <span
+                      class="govuk-visually-hidden"
+                    >
+                      Step
+                    </span>
+                    2
+                  </span>
+                </span>
+              </span>
+              <span>
+                <button
+                  class="mtfh-stepper__button mtfh-stepper__button--title"
+                >
+                  <span>
+                    Select residents
+                  </span>
+                </button>
+              </span>
+            </h4>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+`;

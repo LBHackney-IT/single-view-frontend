@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it allows children 1`] = `
+<div>
+  <div
+    aria-labelledby="error"
+    class="govuk-error-summary lbh-error-summary"
+    role="alert"
+  >
+    <h2
+      class="govuk-error-summary__title"
+      id="error"
+    >
+      Something went wrong
+    </h2>
+    <div
+      class="govuk-error-summary__body"
+    >
+      <p>
+        Test
+      </p>
+      <div>
+        Error
+      </div>
+    </div>
+  </div>
+</div>
+`;

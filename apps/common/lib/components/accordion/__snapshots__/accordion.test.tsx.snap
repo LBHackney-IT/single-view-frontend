@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it passes a11y 1`] = `
+<div>
+  <div
+    class="govuk-accordion lbh-accordion"
+    data-attribute="value"
+    id="test"
+  >
+    <div
+      class="govuk-accordion__controls"
+    >
+      <button
+        aria-expanded="false"
+        class="govuk-accordion__open-all"
+        type="button"
+      >
+        Open all
+        <span
+          class="govuk-visually-hidden"
+        >
+           sections
+        </span>
+      </button>
+    </div>
+    <div
+      class="govuk-accordion__section"
+    >
+      <div
+        class="govuk-accordion__section-header"
+      >
+        <h3
+          class="lbh-heading-h5 govuk-accordion__section-heading"
+        >
+          <button
+            aria-controls="test-content-1"
+            aria-expanded="false"
+            class="govuk-accordion__section-button"
+            id="accordion-heading-test-1"
+            type="button"
+          >
+            Test
+            <span
+              aria-hidden="true"
+              class="govuk-accordion__icon"
+            />
+          </button>
+        </h3>
+      </div>
+      <div
+        aria-labelledby="accordion-heading-test-1"
+        class="govuk-accordion__section-content"
+        id="accordion-content-test-1"
+      >
+        Hello
+      </div>
+    </div>
+    <div
+      class="govuk-accordion__section"
+    >
+      <div
+        class="govuk-accordion__section-header"
+      >
+        <h3
+          class="lbh-heading-h5 govuk-accordion__section-heading"
+        >
+          <button
+            aria-controls="test-content-2"
+            aria-expanded="false"
+            class="govuk-accordion__section-button"
+            id="accordion-heading-test-2"
+            type="button"
+          >
+            Next
+            <span
+              aria-hidden="true"
+              class="govuk-accordion__icon"
+            />
+          </button>
+        </h3>
+      </div>
+      <div
+        aria-labelledby="accordion-heading-test-2"
+        class="govuk-accordion__section-content"
+        id="accordion-content-test-2"
+      >
+        Hello
+      </div>
+    </div>
+  </div>
+</div>
+`;

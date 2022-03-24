@@ -1,0 +1,20 @@
+@import "~lbh-frontend/lbh/base";
+@import "~govuk-frontend/govuk/helpers/typography";
+@import "~lbh-frontend/lbh/components/lbh-pagination/pagination";
+
+button.lbh-pagination__link {
+  @include lbh-body-m;
+  background: transparent;
+  border: none;
+  color: lbh-colour(lbh-link);
+  padding: 0;
+  cursor: pointer;
+
+  &.lbh-pagination__link--current {
+    font-weight: 600;
+  }
+}
+
+.lbh-pagination--center {
+  align-items: center;
+}

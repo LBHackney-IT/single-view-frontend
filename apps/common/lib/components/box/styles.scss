@@ -1,0 +1,17 @@
+@import "~lbh-frontend/lbh/base";
+
+.mtfh-box {
+  padding: 20px;
+  border-radius: 4px;
+  background-color: rgba(lbh-colour("lbh-grey-1"), 0.05);
+  border: 1px solid lbh-colour("lbh-grey-1");
+
+  &--success {
+    background-color: rgba(lbh-colour("lbh-a01"), 0.05);
+    border: 1px solid lbh-colour("lbh-a01");
+  }
+  &--warning {
+    background-color: rgba(lbh-colour("lbh-f02"), 0.05);
+    border: 1px solid lbh-colour("lbh-f02");
+  }
+}

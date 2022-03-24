@@ -1,0 +1,39 @@
+@import "~lbh-frontend/lbh/base";
+@import "~lbh-frontend/lbh/settings/colour-palette";
+
+.comment {
+  display: flex;
+
+  &__title,
+  &__category {
+    font-weight: bold;
+    margin-top: 0;
+  }
+
+  &__date-time {
+    margin-top: 0;
+  }
+
+  &__title {
+    &.--highlight {
+      background-color: rgba(lbh-colour("lbh-a04"), 0.3);
+      padding: 5px;
+    }
+  }
+
+  &__item {
+    width: 100px;
+    margin-top: 0;
+    &.--center {
+      flex-grow: 1;
+    }
+  }
+
+  &__item + &__item {
+    margin-left: 2%;
+  }
+}
+
+.container {
+  display: flex;
+}

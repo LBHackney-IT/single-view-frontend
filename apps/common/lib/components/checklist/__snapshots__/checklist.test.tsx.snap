@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<div>
+  <ul
+    class="mtfh-checklist"
+  >
+    <li>
+      <span
+        class="mtfh-checklist__tick-icon"
+      >
+        <svg
+          fill="none"
+          height="24"
+          viewBox="0 0 31 24"
+          width="31"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M26 5L12 19L5 12"
+            stroke="inherit"
+            stroke-linecap="square"
+            stroke-width="6"
+          />
+        </svg>
+      </span>
+      Success
+    </li>
+    <li>
+      <span
+        class="mtfh-checklist__cross-icon"
+      >
+        <svg
+          fill="none"
+          height="28"
+          viewBox="0 0 28 28"
+          width="28"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5 5L23 23M23 5L5 23"
+            stroke="inherit"
+            stroke-linecap="square"
+            stroke-width="6"
+          />
+        </svg>
+      </span>
+      Fail
+    </li>
+  </ul>
+</div>
+`;
