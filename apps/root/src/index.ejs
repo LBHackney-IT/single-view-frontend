@@ -37,7 +37,7 @@
   <script type="systemjs-importmap">
     {
       "imports": {
-        "@mtfh/root-config": "/<%= htmlWebpackPlugin.files.js[0] %>",
+        "@mfe/root-config": "/<%= htmlWebpackPlugin.files.js[0] %>",
         "formik": "/<%= htmlWebpackPlugin.files.js[1] %>",
         "date-fns": "/<%= htmlWebpackPlugin.files.js[2] %>",
         "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
@@ -65,7 +65,7 @@
   <script type="systemjs-importmap" src="<%= COMMON_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
   <script type="systemjs-importmap" src="<%= AUTH_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
   <script type="systemjs-importmap" src="<%= HEADER_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
-  <script type="systemjs-importmap" src="<%= NOTES_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
+  <script type="systemjs-importmap" src="<%= SINGLE_VIEW_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
 
   <!--
     If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
@@ -86,7 +86,7 @@
     <main class="mtfh-main-wrapper" id="main-content">
         <div class="container-max-width">
                 <route default>
-                    <application name="@mtfh/app" loader="spinner"></application>
+                    <application name="@mfe/single-view" loader="spinner"></application>
                 </route>
             </div>
         </main>
@@ -96,7 +96,7 @@
     <main class="mtfh-main-wrapper" id="main-content">
         <div class="container-max-width">
         <route default>
-            <application name="@mtfh/auth" loader="spinner"></application>
+            <application name="@mfe/auth" loader="spinner"></application>
         </route>
             </div>
         </main>
@@ -110,7 +110,7 @@
         Skip to main content
     </a>
     <header>
-        <application name="@mtfh/header-sv" loader="header"></application>
+        <application name="@mfe/header" loader="header"></application>
     </header>
 </template>
 <template id="single-spa-layout-footer">
@@ -132,7 +132,7 @@
     You need to enable JavaScript to run this app.
   </noscript>
   <script>
-    System.import('@mtfh/root-config');
+    System.import('@mfe/root-config');
   </script>
   <!-- <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full> -->
 </body>

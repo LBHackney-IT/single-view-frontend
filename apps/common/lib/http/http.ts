@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, CancelTokenSource } from "axios";
 import { v4 as uuid } from "uuid";
 
-import { $auth, isAuthorised, logout } from "@mtfh/common/lib/auth";
+import { $auth, isAuthorised, logout } from "@mfe/common/lib/auth";
 
 export interface Config extends AxiosRequestConfig {
   headers: Record<string, string>;

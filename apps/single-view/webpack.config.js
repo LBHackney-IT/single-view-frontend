@@ -7,15 +7,15 @@ const { merge } = require("webpack-merge");
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
-    orgName: "mtfh",
-    projectName: "app",
+    orgName: "mfe",
+    projectName: "single-view",
     webpackConfigEnv,
     argv,
   });
 
   return merge(defaultConfig, {
     entry: {
-      app: defaultConfig.entry,
+      "single-view": defaultConfig.entry,
     },
     output: {
       filename: "[name].[contenthash].js",
@@ -26,7 +26,7 @@ module.exports = (webpackConfigEnv, argv) => {
         APP_ENV: process.env.APP_ENV || "development",
       }),
       new ImportMapWebpackPlugin({
-        namespace: "@mtfh",
+        namespace: "@mfe",
         basePath: process.env.APP_CDN || "http://localhost:8005",
       }),
     ],

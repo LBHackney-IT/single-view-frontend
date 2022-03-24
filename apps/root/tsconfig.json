@@ -1,6 +1,6 @@
 {
   "extends": "ts-config-single-spa",
-  "files": ["src/mtfh-root-config.ts"],
+  "files": ["src/mfe-root-config.ts"],
   "compilerOptions": {
     "declarationDir": "dist"
   },

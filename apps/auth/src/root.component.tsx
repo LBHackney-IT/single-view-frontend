@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import { isAuthorised } from "@mtfh/common/lib/auth";
-import { ConfirmationRouter } from "@mtfh/common/lib/components";
+import { isAuthorised } from "@mfe/common/lib/auth";
+import { ConfirmationRouter } from "@mfe/common/lib/components";
 
 import { LoginView } from "./views";
 

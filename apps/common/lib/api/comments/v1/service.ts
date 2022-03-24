@@ -1,12 +1,12 @@
 import { stringify } from "query-string";
 
-import { $auth } from "@mtfh/common/lib/auth";
-import { config } from "@mtfh/common/lib/config";
+import { $auth } from "@mfe/common/lib/auth";
+import { config } from "@mfe/common/lib/config";
 import {
   AxiosSWRInfiniteResponse,
   axiosInstance,
   useAxiosSWRInfinite,
-} from "@mtfh/common/lib/http";
+} from "@mfe/common/lib/http";
 
 import type { Comment } from "./types";
 

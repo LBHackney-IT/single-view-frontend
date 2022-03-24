@@ -4,7 +4,7 @@ module.exports = {
   transform: {
     "^.+\\.(j|t)sx?$": "babel-jest",
   },
-  transformIgnorePatterns: ["/node_modules/(?!lbh-frontend|@mtfh)"],
+  transformIgnorePatterns: ["/node_modules/(?!lbh-frontend|@mfe)"],
   moduleNameMapper: {
     "\\.(css|scss)$": "identity-obj-proxy",
   },

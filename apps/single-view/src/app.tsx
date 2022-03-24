@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { $auth } from "@mtfh/common/lib/auth";
+import { $auth } from "@mfe/common/lib/auth";
 
 const App = (): JSX.Element => {
   const [auth, setAuth] = useState($auth.getValue());

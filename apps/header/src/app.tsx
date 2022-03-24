@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-import { $auth, isAuthorised, logout } from "@mtfh/common/lib/auth";
-import { Link, PhaseBanner } from "@mtfh/common/lib/components";
+import { $auth, isAuthorised, logout } from "@mfe/common/lib/auth";
+import { Link, PhaseBanner } from "@mfe/common/lib/components";
 
 import { config, locale } from "./services";
 
-import { config as commonConfig } from "@mtfh/common/lib/config";
+import { config as commonConfig } from "@mfe/common/lib/config";
 
 const {
   welcome,
