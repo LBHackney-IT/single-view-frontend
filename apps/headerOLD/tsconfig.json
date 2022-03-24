@@ -1,0 +1,10 @@
+{
+  "extends": "ts-config-single-spa",
+  "include": ["src/**/*", "cypress/**/*"],
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react",
+    "target": "es2016",
+    "esModuleInterop": true
+  }
+}

@@ -1,0 +1,293 @@
+version: 2.1
+
+orbs:
+    aws-s3: circleci/aws-s3@2.0.0
+    aws-cli: circleci/aws-cli@2.0.0
+    aws_assume_role: lbh-hackit/aws_assume_role@0.1.0
+
+parameters:
+    stage:
+        default: development
+        type: string
+
+references:
+    workspace_root: &workspace_root '~'
+    attach_workspace: &attach_workspace
+        attach_workspace:
+            at: *workspace_root
+
+executors:
+    node-executor:
+        docker:
+            - image: circleci/node:14.17.0-browsers
+    docker-terraform:
+        docker:
+            - image: "hashicorp/terraform:light"
+    docker-python:
+        docker:
+            - image: circleci/python:3.7
+
+commands:
+    assume-role-and-persist-workspace:
+        description: "Assume deployment role and persist credentials across jobs"
+        parameters:
+            aws-account:
+                type: string
+        steps:
+            - checkout
+            - aws_assume_role/assume_role:
+                  account: <<parameters.aws-account>>
+                  profile_name: default
+                  role: "LBH_Circle_CI_Deployment_Role"
+            - persist_to_workspace:
+                  root: *workspace_root
+                  paths:
+                      - .aws
+
+    terraform-init-then-apply:
+        description: "Initialize and apply the terraform configuration"
+        steps:
+            - *attach_workspace
+            - checkout
+            - run:
+                  name: get and init
+                  command: |
+                      cd ./terraform/<<pipeline.parameters.stage>>/
+                      terraform get -update=true
+                      terraform init
+            - run:
+                  name: apply
+                  command: |
+                      cd ./terraform/<<pipeline.parameters.stage>>/
+                      terraform apply -auto-approve
+
+jobs:
+    install-dependencies:
+        executor: node-executor
+        steps:
+            - *attach_workspace
+            - checkout
+            - restore_cache:
+                  key: dependency-cache-{{ checksum "yarn.lock" }}-4
+            - run:
+                  name: Install dependencies
+                  command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+            - save_cache:
+                  key: dependency-cache-{{ checksum "yarn.lock" }}-4
+                  paths:
+                      - ./node_modules
+                      - ~/.cache
+            - persist_to_workspace:
+                  root: *workspace_root
+                  paths: . 
+    security-scan:
+        executor: node-executor
+        steps:
+            - *attach_workspace
+            - snyk/scan:
+                severity-threshold: high
+    lint-and-test:
+        executor: node-executor
+        steps:
+            - *attach_workspace
+            - run:
+                  name: Run linter
+                  command: yarn lint
+            - run:
+                  name: Run unit tests
+                  command: yarn test
+    build:
+        executor: node-executor
+        environment:
+            aws-region: eu-west-2
+        steps:
+            - *attach_workspace
+            - aws-cli/install
+            - run:
+                name: Clean dist folder
+                command: rm -rf dist
+            - run:
+                name: Build
+                command: |
+                    export APP_ENV=<<pipeline.parameters.stage>>
+                    export APP_CDN=$(aws ssm get-parameter --name /housing-tl/<<pipeline.parameters.stage>>/header-app-url --query Parameter.Value --output text)
+                    yarn build
+            - persist_to_workspace:
+                root: *workspace_root
+                paths:
+                    - project/dist
+    e2e:
+        executor: node-executor
+        environment:
+            aws-region: eu-west-2
+        steps:
+            - *attach_workspace
+            - aws-cli/install
+            - run:
+                name: Run E2E
+                command: |
+                    export APP_ENV=<<pipeline.parameters.stage>>
+                    export CYPRESS_ENVIRONMENT=<<pipeline.parameters.stage>>
+                    export CYPRESS_BASE_URL=$(aws ssm get-parameter --name /housing-tl/<<pipeline.parameters.stage>>/root-app-url --query Parameter.Value --output text)
+                    if [ "<<pipeline.parameters.stage>>" == "production" ]; then
+                        export CYPRESS_AUTH_TOKEN=$AUTH_TOKEN_PRODUCTION
+                    elif [ "<<pipeline.parameters.stage>>" == "staging" ]; then
+                        export CYPRESS_AUTH_TOKEN=$AUTH_TOKEN_STAGING
+                    else
+                        export CYPRESS_AUTH_TOKEN=$AUTH_TOKEN_DEVELOPMENT
+                    fi
+                    yarn e2e:ci
+            - store_artifacts:
+                path: ~/project/cypress/screenshots
+            - store_artifacts:
+                path: ~/project/cypress/videos
+    deploy:
+        executor: docker-python
+        environment:
+            aws-region: eu-west-2
+        steps:
+            - *attach_workspace
+            - aws-cli/install
+            - run:
+                  name: Deploy to S3
+                  command: |
+                    aws s3 sync dist s3://lbh-housing-tl-header-frontend-<<pipeline.parameters.stage>>.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+                    aws s3 sync dist s3://lbh-housing-tl-header-frontend-<<pipeline.parameters.stage>>.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+
+    assume-role-development:
+        executor: docker-python
+        steps:
+            - assume-role-and-persist-workspace:
+                  aws-account: $AWS_ACCOUNT_DEVELOPMENT
+
+    assume-role-staging:
+        executor: docker-python
+        steps:
+            - assume-role-and-persist-workspace:
+                  aws-account: $AWS_ACCOUNT_STAGING
+
+    assume-role-production:
+        executor: docker-python
+        steps:
+            - assume-role-and-persist-workspace:
+                  aws-account: $AWS_ACCOUNT_PRODUCTION
+
+    terraform-init-and-apply:
+        executor: docker-terraform
+        steps:
+            - terraform-init-then-apply
+
+    trigger-stage:
+        executor: docker-python
+        resource_class: small
+        parameters:
+            stage:
+                type: string
+        steps:
+        - run: |
+                curl --location --request POST 'https://circleci.com/api/v2/project/gh/'"$CIRCLE_PROJECT_USERNAME"'/'"$CIRCLE_PROJECT_REPONAME"'/pipeline' \
+                --header 'Circle-Token: '"$CIRCLE_TOKEN"'' \
+                --header 'Content-Type: application/json' \
+                --data '{"branch": "main", "parameters": {"stage": "<<parameters.stage>>"}}'
+
+workflows:
+    version: 2
+    continuous-delivery-development:
+        when: 
+            and:
+                - equal: [ development, << pipeline.parameters.stage >> ]
+        jobs:
+            - install-dependencies
+            - lint-and-test:
+                requires:
+                    - install-dependencies
+            - assume-role-development:
+                context: api-assume-role-housing-development-context
+                requires:
+                    - lint-and-test
+            - e2e:
+                context: mtfh-mfe-e2e-tests
+                requires:
+                    - assume-role-development
+            - build:
+                requires:
+                    - e2e
+            - terraform-init-and-apply:
+                requires:
+                    - build
+                filters:
+                    branches:
+                        only: main
+            - deploy:
+                requires:
+                    - terraform-init-and-apply
+                filters:
+                    branches:
+                        only: main
+            - trigger-stage:
+                context: mtfh-mfe-e2e-tests
+                stage: "staging"
+                requires:
+                    - deploy
+                filters:
+                    branches:
+                        only: main
+
+    continuous-delivery-staging:
+        when: 
+            and:
+                - equal: [ staging, << pipeline.parameters.stage >> ]
+                - equal: [ main, << pipeline.git.branch >> ]
+        jobs:
+            - install-dependencies
+            - assume-role-staging:
+                  context: api-assume-role-housing-staging-context
+                  requires: 
+                    - install-dependencies
+            - e2e:
+                context: mtfh-mfe-e2e-tests
+                requires:
+                    - assume-role-staging
+            - build:
+                requires:
+                    - e2e
+            - terraform-init-and-apply:
+                  requires:
+                    - build
+            - deploy:
+                requires:
+                    - terraform-init-and-apply
+            - trigger-stage:
+                context: mtfh-mfe-e2e-tests
+                stage: "production"
+                requires:
+                    - deploy
+
+    continuous-delivery-production:
+        when: 
+            and:
+                - equal: [ production, << pipeline.parameters.stage >> ]
+                - equal: [ main, << pipeline.git.branch >> ]
+        jobs:   
+            - permit-production-terraform-release:
+                type: approval
+            - install-dependencies:
+                requires:
+                    - permit-production-terraform-release
+            - assume-role-production:
+                context: api-assume-role-housing-production-context
+                requires:
+                    - install-dependencies
+            - e2e:
+                context: mtfh-mfe-e2e-tests
+                requires:
+                    - assume-role-production
+            - build:
+                requires:
+                    - e2e
+            - terraform-init-and-apply:
+                requires:
+                    - build
+            - deploy:
+                  requires:
+                      - terraform-init-and-apply

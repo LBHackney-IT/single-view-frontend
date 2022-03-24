@@ -1,0 +1,17 @@
+@import "~lbh-frontend/lbh/base";
+@import "~lbh-frontend/lbh/components/lbh-header/header";
+
+button.lbh-link.lbh-signout {
+  margin: 0.8251rem 0 0 1rem;
+  color: #ffffff;
+  font-weight: $lbh-font-weight-regular;
+  vertical-align: bottom;
+}
+
+.lbh-header__links b {
+  font-weight: $lbh-font-weight-bold;
+}
+
+.lbh-header__logo-text {
+  color: #ffffff;
+}
