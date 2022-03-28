@@ -1,5 +1,6 @@
-import axios, { AxiosResponse } from "axios";
-import { getToken } from "../Utils/getToken";
+import axios from "axios";
+import { getToken } from "../Utils/getHackneyToken";
+import { sortResponseByRelevance } from "../Utils/sortResponse";
 
 export const SearchResident = async (
   searchParams: string,
@@ -18,49 +19,6 @@ export const SearchResident = async (
     return new Error("Error searching");
   }
 
-  console.log(response.data.results.persons);
-  console.log(sortResponse(response, address));
-  return response.data.results.persons;
-};
-
-const sortResponse = (response: AxiosResponse<any>, address: string | null) => {
-  let personData = response.data.results.persons;
-  let results: any = [];
-  let itemAddress;
-  for (let index in personData) {
-    let result = {
-      score: 0,
-      data: {},
-    };
-    let item = personData[index];
-
-    //checks addresses in data
-    if (item.tenures.length > 0) {
-      itemAddress = item.tenures[0].assetFullAddress;
-    } else {
-      result.score = 0;
-      result.data = item;
-      results.push(result);
-      continue;
-    }
-
-    if (address && itemAddress.indexOf(address) > -1) {
-      result.score += 1;
-    }
-    result.data = item;
-    results.push(result);
-  }
-  results.sort((a: any, b: any) => {
-    if (a.score < b.score) {
-      return 1;
-    }
-
-    if (a.score > b.score) {
-      return -1;
-    }
-
-    return 0;
-  });
-
-  return results.map((result: any) => result.data);
+  console.log(sortResponseByRelevance(response.data.results.persons, address));
+  return sortResponseByRelevance(response.data.results.persons, address);
 };
