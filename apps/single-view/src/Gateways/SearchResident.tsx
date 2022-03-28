@@ -1,14 +1,21 @@
+import axios from "axios";
+import { getToken } from "../Utils/getToken";
+
 export const SearchResident = async (
   searchParams: string,
   domain: string
 ): Promise<any> => {
-  const response = await fetch(
-    `${process.env.SV_API_PROTOTYPE}/search?searchText=${searchParams}&domain=${domain}`
+  const response = await axios.get(
+    `https://v4xprqejik.execute-api.eu-west-2.amazonaws.com/staging/api/v1/search/${domain}?searchText=${searchParams}`,
+    {
+      headers: {
+        Authorization: `${getToken()}`,
+      },
+    }
   );
   if (response.status >= 400) {
-    console.log(response);
     return new Error("Error searching");
   }
-  console.log(response);
-  return response.json();
+  console.log(response.data.results.persons);
+  return response.data.results.persons;
 };

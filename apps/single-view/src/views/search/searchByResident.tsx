@@ -23,7 +23,7 @@ export const SearchByResident = () => {
   }, [dobDay, dobMonth, dobYear]);
 
   const createSearch = (): string => {
-    let searchTerms = [firstName, lastName, addressLine1, dateOfBirth];
+    let searchTerms = [firstName, lastName, dateOfBirth];
 
     let formattedSearch = searchTerms
       .filter((term) => term !== "")
@@ -42,7 +42,12 @@ export const SearchByResident = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              SearchResident(createSearch(), "persons"); //TODO: allow multiple domains (persons, tenures, assets)
+              if (firstName != "" || lastName != "") {
+                SearchResident(createSearch(), "persons"); // ?? Possible endpoint
+              }
+              if (addressLine1 != "") {
+                SearchResident(addressLine1, "assets");
+              }
             }}
           >
             <div className="govuk-form-group lbh-form-group">
