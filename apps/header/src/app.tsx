@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import { $auth, isAuthorised, logout } from "@mfe/common/lib/auth";
 import { Link, PhaseBanner } from "@mfe/common/lib/components";
 
-import { config, locale } from "./services";
+import { locale } from "./services";
 
 import { config as commonConfig } from "@mfe/common/lib/config";
 
@@ -15,11 +15,10 @@ const {
   branding: { hackney, manageMyHome },
 } = locale;
 
-const { manageMyHomeUnderDev, reportIssue, or, suggestFeature } = locale.betaBanner;
+const { manageMyHomeUnderDev } = locale.betaBanner;
 const { headerNavigation } = locale.a11y;
 
 const App = (): JSX.Element => {
-  const { appEnv } = config;
   const [auth, setAuth] = useState($auth.getValue());
 
   console.log(commonConfig)
@@ -30,18 +29,6 @@ const App = (): JSX.Element => {
       sub.unsubscribe();
     };
   }, []);
-
-  const { environmentName, color } = useMemo(() => {
-    switch (appEnv) {
-      case "staging":
-        return { environmentName: "STAGING", color: "yellow" };
-      case "production":
-        return { environmentName: "BETA", color: "green" };
-      default:
-        return { environmentName: "ALPHA", color: "green" };
-        return { environmentName: "DEVELOPMENT", color: "red" };
-    }
-  }, [appEnv]);
 
   return (
     <>
@@ -99,16 +86,9 @@ const App = (): JSX.Element => {
           </nav>
         </div>
       </div>
-      <PhaseBanner tag={environmentName} variant={color}>
+      <PhaseBanner tag="alpha" variant="green">
         <span>
-          {manageMyHomeUnderDev}{" "}
-          <a target="_blank" href="https://forms.gle/5kUGcRYFwwaZWrGs8" rel="noreferrer">
-            {reportIssue}
-          </a>{" "}
-          {or}{" "}
-          <a target="_blank" href="https://forms.gle/yM7zCKYZcuVzSXkC6" rel="noreferrer">
-            {suggestFeature}
-          </a>
+          {manageMyHomeUnderDev}
         </span>
       </PhaseBanner>
     </>
