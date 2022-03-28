@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import axios from "axios";
+import { SearchResident } from "../../Gateways/SearchResident";
 
 export const SearchByResident = () => {
   const [firstName, setFirstName] = useState("");
@@ -35,16 +35,6 @@ export const SearchByResident = () => {
     return formattedSearch;
   };
 
-  const SearchByResidentFunction = async (
-    searchParams: string,
-    domain: string
-  ): Promise<any> => {
-    const response = await axios.get(
-      `https://f7jmln42lb.execute-api.eu-west-2.amazonaws.com/dev/search?searchText=${searchParams}&domain=${domain}`
-    );
-    console.log(response.data);
-    return response.data;
-  };
   return (
     <>
       <div className="govuk-grid-row">
@@ -52,7 +42,7 @@ export const SearchByResident = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              SearchByResidentFunction(createSearch(), "persons"); //TODO: allow multiple domains (persons, tenures, assets)
+              SearchResident(createSearch(), "persons"); //TODO: allow multiple domains (persons, tenures, assets)
             }}
           >
             <div className="govuk-form-group lbh-form-group">
