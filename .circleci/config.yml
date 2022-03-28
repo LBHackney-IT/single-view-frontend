@@ -4,7 +4,6 @@ orbs:
   aws-s3: circleci/aws-s3@2.0.0
   aws-cli: circleci/aws-cli@2.0.0
   aws_assume_role: lbh-hackit/aws_assume_role@0.1.0
-  snyk: snyk/snyk@1.0.2
 
 parameters:
   run_development_workflow:
@@ -81,6 +80,17 @@ commands:
           command: |
             cd ./apps/auth/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
+      - run:
+          name: get and init common
+          command: |
+            cd ./apps/common/terraform/<<parameters.environment>>/
+            terraform get -update=true
+            terraform init
+      - run:
+          name: apply common
+          command: |
+            cd ./apps/common/terraform/<<parameters.environment>>/
+            terraform apply -auto-approve
 jobs:
   install-dependencies:
     executor: node-executor
@@ -92,6 +102,12 @@ jobs:
       - run:
           name: Install auth dependencies
           command: cd ./apps/auth && yarn
+      - run:
+          name: Install common dependencies
+          command: cd ./apps/common && yarn
+      - run:
+          name: Install header dependencies
+          command: cd ./apps/header && yarn
       - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
@@ -99,12 +115,6 @@ jobs:
       - persist_to_workspace:
           root: *workspace_root
           paths: .
-  # security-scan:
-  #   executor: node-executor
-  #   steps:
-  #     - *attach_workspace
-  #     - snyk/scan:
-  #         severity-threshold: high
   lint-and-test:
     executor: node-executor
     steps:
@@ -120,6 +130,12 @@ jobs:
       - run:
           name: Run auth unit test
           command: cd apps/auth/ && yarn test
+      - run:
+          name: Run common linter
+          command: cd apps/common/ && yarn lint
+      - run:
+          name: Run common unit test
+          command: cd apps/common/ && yarn test
   build-deploy-development:
     executor: node-executor
     environment:
@@ -143,6 +159,38 @@ jobs:
             cd apps/auth/
             aws s3 sync dist s3://lbh-single-view-auth-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-auth-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: build common
+          command: |
+            cd apps/common/
+            export APP_ENV=development
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/common-app-url --query Parameter.Value --output text)
+            export AUTH_ALLOWED_GROUPS=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-allowed-groups --query Parameter.Value --output text)
+            export AUTH_DOMAIN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-domain --query Parameter.Value --output text)
+            export COOKIE_DOMAIN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/cookie-domain --query Parameter.Value --output text)
+            export AUTH_TOKEN_NAME=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-token-name --query Parameter.Value --output text)
+            export CONFIGURATION_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/configuration-api-url --query Parameter.Value --output text)
+            export CONTACT_DETAILS_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/contact-details-api-url --query Parameter.Value --output text)
+            export CONTACT_DETAILS_API_URL_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/contact-details-api-url-v2 --query Parameter.Value --output text)
+            export PERSON_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-api-url --query Parameter.Value --output text)
+            export PERSON_API_URL_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-api-url-v2 --query Parameter.Value --output text)
+            export NOTES_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/notes-api-url --query Parameter.Value --output text)
+            export NOTES_API_URL_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/notes-api-url-v2 --query Parameter.Value --output text)
+            export TENURE_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/tenure-api-url --query Parameter.Value --output text)
+            export PROPERTY_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/property-api-url --query Parameter.Value --output text)
+            export REFERENCE_DATA_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/reference-data-api-url --query Parameter.Value --output text)
+            export ADDRESS_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/address-api-url --query Parameter.Value --output text)
+            export EQUALITY_INFORMATION_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/equality-information-api-url --query Parameter.Value --output text)
+            export REPAIRS_HUB_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/repairs-hub-app-url --query Parameter.Value --output text)
+            export REPAIRS_HUB_API_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/repairs-hub-api-url --query Parameter.Value --output text)
+            export PROCESS_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/process-api-url-v1 --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 common
+          command: |
+            cd apps/common/
+            aws s3 sync dist s3://lbh-single-view-common-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-common-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
   build-deploy-staging:
     executor: node-executor
     environment:
@@ -150,23 +198,54 @@ jobs:
     parameters:
       stage:
         type: string
-      app:
-        type: string
     steps:
       - *attach_workspace
       - aws-cli/install
       - run:
-          name: build
+          name: build auth
           command: |
-            cd apps/<< parameters.app >>/
+            cd apps/auth/
             export APP_ENV=<<parameters.stage>>
-            export APP_CDN=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
             yarn build
       - run:
-          name: Deploy to S3
+          name: Deploy to S3 auth
           command: |
-            aws s3 sync dist s3://lbh-housing-tl-auth-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-housing-tl-auth-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+            cd apps/auth/
+            aws s3 sync dist s3://lbh-single-view-auth-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-auth-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: build common
+          command: |
+            cd apps/common
+            export APP_ENV=staging
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/common-app-url --query Parameter.Value --output text)
+            export AUTH_ALLOWED_GROUPS=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-allowed-groups --query Parameter.Value --output text)
+            export AUTH_DOMAIN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-domain --query Parameter.Value --output text)
+            export COOKIE_DOMAIN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/cookie-domain --query Parameter.Value --output text)
+            export AUTH_TOKEN_NAME=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-token-name --query Parameter.Value --output text)
+            export CONFIGURATION_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/configuration-api-url --query Parameter.Value --output text)
+            export CONTACT_DETAILS_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/contact-details-api-url --query Parameter.Value --output text)
+            export CONTACT_DETAILS_API_URL_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/contact-details-api-url-v2 --query Parameter.Value --output text)
+            export PERSON_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-api-url --query Parameter.Value --output text)
+            export PERSON_API_URL_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-api-url-v2 --query Parameter.Value --output text)
+            export NOTES_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/notes-api-url --query Parameter.Value --output text)
+            export NOTES_API_URL_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/notes-api-url-v2 --query Parameter.Value --output text)
+            export TENURE_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/tenure-api-url --query Parameter.Value --output text)
+            export PROPERTY_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/property-api-url --query Parameter.Value --output text)
+            export REFERENCE_DATA_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/reference-data-api-url --query Parameter.Value --output text)
+            export ADDRESS_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/address-api-url --query Parameter.Value --output text)
+            export EQUALITY_INFORMATION_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/equality-information-api-url --query Parameter.Value --output text)
+            export REPAIRS_HUB_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/repairs-hub-app-url --query Parameter.Value --output text)
+            export REPAIRS_HUB_API_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/repairs-hub-api-url --query Parameter.Value --output text)
+            export PROCESS_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/process-api-url-v1 --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 common
+          command: |
+            cd apps/common/
+            aws s3 sync dist s3://lbh-single-view-common-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-common-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
   build-deploy-production:
     executor: node-executor
     environment:
@@ -174,23 +253,54 @@ jobs:
     parameters:
       stage:
         type: string
-      app:
-        type: string
     steps:
       - *attach_workspace
       - aws-cli/install
       - run:
-          name: build
+          name: build auth
           command: |
-            cd apps/<< parameters.app >>/
+            cd apps/auth/
             export APP_ENV=<<parameters.stage>>
-            export APP_CDN=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
             yarn build
       - run:
-          name: Deploy to S3
+          name: Deploy to S3 auth
           command: |
-            aws s3 sync dist s3://lbh-housing-tl-auth-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-housing-tl-auth-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+            cd apps/auth/
+            aws s3 sync dist s3://lbh-single-view-auth-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-auth-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: build common
+          command: |
+            cd apps/common/
+            export APP_ENV=production
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/common-app-url --query Parameter.Value --output text)
+            export AUTH_ALLOWED_GROUPS=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-allowed-groups --query Parameter.Value --output text)
+            export AUTH_DOMAIN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-domain --query Parameter.Value --output text)
+            export COOKIE_DOMAIN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/cookie-domain --query Parameter.Value --output text)
+            export AUTH_TOKEN_NAME=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-token-name --query Parameter.Value --output text)
+            export CONFIGURATION_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/configuration-api-url --query Parameter.Value --output text)
+            export CONTACT_DETAILS_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/contact-details-api-url --query Parameter.Value --output text)
+            export CONTACT_DETAILS_API_URL_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/contact-details-api-url-v2 --query Parameter.Value --output text)
+            export PERSON_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-api-url --query Parameter.Value --output text)
+            export PERSON_API_URL_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-api-url-v2 --query Parameter.Value --output text)
+            export NOTES_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/notes-api-url --query Parameter.Value --output text)
+            export NOTES_API_URL_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/notes-api-url-v2 --query Parameter.Value --output text)
+            export TENURE_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/tenure-api-url --query Parameter.Value --output text)
+            export PROPERTY_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/property-api-url --query Parameter.Value --output text)
+            export REFERENCE_DATA_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/reference-data-api-url --query Parameter.Value --output text)
+            export ADDRESS_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/address-api-url --query Parameter.Value --output text)
+            export EQUALITY_INFORMATION_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/equality-information-api-url --query Parameter.Value --output text)
+            export REPAIRS_HUB_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/repairs-hub-app-url --query Parameter.Value --output text)
+            export REPAIRS_HUB_API_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/repairs-hub-api-url --query Parameter.Value --output text)
+            export PROCESS_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/process-api-url-v1 --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 common
+          command: |
+            cd apps/common/
+            aws s3 sync dist s3://lbh-single-view-common-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://llbh-single-view-common-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
   assume-role-development:
     executor: docker-python
@@ -217,45 +327,16 @@ jobs:
           environment: "development"
 
   terraform-init-and-apply-to-staging:
-    parameters:
-      app:
-        type: string
     executor: docker-terraform
     steps:
       - terraform-init-then-apply:
           environment: "staging"
 
   terraform-init-and-apply-to-production:
-    parameters:
-      app:
-        type: string
     executor: docker-terraform
     steps:
       - terraform-init-then-apply:
           environment: "production"
-
-  # trigger-e2e-pipeline:
-  #   executor: cimg-base
-  #   resource_class: small
-  #   parameters:
-  #     stage:
-  #       type: string
-  #   steps:
-  #     - run: |
-  #         export DEPLOYMENT_ENVIRONMENT='<<parameters.stage>>_environment'
-  #         curl --location --request POST 'https://circleci.com/api/v2/project/gh/LBHackney-IT/mtfh-tl-e2e-tests/pipeline' \
-  #         --header 'Circle-Token: '"$CIRCLE_TOKEN"'' \
-  #         --header 'Content-Type: application/json' \
-  #         --data '{"branch": "master", "parameters": {"run_workflow_ci": false, "external_trigger": true, "upstream_pipeline_name": "<< pipeline.project.git_url >>", '\""$DEPLOYMENT_ENVIRONMENT"\"': true}}'
-
-  failure-downstream:
-    executor: cimg-base
-    resource_class: small
-    steps:
-      - run: |
-          echo downstream e2e tests have failed! Please check the e2e pipeline: ;
-          echo -e 'https://circleci.com/api/v2/project/gh/LBHackney-IT/mtfh-tl-e2e-tests/pipeline' ;
-          exit 1
 
 workflows:
   version: 2
@@ -266,17 +347,9 @@ workflows:
       - lint-and-test:
           requires:
             - install-dependencies
-      # - security-scan:
-      #       context: mtfh-security-scan
-      #       requires:
-      #           - lint-and-test
-      #       filters:
-      #           branches:
-      #               only: main
       - assume-role-development:
           context: api-assume-role-corporate-development-context
           requires:
-            #   - security-scan
             - lint-and-test
           filters:
             branches:
@@ -294,102 +367,73 @@ workflows:
           filters:
             branches:
               only: development
-      # - trigger-e2e-pipeline:
-      #     context: mtfh-mfe-e2e-tests
-      #     stage: "development"
-      #     requires:
-      #       - build-deploy-development
-      #     filters:
-      #       branches:
-      #         only: development
 
-  # continuous-delivery-staging:
-  #   when: << pipeline.parameters.run_staging_workflow >>
-  #   jobs:
-  #     - permit-deploy-staging:
-  #         type: approval
-  #         filters:
-  #           branches:
-  #             only: main
-  #     - install-dependencies:
-  #         requires:
-  #           - permit-deploy-staging
-  #     - lint-and-test:
-  #         requires:
-  #           - install-dependencies
-  #     - assume-role-staging:
-  #         context: api-assume-role-corporate-staging-context
-  #         requires:
-  #           - lint-and-test
-  #         filters:
-  #           branches:
-  #             only: main
-  #     - terraform-init-and-apply-to-staging:
-  #         requires:
-  #           - assume-role-staging
-  #         filters:
-  #           branches:
-  #             only: main
-  #     - build-deploy-staging:
-  #         stage: "staging"
-  #         requires:
-  #           - terraform-init-and-apply-to-staging
-  #         filters:
-  #           branches:
-  #             only: main
-  #     - trigger-e2e-pipeline:
-  #         context: mtfh-mfe-e2e-tests
-  #         stage: "staging"
-  #         requires:
-  #           - build-deploy-staging
-  #         filters:
-  #           branches:
-  #             only: main
-  #
-  # continuous-delivery-production:
-  #   when: << pipeline.parameters.run_production_workflow >>
-  #   jobs:
-  #     - permit-production-terraform-release:
-  #         type: approval
-  #         filters:
-  #           branches:
-  #             only: main
-  #     - install-dependencies:
-  #         requires:
-  #           - permit-production-terraform-release
-  #     - lint-and-test:
-  #         requires:
-  #           - install-dependencies
-  #     - assume-role-production:
-  #         context: api-assume-role-corporate-production-context
-  #         requires:
-  #           - lint-and-test
-  #         filters:
-  #           branches:
-  #             only: main
-  #     - terraform-init-and-apply-to-production:
-  #         requires:
-  #           - assume-role-production
-  #         filters:
-  #           branches:
-  #             only: main
-  #     - build-deploy-production:
-  #         stage: "production"
-  #         requires:
-  #           - terraform-init-and-apply-to-production
-  #         filters:
-  #           branches:
-  #             only: main
-  #     - trigger-e2e-pipeline:
-  #         context: mtfh-mfe-e2e-tests
-  #         stage: "production"
-  #         requires:
-  #           - build-deploy-production
-  #         filters:
-  #           branches:
-  #             only: main
-  #
-  # e2e-tests-failure:
-  #   when: << pipeline.parameters.e2e_test_failure >>
-  #   jobs:
-  #     - failure-downstream
+  continuous-delivery-staging:
+    when: << pipeline.parameters.run_staging_workflow >>
+    jobs:
+      - permit-deploy-staging:
+          type: approval
+          filters:
+            branches:
+              only: main
+      - install-dependencies:
+          requires:
+            - permit-deploy-staging
+      - lint-and-test:
+          requires:
+            - install-dependencies
+      - assume-role-staging:
+          context: api-assume-role-corporate-staging-context
+          requires:
+            - lint-and-test
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-apply-to-staging:
+          requires:
+            - assume-role-staging
+          filters:
+            branches:
+              only: main
+      - build-deploy-staging:
+          stage: "staging"
+          requires:
+            - terraform-init-and-apply-to-staging
+          filters:
+            branches:
+              only: main
+
+  continuous-delivery-production:
+    when: << pipeline.parameters.run_production_workflow >>
+    jobs:
+      - permit-production-terraform-release:
+          type: approval
+          filters:
+            branches:
+              only: main
+      - install-dependencies:
+          requires:
+            - permit-production-terraform-release
+      - lint-and-test:
+          requires:
+            - install-dependencies
+      - assume-role-production:
+          context: api-assume-role-corporate-production-context
+          requires:
+            - lint-and-test
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-apply-to-production:
+          requires:
+            - assume-role-production
+          filters:
+            branches:
+              only: main
+      - build-deploy-production:
+          stage: "production"
+          requires:
+            - terraform-init-and-apply-to-production
+          filters:
+            branches:
+              only: main
