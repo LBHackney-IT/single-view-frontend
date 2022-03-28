@@ -135,13 +135,14 @@ jobs:
           command: |
             cd apps/auth/
             export APP_ENV=<<parameters.stage>>
-            export APP_CDN=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
             yarn build
       - run:
           name: Deploy to S3 auth
           command: |
-            aws s3 sync dist s3://lbh-housing-tl-auth-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-housing-tl-auth-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+            cd apps/auth/
+            aws s3 sync dist s3://lbh-single-view-auth-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-auth-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
   build-deploy-staging:
     executor: node-executor
     environment:
