@@ -34,7 +34,8 @@ export const SearchByResident = () => {
           >
             <div className="govuk-form-group lbh-form-group">
               <label className="govuk-label lbh-label" htmlFor="firstName">
-                First Name
+                * First name{" "}
+                {<text style={{ fontStyle: "italic" }}> Mandatory</text>}
               </label>
               <input
                 className="govuk-input lbh-input"
@@ -46,7 +47,8 @@ export const SearchByResident = () => {
             </div>
             <div className="govuk-form-group lbh-form-group">
               <label className="govuk-label lbh-label" htmlFor="lastName">
-                Last Name
+                * Last name{" "}
+                {<text style={{ fontStyle: "italic" }}> Mandatory</text>}
               </label>
               <input
                 className="govuk-input lbh-input"
