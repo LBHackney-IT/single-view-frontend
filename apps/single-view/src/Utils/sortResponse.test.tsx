@@ -1,6 +1,6 @@
 import { sortResponseByRelevance } from "./sortResponse";
 
-describe("sortResponseByRelevance function", () => {
+describe.only("sortResponseByRelevance function", () => {
   it("should sort the response that matches with the address argument first, if passed in", () => {
     let result = sortResponseByRelevance(mockData, "N16 8AH");
 
