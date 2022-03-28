@@ -9,9 +9,6 @@ export const { bootstrap, mount, unmount } = singleSpaReact({
   ReactDOM,
   rootComponent: Root,
   errorBoundary(err, info, props) {
-    console.log(err);
-    console.log(info);
-    console.log(props);
     return (
       <ErrorSummary
         id="mtfh-personal-details"
