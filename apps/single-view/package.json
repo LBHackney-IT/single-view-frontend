@@ -1,5 +1,5 @@
 {
-  "name": "@mtfh/app",
+  "name": "@mfe/single-view",
   "scripts": {
     "start": "webpack serve --port 8005",
     "start:standalone": "webpack serve --env standalone",
@@ -15,7 +15,7 @@
     "coverage": "cross-env BABEL_ENV=test jest --coverage"
   },
   "dependencies": {
-    "@mtfh/common": "https://github.com/LBHackney-IT/mtfh-frontend-common.git",
+    "@mfe/common": "file:../common",
     "lbh-frontend": "^3.6.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",

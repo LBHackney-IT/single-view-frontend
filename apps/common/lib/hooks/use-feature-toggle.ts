@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { $configuration, getFeatureToggle } from "@mtfh/common/lib/configuration";
+import { $configuration, getFeatureToggle } from "@mfe/common/lib/configuration";
 
 export const useFeatureToggle = (path: string): boolean => {
   const [toggle, setToggle] = useState(getFeatureToggle(path));

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { $auth, isAuthorised, login } from "@mtfh/common/lib/auth";
+import { $auth, isAuthorised, login } from "@mfe/common/lib/auth";
 import {
   Button,
   ErrorSummary,
@@ -8,7 +8,7 @@ import {
   Layout,
   Link,
   Text,
-} from "@mtfh/common/lib/components";
+} from "@mfe/common/lib/components";
 
 import { REQUEST_ACCESS_LINK } from "../../constants";
 import { locale } from "../../services";

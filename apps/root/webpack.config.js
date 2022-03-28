@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (webpackConfigEnv, argv) => {
-  const orgName = "mtfh";
+  const orgName = "mfe";
   const defaultConfig = singleSpaDefaults({
     orgName,
     projectName: "root-config",
@@ -37,7 +37,7 @@ module.exports = (webpackConfigEnv, argv) => {
           COMMON_APP_URL: process.env.COMMON_APP_URL || "//localhost:8040",
           HEADER_APP_URL: process.env.HEADER_APP_URL || "//localhost:8091",
           AUTH_APP_URL: process.env.AUTH_APP_URL || "//localhost:8080",
-          NOTES_APP_URL: process.env.NOTES_APP_URL || "//localhost:8005",
+          SINGLE_VIEW_APP_URL: process.env.SINGLE_VIEW_APP_URL || "//localhost:8005",
         },
       }),
     ],

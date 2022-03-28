@@ -1,7 +1,7 @@
 {
-  "name": "@mtfh/common",
+  "name": "@mfe/common",
   "version": "0.0.1",
-  "main": "lib/mtfh-common.tsx",
+  "main": "lib/mfe-common.tsx",
   "scripts": {
     "start": "cross-env APP_ENV=local webpack serve --port 8040",
     "start:standalone": "cross-env APP_ENV=local webpack serve --env standalone",

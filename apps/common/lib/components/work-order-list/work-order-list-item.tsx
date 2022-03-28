@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 
 import cn from "classnames";
 
-import { formatDate } from "@mtfh/common/lib/utils";
+import { formatDate } from "@mfe/common/lib/utils";
 
 import { WorkOrder } from "../../api/work-order/v2";
 import { config } from "../../config";

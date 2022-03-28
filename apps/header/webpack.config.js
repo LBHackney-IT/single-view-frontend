@@ -5,15 +5,15 @@ const { merge } = require("webpack-merge");
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
-    orgName: "mtfh",
-    projectName: "header-sv",
+    orgName: "mfe",
+    projectName: "header",
     webpackConfigEnv,
     argv,
   });
 
   return merge(defaultConfig, {
     entry: {
-      "header-sv": defaultConfig.entry,
+      "header": defaultConfig.entry,
     },
     output: {
       filename: "[name].[contenthash].js",
@@ -36,7 +36,7 @@ module.exports = (webpackConfigEnv, argv) => {
         APP_ENV: process.env.APP_ENV || "development",
       }),
       new ImportMapWebpackPlugin({
-        namespace: "@mtfh",
+        namespace: "@mfe",
         basePath: process.env.APP_CDN || "http://localhost:8091",
       }),
     ],

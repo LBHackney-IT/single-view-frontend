@@ -3,12 +3,12 @@ import React from "react";
 import { render } from "@hackney/mtfh-test-utils";
 import { screen, waitFor } from "@testing-library/react";
 
-import { $auth, isAuthorised } from "@mtfh/common/lib/auth";
+import { $auth, isAuthorised } from "@mfe/common/lib/auth";
 
 import Root from "./root.component";
 import { locale } from "./services";
 
-jest.mock("@mtfh/common/lib/auth", () => ({
+jest.mock("@mfe/common/lib/auth", () => ({
   $auth: { getValue: jest.fn() },
   isAuthorised: jest.fn().mockReturnValueOnce(true),
 }));

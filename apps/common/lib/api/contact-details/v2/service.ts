@@ -1,11 +1,11 @@
-import { config } from "@mtfh/common/lib/config";
+import { config } from "@mfe/common/lib/config";
 import {
   AxiosSWRConfiguration,
   AxiosSWRResponse,
   axiosInstance,
   useAxiosSWR,
-} from "@mtfh/common/lib/http";
-import { removeWhitespace } from "@mtfh/common/lib/utils";
+} from "@mfe/common/lib/http";
+import { removeWhitespace } from "@mfe/common/lib/utils";
 
 import {
   ContactDetail,

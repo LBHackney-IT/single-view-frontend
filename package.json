@@ -1,12 +1,18 @@
 {
   "name": "single-view-frontend",
   "scripts": {
-    "start": "concurrently \"yarn root\" \"yarn common\" \"yarn auth\" \"yarn header\" \"yarn single_view\"",
+    "install-apps": "concurrently \"yarn install-root\" \"yarn install-common\" \"yarn install-auth\" \"yarn install-header\" \"yarn install-single-view\"",
+    "start": "concurrently \"yarn root\" \"yarn common\" \"yarn auth\" \"yarn header\" \"yarn single-view\"",
+    "install-root": "cd apps/root && yarn",
     "root": "cd apps/root && yarn start",
+    "install-common": "cd apps/common && yarn",
     "common": "cd apps/common && yarn start",
+    "install-auth": "cd apps/auth && yarn",
     "auth": "cd apps/auth && yarn start",
+    "install-header": "cd apps/header && yarn",
     "header": "cd apps/header && yarn start",
-    "single_view": "cd apps/single-view && yarn start"
+    "install-single-view": "cd apps/single-view && yarn",
+    "single-view": "cd apps/single-view && yarn start"
   },
   "devDependencies": {
     "concurrently": "^7.0.0"
