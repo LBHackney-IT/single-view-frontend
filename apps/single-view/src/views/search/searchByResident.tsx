@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from "react";
 import { SearchResident } from "../../Gateways/SearchResident";
 
@@ -6,33 +6,18 @@ export const SearchByResident = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [addressLine1, setAddressLine1] = useState("");
-
-  const [dobDay, setDobDay] = useState("");
-  const [dobMonth, setDobMonth] = useState("");
-  const [dobYear, setDobYear] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-
-  useEffect(() => {
-    setDateOfBirth(
-      dobYear +
-        "-" +
-        (dobMonth.length == 1 ? "0" + dobMonth : dobMonth) +
-        "-" +
-        (dobDay.length == 1 ? "0" + dobDay : dobDay)
-    );
-  }, [dobDay, dobMonth, dobYear]);
+  const [postCode, setPostcode] = useState("");
 
   const createSearch = (): string => {
-    let searchTerms = [firstName, lastName, dateOfBirth];
+    let searchTerms = [firstName, lastName];
 
-    let formattedSearch = searchTerms
-      .filter((term) => term !== "")
-      .join("+")
-      .replace(/--/g, "")
-      .replace(/\+$/, "")
-      .replace(/' '/g, "");
+    let formattedSearch = searchTerms.filter((term) => term !== "").join("+");
 
     return formattedSearch;
+  };
+
+  const joinAddresses = (): string => {
+    return [addressLine1, postCode].filter((term) => term !== "").join(" ");
   };
 
   return (
@@ -43,10 +28,7 @@ export const SearchByResident = () => {
             onSubmit={(e) => {
               e.preventDefault();
               if (firstName != "" || lastName != "") {
-                SearchResident(createSearch(), "persons"); // ?? Possible endpoint
-              }
-              if (addressLine1 != "") {
-                SearchResident(addressLine1, "assets");
+                SearchResident(createSearch(), joinAddresses());
               }
             }}
           >
@@ -87,73 +69,18 @@ export const SearchByResident = () => {
               />
             </div>
             <div className="govuk-form-group lbh-form-group">
-              <fieldset
-                className="govuk-fieldset"
-                role="group"
-                aria-describedby="dob-hint"
-              >
-                <legend className="govuk-label lbh-label">Date of Birth</legend>
-                <div className="govuk-date-input lbh-date-input" id="dob">
-                  <div className="govuk-date-input__item">
-                    <div className="govuk-form-group">
-                      <label
-                        className="govuk-label lbh-label"
-                        htmlFor="dob-day"
-                      >
-                        Day
-                      </label>
-                      <input
-                        className="govuk-input govuk-date-input__input govuk-input--width-2"
-                        id="dob-day"
-                        name="dob-day"
-                        type="text"
-                        pattern="[0-9]*"
-                        inputMode="numeric"
-                        onChange={(e) => setDobDay(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="govuk-date-input__item">
-                    <div className="govuk-form-group">
-                      <label
-                        className="govuk-label lbh-label"
-                        htmlFor="dob-month"
-                      >
-                        Month
-                      </label>
-                      <input
-                        className="govuk-input govuk-date-input__input govuk-input--width-2"
-                        id="dob-month"
-                        name="dob-month"
-                        type="text"
-                        pattern="[0-9]*"
-                        inputMode="numeric"
-                        onChange={(e) => setDobMonth(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="govuk-date-input__item">
-                    <div className="govuk-form-group">
-                      <label
-                        className="govuk-label lbh-label"
-                        htmlFor="dob-year"
-                      >
-                        Year
-                      </label>
-                      <input
-                        className="govuk-input govuk-date-input__input govuk-input--width-4"
-                        id="dob-year"
-                        name="dob-year"
-                        type="text"
-                        pattern="[0-9]*"
-                        inputMode="numeric"
-                        onChange={(e) => setDobYear(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
+              <label className="govuk-label lbh-label" htmlFor="postcode">
+                Postcode
+              </label>
+              <input
+                className="govuk-input lbh-input"
+                id="postcode"
+                name="postcode"
+                type="text"
+                onChange={(e) => setPostcode(e.target.value)}
+              />
             </div>
+
             <button className="govuk-button lbh-button govuk-button--start">
               Search
               <svg
