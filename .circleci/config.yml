@@ -130,12 +130,7 @@ jobs:
       - run:
           name: Run auth unit test
           command: cd apps/auth/ && yarn test
-      - run:
-          name: Run common linter
-          command: cd apps/common/ && yarn lint
-      - run:
-          name: Run common unit test
-          command: cd apps/common/ && yarn test
+
   build-deploy-development:
     executor: node-executor
     environment:
@@ -191,6 +186,20 @@ jobs:
             cd apps/common/
             aws s3 sync dist s3://lbh-single-view-common-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-common-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: build header
+          command: |
+            cd apps/header/
+            export APP_ENV=<<parameters.stage>>
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 header
+          command: |
+            cd apps/header/
+            aws s3 sync dist s3://lbh-single-view-header-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-header-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+
   build-deploy-staging:
     executor: node-executor
     environment:
@@ -246,6 +255,20 @@ jobs:
             cd apps/common/
             aws s3 sync dist s3://lbh-single-view-common-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-common-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: build header
+          command: |
+            cd apps/header/
+            export APP_ENV=<<parameters.stage>>
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 header
+          command: |
+            cd apps/header/
+            aws s3 sync dist s3://lbh-single-view-header-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-header-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+
   build-deploy-production:
     executor: node-executor
     environment:
@@ -301,6 +324,19 @@ jobs:
             cd apps/common/
             aws s3 sync dist s3://lbh-single-view-common-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://llbh-single-view-common-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: build header
+          command: |
+            cd apps/header/
+            export APP_ENV=<<parameters.stage>>
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 header
+          command: |
+            cd apps/header/
+            aws s3 sync dist s3://lbh-single-view-header-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-header-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
   assume-role-development:
     executor: docker-python

@@ -4,14 +4,14 @@ provider "aws" {
 }
 terraform {
   backend "s3" {
-    bucket  = "terraform-state-housing-production"
+    bucket  = "terraform-state-corporate-production"
     encrypt = true
     region  = "eu-west-2"
     key     = "services/t-and-l-header-frontend/state"
   }
 }
 resource "aws_s3_bucket" "frontend-bucket-production" {
-  bucket = "lbh-housing-tl-header-frontend-production.hackney.gov.uk"
+  bucket = "lbh-single-view-header-frontend-production.hackney.gov.uk"
   acl    = "private"
   versioning {
     enabled = true
@@ -31,10 +31,10 @@ resource "aws_s3_bucket" "frontend-bucket-production" {
 module "cloudfront-production" {
   source = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
   s3_domain_name = aws_s3_bucket.frontend-bucket-production.bucket_regional_domain_name
-  origin_id = "mtfh-t-and-l-header-frontend"
+  origin_id = "single-view-header-frontend"
   s3_bucket_arn = aws_s3_bucket.frontend-bucket-production.arn
   s3_bucket_id = aws_s3_bucket.frontend-bucket-production.id
-  orginin_access_identity_desc = "T&L header frontend cloudfront identity"
+  orginin_access_identity_desc = "single-view header frontend cloudfront identity"
   cname_aliases = []
   environment_name = "production"
   cost_code= "B0811"
@@ -43,7 +43,7 @@ module "cloudfront-production" {
   compress = true
 }
 resource "aws_ssm_parameter" "cdn" {
-  name  = "/housing-tl/production/header-app-url"
+  name  = "/single-view/production/header-app-url"
   type  = "String"
   value = "https://${module.cloudfront-production.cloudfront_domain_name}"
   overwrite = true
