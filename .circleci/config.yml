@@ -113,6 +113,17 @@ commands:
           command: |
             cd ./apps/root/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
+      - run:
+          name: Get and init single view
+          command: |
+            cd ./apps/single-view/terraform/<<parameters.environment>>/
+            terraform get -update=true
+            terraform init
+      - run:
+          name: Apply single view
+          command: |
+            cd ./apps/single-view/terraform/<<parameters.environment>>/
+            terraform apply -auto-approve
 
 jobs:
   install-dependencies:
@@ -134,6 +145,9 @@ jobs:
       - run:
           name: Install root dependencies
           command: cd ./apps/root && yarn
+      - run:
+          name: Install single-view dependencies
+          command: cd ./apps/single-view && yarn
       - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
@@ -146,11 +160,11 @@ jobs:
     steps:
       - *attach_workspace
       - run:
-          name: Run auth linter
-          command: cd apps/auth/ && yarn lint
+          name: Run linter
+          command: cd apps/single-view/ && echo "yarn lint"
       - run:
-          name: Run auth unit test
-          command: cd apps/auth/ && yarn test
+          name: Run unit test
+          command: cd apps/single-view/ && echo "yarn test"
 
   build-deploy-development:
     executor: node-executor
@@ -235,13 +249,26 @@ jobs:
             export ACTIVITIES_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/activities-app-url --query Parameter.Value --output text)
             export PROPERTY_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/property-app-url --query Parameter.Value --output text)
             export PROCESSES_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/processes-app-url --query Parameter.Value --output text)
-            yarn build
+            yarn build:webpack
       - run:
           name: Deploy to S3 root
           command: |
             cd apps/root/
             aws s3 sync dist s3://lbh-single-view-root-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-root-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: Build single view
+          command: |
+            cd apps/single-view/
+            export APP_ENV=<<parameters.stage>>
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 single view
+          command: |
+            cd apps/single-view/
+            aws s3 sync dist s3://lbh-single-view-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
   build-deploy-staging:
     executor: node-executor
@@ -333,6 +360,19 @@ jobs:
             cd apps/root/
             aws s3 sync dist s3://lbh-single-view-root-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-root-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: Build single view
+          command: |
+            cd apps/single-view/
+            export APP_ENV=<<parameters.stage>>
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 single view
+          command: |
+            cd apps/single-view/
+            aws s3 sync dist s3://lbh-single-view-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
   build-deploy-production:
     executor: node-executor
@@ -424,6 +464,19 @@ jobs:
             cd apps/root/
             aws s3 sync dist s3://lbh-single-view-root-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-root-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: Build single view
+          command: |
+            cd apps/single-view/
+            export APP_ENV=<<parameters.stage>>
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 single view
+          command: |
+            cd apps/single-view/
+            aws s3 sync dist s3://lbh-single-view-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
 
   assume-role-development:
