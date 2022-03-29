@@ -7,11 +7,11 @@ terraform {
     bucket  = "terraform-state-corporate-production"
     encrypt = true
     region  = "eu-west-2"
-    key     = "services/single-view-header-frontend/state"
+    key     = "services/single-view-root-frontend/state"
   }
 }
 resource "aws_s3_bucket" "frontend-bucket-production" {
-  bucket = "lbh-single-view-header-frontend-production.hackney.gov.uk"
+  bucket = "lbh-single-view-root-frontend-production.hackney.gov.uk"
   acl    = "private"
   versioning {
     enabled = true
@@ -31,19 +31,19 @@ resource "aws_s3_bucket" "frontend-bucket-production" {
 module "cloudfront-production" {
   source = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
   s3_domain_name = aws_s3_bucket.frontend-bucket-production.bucket_regional_domain_name
-  origin_id = "single-view-header-frontend"
+  origin_id = "single-view-root-frontend"
   s3_bucket_arn = aws_s3_bucket.frontend-bucket-production.arn
   s3_bucket_id = aws_s3_bucket.frontend-bucket-production.id
-  orginin_access_identity_desc = "single-view header frontend cloudfront identity"
+  orginin_access_identity_desc = "Single View root frontend cloudfront identity"
   cname_aliases = []
   environment_name = "production"
-  cost_code= "B0811"
-  project_name = "MTFH Tenants and Leaseholders"
+  cost_code = "B0811"
+  project_name = "Single View"
   use_cloudfront_cert = true
   compress = true
 }
 resource "aws_ssm_parameter" "cdn" {
-  name  = "/single-view/production/header-app-url"
+  name  = "/single-view/production/root-app-url"
   type  = "String"
   value = "https://${module.cloudfront-production.cloudfront_domain_name}"
   overwrite = true

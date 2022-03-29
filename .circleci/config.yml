@@ -70,38 +70,50 @@ commands:
       - *attach_workspace
       - checkout
       - run:
-          name: get and init auth
+          name: Get and init auth
           command: |
             cd ./apps/auth/terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
       - run:
-          name: apply auth
+          name: Apply auth
           command: |
             cd ./apps/auth/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
       - run:
-          name: get and init common
+          name: Get and init common
           command: |
             cd ./apps/common/terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
       - run:
-          name: apply common
+          name: Apply common
           command: |
             cd ./apps/common/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
       - run:
-          name: get and init header
+          name: Get and init header
           command: |
             cd ./apps/header/terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
       - run:
-          name: apply header
+          name: Apply header
           command: |
             cd ./apps/header/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
+      - run:
+          name: Get and init root
+          command: |
+            cd ./apps/root/terraform/<<parameters.environment>>/
+            terraform get -update=true
+            terraform init
+      - run:
+          name: Apply root
+          command: |
+            cd ./apps/root/terraform/<<parameters.environment>>/
+            terraform apply -auto-approve
+
 jobs:
   install-dependencies:
     executor: node-executor
@@ -119,6 +131,9 @@ jobs:
       - run:
           name: Install header dependencies
           command: cd ./apps/header && yarn
+      - run:
+          name: Install root dependencies
+          command: cd ./apps/root && yarn
       - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
@@ -130,11 +145,6 @@ jobs:
     executor: node-executor
     steps:
       - *attach_workspace
-      - run:
-          name: debug
-          command: |
-            pwd
-            ls -al
       - run:
           name: Run auth linter
           command: cd apps/auth/ && yarn lint
@@ -153,7 +163,7 @@ jobs:
       - *attach_workspace
       - aws-cli/install
       - run:
-          name: build auth
+          name: Build auth
           command: |
             cd apps/auth/
             export APP_ENV=<<parameters.stage>>
@@ -166,7 +176,7 @@ jobs:
             aws s3 sync dist s3://lbh-single-view-auth-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-auth-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
       - run:
-          name: build common
+          name: Build common
           command: |
             cd apps/common/
             export APP_ENV=development
@@ -198,7 +208,7 @@ jobs:
             aws s3 sync dist s3://lbh-single-view-common-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-common-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
       - run:
-          name: build header
+          name: Build header
           command: |
             cd apps/header/
             export APP_ENV=<<parameters.stage>>
@@ -210,6 +220,28 @@ jobs:
             cd apps/header/
             aws s3 sync dist s3://lbh-single-view-header-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-header-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: Build root
+          command: |
+            cd apps/root/
+            export ROOT_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/root-app-url --query Parameter.Value --output text)
+            export HEADER_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
+            export AUTH_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
+            export SEARCH_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/search-app-url --query Parameter.Value --output text)
+            export PERSON_DETAILS_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-details-app-url --query Parameter.Value --output text)
+            export COMMENTS_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/comments-app-url --query Parameter.Value --output text)
+            export COMMON_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/common-app-url --query Parameter.Value --output text)
+            export TENURE_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/tenure-app-url --query Parameter.Value --output text)
+            export ACTIVITIES_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/activities-app-url --query Parameter.Value --output text)
+            export PROPERTY_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/property-app-url --query Parameter.Value --output text)
+            export PROCESSES_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/processes-app-url --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 root
+          command: |
+            cd apps/root/
+            aws s3 sync dist s3://lbh-single-view-root-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-root-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
   build-deploy-staging:
     executor: node-executor
@@ -222,7 +254,7 @@ jobs:
       - *attach_workspace
       - aws-cli/install
       - run:
-          name: build auth
+          name: Build auth
           command: |
             cd apps/auth/
             export APP_ENV=<<parameters.stage>>
@@ -235,7 +267,7 @@ jobs:
             aws s3 sync dist s3://lbh-single-view-auth-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-auth-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
       - run:
-          name: build common
+          name: Build common
           command: |
             cd apps/common
             export APP_ENV=staging
@@ -267,7 +299,7 @@ jobs:
             aws s3 sync dist s3://lbh-single-view-common-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-common-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
       - run:
-          name: build header
+          name: Build header
           command: |
             cd apps/header/
             export APP_ENV=<<parameters.stage>>
@@ -279,6 +311,28 @@ jobs:
             cd apps/header/
             aws s3 sync dist s3://lbh-single-view-header-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-header-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: Build root
+          command: |
+            cd apps/root/
+            export ROOT_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/root-app-url --query Parameter.Value --output text)
+            export HEADER_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
+            export AUTH_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
+            export SEARCH_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/search-app-url --query Parameter.Value --output text)
+            export PERSON_DETAILS_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-details-app-url --query Parameter.Value --output text)
+            export COMMENTS_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/comments-app-url --query Parameter.Value --output text)
+            export COMMON_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/common-app-url --query Parameter.Value --output text)
+            export TENURE_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/tenure-app-url --query Parameter.Value --output text)
+            export ACTIVITIES_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/activities-app-url --query Parameter.Value --output text)
+            export PROPERTY_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/property-app-url --query Parameter.Value --output text)
+            export PROCESSES_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/processes-app-url --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 root
+          command: |
+            cd apps/root/
+            aws s3 sync dist s3://lbh-single-view-root-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-root-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
   build-deploy-production:
     executor: node-executor
@@ -291,7 +345,7 @@ jobs:
       - *attach_workspace
       - aws-cli/install
       - run:
-          name: build auth
+          name: Build auth
           command: |
             cd apps/auth/
             export APP_ENV=<<parameters.stage>>
@@ -304,7 +358,7 @@ jobs:
             aws s3 sync dist s3://lbh-single-view-auth-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-auth-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
       - run:
-          name: build common
+          name: Build common
           command: |
             cd apps/common/
             export APP_ENV=production
@@ -336,7 +390,7 @@ jobs:
             aws s3 sync dist s3://lbh-single-view-common-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://llbh-single-view-common-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
       - run:
-          name: build header
+          name: Build header
           command: |
             cd apps/header/
             export APP_ENV=<<parameters.stage>>
@@ -348,6 +402,29 @@ jobs:
             cd apps/header/
             aws s3 sync dist s3://lbh-single-view-header-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-header-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+      - run:
+          name: Build root
+          command: |
+            cd apps/root/
+            export ROOT_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/root-app-url --query Parameter.Value --output text)
+            export HEADER_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
+            export AUTH_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
+            export SEARCH_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/search-app-url --query Parameter.Value --output text)
+            export PERSON_DETAILS_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-details-app-url --query Parameter.Value --output text)
+            export COMMENTS_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/comments-app-url --query Parameter.Value --output text)
+            export COMMON_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/common-app-url --query Parameter.Value --output text)
+            export TENURE_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/tenure-app-url --query Parameter.Value --output text)
+            export ACTIVITIES_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/activities-app-url --query Parameter.Value --output text)
+            export PROPERTY_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/property-app-url --query Parameter.Value --output text)
+            export PROCESSES_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/processes-app-url --query Parameter.Value --output text)
+            yarn build
+      - run:
+          name: Deploy to S3 root
+          command: |
+            cd apps/root/
+            aws s3 sync dist s3://lbh-single-view-root-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-root-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+
 
   assume-role-development:
     executor: docker-python
