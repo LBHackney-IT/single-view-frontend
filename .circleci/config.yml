@@ -91,6 +91,17 @@ commands:
           command: |
             cd ./apps/common/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
+      - run:
+          name: get and init header
+          command: |
+            cd ./apps/header/terraform/<<parameters.environment>>/
+            terraform get -update=true
+            terraform init
+      - run:
+          name: apply header
+          command: |
+            cd ./apps/header/terraform/<<parameters.environment>>/
+            terraform apply -auto-approve
 jobs:
   install-dependencies:
     executor: node-executor

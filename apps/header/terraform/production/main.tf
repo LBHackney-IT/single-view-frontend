@@ -7,7 +7,7 @@ terraform {
     bucket  = "terraform-state-corporate-production"
     encrypt = true
     region  = "eu-west-2"
-    key     = "services/t-and-l-header-frontend/state"
+    key     = "services/single-view-header-frontend/state"
   }
 }
 resource "aws_s3_bucket" "frontend-bucket-production" {
