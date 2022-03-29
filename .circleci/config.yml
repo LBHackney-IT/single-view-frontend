@@ -239,6 +239,8 @@ jobs:
           command: |
             cd apps/root/
             export ROOT_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/root-app-url --query Parameter.Value --output text)
+            export NOTES_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
+
             export HEADER_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
             export AUTH_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
             export SEARCH_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/search-app-url --query Parameter.Value --output text)
