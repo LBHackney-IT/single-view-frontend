@@ -6,8 +6,6 @@ import { Link, PhaseBanner } from "@mfe/common/lib/components";
 
 import { locale } from "./services";
 
-import { config as commonConfig } from "@mfe/common/lib/config";
-
 const {
   welcome,
   signIn,
@@ -20,8 +18,6 @@ const { headerNavigation } = locale.a11y;
 
 const App = (): JSX.Element => {
   const [auth, setAuth] = useState($auth.getValue());
-
-  console.log(commonConfig)
 
   useEffect(() => {
     const sub = $auth.subscribe(setAuth);
