@@ -549,14 +549,7 @@ workflows:
   continuous-delivery-staging:
     when: << pipeline.parameters.run_staging_workflow >>
     jobs:
-      - permit-deploy-staging:
-          type: approval
-          filters:
-            branches:
-              only: main
-      - install-dependencies:
-          requires:
-            - permit-deploy-staging
+      - install-dependencies
       - lint-and-test:
           requires:
             - install-dependencies
