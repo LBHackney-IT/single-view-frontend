@@ -7,12 +7,12 @@ terraform {
     bucket  = "terraform-state-corporate-development"
     encrypt = true
     region  = "eu-west-2"
-    key     = "services/single-view-common-frontend/state"
+    key     = "services/single-view-frontend/state"
   }
 }
 resource "aws_s3_bucket" "frontend-bucket-development" {
-  bucket = "lbh-single-view-common-frontend-development.hackney.gov.uk"
-  acl    = "private"
+  bucket = "lbh-single-view-frontend-development.hackney.gov.uk"
+  acl    = "public-read"
   versioning {
     enabled = true
   }
@@ -20,13 +20,13 @@ resource "aws_s3_bucket" "frontend-bucket-development" {
     index_document = "index.html"
     error_document = "error.html"
   }
-  cors_rule {
-    allowed_headers = ["*"]
-    allowed_methods = ["GET"]
-    allowed_origins = ["https://d10uhf6plhgiz3.cloudfront.net/"]
-    expose_headers  = ["x-amz-server-side-encryption","x-amz-request-id","x-amz-id-2"]
-    max_age_seconds = 3000
-  }
+  # cors_rule {
+  #   allowed_headers = ["*"]
+  #   allowed_methods = ["GET"]
+  #   allowed_origins = ["https://single-view-development.hackney.gov.uk"]
+  #   expose_headers  = ["x-amz-server-side-encryption","x-amz-request-id","x-amz-id-2"]
+  #   max_age_seconds = 3000
+  # }
 }
 module "cloudfront-development" {
   source = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
@@ -38,13 +38,12 @@ module "cloudfront-development" {
   cname_aliases = []
   environment_name = "development"
   cost_code = "B0811"
-  project_name= "Single View Frontend"
+  project_name = "Single View"
   use_cloudfront_cert = true
   compress = true
 }
-
 resource "aws_ssm_parameter" "cdn" {
-  name  = "/single-view/development/common-app-url"
+  name  = "/single-view/development/app-url"
   type  = "String"
   value = "https://${module.cloudfront-development.cloudfront_domain_name}"
   overwrite = true
