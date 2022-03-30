@@ -12,16 +12,11 @@ parameters:
     type: boolean
 
   run_staging_workflow:
-    default: false
+    default: true
     type: boolean
 
   run_production_workflow:
-    default: false
-    type: boolean
-
-  e2e_test_failure:
-    description: Run the failure workflow if the e2e tests fail downstream
-    default: false
+    default: true
     type: boolean
 
 references:
