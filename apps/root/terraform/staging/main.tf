@@ -12,7 +12,8 @@ terraform {
 }
 resource "aws_s3_bucket" "frontend-bucket-staging" {
   bucket = "lbh-single-view-root-frontend-staging.hackney.gov.uk"
-  acl    = "private"
+  # acl    = "private"
+  acl    = "public-read"
   versioning {
     enabled = true
   }
@@ -20,13 +21,13 @@ resource "aws_s3_bucket" "frontend-bucket-staging" {
     index_document = "index.html"
     error_document = "error.html"
   }
-  cors_rule {
-    allowed_headers = ["*"]
-    allowed_methods = ["GET"]
-    allowed_origins = ["https://single-view-staging.hackney.gov.uk"]
-    expose_headers  = ["x-amz-server-side-encryption","x-amz-request-id","x-amz-id-2"]
-    max_age_seconds = 3000
-  }
+  # cors_rule {
+  #   allowed_headers = ["*"]
+  #   allowed_methods = ["GET"]
+  #   allowed_origins = ["https://single-view-staging.hackney.gov.uk"]
+  #   expose_headers  = ["x-amz-server-side-encryption","x-amz-request-id","x-amz-id-2"]
+  #   max_age_seconds = 3000
+  # }
 }
 module "cloudfront-staging" {
   source = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
@@ -35,7 +36,7 @@ module "cloudfront-staging" {
   s3_bucket_arn = aws_s3_bucket.frontend-bucket-staging.arn
   s3_bucket_id = aws_s3_bucket.frontend-bucket-staging.id
   orginin_access_identity_desc = "Single view frontend cloudfront identity"
-  cname_aliases = []
+  cname_aliases = ["single-view-staging.hackney.gov.uk"]
   environment_name = "staging"
   cost_code = "B0811"
   project_name = "Single View"

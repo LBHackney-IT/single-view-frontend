@@ -23,7 +23,7 @@ resource "aws_s3_bucket" "frontend-bucket-development" {
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["GET"]
-    allowed_origins = ["https://d10uhf6plhgiz3.cloudfront.net/"]
+    allowed_origins = ["https://single-view-development.hackney.gov.uk/"]
     expose_headers  = ["x-amz-server-side-encryption","x-amz-request-id","x-amz-id-2"]
     max_age_seconds = 3000
   }
