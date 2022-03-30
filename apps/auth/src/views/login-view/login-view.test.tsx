@@ -4,13 +4,13 @@ import { render } from "@hackney/mtfh-test-utils";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { login } from "@mtfh/common/lib/auth";
+import { login } from "@mfe/common/lib/auth";
 
 import { locale } from "../../services";
 import { LoginView } from "./login-view";
 
-jest.mock("@mtfh/common/lib/auth", () => ({
-  ...(jest.requireActual("@mtfh/common/lib/auth") as object),
+jest.mock("@mfe/common/lib/auth", () => ({
+  ...(jest.requireActual("@mfe/common/lib/auth") as object),
   login: jest.fn(),
 }));
 

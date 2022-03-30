@@ -1,5 +1,5 @@
 {
-  "name": "@mtfh/header-sv",
+  "name": "@mfe/header",
   "version": "0.0.1",
   "license": "MIT",
   "private": true,
@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mtfh/common": "https://github.com/LBHackney-IT/mtfh-frontend-common.git",
+    "@mfe/common": "file:../common",
     "lbh-frontend": "^3.6.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",

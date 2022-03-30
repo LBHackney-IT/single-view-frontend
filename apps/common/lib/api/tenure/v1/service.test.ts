@@ -1,10 +1,10 @@
-import { config } from "@mtfh/common/lib/config";
+import { config } from "@mfe/common/lib/config";
 import {
   AxiosSWRConfiguration,
   axiosInstance,
   mutate,
   useAxiosSWR,
-} from "@mtfh/common/lib/http";
+} from "@mfe/common/lib/http";
 
 import {
   AddPersonToTenureParams,
@@ -20,8 +20,8 @@ import {
 
 import type { Tenure } from "./types";
 
-jest.mock("@mtfh/common/lib/http", () => ({
-  ...jest.requireActual("@mtfh/common/lib/http"),
+jest.mock("@mfe/common/lib/http", () => ({
+  ...jest.requireActual("@mfe/common/lib/http"),
   axiosInstance: { patch: jest.fn(), post: jest.fn(), delete: jest.fn() },
   useAxiosSWR: jest.fn(),
   mutate: jest.fn(),

@@ -7,7 +7,7 @@ const { ImportMapWebpackPlugin } = require("@hackney/webpack-import-map-plugin")
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
-    orgName: "mtfh",
+    orgName: "mfe",
     projectName: "common",
     webpackConfigEnv,
     argv,
@@ -17,7 +17,7 @@ module.exports = (webpackConfigEnv, argv) => {
 
   return merge(defaultConfig, {
     entry: {
-      common: path.join(__dirname, "lib", "mtfh-common.tsx"),
+      common: path.join(__dirname, "lib", "mfe-common.tsx"),
       "common/lib/auth": path.join(__dirname, "lib", "auth"),
       "common/lib/http": path.join(__dirname, "lib", "http"),
       "common/lib/config": path.join(__dirname, "lib", "config"),
@@ -48,7 +48,7 @@ module.exports = (webpackConfigEnv, argv) => {
     },
     resolve: {
       alias: {
-        "@mtfh/common/lib": path.join(__dirname, "lib"),
+        "@mfe/common/lib": path.join(__dirname, "lib"),
       },
     },
     module: {
@@ -84,7 +84,7 @@ module.exports = (webpackConfigEnv, argv) => {
         PROCESS_API_URL_V1: dotenv.PROCESS_API_URL_V1 || "",
       }),
       new ImportMapWebpackPlugin({
-        namespace: "@mtfh",
+        namespace: "@mfe",
         basePath: process.env.APP_CDN || "http://localhost:8040",
       }),
     ],

@@ -1,9 +1,9 @@
-import { config } from "@mtfh/common/lib/config";
+import { config } from "@mfe/common/lib/config";
 import {
   AxiosSWRConfiguration,
   AxiosSWRResponse,
   useAxiosSWR,
-} from "@mtfh/common/lib/http";
+} from "@mfe/common/lib/http";
 
 import type { ReferenceData } from "./types";
 

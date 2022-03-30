@@ -9,8 +9,8 @@ import { RestRequest } from "msw";
 import {
   ContactDetailsPhoneTypes,
   ContactInformationContactTypes,
-} from "@mtfh/common/lib/api/contact-details/v2";
-import { config } from "@mtfh/common/lib/config";
+} from "@mfe/common/lib/api/contact-details/v2";
+import { config } from "@mfe/common/lib/config";
 
 import {
   addContactDetail,

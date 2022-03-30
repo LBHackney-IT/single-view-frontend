@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SearchView } from "./Views/search";
+import { SearchView } from "./Views/SearchView";
 
 const App = (): JSX.Element => {
   const [hasSearched, setHasSearched] = useState(false);

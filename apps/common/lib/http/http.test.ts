@@ -1,7 +1,7 @@
 import { request, server } from "@hackney/mtfh-test-utils";
 import { rest } from "msw";
 
-import { $auth } from "@mtfh/common/lib/auth";
+import { $auth } from "@mfe/common/lib/auth";
 
 import { axiosInstance, createCancelToken } from "./http";
 

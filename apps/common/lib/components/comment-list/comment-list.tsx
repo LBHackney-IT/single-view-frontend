@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 
-import { useComments } from "@mtfh/common/lib/api/comments/v2";
-import { useReferenceData } from "@mtfh/common/lib/api/reference-data/v1";
+import { useComments } from "@mfe/common/lib/api/comments/v2";
+import { useReferenceData } from "@mfe/common/lib/api/reference-data/v1";
 
 import locale from "../../locale";
 import { Center } from "../center";

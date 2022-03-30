@@ -1,14 +1,30 @@
 {
   "name": "single-view-frontend",
   "scripts": {
-    "start": "concurrently \"yarn root\" \"yarn common\" \"yarn auth\" \"yarn header\" \"yarn single_view\"",
+    "install-apps": "yarn install-root && yarn install-common && yarn install-auth && yarn install-header && yarn install-single-view",
+    "lint": "yarn lint-root && yarn lint-single-view",
+    "test": "yarn test-single-view",
+    "prepare": "husky install",
+    "start": "concurrently \"yarn root\" \"yarn common\" \"yarn auth\" \"yarn header\" \"yarn single-view\"",
+    "install-root": "cd apps/root && yarn",
+    "lint-root": "cd apps/root && yarn lint",
     "root": "cd apps/root && yarn start",
+    "install-common": "cd apps/common && yarn",
     "common": "cd apps/common && yarn start",
+    "install-auth": "cd apps/auth && yarn",
     "auth": "cd apps/auth && yarn start",
+    "install-header": "cd apps/header && yarn",
     "header": "cd apps/header && yarn start",
-    "single_view": "cd apps/single-view && yarn start"
+    "install-single-view": "cd apps/single-view && yarn",
+    "lint-single-view": "cd apps/single-view && yarn lint",
+    "test-single-view": "cd apps/single-view && yarn test",
+    "single-view": "cd apps/single-view && yarn start",
+    "format-root": "cd apps/root && yarn format",
+    "format-single-view": "cd apps/single-view && yarn format",
+    "format": "yarn format-root && yarn format-single-view"
   },
   "devDependencies": {
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.0.0",
+    "husky": "^7.0.4"
   }
 }

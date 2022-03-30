@@ -27,8 +27,8 @@ import {
 } from "single-spa-layout";
 
 import "./root.styles.scss";
-import { isAuthorised } from "@mtfh/common/lib/auth";
-import { getConfiguration } from "@mtfh/common/lib/configuration";
+import { isAuthorised } from "@mfe/common/lib/auth";
+import { getConfiguration } from "@mfe/common/lib/configuration";
 
 getConfiguration();
 const templatePath = isAuthorised() ? "authorised" : "public";

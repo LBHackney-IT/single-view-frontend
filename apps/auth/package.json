@@ -1,9 +1,9 @@
 {
-  "name": "@mtfh/auth",
+  "name": "@mfe/auth",
   "version": "0.0.2",
   "license": "MIT",
   "private": true,
-  "main": "src/mtfh-auth.tsx",
+  "main": "src/mfe-auth.tsx",
   "scripts": {
     "start": "webpack serve --port 8080",
     "start:standalone": "webpack serve --env standalone",
@@ -17,7 +17,7 @@
     "buffer": false
   },
   "dependencies": {
-    "@mtfh/common": "https://github.com/LBHackney-IT/mtfh-frontend-common.git",
+    "@mfe/common": "file:../common",
     "classnames": "2.3.1",
     "govuk-frontend": "3.11.0",
     "lbh-frontend": "^3.6.1",

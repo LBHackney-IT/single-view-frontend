@@ -1,5 +1,5 @@
-import { config } from "@mtfh/common/lib/config";
-import { axiosInstance, mutate } from "@mtfh/common/lib/http";
+import { config } from "@mfe/common/lib/config";
+import { axiosInstance, mutate } from "@mfe/common/lib/http";
 
 import type { Person } from "./types";
 

@@ -1,16 +1,11 @@
 {
-  "name": "@mtfh/root-config",
+  "name": "@mfe/root-config",
   "scripts": {
-    "start": "concurrently \"webpack serve --port 9000 --env isLocal\" \"yarn common\" \"yarn auth\" \"yarn header\" \"yarn app\"",
-    "common": "cd ../mtfh-frontend-common && yarn start",
-    "auth": "cd ../mtfh-frontend-authentication && yarn start",
-    "header": "cd ../sv-header && yarn start",
-    "app": "cd ../sv-app && yarn start",
+    "start": "webpack serve --port 9000 --env isLocal",
     "lint": "eslint src --ext js,ts,tsx",
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
-    "prepare": "cd ../.. && husky install apps/root/.husky",
     "build": "concurrently yarn:build:*",
     "build:webpack": "webpack --mode=production",
     "build:types": "tsc"
@@ -30,7 +25,6 @@
     "eslint-config-ts-important-stuff": "^1.1.0",
     "eslint-plugin-prettier": "^3.4.1",
     "html-webpack-plugin": "^5.3.2",
-    "husky": "^7.0.2",
     "jest": "^27.0.6",
     "jest-cli": "^27.0.6",
     "mini-css-extract-plugin": "^2.5.3",
@@ -48,7 +42,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@mtfh/common": "https://github.com/LBHackney-IT/mtfh-frontend-common.git",
+    "@mfe/common": "file:../common",
     "@types/jest": "^27.0.1",
     "@types/systemjs": "^6.1.1",
     "@types/webpack-env": "^1.16.2",
@@ -57,5 +51,5 @@
     "single-spa": "^5.9.3",
     "single-spa-layout": "^1.6.0"
   },
-  "types": "dist/mtfh-root-config.d.ts"
+  "types": "dist/mfe-root-config.d.ts"
 }
