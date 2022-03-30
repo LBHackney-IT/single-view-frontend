@@ -1,7 +1,7 @@
 import { deleteContactDetailV1, server } from "@hackney/mtfh-test-utils";
 import { RestRequest } from "msw";
 
-import { config } from "@mtfh/common/lib/config";
+import { config } from "@mfe/common/lib/config";
 
 import { deleteContactDetail } from "./service";
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useReferenceData } from "@mtfh/common/lib/api/reference-data/v1";
+import { useReferenceData } from "@mfe/common/lib/api/reference-data/v1";
 
 import locale from "../locale";
 

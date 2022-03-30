@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { $auth, logout } from "@mtfh/common/lib/auth";
+import { $auth, logout } from "@mfe/common/lib/auth";
 
 import Root from "./root.component";
 
@@ -18,8 +18,8 @@ const mockUser = {
   iat: 1234,
 };
 
-jest.mock("@mtfh/common/lib/auth", () => {
-  const originalModule = jest.requireActual("@mtfh/common/lib/auth");
+jest.mock("@mfe/common/lib/auth", () => {
+  const originalModule = jest.requireActual("@mfe/common/lib/auth");
   return {
     ...originalModule,
     logout: jest.fn(),

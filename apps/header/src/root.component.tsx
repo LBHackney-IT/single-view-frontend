@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ConfirmationRouter } from "@mtfh/common/lib/components";
+import { ConfirmationRouter } from "@mfe/common/lib/components";
 
 import App from "./app";
 

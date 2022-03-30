@@ -4,7 +4,7 @@ const { merge } = require("webpack-merge");
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
-    orgName: "mtfh",
+    orgName: "mfe",
     projectName: "auth",
     webpackConfigEnv,
     argv,
@@ -31,7 +31,7 @@ module.exports = (webpackConfigEnv, argv) => {
     externals: ["react-router-dom"],
     plugins: [
       new ImportMapWebpackPlugin({
-        namespace: "@mtfh",
+        namespace: "@mfe",
         basePath: process.env.APP_CDN || "http://localhost:8080",
       }),
     ],

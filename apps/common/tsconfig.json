@@ -8,7 +8,7 @@
     "baseUrl": "lib",
     "esModuleInterop": true,
     "paths": {
-      "@mtfh/common/lib/*": ["*"]
+      "@mfe/common/lib/*": ["*"]
     }
   }
 }

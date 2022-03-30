@@ -1,5 +1,5 @@
 {
-  "name": "@mtfh/app",
+  "name": "@mfe/single-view",
   "scripts": {
     "start": "webpack serve --port 8005",
     "start:standalone": "webpack serve --env standalone",
@@ -11,11 +11,10 @@
     "check-format": "prettier --check .",
     "test": "cross-env BABEL_ENV=test jest",
     "watch-tests": "cross-env BABEL_ENV=test jest --watch",
-    "prepare": "cd ../.. && husky install apps/single-view/.husky",
     "coverage": "cross-env BABEL_ENV=test jest --coverage"
   },
   "dependencies": {
-    "@mtfh/common": "https://github.com/LBHackney-IT/mtfh-frontend-common.git",
+    "@mfe/common": "file:../common",
     "axios": "^0.26.1",
     "js-cookie": "^3.0.1",
     "lbh-frontend": "^3.6.1",
@@ -49,7 +48,6 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-ts-react-important-stuff": "^3.0.0",
     "eslint-plugin-prettier": "^3.4.1",
-    "husky": "^7.0.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
     "jest-cli": "^27.0.6",
