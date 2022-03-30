@@ -427,7 +427,7 @@ jobs:
           command: |
             cd apps/common/
             aws s3 sync dist s3://lbh-single-view-common-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://llbh-single-view-common-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+            aws s3 sync dist s3://lbh-single-view-common-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
       - run:
           name: Build header
           command: |
