@@ -586,6 +586,8 @@ workflows:
           requires:
             - install-dependencies
       - cleaner-s3-buckets:
+          requires:
+            - assume-role-staging
           stage: "staging"
           filters:
             branches:
@@ -626,6 +628,8 @@ workflows:
           requires:
             - install-dependencies
       - cleaner-s3-buckets:
+          requires:
+            - assume-role-production
           stage: "production"
           filters:
             branches:
