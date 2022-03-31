@@ -39,7 +39,7 @@ module "cloudfront-staging" {
   environment_name = "staging"
   cost_code = "B0811"
   project_name = "Single View"
-  use_cloudfront_cert = false
+  use_cloudfront_cert = true
   compress = true
 }
 resource "aws_ssm_parameter" "cdn" {
