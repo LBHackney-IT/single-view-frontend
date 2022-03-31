@@ -1,12 +1,29 @@
 import React, { useState } from "react";
-import { SearchView } from "./Views/SearchView";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import SearchView from "./Views/SearchView";
 
 const App = (): JSX.Element => {
   const [hasSearched, setHasSearched] = useState(false);
   return (
     <>
-      <h1 className="lbh-heading-h1">Welcome to Single View 2.0</h1>
-      <SearchView />
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/search" />
+          </Route>
+          <Route exact path="/search">
+            <SearchView />
+          </Route>
+          <Route>
+            <p className="lbh-body-s">Page not found</p>
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 };
