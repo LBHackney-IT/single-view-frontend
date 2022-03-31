@@ -103,11 +103,11 @@ commands:
             cd ./apps/root/terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
-      - run:
-          name: Detroy root
-          command: |
-            cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform destroy -auto-approve
+      # - run:
+      #     name: Detroy root
+      #     command: |
+      #       cd ./apps/root/terraform/<<parameters.environment>>/
+      #       terraform destroy -auto-approve
       - run:
           name: Apply root
           command: |
