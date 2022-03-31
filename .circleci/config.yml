@@ -597,13 +597,13 @@ workflows:
           filters:
             branches:
               only: main
-      - clean-s3-buckets:
-          requires:
-            - assume-role-staging
-          stage: "staging"
-          filters:
-            branches:
-              only: main
+      # - clean-s3-buckets:
+      #     requires:
+      #       - assume-role-staging
+      #     stage: "staging"
+      #     filters:
+      #       branches:
+      #         only: main
       - terraform-init-and-apply-to-staging:
           requires:
             - clean-s3-buckets
@@ -639,13 +639,13 @@ workflows:
           filters:
             branches:
               only: main
-      - clean-s3-buckets:
-          requires:
-            - assume-role-production
-          stage: "production"
-          filters:
-            branches:
-              only: main
+      # - clean-s3-buckets:
+      #     requires:
+      #       - assume-role-production
+      #     stage: "production"
+      #     filters:
+      #       branches:
+      #         only: main
       - terraform-init-and-apply-to-production:
           requires:
             - clean-s3-buckets
