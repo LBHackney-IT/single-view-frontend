@@ -387,27 +387,22 @@ jobs:
       - run:
           name: Clear auth bucket
           command: |
-            cd ./apps/auth/
             aws s3 rm s3://lbh-single-view-auth-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
       - run:
           name: Clear common bucket
           command: |
-            cd ./apps/common/
             aws s3 rm s3://lbh-single-view-common-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
       - run:
           name: Clear header bucket
           command: |
-            cd ./apps/header/
             aws s3 rm s3://lbh-single-view-header-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
       - run:
           name: Clear single view bucket
           command: |
-            cd ./apps/single-view/
             aws s3 rm s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
       - run:
           name: Clear root bucket
           command: |
-            cd ./apps/root/
             aws s3 rm s3://lbh-single-view-root-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
 
   build-deploy-production:
