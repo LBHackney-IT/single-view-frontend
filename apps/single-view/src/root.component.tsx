@@ -1,8 +1,6 @@
 import React from "react";
-
-import { ConfirmationRouter } from "@mfe/common/lib/components";
-
 import App from "./app";
+import { ConfirmationRouter } from "@mfe/common/lib/components";
 
 const Root = (): JSX.Element => (
   <ConfirmationRouter>
