@@ -107,7 +107,6 @@ commands:
           name: Apply root
           command: |
             cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform state push errored.tfstate
             terraform apply -auto-approve
       - run:
           name: Get and init single view
