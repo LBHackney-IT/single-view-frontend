@@ -374,6 +374,25 @@ jobs:
             aws s3 sync dist s3://lbh-single-view-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
+  cleaner-s3-buckets:
+    executor: node-executor
+    environment:
+      aws-region: eu-west-2
+    parameters:
+      stage:
+        type: string
+    steps:
+      - *attach_workspace
+      - aws-cli/install
+      - run:
+          name: Clear S3 buckets
+          command: |
+            aws s3 rm s3://lbh-single-view-auth-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+            aws s3 rm s3://lbh-single-view-common-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+            aws s3 rm s3://lbh-single-view-header-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+            aws s3 rm s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+            aws s3 rm s3://lbh-single-view-root-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+
   build-deploy-production:
     executor: node-executor
     environment:
@@ -554,6 +573,11 @@ workflows:
       - lint-and-test:
           requires:
             - install-dependencies
+      - remove-root-s3:
+          stage: "staging"
+          filters:
+            branches:
+              only: main
       - assume-role-staging:
           context: api-assume-role-corporate-staging-context
           requires:
@@ -589,6 +613,11 @@ workflows:
       - lint-and-test:
           requires:
             - install-dependencies
+      - remove-root-s3:
+          stage: "production"
+          filters:
+            branches:
+              only: main
       - assume-role-production:
           context: api-assume-role-corporate-production-context
           requires:
