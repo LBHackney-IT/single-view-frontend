@@ -104,6 +104,15 @@ commands:
             terraform get -update=true
             terraform init
       - run:
+          name: Clear root bucket
+          command: |
+            aws s3 rm s3://lbh-single-view-root-frontend-<<parameters.environment>>.hackney.gov.uk/ --recursive
+      - run:
+          name: Detroy root
+          command: |
+            cd ./apps/root/terraform/<<parameters.environment>>/
+            terraform destroy -auto-approve
+      - run:
           name: Apply root
           command: |
             cd ./apps/root/terraform/<<parameters.environment>>/
@@ -373,6 +382,37 @@ jobs:
             cd apps/single-view/
             aws s3 sync dist s3://lbh-single-view-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+
+  clean-s3-buckets:
+    executor: node-executor
+    environment:
+      aws-region: eu-west-2
+    parameters:
+      stage:
+        type: string
+    steps:
+      - *attach_workspace
+      - aws-cli/install
+      - run:
+          name: Clear auth bucket
+          command: |
+            aws s3 rm s3://lbh-single-view-auth-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      - run:
+          name: Clear common bucket
+          command: |
+            aws s3 rm s3://lbh-single-view-common-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      - run:
+          name: Clear header bucket
+          command: |
+            aws s3 rm s3://lbh-single-view-header-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      - run:
+          name: Clear single view bucket
+          command: |
+            aws s3 rm s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      - run:
+          name: Clear root bucket
+          command: |
+            aws s3 rm s3://lbh-single-view-root-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
 
   build-deploy-production:
     executor: node-executor
