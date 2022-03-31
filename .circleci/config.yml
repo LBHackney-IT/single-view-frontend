@@ -641,14 +641,14 @@ workflows:
               only: main
       - clean-s3-buckets:
           requires:
-            - clean-s3-buckets
+            - assume-role-production
           stage: "production"
           filters:
             branches:
               only: main
       - terraform-init-and-apply-to-production:
           requires:
-            - assume-role-production
+            - clean-s3-buckets
           filters:
             branches:
               only: main
