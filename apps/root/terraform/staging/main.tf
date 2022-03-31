@@ -13,8 +13,10 @@ terraform {
 resource "aws_s3_bucket" "frontend-bucket-staging" {
   bucket = "lbh-single-view-root-frontend-staging.hackney.gov.uk"
   acl    = "private"
+  force_destroy = true
+
   versioning {
-    enabled = true
+    enabled = false
   }
   website {
     index_document = "index.html"
