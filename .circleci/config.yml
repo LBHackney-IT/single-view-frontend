@@ -104,10 +104,6 @@ commands:
             terraform get -update=true
             terraform init
       - run:
-          name: Clear root bucket
-          command: |
-            aws s3 rm s3://lbh-single-view-root-frontend-<<parameters.environment>>.hackney.gov.uk/ --recursive
-      - run:
           name: Detroy root
           command: |
             cd ./apps/root/terraform/<<parameters.environment>>/
@@ -393,22 +389,22 @@ jobs:
     steps:
       - *attach_workspace
       - aws-cli/install
-      - run:
-          name: Clear auth bucket
-          command: |
-            aws s3 rm s3://lbh-single-view-auth-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
-      - run:
-          name: Clear common bucket
-          command: |
-            aws s3 rm s3://lbh-single-view-common-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
-      - run:
-          name: Clear header bucket
-          command: |
-            aws s3 rm s3://lbh-single-view-header-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
-      - run:
-          name: Clear single view bucket
-          command: |
-            aws s3 rm s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      # - run:
+      #     name: Clear auth bucket
+      #     command: |
+      #       aws s3 rm s3://lbh-single-view-auth-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      # - run:
+      #     name: Clear common bucket
+      #     command: |
+      #       aws s3 rm s3://lbh-single-view-common-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      # - run:
+      #     name: Clear header bucket
+      #     command: |
+      #       aws s3 rm s3://lbh-single-view-header-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      # - run:
+      #     name: Clear single view bucket
+      #     command: |
+      #       aws s3 rm s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
       - run:
           name: Clear root bucket
           command: |
@@ -601,6 +597,13 @@ workflows:
           filters:
             branches:
               only: main
+      - clean-s3-buckets:
+          requires:
+            - assume-role-staging:
+          stage: "staging"
+          filters:
+            branches:
+              only: main
       - terraform-init-and-apply-to-staging:
           requires:
             - assume-role-staging
@@ -633,6 +636,13 @@ workflows:
           context: api-assume-role-corporate-production-context
           requires:
             - lint-and-test
+          filters:
+            branches:
+              only: main
+      - clean-s3-buckets:
+          requires:
+            - assume-role-production:
+          stage: "production"
           filters:
             branches:
               only: main
