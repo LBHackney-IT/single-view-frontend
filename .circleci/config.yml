@@ -104,6 +104,15 @@ commands:
             terraform get -update=true
             terraform init
       - run:
+          name: Clear root bucket
+          command: |
+            aws s3 rm s3://lbh-single-view-root-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      - run:
+          name: Detroy root
+          command: |
+            cd ./apps/root/terraform/<<parameters.environment>>/
+            terraform destroy -auto-approve
+      - run:
           name: Apply root
           command: |
             cd ./apps/root/terraform/<<parameters.environment>>/
@@ -374,7 +383,7 @@ jobs:
             aws s3 sync dist s3://lbh-single-view-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
-  cleaner-s3-buckets:
+  clean-s3-buckets:
     executor: node-executor
     environment:
       aws-region: eu-west-2
@@ -585,13 +594,6 @@ workflows:
       - lint-and-test:
           requires:
             - install-dependencies
-      - cleaner-s3-buckets:
-          requires:
-            - assume-role-staging
-          stage: "staging"
-          filters:
-            branches:
-              only: main
       - assume-role-staging:
           context: api-assume-role-corporate-staging-context
           requires:
@@ -627,13 +629,6 @@ workflows:
       - lint-and-test:
           requires:
             - install-dependencies
-      - cleaner-s3-buckets:
-          requires:
-            - assume-role-production
-          stage: "production"
-          filters:
-            branches:
-              only: main
       - assume-role-production:
           context: api-assume-role-corporate-production-context
           requires:
