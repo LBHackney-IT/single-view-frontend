@@ -103,11 +103,11 @@ commands:
             cd ./apps/root/terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
-      # - run:
-      #     name: Detroy root
-      #     command: |
-      #       cd ./apps/root/terraform/<<parameters.environment>>/
-      #       terraform destroy -auto-approve
+      - run:
+          name: Detroy root
+          command: |
+            cd ./apps/root/terraform/<<parameters.environment>>/
+            terraform destroy -auto-approve
       - run:
           name: Apply root
           command: |
@@ -596,17 +596,17 @@ workflows:
           filters:
             branches:
               only: main
-      # - clean-s3-buckets:
-      #     requires:
-      #       - assume-role-staging
-      #     stage: "staging"
-      #     filters:
-      #       branches:
-      #         only: main
-      - terraform-init-and-apply-to-staging:
+      - clean-s3-buckets:
           requires:
             - assume-role-staging
-            # - clean-s3-buckets
+          stage: "staging"
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-apply-to-staging:
+          requires:
+            # - assume-role-staging
+            - clean-s3-buckets
           filters:
             branches:
               only: main
@@ -639,17 +639,17 @@ workflows:
           filters:
             branches:
               only: main
-      # - clean-s3-buckets:
-      #     requires:
-      #       - assume-role-production
-      #     stage: "production"
-      #     filters:
-      #       branches:
-      #         only: main
-      - terraform-init-and-apply-to-production:
+      - clean-s3-buckets:
           requires:
             - assume-role-production
-            # - clean-s3-buckets
+          stage: "production"
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-apply-to-production:
+          requires:
+            # - assume-role-production
+            - clean-s3-buckets
           filters:
             branches:
               only: main

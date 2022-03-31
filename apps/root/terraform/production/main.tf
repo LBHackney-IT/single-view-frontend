@@ -34,7 +34,7 @@ module "cloudfront-production" {
   environment_name = "production"
   cost_code = "B0811"
   project_name = "Single View"
-  use_cloudfront_cert = true
+  use_cloudfront_cert = false
   compress = true
 }
 resource "aws_ssm_parameter" "cdn" {
