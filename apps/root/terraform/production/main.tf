@@ -13,6 +13,7 @@ terraform {
 resource "aws_s3_bucket" "frontend-bucket-production" {
   bucket = "lbh-single-view-root-frontend-production.hackney.gov.uk"
   acl    = "private"
+  force_destroy = true
   versioning {
     enabled = true
   }
