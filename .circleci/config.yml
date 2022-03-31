@@ -573,7 +573,7 @@ workflows:
       - lint-and-test:
           requires:
             - install-dependencies
-      - remove-root-s3:
+      - cleaner-s3-buckets:
           stage: "staging"
           filters:
             branches:
@@ -613,7 +613,7 @@ workflows:
       - lint-and-test:
           requires:
             - install-dependencies
-      - remove-root-s3:
+      - cleaner-s3-buckets:
           stage: "production"
           filters:
             branches:
