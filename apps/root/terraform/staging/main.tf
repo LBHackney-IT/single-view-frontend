@@ -30,7 +30,8 @@ module "cloudfront-staging" {
   s3_bucket_arn = aws_s3_bucket.frontend-bucket-staging.arn
   s3_bucket_id = aws_s3_bucket.frontend-bucket-staging.id
   orginin_access_identity_desc = "Single view frontend cloudfront identity"
-  cname_aliases = ["single-view-staging.hackney.gov.uk"]
+  cname_aliases = []
+  # cname_aliases = ["single-view-staging.hackney.gov.uk"]
   environment_name = "staging"
   cost_code = "B0811"
   project_name = "Single View"
