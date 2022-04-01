@@ -12,8 +12,6 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const [addressLine1, setAddressLine1] = useState("");
   const [postCode, setPostcode] = useState("");
 
-  let searchResults: Person[];
-
   const createSearch = (): string => {
     let searchTerms = [firstName, lastName];
 
@@ -28,7 +26,10 @@ export const SearchByResident = (props: myProps): JSX.Element => {
 
   const handleSearch = async () => {
     try {
-      searchResults = await SearchResident(createSearch(), joinAddresses());
+      let searchResults: Person[] = await SearchResident(
+        createSearch(),
+        joinAddresses()
+      );
       props.setResultsFunction(searchResults);
     } catch (e) {
       console.log(e);
