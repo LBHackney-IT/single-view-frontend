@@ -26,6 +26,15 @@ export const SearchByResident = (props: myProps): JSX.Element => {
     return [addressLine1, postCode].filter((term) => term !== "").join(" ");
   };
 
+  const handleSearch = async () => {
+    try {
+      searchResults = await SearchResident(createSearch(), joinAddresses());
+      props.setResultsFunction(searchResults);
+    } catch (e) {
+      console.log(e); //do better error handling here
+    }
+  };
+
   return (
     <>
       <div className="govuk-grid-row">
@@ -34,8 +43,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
             onSubmit={(e) => {
               e.preventDefault();
               if (firstName != "" || lastName != "") {
-                SearchResident(createSearch(), joinAddresses());
-                props.setResultsFunction(searchResults);
+                handleSearch();
               }
             }}
           >
