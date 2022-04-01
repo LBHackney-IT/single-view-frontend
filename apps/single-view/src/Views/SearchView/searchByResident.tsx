@@ -31,7 +31,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
       searchResults = await SearchResident(createSearch(), joinAddresses());
       props.setResultsFunction(searchResults);
     } catch (e) {
-      console.log(e); //do better error handling here
+      console.log(e);
     }
   };
 
@@ -42,7 +42,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              if (firstName != "" || lastName != "") {
+              if (firstName != "" && lastName != "") {
                 handleSearch();
               }
             }}
