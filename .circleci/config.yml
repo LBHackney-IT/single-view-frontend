@@ -104,19 +104,9 @@ commands:
             terraform get -update=true
             terraform init
       - run:
-          name: Clear root bucket
-          command: |
-            aws s3 rm s3://lbh-single-view-root-frontend-<<parameters.environment>>.hackney.gov.uk/ --recursive
-      - run:
-          name: Detroy root
-          command: |
-            cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform destroy -auto-approve
-      - run:
           name: Apply root
           command: |
             cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform destroy -auto-approve
             terraform apply -auto-approve
       - run:
           name: Get and init single view

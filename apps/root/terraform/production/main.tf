@@ -29,11 +29,13 @@ module "cloudfront-production" {
   s3_bucket_arn = aws_s3_bucket.frontend-bucket-production.arn
   s3_bucket_id = aws_s3_bucket.frontend-bucket-production.id
   orginin_access_identity_desc = "Single View root frontend cloudfront identity"
-  cname_aliases = ["single-view.hackney.gov.uk"]
+  cname_aliases = []
+  # cname_aliases = ["single-view.hackney.gov.uk"]
   environment_name = "production"
   cost_code = "B0811"
   project_name = "Single View"
   use_cloudfront_cert = false
+  hackney_cert_arn = ""
   compress = true
 }
 resource "aws_ssm_parameter" "cdn" {
