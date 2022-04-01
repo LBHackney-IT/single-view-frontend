@@ -108,11 +108,11 @@ commands:
           command: |
             cd ./apps/root/terraform/<<parameters.environment>>/
             terraform destroy -auto-approve
-      - run:
-          name: Apply root
-          command: |
-            cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform apply -auto-approve
+      # - run:
+      #     name: Apply root
+      #     command: |
+      #       cd ./apps/root/terraform/<<parameters.environment>>/
+      #       terraform apply -auto-approve
       - run:
           name: Get and init single view
           command: |
