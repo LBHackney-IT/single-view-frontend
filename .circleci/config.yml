@@ -65,6 +65,28 @@ commands:
       - *attach_workspace
       - checkout
       - run:
+          name: Get and init root
+          command: |
+            cd ./apps/root/terraform/<<parameters.environment>>/
+            terraform get -update=true
+            terraform init
+      - run:
+          name: Apply root
+          command: |
+            cd ./apps/root/terraform/<<parameters.environment>>/
+            terraform apply -auto-approve
+      - run:
+          name: Get and init single view
+          command: |
+            cd ./apps/single-view/terraform/<<parameters.environment>>/
+            terraform get -update=true
+            terraform init
+      - run:
+          name: Apply single view
+          command: |
+            cd ./apps/single-view/terraform/<<parameters.environment>>/
+            terraform apply -auto-approve
+      - run:
           name: Get and init auth
           command: |
             cd ./apps/auth/terraform/<<parameters.environment>>/
@@ -96,28 +118,6 @@ commands:
           name: Apply header
           command: |
             cd ./apps/header/terraform/<<parameters.environment>>/
-            terraform apply -auto-approve
-      - run:
-          name: Get and init root
-          command: |
-            cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
-      - run:
-          name: Apply root
-          command: |
-            cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform apply -auto-approve
-      - run:
-          name: Get and init single view
-          command: |
-            cd ./apps/single-view/terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
-      - run:
-          name: Apply single view
-          command: |
-            cd ./apps/single-view/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
 
 jobs:
