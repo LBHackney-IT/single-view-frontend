@@ -30,8 +30,7 @@ module "cloudfront-development" {
   s3_bucket_arn = aws_s3_bucket.frontend-bucket-development.arn
   s3_bucket_id = aws_s3_bucket.frontend-bucket-development.id
   orginin_access_identity_desc = "Single view root frontend cloudfront identity"
-  cname_aliases = []
-  # cname_aliases = ["single-view-development.hackney.gov.uk"]
+  cname_aliases = ["single-view-development.hackney.gov.uk"]
   environment_name = "development"
   cost_code = "B0811"
   project_name = "Single View"

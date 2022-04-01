@@ -65,6 +65,28 @@ commands:
       - *attach_workspace
       - checkout
       - run:
+          name: Get and init root
+          command: |
+            cd ./apps/root/terraform/<<parameters.environment>>/
+            terraform get -update=true
+            terraform init
+      - run:
+          name: Apply root
+          command: |
+            cd ./apps/root/terraform/<<parameters.environment>>/
+            terraform apply -auto-approve
+      - run:
+          name: Get and init single view
+          command: |
+            cd ./apps/single-view/terraform/<<parameters.environment>>/
+            terraform get -update=true
+            terraform init
+      - run:
+          name: Apply single view
+          command: |
+            cd ./apps/single-view/terraform/<<parameters.environment>>/
+            terraform apply -auto-approve
+      - run:
           name: Get and init auth
           command: |
             cd ./apps/auth/terraform/<<parameters.environment>>/
@@ -96,28 +118,6 @@ commands:
           name: Apply header
           command: |
             cd ./apps/header/terraform/<<parameters.environment>>/
-            terraform apply -auto-approve
-      - run:
-          name: Get and init root
-          command: |
-            cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
-      - run:
-          name: Apply root
-          command: |
-            cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform apply -auto-approve
-      - run:
-          name: Get and init single view
-          command: |
-            cd ./apps/single-view/terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
-      - run:
-          name: Apply single view
-          command: |
-            cd ./apps/single-view/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
 
 jobs:
@@ -156,10 +156,10 @@ jobs:
       - *attach_workspace
       - run:
           name: Run linter
-          command: cd apps/single-view/ && echo "yarn lint"
+          command: cd apps/single-view/ && yarn lint
       - run:
           name: Run unit test
-          command: cd apps/single-view/ && echo "yarn test"
+          command: cd apps/single-view/ && yarn test
 
   build-deploy-development:
     executor: node-executor
@@ -552,10 +552,16 @@ workflows:
   continuous-delivery-development:
     when: << pipeline.parameters.run_development_workflow >>
     jobs:
-      - install-dependencies
+      - install-dependencies:
+          filters:
+            branches:
+              only: development
       - lint-and-test:
           requires:
             - install-dependencies
+          filters:
+            branches:
+              only: development
       - assume-role-development:
           context: api-assume-role-corporate-development-context
           requires:
