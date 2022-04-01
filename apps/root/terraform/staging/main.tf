@@ -35,6 +35,7 @@ module "cloudfront-staging" {
   cost_code = "B0811"
   project_name = "Single View"
   hackney_cert_arn = "arn:aws:acm:us-east-1:163959497493:certificate/97f8d5f9-f0d7-47d9-b5b5-a28e55df3eba"
+  use_cloudfront_cert = false
   compress = true
 }
 resource "aws_ssm_parameter" "cdn" {

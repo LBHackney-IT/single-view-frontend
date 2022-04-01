@@ -34,6 +34,7 @@ module "cloudfront-production" {
   environment_name = "production"
   cost_code = "B0811"
   project_name = "Single View"
+  use_cloudfront_cert = false
   hackney_cert_arn = ""
   compress = true
 }

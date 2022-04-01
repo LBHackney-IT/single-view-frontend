@@ -35,6 +35,7 @@ module "cloudfront-development" {
   cost_code = "B0811"
   project_name = "Single View"
   hackney_cert_arn = "arn:aws:acm:us-east-1:467644390825:certificate/116f2c69-af89-46ac-9f2d-5d2db329f57a"
+  use_cloudfront_cert = false
   compress = true
 }
 resource "aws_ssm_parameter" "cdn" {
