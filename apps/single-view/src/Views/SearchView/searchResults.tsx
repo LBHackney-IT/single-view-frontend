@@ -8,16 +8,23 @@ interface myProps {
 export const SearchResults = (props: myProps): JSX.Element => {
   return (
     <div className="lbh-container">
+      <h2 className="lbh-heading-h3">{`${props.searchResults.length} results found`}</h2>
       {props.searchResults.map((person: Person, index: number) => {
         return (
-          <li key={index}>
-            <a href={`/customers/${person.id}`}>
-              {person.firstname} {person.surname},{" "}
+          <ul className="lbh-body" key={index}>
+            <a
+              href={`/customers/${person.id}`}
+              className="lbh-link lbh-link--no-visited-state"
+            >
+              {person.firstname} {person.surname}, Date of Birth:{" "}
+              {person.dateOfBirth}
+            </a>
+            <div>
               {person.tenures.map((tenure) => {
                 return tenure.assetFullAddress;
               })}
-            </a>
-          </li>
+            </div>
+          </ul>
         );
       })}
     </div>
