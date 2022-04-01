@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "frontend-bucket-production" {
   force_destroy = true
 
   versioning {
-    enabled = false
+    enabled = true
   }
   website {
     index_document = "index.html"
@@ -34,7 +34,7 @@ module "cloudfront-production" {
   environment_name = "production"
   cost_code = "B0811"
   project_name = "Single View"
-  use_cloudfront_cert = false
+  hackney_cert_arn = ""
   compress = true
 }
 resource "aws_ssm_parameter" "cdn" {

@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "frontend-bucket-staging" {
   force_destroy = true
 
   versioning {
-    enabled = false
+    enabled = true
   }
   website {
     index_document = "index.html"
@@ -34,7 +34,7 @@ module "cloudfront-staging" {
   environment_name = "staging"
   cost_code = "B0811"
   project_name = "Single View"
-  use_cloudfront_cert = false
+  hackney_cert_arn = "arn:aws:acm:us-east-1:163959497493:certificate/97f8d5f9-f0d7-47d9-b5b5-a28e55df3eba"
   compress = true
 }
 resource "aws_ssm_parameter" "cdn" {
