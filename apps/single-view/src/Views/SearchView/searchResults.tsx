@@ -19,7 +19,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
               {person.firstname} {person.surname}, Date of Birth:{" "}
               {person.dateOfBirth}
             </a>
-            <div>
+            <div className="lbh-body-s">
               {person.tenures.map((tenure) => {
                 return tenure.assetFullAddress;
               })}
