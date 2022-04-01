@@ -12,9 +12,9 @@ export const SearchResults = (props: myProps): JSX.Element => {
         return (
           <li key={index}>
             <a href={`/customers/${person.id}`}>
-              {person.firstname} {person.surname},
-              {person.tenures.forEach((tenure) => {
-                tenure.assetFullAddress;
+              {person.firstname} {person.surname},{" "}
+              {person.tenures.map((tenure) => {
+                return tenure.assetFullAddress;
               })}
             </a>
           </li>
