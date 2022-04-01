@@ -6,5 +6,20 @@ interface myProps {
 }
 
 export const SearchResults = (props: myProps): JSX.Element => {
-  return <div>Search Results here: {props.searchResults}</div>;
+  return (
+    <div className="lbh-container">
+      {props.searchResults.map((person: Person, index: number) => {
+        return (
+          <li key={index}>
+            <a href={`/customers/${person.id}`}>
+              {person.firstname} {person.surname},
+              {person.tenures.forEach((tenure) => {
+                tenure.assetFullAddress;
+              })}
+            </a>
+          </li>
+        );
+      })}
+    </div>
+  );
 };
