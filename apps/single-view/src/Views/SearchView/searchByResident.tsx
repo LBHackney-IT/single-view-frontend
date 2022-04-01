@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { SearchResident } from "../../Gateways/SearchResident";
+import { Person } from "../../Interfaces/housingSearchInterfaces";
 
 interface myProps {
-  setResultsFunction: (results: string) => void;
+  setResultsFunction: (searchResults: Person[]) => void;
 }
 
 export const SearchByResident = (props: myProps): JSX.Element => {
@@ -10,6 +11,8 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const [lastName, setLastName] = useState("");
   const [addressLine1, setAddressLine1] = useState("");
   const [postCode, setPostcode] = useState("");
+
+  let searchResults: Person[];
 
   const createSearch = (): string => {
     let searchTerms = [firstName, lastName];
@@ -32,7 +35,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               e.preventDefault();
               if (firstName != "" || lastName != "") {
                 SearchResident(createSearch(), joinAddresses());
-                props.setResultsFunction("results");
+                props.setResultsFunction(searchResults);
               }
             }}
           >

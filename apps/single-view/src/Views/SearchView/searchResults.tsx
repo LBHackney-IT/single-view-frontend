@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { Person } from "../../Interfaces/housingSearchInterfaces";
 
 interface myProps {
-  results: string;
+  searchResults: Person[];
 }
 
 export const SearchResults = (props: myProps): JSX.Element => {
-  return <div>Search Results here: {props.results}</div>;
+  return <div>Search Results here: {props.searchResults}</div>;
 };
