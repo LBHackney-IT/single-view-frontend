@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { SearchResident } from "../../Gateways/SearchResident";
 
-export const SearchByResident = () => {
+interface myProps {
+  setResultsFunction: (results: string) => void;
+}
+
+export const SearchByResident = (props: myProps): JSX.Element => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [addressLine1, setAddressLine1] = useState("");
@@ -28,6 +32,7 @@ export const SearchByResident = () => {
               e.preventDefault();
               if (firstName != "" || lastName != "") {
                 SearchResident(createSearch(), joinAddresses());
+                props.setResultsFunction("results");
               }
             }}
           >
