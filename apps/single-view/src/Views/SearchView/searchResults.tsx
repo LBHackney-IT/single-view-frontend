@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { formatDateOfBirth } from "../../Utils/formatDateOfBirth";
 import { Person } from "../../Interfaces/housingSearchInterfaces";
 
 interface myProps {
@@ -17,7 +18,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
               className="lbh-link lbh-link--no-visited-state"
             >
               {person.firstname} {person.surname}, Date of Birth:{" "}
-              {person.dateOfBirth}
+              {formatDateOfBirth(person.dateOfBirth)}
             </a>
             <div className="lbh-body-s">
               {person.tenures.map((tenure) => {
