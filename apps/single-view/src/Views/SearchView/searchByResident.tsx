@@ -43,7 +43,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              if (firstName != "" && lastName != "") {
+              if (firstName && lastName) {
                 handleSearch();
               }
             }}
