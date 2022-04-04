@@ -31,7 +31,7 @@ export const CustomerView = () => {
 
   useEffect(() => {
     loadPerson();
-  });
+  }, []);
 
   return (
     <>
