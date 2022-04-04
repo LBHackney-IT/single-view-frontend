@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
-import SearchView from "./Views/SearchView";
+import { CustomerView, SearchView } from "./Views";
+
+import "./app.scss";
 
 const App = (): JSX.Element => {
   const [hasSearched, setHasSearched] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      require("lbh-frontend").initAll();
+    }
+  }, []);
+
   return (
     <>
       <Router>
@@ -16,8 +25,11 @@ const App = (): JSX.Element => {
           <Route exact path="/">
             <Redirect to="/search" />
           </Route>
-          <Route exact path="/search">
+          <Route path="/search">
             <SearchView />
+          </Route>
+          <Route path="/customers/:id">
+            <CustomerView />
           </Route>
           <Route>
             <p className="lbh-body-s">Page not found</p>

@@ -1,6 +1,6 @@
 import React from "react";
 import { formatDateOfBirth } from "../../Utils/formatDateOfBirth";
-import { Person } from "../../Interfaces/housingSearchInterfaces";
+import { Person } from "../../Interfaces";
 
 interface myProps {
   searchResults: Person[];

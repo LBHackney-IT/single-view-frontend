@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SearchResident } from "../../Gateways/SearchResident";
-import { Person } from "../../Interfaces/housingSearchInterfaces";
+import { Person } from "../../Interfaces";
 
 interface myProps {
   setResultsFunction: (searchResults: Person[]) => void;

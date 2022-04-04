@@ -13,7 +13,6 @@ module.exports = (webpackConfigEnv, argv) => {
     webpackConfigEnv,
     argv,
   });
-  
 
   return merge(defaultConfig, {
     entry: {
@@ -21,6 +20,14 @@ module.exports = (webpackConfigEnv, argv) => {
     },
     output: {
       filename: "[name].[contenthash].js",
+    },
+    module: {
+      rules: [
+        {
+          test: /\.scss$/i,
+          use: ["style-loader", "css-loader", "sass-loader"],
+        },
+      ],
     },
     externals: ["react-router-dom", "formik", "yup"],
     plugins: [
