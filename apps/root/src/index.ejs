@@ -48,19 +48,26 @@
 
   <!-- Add your organization's prod import map URL to this script's src  -->
   <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        <% if (isLocal) { %>
+          "single-spa": "https://cdnjs.cloudflare.com/ajax/libs/single-spa/5.9.0/umd/single-spa.dev.js",
+          "react": "https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.development.js",
+          "react-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js",
+          "react-router-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.js"
+        <% } else { %>
+          "single-spa": "https://cdnjs.cloudflare.com/ajax/libs/single-spa/5.9.0/umd/single-spa.min.js",
+          "react": "https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.production.min.js",
+          "react-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.production.min.js",
+          "react-router-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js"
+        <% } %>
+      }
+    }
+  </script>
 
-  <% if (isLocal) { %>
-    <script type="systemjs-importmap">
-        {
-            "imports": {
-                "@single-spa/welcome": "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js",
-                "react": "https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.development.js",
-                "react-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js",
-                "react-router-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.js"
-            }
-        }
-    </script>
-  <% } %>
+  <!-- Add your organization's prod import map URL to this script's src  -->
+  <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
 
   <script type="systemjs-importmap" src="<%= COMMON_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
   <script type="systemjs-importmap" src="<%= AUTH_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
