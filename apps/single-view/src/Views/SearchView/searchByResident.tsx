@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SearchResident } from "../../Gateways/SearchResident";
+import { SearchResident } from "../../Gateways";
 
 export const SearchByResident = () => {
   const [firstName, setFirstName] = useState("");
