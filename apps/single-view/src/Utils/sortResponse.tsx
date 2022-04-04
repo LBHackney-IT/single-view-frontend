@@ -13,13 +13,14 @@ export const sortResponseByRelevance = (
 
     if (item.tenures != undefined) {
       for (let i = 0; i < item.tenures.length; i++) {
-        itemAddress = item.tenures[i].assetFullAddress;
-        if (address && itemAddress.indexOf(address) > -1) {
+        itemAddress = item.tenures[i].assetFullAddress.toLowerCase();
+        if (address && itemAddress.indexOf(address.toLowerCase()) > -1) {
           result.score += 1;
         }
       }
     }
     result.data = item;
+    console.log(result);
     results.push(result);
   }
   results.sort((a: any, b: any) => {
