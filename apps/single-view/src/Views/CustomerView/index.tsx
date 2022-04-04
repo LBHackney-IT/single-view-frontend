@@ -1,43 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getCustomer } from "../../Gateways";
+import { getPerson } from "../../Gateways";
 import { Person, UrlParams } from "../../Interfaces";
 import { Profile } from "./Profile";
 
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
-  const [person, setPerson] = useState<Person>({
-    id: "cbd7d7b7-c68a-4741-898d-36492b85f189",
-    title: "Mrs",
-    firstname: "test",
-    middleName: null,
-    surname: "test",
-    preferredFirstname: null,
-    preferredSurname: null,
+  const voidPerson = {
+    id: "",
+    title: "",
+    firstname: "",
+    middleName: "",
+    surname: "",
+    preferredFirstname: "",
+    preferredSurname: "",
+    dateOfBirth: "",
     totalBalance: 0.0,
-    dateOfBirth: "1990-12-12",
-    personTypes: ["Tenant"],
+    personTypes: [],
     IsPersonCautionaryAlerted: false,
     IsTenureCautionaryAlerted: false,
-    tenures: [
-      {
-        id: "6bc70564-b4f3-4dd1-ac36-26f3572d1d61",
-        type: "Commercial Let",
-        totalBalance: 0.0,
-        startDate: "2022-10-10T00:00:00Z",
-        endDate: null,
-        assetFullAddress:
-          "Psp 36 Nelson Mandela House 124 Cazenove Road Hackney London N16 6AJ",
-        postCode: null,
-        paymentReference: null,
-        isActive: true,
-      },
-    ],
+    tenures: [],
+  };
+  const [person, setPerson] = useState<Person>(voidPerson);
+
+  const loadPerson = async () => {
+    let person = await getPerson(id);
+
+    setPerson(person);
+  };
+
+  useEffect(() => {
+    loadPerson();
   });
-
-  const customer = getCustomer(id);
-
-  console.log(customer);
 
   return (
     <>

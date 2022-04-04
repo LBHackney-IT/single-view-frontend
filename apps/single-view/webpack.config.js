@@ -4,7 +4,7 @@ const {
 const webpack = require("webpack");
 const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
 const { merge } = require("webpack-merge");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
@@ -14,8 +14,8 @@ module.exports = (webpackConfigEnv, argv) => {
     argv,
   });
 
-    const env = dotenv.config().parsed;
-  
+  const env = dotenv.config().parsed;
+
   // reduce it to a nice object, the same as before
   const envKeys = Object.keys(env).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(env[next]);
