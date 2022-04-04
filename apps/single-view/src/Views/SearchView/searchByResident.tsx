@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { SearchResident } from "../../Gateways";
+import { SearchResident } from "../../Gateways/SearchResident";
+import { Person } from "../../Interfaces/housingSearchInterfaces";
 
-export const SearchByResident = () => {
+interface myProps {
+  setResultsFunction: (searchResults: Person[]) => void;
+}
+
+export const SearchByResident = (props: myProps): JSX.Element => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [addressLine1, setAddressLine1] = useState("");
@@ -19,6 +24,18 @@ export const SearchByResident = () => {
     return [addressLine1, postCode].filter((term) => term !== "").join(" ");
   };
 
+  const handleSearch = async () => {
+    try {
+      let searchResults: Person[] = await SearchResident(
+        createSearch(),
+        joinAddresses()
+      );
+      props.setResultsFunction(searchResults);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <>
       <div className="govuk-grid-row">
@@ -26,12 +43,15 @@ export const SearchByResident = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              if (firstName != "" || lastName != "") {
-                SearchResident(createSearch(), joinAddresses());
+              if (firstName && lastName) {
+                handleSearch();
               }
             }}
           >
-            <div className="govuk-form-group lbh-form-group">
+            <div
+              className="govuk-form-group lbh-form-group"
+              style={{ width: "60%" }}
+            >
               <label className="govuk-label lbh-label" htmlFor="firstName">
                 * First name{" "}
                 {<text style={{ fontStyle: "italic" }}> Mandatory</text>}
@@ -44,7 +64,10 @@ export const SearchByResident = () => {
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
-            <div className="govuk-form-group lbh-form-group">
+            <div
+              className="govuk-form-group lbh-form-group"
+              style={{ width: "60%" }}
+            >
               <label className="govuk-label lbh-label" htmlFor="lastName">
                 * Last name{" "}
                 {<text style={{ fontStyle: "italic" }}> Mandatory</text>}
@@ -57,7 +80,10 @@ export const SearchByResident = () => {
                 onChange={(e) => setLastName(e.target.value)}
               />
             </div>
-            <div className="govuk-form-group lbh-form-group">
+            <div
+              className="govuk-form-group lbh-form-group"
+              style={{ width: "60%" }}
+            >
               <label className="govuk-label lbh-label" htmlFor="addressLine1">
                 First Line of Address
               </label>
@@ -69,7 +95,10 @@ export const SearchByResident = () => {
                 onChange={(e) => setAddressLine1(e.target.value)}
               />
             </div>
-            <div className="govuk-form-group lbh-form-group">
+            <div
+              className="govuk-form-group lbh-form-group"
+              style={{ width: "60%" }}
+            >
               <label className="govuk-label lbh-label" htmlFor="postcode">
                 Postcode
               </label>
