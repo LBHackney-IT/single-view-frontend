@@ -34,6 +34,12 @@ module.exports = (webpackConfigEnv, argv) => {
       new webpack.EnvironmentPlugin({
         APP_ENV: process.env.APP_ENV || "development",
       }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          'HOUSING_SEARCH_API': process.env.HOUSING_SEARCH_API,
+          'PERSON_API_V1': process.env.PERSON_API_V1
+        }
+      }),
       new Dotenv(),
       new ImportMapWebpackPlugin({
         namespace: "@mfe",
