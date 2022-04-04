@@ -8,7 +8,7 @@ export const SearchResident = async (
   address: string | null
 ): Promise<Person[]> => {
   const response = await axios.get(
-    `https://v4xprqejik.execute-api.eu-west-2.amazonaws.com/staging/api/v1/search/persons?searchText=${searchParams}`,
+    `${process.env.HOUSING_SEARCH_API_V1}/search/persons?searchText=${searchParams}`,
     {
       headers: {
         Authorization: `${getToken()}`,

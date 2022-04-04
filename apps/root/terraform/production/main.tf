@@ -14,9 +14,8 @@ resource "aws_s3_bucket" "frontend-bucket-production" {
   bucket = "lbh-single-view-root-frontend-production.hackney.gov.uk"
   acl    = "private"
   force_destroy = true
-
   versioning {
-    enabled = false
+    enabled = true
   }
   website {
     index_document = "index.html"
@@ -35,6 +34,7 @@ module "cloudfront-production" {
   cost_code = "B0811"
   project_name = "Single View"
   use_cloudfront_cert = false
+  hackney_cert_arn = "arn:aws:acm:us-east-1:492942404536:certificate/eafddce3-0259-4382-bc02-d5207b2a31f3"
   compress = true
 }
 resource "aws_ssm_parameter" "cdn" {

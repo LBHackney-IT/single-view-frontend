@@ -65,6 +65,28 @@ commands:
       - *attach_workspace
       - checkout
       - run:
+          name: Get and init root
+          command: |
+            cd ./apps/root/terraform/<<parameters.environment>>/
+            terraform get -update=true
+            terraform init
+      - run:
+          name: Apply root
+          command: |
+            cd ./apps/root/terraform/<<parameters.environment>>/
+            terraform apply -auto-approve
+      - run:
+          name: Get and init single view
+          command: |
+            cd ./apps/single-view/terraform/<<parameters.environment>>/
+            terraform get -update=true
+            terraform init
+      - run:
+          name: Apply single view
+          command: |
+            cd ./apps/single-view/terraform/<<parameters.environment>>/
+            terraform apply -auto-approve
+      - run:
           name: Get and init auth
           command: |
             cd ./apps/auth/terraform/<<parameters.environment>>/
@@ -96,33 +118,6 @@ commands:
           name: Apply header
           command: |
             cd ./apps/header/terraform/<<parameters.environment>>/
-            terraform apply -auto-approve
-      - run:
-          name: Get and init root
-          command: |
-            cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
-      - run:
-          name: Detroy root
-          command: |
-            cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform destroy -auto-approve
-      # - run:
-      #     name: Apply root
-      #     command: |
-      #       cd ./apps/root/terraform/<<parameters.environment>>/
-      #       terraform apply -auto-approve
-      - run:
-          name: Get and init single view
-          command: |
-            cd ./apps/single-view/terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
-      - run:
-          name: Apply single view
-          command: |
-            cd ./apps/single-view/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
 
 jobs:
@@ -161,10 +156,10 @@ jobs:
       - *attach_workspace
       - run:
           name: Run linter
-          command: cd apps/single-view/ && echo "yarn lint"
+          command: cd apps/single-view/ && yarn lint
       - run:
           name: Run unit test
-          command: cd apps/single-view/ && echo "yarn test"
+          command: cd apps/single-view/ && yarn test
 
   build-deploy-development:
     executor: node-executor
@@ -388,22 +383,22 @@ jobs:
     steps:
       - *attach_workspace
       - aws-cli/install
-      # - run:
-      #     name: Clear auth bucket
-      #     command: |
-      #       aws s3 rm s3://lbh-single-view-auth-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
-      # - run:
-      #     name: Clear common bucket
-      #     command: |
-      #       aws s3 rm s3://lbh-single-view-common-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
-      # - run:
-      #     name: Clear header bucket
-      #     command: |
-      #       aws s3 rm s3://lbh-single-view-header-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
-      # - run:
-      #     name: Clear single view bucket
-      #     command: |
-      #       aws s3 rm s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      - run:
+          name: Clear auth bucket
+          command: |
+            aws s3 rm s3://lbh-single-view-auth-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      - run:
+          name: Clear common bucket
+          command: |
+            aws s3 rm s3://lbh-single-view-common-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      - run:
+          name: Clear header bucket
+          command: |
+            aws s3 rm s3://lbh-single-view-header-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+      - run:
+          name: Clear single view bucket
+          command: |
+            aws s3 rm s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
       - run:
           name: Clear root bucket
           command: |
@@ -557,10 +552,16 @@ workflows:
   continuous-delivery-development:
     when: << pipeline.parameters.run_development_workflow >>
     jobs:
-      - install-dependencies
+      - install-dependencies:
+          filters:
+            branches:
+              only: development
       - lint-and-test:
           requires:
             - install-dependencies
+          filters:
+            branches:
+              only: development
       - assume-role-development:
           context: api-assume-role-corporate-development-context
           requires:
@@ -596,17 +597,9 @@ workflows:
           filters:
             branches:
               only: main
-      - clean-s3-buckets:
-          requires:
-            - assume-role-staging
-          stage: "staging"
-          filters:
-            branches:
-              only: main
       - terraform-init-and-apply-to-staging:
           requires:
-            # - assume-role-staging
-            - clean-s3-buckets
+            - assume-role-staging
           filters:
             branches:
               only: main
@@ -639,17 +632,9 @@ workflows:
           filters:
             branches:
               only: main
-      - clean-s3-buckets:
-          requires:
-            - assume-role-production
-          stage: "production"
-          filters:
-            branches:
-              only: main
       - terraform-init-and-apply-to-production:
           requires:
-            # - assume-role-production
-            - clean-s3-buckets
+            - assume-role-production
           filters:
             branches:
               only: main
