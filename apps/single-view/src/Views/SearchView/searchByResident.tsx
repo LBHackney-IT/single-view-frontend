@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { SearchResident } from "../../Gateways/SearchResident";
+import { Person } from "../../Interfaces/housingSearchInterfaces";
 
-export const SearchByResident = () => {
+interface myProps {
+  setResultsFunction: (searchResults: Person[]) => void;
+}
+
+export const SearchByResident = (props: myProps): JSX.Element => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [addressLine1, setAddressLine1] = useState("");
@@ -19,6 +24,18 @@ export const SearchByResident = () => {
     return [addressLine1, postCode].filter((term) => term !== "").join(" ");
   };
 
+  const handleSearch = async () => {
+    try {
+      let searchResults: Person[] = await SearchResident(
+        createSearch(),
+        joinAddresses()
+      );
+      props.setResultsFunction(searchResults);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <>
       <div className="govuk-grid-row">
@@ -26,8 +43,8 @@ export const SearchByResident = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              if (firstName != "" || lastName != "") {
-                SearchResident(createSearch(), joinAddresses());
+              if (firstName && lastName) {
+                handleSearch();
               }
             }}
           >
