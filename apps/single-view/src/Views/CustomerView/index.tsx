@@ -17,8 +17,8 @@ export const CustomerView = () => {
     totalBalance: 0.0,
     dateOfBirth: "1990-12-12",
     personTypes: ["Tenant"],
-    isPersonCautionaryAlert: false,
-    isTenureCautionaryAlert: false,
+    IsPersonCautionaryAlerted: false,
+    IsTenureCautionaryAlerted: false,
     tenures: [
       {
         id: "6bc70564-b4f3-4dd1-ac36-26f3572d1d61",

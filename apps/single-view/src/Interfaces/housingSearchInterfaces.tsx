@@ -2,10 +2,10 @@ export interface Person {
   id: string;
   title: string;
   firstname: string;
-  middleName: string;
+  middleName: string | null;
   surname: string;
-  preferredFirstname: string;
-  preferredSurname: string;
+  preferredFirstname: string | null;
+  preferredSurname: string | null;
   dateOfBirth: string;
   totalBalance: number;
   personTypes: string[];
@@ -14,14 +14,14 @@ export interface Person {
   tenures: Tenure[];
 }
 
-interface Tenure {
+export interface Tenure {
   id: string;
   type: string;
   startDate: string;
-  endDate: string;
+  endDate: string | null;
   assetFullAddress: string;
   totalBalance: number;
-  postCode: string;
-  paymentReference: string;
+  postCode: string | null;
+  paymentReference: string | null;
   isActive: true;
 }
