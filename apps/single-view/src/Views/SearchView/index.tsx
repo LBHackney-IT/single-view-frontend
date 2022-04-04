@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SearchByResident } from "./searchByResident";
 import { SearchResults } from "./searchResults";
-import { Person } from "../../Interfaces/housingSearchInterfaces";
+import { Person } from "../../Interfaces";
 
 export const SearchView = (): JSX.Element => {
   const [results, setResults] = useState<Person[]>();
