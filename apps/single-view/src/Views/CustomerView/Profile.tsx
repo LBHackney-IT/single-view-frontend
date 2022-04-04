@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
 import { Person } from "../../Interfaces";
 
@@ -17,6 +17,10 @@ const fullName = (person: Person): string => {
 
 export const Profile = (props: Props) => {
   const [person, SetPerson] = useState<Person>(props.person);
+
+  useEffect(() => {
+    SetPerson(props.person);
+  }, [props]);
 
   return (
     <>
