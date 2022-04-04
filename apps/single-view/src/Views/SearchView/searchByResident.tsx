@@ -48,7 +48,10 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               }
             }}
           >
-            <div className="govuk-form-group lbh-form-group">
+            <div
+              className="govuk-form-group lbh-form-group"
+              style={{ width: "60%" }}
+            >
               <label className="govuk-label lbh-label" htmlFor="firstName">
                 * First name{" "}
                 {<text style={{ fontStyle: "italic" }}> Mandatory</text>}
@@ -61,7 +64,10 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
-            <div className="govuk-form-group lbh-form-group">
+            <div
+              className="govuk-form-group lbh-form-group"
+              style={{ width: "60%" }}
+            >
               <label className="govuk-label lbh-label" htmlFor="lastName">
                 * Last name{" "}
                 {<text style={{ fontStyle: "italic" }}> Mandatory</text>}
@@ -74,7 +80,10 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                 onChange={(e) => setLastName(e.target.value)}
               />
             </div>
-            <div className="govuk-form-group lbh-form-group">
+            <div
+              className="govuk-form-group lbh-form-group"
+              style={{ width: "60%" }}
+            >
               <label className="govuk-label lbh-label" htmlFor="addressLine1">
                 First Line of Address
               </label>
@@ -86,7 +95,10 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                 onChange={(e) => setAddressLine1(e.target.value)}
               />
             </div>
-            <div className="govuk-form-group lbh-form-group">
+            <div
+              className="govuk-form-group lbh-form-group"
+              style={{ width: "60%" }}
+            >
               <label className="govuk-label lbh-label" htmlFor="postcode">
                 Postcode
               </label>
