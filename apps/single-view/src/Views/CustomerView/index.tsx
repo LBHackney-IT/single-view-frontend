@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Profile } from "./Profile";
 import { getPerson } from "../../Gateways";
 import { Person, UrlParams } from "../../Interfaces";
-import { Profile } from "./Profile";
 
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
-  const voidPerson = {
+  const [person, setPerson] = useState<Person>({
     id: "",
     title: "",
     firstname: "",
@@ -20,10 +20,9 @@ export const CustomerView = () => {
     IsPersonCautionaryAlerted: false,
     IsTenureCautionaryAlerted: false,
     tenures: [],
-  };
-  const [person, setPerson] = useState<Person>(voidPerson);
+  });
 
-  const loadPerson = async () => {
+  const loadPerson = async (): Promise<void> => {
     let person = await getPerson(id);
 
     setPerson(person);
@@ -31,7 +30,7 @@ export const CustomerView = () => {
 
   useEffect(() => {
     loadPerson();
-  });
+  }, []);
 
   return (
     <>
