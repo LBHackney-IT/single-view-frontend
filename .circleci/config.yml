@@ -257,10 +257,9 @@ jobs:
           name: Build single view
           command: |
             cd apps/single-view/
-            touch .env
-            echo "APP_ENV=<<parameters.stage>>" >> .env
-            echo "APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)" >> .env
-            echo "HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text) >> .env"
+            export APP_ENV=<<parameters.stage>>
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
+            export HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text)
 
             yarn build
       - run:
@@ -366,10 +365,9 @@ jobs:
           name: Build single view
           command: |
             cd apps/single-view/
-            touch .env
-            echo "APP_ENV=<<parameters.stage>>" >> .env
-            echo "APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)" >> .env
-            echo "HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text) >> .env"
+            export APP_ENV=<<parameters.stage>>
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
+            export HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text)
 
             yarn build
       - run:
@@ -506,10 +504,9 @@ jobs:
           name: Build single view
           command: |
             cd apps/single-view/
-            touch .env
-            echo "APP_ENV=<<parameters.stage>>" >> .env
-            echo "APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)" >> .env
-            echo "HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text) >> .env"
+            export APP_ENV=<<parameters.stage>>
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
+            export HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text)
 
             yarn build
       - run:
