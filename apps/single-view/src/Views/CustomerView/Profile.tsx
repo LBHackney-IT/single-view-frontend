@@ -24,6 +24,10 @@ export const Profile = (props: Props) => {
     setPerson(props.person);
   }, [props.person]);
 
+  useEffect(() => {
+    setPerson(props.person);
+  }, [props]);
+
   return (
     <>
       <dl className="govuk-summary-list lbh-summary-list">
