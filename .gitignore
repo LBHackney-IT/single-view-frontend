@@ -70,3 +70,7 @@ dist
 *.sln
 *.sw?
 .DS_Store
+
+# Cypress files
+cypress/screenshots
+cypress/videos

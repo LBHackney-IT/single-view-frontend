@@ -22,15 +22,17 @@
     "format-root": "cd apps/root && yarn format",
     "format-single-view": "cd apps/single-view && yarn format",
     "format": "yarn format-root && yarn format-single-view",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:open": "HACKNEY_JWT_SECRET=test-secret cypress open",
+    "cypress:run": "HACKNEY_JWT_SECRET=test-secret cypress run"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
     "cypress": "^9.5.3",
-    "husky": "^7.0.4"
+    "husky": "^7.0.4",
+    "typescript": "^4.6.3"
   },
   "dependencies": {
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.0.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }
