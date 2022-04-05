@@ -31,7 +31,7 @@ module.exports = (webpackConfigEnv, argv) => {
     },
     externals: ["react-router-dom", "formik", "yup"],
     plugins: [      
-      new webpack.DefinePlugin({
+      new webpack.EnvironmentPlugin({
         'process.env': {
           APP_ENV: process.env.APP_ENV || "development",
           HOUSING_SEARCH_API_V1: process.env.HOUSING_SEARCH_API_V1 || dotenv.HOUSING_SEARCH_API_V1,
