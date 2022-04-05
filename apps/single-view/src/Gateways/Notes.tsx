@@ -9,5 +9,7 @@ export const getNotes = async (id: string): Promise<Note[]> => {
     },
   });
 
+  console.log(response.data); //TODO: remove when implementing view
+
   return response.data;
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPerson } from "../../Gateways";
+import { getNotes } from "../../Gateways/Notes";
 import { Person, UrlParams } from "../../Interfaces";
 import { Profile } from "./Profile";
 
@@ -31,6 +32,7 @@ export const CustomerView = () => {
 
   useEffect(() => {
     loadPerson();
+    getNotes(id);
   }, []);
 
   return (
