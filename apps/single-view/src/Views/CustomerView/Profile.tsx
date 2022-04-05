@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
 import { Person } from "../../Interfaces";
+import { formatDateOfBirth } from "../../Utils/formatDateOfBirth";
 
 interface Props {
   person: Person;
 }
 
+// TODO: Migrate this to a util?
 const fullName = (person: Person): string => {
   return `
         ${person.title}
@@ -16,10 +18,14 @@ const fullName = (person: Person): string => {
 };
 
 export const Profile = (props: Props) => {
-  const [person, SetPerson] = useState<Person>(props.person);
+  const [person, setPerson] = useState<Person>(props.person);
 
   useEffect(() => {
-    SetPerson(props.person);
+    setPerson(props.person);
+  }, [props.person]);
+
+  useEffect(() => {
+    setPerson(props.person);
   }, [props]);
 
   return (
@@ -29,7 +35,7 @@ export const Profile = (props: Props) => {
           {fullName(person)}
         </DescriptionListItem>
         <DescriptionListItem title="Date of Birth">
-          {person.dateOfBirth}
+          {formatDateOfBirth(person.dateOfBirth)}
         </DescriptionListItem>
         <DescriptionListItem title="Tenures">
           {person.tenures.map((tenure, index) => {
