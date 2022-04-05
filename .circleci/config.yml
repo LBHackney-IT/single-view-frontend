@@ -332,8 +332,8 @@ jobs:
           name: Deploy to S3 single view
           command: |
             cd apps/single-view/
-            aws s3 sync dist s3://lbh-single-view-frontend-development.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-frontend-development.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+            aws s3 sync dist s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
   build-deploy-staging:
     executor: node-executor
