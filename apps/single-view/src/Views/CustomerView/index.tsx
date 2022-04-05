@@ -33,6 +33,9 @@ export const CustomerView = () => {
   useEffect(() => {
     loadPerson();
     getNotes(id);
+    person.tenures.forEach((tenure) => {
+      getNotes(tenure.id);
+    });
   }, []);
 
   return (
