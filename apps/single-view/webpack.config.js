@@ -4,7 +4,6 @@ const {
 const webpack = require("webpack");
 const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
 const { merge } = require("webpack-merge");
-const Dotenv = require('dotenv-webpack');
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
@@ -36,11 +35,11 @@ module.exports = (webpackConfigEnv, argv) => {
       }),
       new webpack.DefinePlugin({
         'process.env': {
-          'HOUSING_SEARCH_API': process.env.HOUSING_SEARCH_API,
-          'PERSON_API_V1': process.env.PERSON_API_V1
+          'HOUSING_SEARCH_API_V1': process.env.HOUSING_SEARCH_API_V1,
+          'PERSON_API_V1': process.env.PERSON_API_V1,
+          'NOTES_API_V1': process.env.NOTES_API_V1,
         }
-      }),
-      new Dotenv(),
+      }),     
       new ImportMapWebpackPlugin({
         namespace: "@mfe",
         basePath: process.env.APP_CDN || "http://localhost:8005",

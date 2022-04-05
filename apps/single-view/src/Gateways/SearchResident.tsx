@@ -7,6 +7,7 @@ export const SearchResident = async (
   searchParams: string,
   address: string | null
 ): Promise<Person[]> => {
+  console.log(process.env);
   const response = await axios.get(
     `${process.env.HOUSING_SEARCH_API_V1}/search/persons?searchText=${searchParams}`,
     {
