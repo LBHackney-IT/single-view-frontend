@@ -19,17 +19,3 @@ export const voidPerson: Person = {
   isAMinor: false,
   dateOfDeath: "",
 };
-
-export const fullName = (person: Person): string => {
-  return `
-        ${person.title}
-        ${person.preferredFirstName || person.firstName}
-        ${person.middleName || ""}
-        ${person.preferredSurname || person.surname}
-    `;
-};
-
-export const formatDateOfBirth = (dob: string): string => {
-  let [year, month, day] = dob.split("-");
-  return [day, month, year].join("/");
-};

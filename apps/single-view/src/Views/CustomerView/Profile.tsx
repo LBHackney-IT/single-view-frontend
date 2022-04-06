@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
 import { Person } from "../../Interfaces/personInterfaces";
-import { formatDateOfBirth, fullName } from "../../Utils/Person";
+import { formatDateOfBirth } from "../../Utils/formatDateOfBirth";
 
 interface Props {
   person: Person;
@@ -18,7 +18,10 @@ export const Profile = (props: Props) => {
     <>
       <dl className="govuk-summary-list lbh-summary-list">
         <DescriptionListItem title="Name">
-          {fullName(person)}
+          {person.title} {person.firstName} {person.surname}
+        </DescriptionListItem>
+        <DescriptionListItem title="Middle Name(s)">
+          {person.middleName}
         </DescriptionListItem>
         <DescriptionListItem title="Date of Birth">
           {formatDateOfBirth(person.dateOfBirth)}
@@ -31,6 +34,18 @@ export const Profile = (props: Props) => {
               </p>
             );
           })}
+        </DescriptionListItem>
+        <DescriptionListItem title="Types">
+          {person.personTypes.join(", ")}
+        </DescriptionListItem>
+        <DescriptionListItem title="Place of Birth">
+          {person.placeOfBirth}
+        </DescriptionListItem>
+        <DescriptionListItem title="Date of Death">
+          {person.dateOfDeath}
+        </DescriptionListItem>
+        <DescriptionListItem title="Is a Minor">
+          {person.isAMinor ? "Y" : "N"}
         </DescriptionListItem>
       </dl>
     </>
