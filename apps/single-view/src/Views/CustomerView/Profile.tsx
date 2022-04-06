@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
 import { Person } from "../../Interfaces/personInterfaces";
-import { formatDateOfBirth } from "../../Utils/formatDateOfBirth";
+import { formatDateOfBirth, fullName } from "../../Utils/Person";
 
 interface Props {
   person: Person;
 }
-
-// TODO: Migrate this to a util?
-const fullName = (person: Person): string => {
-  return `
-        ${person.title}
-        ${person.preferredFirstName || person.firstName}
-        ${person.middleName || ""}
-        ${person.preferredSurname || person.surname}
-    `;
-};
 
 export const Profile = (props: Props) => {
   const [person, setPerson] = useState<Person>(props.person);

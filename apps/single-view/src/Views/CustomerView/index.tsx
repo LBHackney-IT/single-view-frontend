@@ -5,33 +5,14 @@ import { getPerson } from "../../Gateways";
 import { getNotes } from "../../Gateways/Notes";
 import { UrlParams } from "../../Interfaces";
 import { Person } from "../../Interfaces/personInterfaces";
+import { voidPerson } from "../../Utils/Person";
 
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
-  const [person, setPerson] = useState<Person>({
-    id: "",
-    title: "",
-    preferredTitle: "",
-    preferredFirstName: "",
-    preferredMiddleName: "",
-    preferredSurname: "",
-    firstName: "",
-    middleName: "",
-    surname: "",
-    placeOfBirth: "",
-    dateOfBirth: "",
-    personTypes: [],
-    tenures: [],
-    reason: "",
-    links: [],
-    isAMinor: false,
-    dateOfDeath: "",
-  });
+  const [person, setPerson] = useState<Person>(voidPerson);
 
   const loadPerson = async (): Promise<void> => {
-    let person = await getPerson(id);
-
-    setPerson(person);
+    setPerson(await getPerson(id));
   };
 
   useEffect(() => {
