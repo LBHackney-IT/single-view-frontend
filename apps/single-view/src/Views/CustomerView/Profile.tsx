@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
-import { Person } from "../../Interfaces";
+import { Person } from "../../Interfaces/personInterfaces";
 import { formatDateOfBirth } from "../../Utils/formatDateOfBirth";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 const fullName = (person: Person): string => {
   return `
         ${person.title}
-        ${person.preferredFirstname || person.firstname}
+        ${person.preferredFirstName || person.firstName}
         ${person.middleName || ""}
         ${person.preferredSurname || person.surname}
     `;
@@ -23,10 +23,6 @@ export const Profile = (props: Props) => {
   useEffect(() => {
     setPerson(props.person);
   }, [props.person]);
-
-  useEffect(() => {
-    setPerson(props.person);
-  }, [props]);
 
   return (
     <>

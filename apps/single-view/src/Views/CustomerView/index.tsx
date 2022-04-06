@@ -3,24 +3,29 @@ import { useParams } from "react-router-dom";
 import { Profile } from "./Profile";
 import { getPerson } from "../../Gateways";
 import { getNotes } from "../../Gateways/Notes";
-import { Person, UrlParams } from "../../Interfaces";
+import { UrlParams } from "../../Interfaces";
+import { Person } from "../../Interfaces/personInterfaces";
 
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
   const [person, setPerson] = useState<Person>({
     id: "",
     title: "",
-    firstname: "",
+    preferredTitle: "",
+    preferredFirstName: "",
+    preferredMiddleName: "",
+    preferredSurname: "",
+    firstName: "",
     middleName: "",
     surname: "",
-    preferredFirstname: "",
-    preferredSurname: "",
+    placeOfBirth: "",
     dateOfBirth: "",
-    totalBalance: 0.0,
     personTypes: [],
-    IsPersonCautionaryAlerted: false,
-    IsTenureCautionaryAlerted: false,
     tenures: [],
+    reason: "",
+    links: [],
+    isAMinor: false,
+    dateOfDeath: "",
   });
 
   const loadPerson = async (): Promise<void> => {
