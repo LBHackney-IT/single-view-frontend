@@ -1,11 +1,13 @@
 export interface Note {
   id: string;
+  title: string;
   description: string;
   targetType: string;
   targetId: string;
   createdAt: string;
   categorisation: Categorisation;
   author: Author;
+  highlight: boolean;
 }
 
 interface Categorisation {
