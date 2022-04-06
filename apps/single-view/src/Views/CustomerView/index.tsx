@@ -71,14 +71,13 @@ export const CustomerView = () => {
               Profile
             </a>
           </li>
-        </ul>
-        <ul className="govuk-tabs__list">
           <li className="govuk-tabs__list-item govuk-tabs__list-item--selected">
             <a className="govuk-tabs__tab" href="#notes">
               Notes
             </a>
           </li>
         </ul>
+
         <section className="govuk-tabs__panel" id="profile">
           <Profile person={person} />
         </section>

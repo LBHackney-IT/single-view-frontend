@@ -17,8 +17,8 @@ export const Note = (props: Props) => {
         {props.note.targetType && (
           <p className="lbh-body-s">
             <span className="govuk-tag lbh-tag lbh-tag--green">
-              {props.note.targetType.charAt(0).toUpperCase() +
-                props.note.targetType.slice(1)}
+              {props.note.categorisation.category.charAt(0).toUpperCase() +
+                props.note.categorisation.category.slice(1)}
             </span>
           </p>
         )}
@@ -26,7 +26,7 @@ export const Note = (props: Props) => {
       <div className="sv-timeline__card">
         <div className="sv-timeline__card_title">
           <div style={{ marginRight: "1em", flexBasis: "15%" }}>
-            <h5 className="lbh-heading-h5">{props.note.author}</h5>
+            <h5 className="lbh-heading-h5">{props.note.author.fullName}</h5>
           </div>
           <p className="lbh-body-s">{props.note.description}</p>
         </div>
