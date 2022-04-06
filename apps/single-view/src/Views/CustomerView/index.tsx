@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Profile } from "./Profile";
 import { getPerson } from "../../Gateways";
+import { getNotes } from "../../Gateways/Notes";
 import { Person, UrlParams } from "../../Interfaces";
 
 export const CustomerView = () => {
@@ -30,6 +31,10 @@ export const CustomerView = () => {
 
   useEffect(() => {
     loadPerson();
+    getNotes(id);
+    person.tenures.forEach((tenure) => {
+      getNotes(tenure.id);
+    });
   }, []);
 
   return (
