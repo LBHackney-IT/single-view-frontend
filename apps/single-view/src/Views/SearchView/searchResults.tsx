@@ -8,7 +8,7 @@ interface myProps {
 
 export const SearchResults = (props: myProps): JSX.Element => {
   return (
-    <div className="govuk-grid-row">
+    <div className="govuk-grid-row" id="searchResults">
       <div className="govuk-grid-column-two-thirds">
         <h2 className="lbh-heading-h3">{`${props.searchResults.length} results found`}</h2>
         {props.searchResults.map((person: Person, index: number) => {
