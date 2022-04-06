@@ -1,5 +1,5 @@
 import React from "react";
-import { formatDateOfBirth } from "../../Utils/formatDateOfBirth";
+import { formatDateOfBirth } from "../../Utils/formatDates";
 import { Person } from "../../Interfaces";
 
 interface myProps {

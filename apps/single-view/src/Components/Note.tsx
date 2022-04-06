@@ -1,5 +1,6 @@
 import React from "react";
 import { Note as NoteInterface } from "../Interfaces";
+import { formatDate } from "../Utils/formatDates";
 
 interface Props {
   note: NoteInterface;
@@ -12,7 +13,7 @@ export const Note = (props: Props) => {
         style={{ alignItems: "center", display: "flex", marginBottom: "1em" }}
       >
         <div style={{ marginRight: "1em" }}>
-          <h5 className="lbh-heading-h5">{props.note.createdAt}</h5>
+          <h5 className="lbh-heading-h5">{formatDate(props.note.createdAt)}</h5>
         </div>
         {props.note.targetType && (
           <p className="lbh-body-s">

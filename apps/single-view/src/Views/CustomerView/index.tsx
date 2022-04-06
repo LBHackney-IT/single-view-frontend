@@ -30,7 +30,7 @@ export const CustomerView = () => {
       description: "",
       targetType: "",
       targetId: "",
-      createdAt: "",
+      createdAt: String(new Date()),
       categorisation: {
         category: "",
         subCategory: "",
