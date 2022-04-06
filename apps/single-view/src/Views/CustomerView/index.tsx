@@ -5,6 +5,7 @@ import { Notes } from "./Notes";
 import { getPerson } from "../../Gateways";
 import { getNotes } from "../../Gateways/Notes";
 import { Note, Person, UrlParams } from "../../Interfaces";
+import { sortNotes } from "../../Utils/sortNotes";
 
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
@@ -52,7 +53,8 @@ export const CustomerView = () => {
 
   const loadNotes = async (): Promise<void> => {
     let notes = await getNotes(id);
-    setNotes(notes);
+
+    setNotes(sortNotes(notes));
     //TODO: get notes from tenures and sort
   };
 
