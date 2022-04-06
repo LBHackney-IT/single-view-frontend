@@ -45,22 +45,20 @@ export const CustomerView = () => {
     },
   ]);
 
-  const loadPerson = async (): Promise<void> => {
+  const loadPerson = async (): Promise<Person> => {
     let person = await getPerson(id);
-
     setPerson(person);
+    return person;
   };
 
-  const loadNotes = async (): Promise<void> => {
-    let notes = await getNotes(id);
-
-    setNotes(sortNotes(notes));
-    //TODO: get notes from tenures and sort
+  const loadNotes = async (person: Person): Promise<void> => {
+    await getNotes(person.id).then((personNotes) => {
+      setNotes(sortNotes(personNotes));
+    });
   };
 
   useEffect(() => {
-    loadPerson();
-    loadNotes();
+    loadPerson().then((person) => loadNotes(person));
   }, []);
 
   return (

@@ -7,8 +7,6 @@ export const formatDate = (dateString: string): string => {
   console.log(dateString);
   let d = new Date(dateString);
 
-  console.log(d);
-
   const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
   const mo = new Intl.DateTimeFormat("en", { month: "2-digit" }).format(d);
   const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
