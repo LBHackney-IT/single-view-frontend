@@ -4,7 +4,6 @@ export const formatDateOfBirth = (dob: string): string => {
 };
 
 export const formatDate = (dateString: string): string => {
-  console.log(dateString);
   let d = new Date(dateString);
 
   const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);

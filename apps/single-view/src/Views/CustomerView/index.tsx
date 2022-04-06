@@ -47,13 +47,16 @@ export const CustomerView = () => {
 
   const loadPerson = async (): Promise<Person> => {
     let person = await getPerson(id);
+
     setPerson(person);
+
     return person;
   };
 
+  //Need to get notes from tenures, without descending into async/await hell
   const loadNotes = async (person: Person): Promise<void> => {
     await getNotes(person.id).then((personNotes) => {
-      setNotes(sortNotes(personNotes));
+      setNotes(personNotes);
     });
   };
 
