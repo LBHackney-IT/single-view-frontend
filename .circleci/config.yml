@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@2.0.0
   aws-cli: circleci/aws-cli@2.0.0
+  cypress: cypress-io/cypress@1
   aws_assume_role: lbh-hackit/aws_assume_role@0.1.0
 
 parameters:
@@ -584,6 +585,20 @@ jobs:
 
 workflows:
   version: 2
+  commit:
+    jobs:
+      - cypress/install:
+          yarn: true
+          build: 'yarn build' # run a custom app build step
+      - cypress/run:
+          requires:
+            - cypress/install
+          # parallel: true # split all specs across machines
+          parallelism: 4 # use 4 CircleCI machines to finish quickly
+          yarn: true
+          group: 'all tests' # name this group "all tests" on the dashboard
+          install-command: yarn install-ci
+          start: 'yarn start' # start server before running tests
   continuous-delivery-development-auth:
     when: << pipeline.parameters.run_development_workflow >>
     jobs:
