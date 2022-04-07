@@ -342,6 +342,9 @@ jobs:
       - checkout
       - run:
           name: Install
+          command: yarn install
+      - run:
+          name: Install apps
           command: yarn install-ci
       - run:
           name: Run E2E
