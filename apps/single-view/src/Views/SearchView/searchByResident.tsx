@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { SearchResident } from "../../Gateways/SearchResident";
-import { Person } from "../../Interfaces";
+import { housingSearchPerson } from "../../Interfaces";
 
 interface myProps {
-  setResultsFunction: (searchResults: Person[]) => void;
+  setResultsFunction: (searchResults: housingSearchPerson[]) => void;
 }
 
 export const SearchByResident = (props: myProps): JSX.Element => {
@@ -26,7 +26,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
 
   const handleSearch = async () => {
     try {
-      let searchResults: Person[] = await SearchResident(
+      let searchResults: housingSearchPerson[] = await SearchResident(
         createSearch(),
         joinAddresses()
       );

@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
-import { Person } from "../../Interfaces";
+import { Person } from "../../Interfaces/personInterfaces";
 import { formatDateOfBirth } from "../../Utils/formatDates";
 
 interface Props {
   person: Person;
 }
-
-// TODO: Migrate this to a util?
-const fullName = (person: Person): string => {
-  return `
-        ${person.title}
-        ${person.preferredFirstname || person.firstname}
-        ${person.middleName || ""}
-        ${person.preferredSurname || person.surname}
-    `;
-};
 
 export const Profile = (props: Props) => {
   const [person, setPerson] = useState<Person>(props.person);
@@ -24,15 +14,14 @@ export const Profile = (props: Props) => {
     setPerson(props.person);
   }, [props.person]);
 
-  useEffect(() => {
-    setPerson(props.person);
-  }, [props]);
-
   return (
     <>
       <dl className="govuk-summary-list lbh-summary-list">
         <DescriptionListItem title="Name">
-          {fullName(person)}
+          {person.title} {person.firstName} {person.surname}
+        </DescriptionListItem>
+        <DescriptionListItem title="Middle Name(s)">
+          {person.middleName}
         </DescriptionListItem>
         <DescriptionListItem title="Date of Birth">
           {formatDateOfBirth(person.dateOfBirth)}
@@ -45,6 +34,18 @@ export const Profile = (props: Props) => {
               </p>
             );
           })}
+        </DescriptionListItem>
+        <DescriptionListItem title="Types">
+          {person.personTypes.join(", ")}
+        </DescriptionListItem>
+        <DescriptionListItem title="Place of Birth">
+          {person.placeOfBirth}
+        </DescriptionListItem>
+        <DescriptionListItem title="Date of Death">
+          {person.dateOfDeath}
+        </DescriptionListItem>
+        <DescriptionListItem title="Is a Minor">
+          {person.isAMinor ? "Y" : "N"}
         </DescriptionListItem>
       </dl>
     </>

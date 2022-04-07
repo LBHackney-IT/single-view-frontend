@@ -4,27 +4,14 @@ import { Profile } from "./Profile";
 import { Notes } from "./Notes";
 import { getPerson } from "../../Gateways";
 import { getNotes } from "../../Gateways/Notes";
+import { voidPerson } from "../../Utils/Person";
 import { Note, Person, UrlParams } from "../../Interfaces";
 import { sortNotes } from "../../Utils/sortNotes";
 
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
-  const [person, setPerson] = useState<Person>({
-    id: "",
-    title: "",
-    firstname: "",
-    middleName: "",
-    surname: "",
-    preferredFirstname: "",
-    preferredSurname: "",
-    dateOfBirth: "",
-    totalBalance: 0.0,
-    personTypes: [],
-    IsPersonCautionaryAlerted: false,
-    IsTenureCautionaryAlerted: false,
-    tenures: [],
-  });
-  const [notes, setNotes] = useState<Note[]>([
+  const [person, setPerson] = useState<Person>(voidPerson);
+  const [notes, setNotes] = useState<Array<Note>>([
     {
       id: "",
       title: "",
@@ -45,23 +32,18 @@ export const CustomerView = () => {
     },
   ]);
 
-  const loadPerson = async (): Promise<Person> => {
-    let person = await getPerson(id);
-
-    setPerson(person);
-
-    return person;
+  const loadPerson = async (): Promise<void> => {
+    setPerson(await getPerson(id));
   };
 
   //Need to get notes from tenures, without descending into async/await hell
-  const loadNotes = async (person: Person): Promise<void> => {
-    await getNotes(person.id).then((personNotes) => {
-      setNotes(personNotes);
-    });
+  const loadNotes = async (): Promise<void> => {
+    setNotes(sortNotes(await getNotes(id)));
   };
 
   useEffect(() => {
-    loadPerson().then((person) => loadNotes(person));
+    loadPerson();
+    loadNotes();
   }, []);
 
   return (

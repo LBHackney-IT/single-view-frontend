@@ -1,4 +1,4 @@
-export interface Person {
+export interface housingSearchPerson {
   id: string;
   title: string;
   firstname: string;
