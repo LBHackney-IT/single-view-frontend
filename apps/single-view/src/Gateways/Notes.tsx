@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getToken } from "../Utils/getHackneyToken";
-import { Note } from "../Interfaces";
+import { Person, Note } from "../Interfaces";
 
 export const getNotes = async (id: string): Promise<Note[] | null> => {
   try {
@@ -15,5 +15,29 @@ export const getNotes = async (id: string): Promise<Note[] | null> => {
     return response.data.results;
   } catch (e) {
     return null;
+  }
+};
+
+export const loadPersonNotes = async (
+  person: Person,
+  collatedNotes: Note[]
+): Promise<Person> => {
+  let result = await getNotes(person.id);
+
+  if (result) {
+    collatedNotes.push(...result);
+  }
+  return person;
+};
+
+export const loadTenureNotes = async (
+  person: Person,
+  collatedNotes: Note[]
+): Promise<void> => {
+  if (person.tenures) {
+    for (const tenure of person.tenures) {
+      let notes = await getNotes(tenure.id);
+      if (notes) collatedNotes.push(...notes);
+    }
   }
 };
