@@ -51,13 +51,7 @@ export const CustomerView = () => {
           <Profile person={person} />
         </section>
         <section className="govuk-tabs__panel" id="notes">
-          {notes ? (
-            <Notes notes={notes} />
-          ) : (
-            <div className="govuk-inset-text lbh-inset-text">
-              There were no notes found for this customer.
-            </div>
-          )}
+          <Notes notes={notes} />
         </section>
       </div>
     </>

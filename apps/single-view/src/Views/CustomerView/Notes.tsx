@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const Notes = (props: Props): JSX.Element => {
-  return (
+  return props.notes ? (
     <ol className="lbh-timeline">
       {props.notes?.map((note: NoteInterface, index: number) => {
         return (
@@ -20,5 +20,9 @@ export const Notes = (props: Props): JSX.Element => {
         );
       })}
     </ol>
+  ) : (
+    <div className="govuk-inset-text lbh-inset-text">
+      There were no notes found for this customer.
+    </div>
   );
 };

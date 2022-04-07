@@ -12,7 +12,6 @@ export const getNotes = async (id: string): Promise<Note[] | null> => {
         },
       }
     );
-
     return response.data.results;
   } catch (e) {
     return null;
