@@ -4,7 +4,7 @@
     "install-apps": "yarn install-root && yarn install-common && yarn install-auth && yarn install-header && yarn install-single-view",
     "install-ci": "yarn install-root --frozen-lockfile && yarn install-common --frozen-lockfile && yarn install-auth --frozen-lockfile && yarn install-header --frozen-lockfile && yarn install-single-view --frozen-lockfile",
     "lint": "yarn lint-root && yarn lint-single-view",
-    "e2e": "start-server-and-test start http://localhost:9000 cy:cypress",
+    "e2e": "start-server-and-test start http://localhost:9000 cypress:run",
     "test": "yarn test-single-view",
     "prepare": "husky install",
     "start": "concurrently \"yarn root\" \"yarn common\" \"yarn auth\" \"yarn header\" \"yarn single-view\"",
