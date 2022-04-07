@@ -1,4 +1,5 @@
 import { sortNotes } from "./sortNotes";
+import { Note } from "../Interfaces"
 
 describe("sortNotes function", () => {
   it("sorts the notes in ascending date order", () => {
@@ -7,7 +8,7 @@ describe("sortNotes function", () => {
   });
 });
 
-const mockData = [
+const mockData: Note[] = [
   {
     id: "14e00ab1-9fd6-4f10-a6bd-bd84171bfb1b",
     title: "Note Title",

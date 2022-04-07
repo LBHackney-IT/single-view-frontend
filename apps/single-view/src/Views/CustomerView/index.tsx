@@ -16,11 +16,11 @@ export const CustomerView = () => {
       id: "",
       title: "",
       description: "",
-      targetType: "",
+      targetType: "person",
       targetId: "",
       createdAt: String(new Date()),
       categorisation: {
-        category: "",
+        category: "appointments",
         subCategory: "",
         description: "",
       },
