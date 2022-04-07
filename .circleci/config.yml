@@ -590,7 +590,8 @@ workflows:
       - cypress/install:
           executor: node-executor
           yarn: true
-          build: 'yarn build' # run a custom app build step
+          install-command: yarn install-ci
+          # build: 'yarn build' # run a custom app build step
       - cypress/run:
           requires:
             - cypress/install
