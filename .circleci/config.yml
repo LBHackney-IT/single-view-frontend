@@ -588,6 +588,7 @@ workflows:
   commit:
     jobs:
       - cypress/install:
+          executor: cypress/base:12.18.3
           yarn: true
           build: 'yarn build' # run a custom app build step
       - cypress/run:
