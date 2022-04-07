@@ -12,14 +12,18 @@ import { voidNotes } from "../../Utils/Note";
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
   const [person, setPerson] = useState<Person>(voidPerson);
-  const [notes, setNotes] = useState<Array<Note>>(voidNotes);
+  const [notes, setNotes] = useState<Array<Note>>();
 
   const loadPerson = async (): Promise<void> => {
     setPerson(await getPerson(id));
   };
 
   const loadNotes = async (): Promise<void> => {
-    setNotes(sortNotes(await getNotes(id)));
+    let result = await getNotes(id);
+
+    if (result) {
+      setNotes(sortNotes(result));
+    }
   };
 
   useEffect(() => {
@@ -48,7 +52,13 @@ export const CustomerView = () => {
           <Profile person={person} />
         </section>
         <section className="govuk-tabs__panel" id="notes">
-          <Notes notes={notes} />
+          {notes ? (
+            <Notes notes={notes} />
+          ) : (
+            <div className="govuk-inset-text lbh-inset-text">
+              There were no notes found for this customer.
+            </div>
+          )}
         </section>
       </div>
     </>

@@ -3,7 +3,7 @@ import { Note } from "../../Components";
 import { Note as NoteInterface } from "../../Interfaces/notesInterfaces";
 
 interface Props {
-  notes: NoteInterface[];
+  notes?: NoteInterface[];
 }
 
 export const Notes = (props: Props): JSX.Element => {

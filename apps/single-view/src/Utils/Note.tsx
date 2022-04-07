@@ -1,6 +1,6 @@
 import { Note } from "../Interfaces/notesInterfaces";
 
-export const noNotePlaceholder: Array<Note> = [
+export const noNotesFoundPlaceholder: Array<Note> = [
   {
     id: "",
     title: "",
