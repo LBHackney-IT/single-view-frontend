@@ -599,8 +599,10 @@ workflows:
           parallelism: 4 # use 4 CircleCI machines to finish quickly
           executor: node-executor
           yarn: true
+          wait-on: 'http://localhost:9000'
           group: 'all tests' # name this group "all tests" on the dashboard
           install-command: yarn install-ci
+          no-workspace: true
           start: 'yarn start' # start server before running tests
   continuous-delivery-development-auth:
     when: << pipeline.parameters.run_development_workflow >>
