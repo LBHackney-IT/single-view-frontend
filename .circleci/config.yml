@@ -587,14 +587,16 @@ workflows:
   version: 2
   cypress:
     jobs:
-      # - cypress/install:
-      #     executor: node-executor
+      - cypress/install:
+          executor: node-executor
       #     yarn: true
       #     install-command: yarn install
       #     # build: 'yarn build' # run a custom app build step
       - cypress/run:
-          # requires:
-            # - cypress/install
+          requires:
+            - cypress/install
+          post-checkout:
+            - run: echo "^_^"
           parallel: true # split all specs across machines
           parallelism: 4 # use 4 CircleCI machines to finish quickly
           executor: node-executor
@@ -602,7 +604,8 @@ workflows:
           wait-on: 'http://localhost:9000'
           group: 'all tests' # name this group "all tests" on the dashboard
           install-command: yarn install-ci
-          no-workspace: true
+          working_directory: .
+          store_artifacts: true
           start: 'yarn start' # start server before running tests
   continuous-delivery-development-auth:
     when: << pipeline.parameters.run_development_workflow >>
