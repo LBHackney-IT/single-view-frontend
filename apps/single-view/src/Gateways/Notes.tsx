@@ -12,5 +12,9 @@ export const getNotes = async (id: string): Promise<Note[]> => {
     }
   );
 
+  if (response.status > 400) {
+    //do something
+  }
+
   return response.data.results;
 };

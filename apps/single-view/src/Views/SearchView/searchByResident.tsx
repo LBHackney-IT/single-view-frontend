@@ -26,10 +26,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
 
   const handleSearch = async () => {
     try {
-      let searchResults: housingSearchPerson[] = await SearchResident(
-        createSearch(),
-        joinAddresses()
-      );
+      let searchResults = await SearchResident(createSearch(), joinAddresses());
       props.setResultsFunction(searchResults);
     } catch (e) {
       console.log(e);
