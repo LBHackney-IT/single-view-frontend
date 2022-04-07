@@ -336,126 +336,20 @@ jobs:
             aws s3 sync dist s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
             aws s3 sync dist s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
-  build-deploy-staging:
+  e2e:
     executor: node-executor
-    environment:
-      aws-region: eu-west-2
-    parameters:
-      stage:
-        type: string
     steps:
-      - *attach_workspace
-      - aws-cli/install
+      - checkout
       - run:
-          name: Build auth
-          command: |
-            cd apps/auth/
-            export APP_ENV=<<parameters.stage>>
-            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
-            yarn build
+          name: Install
+          command: yarn install-ci
       - run:
-          name: Deploy to S3 auth
-          command: |
-            cd apps/auth/
-            aws s3 sync dist s3://lbh-single-view-auth-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-auth-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
-      - run:
-          name: Build common
-          command: |
-            cd apps/common
-            export APP_ENV=staging
-            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/common-app-url --query Parameter.Value --output text)
-            export AUTH_ALLOWED_GROUPS=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-allowed-groups --query Parameter.Value --output text)
-            export AUTH_DOMAIN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-domain --query Parameter.Value --output text)
-            export COOKIE_DOMAIN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/cookie-domain --query Parameter.Value --output text)
-            export AUTH_TOKEN_NAME=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-token-name --query Parameter.Value --output text)
-            export CONFIGURATION_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/configuration-api-url --query Parameter.Value --output text)
-            yarn build
-      - run:
-          name: Deploy to S3 common
-          command: |
-            cd apps/common/
-            aws s3 sync dist s3://lbh-single-view-common-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-common-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
-      - run:
-          name: Build header
-          command: |
-            cd apps/header/
-            export APP_ENV=<<parameters.stage>>
-            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
-            yarn build
-      - run:
-          name: Deploy to S3 header
-          command: |
-            cd apps/header/
-            aws s3 sync dist s3://lbh-single-view-header-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-header-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
-      - run:
-          name: Build root
-          command: |
-            cd apps/root/
-            export ROOT_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/root-app-url --query Parameter.Value --output text)
-            export SINGLE_VIEW_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
-            export HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text)
-            export PERSON_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-v1 --query Parameter.Value --output text)
-
-            export HEADER_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
-            export AUTH_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
-            export COMMON_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/common-app-url --query Parameter.Value --output text)
-            yarn build:webpack
-      - run:
-          name: Deploy to S3 root
-          command: |
-            cd apps/root/
-            aws s3 sync dist s3://lbh-single-view-root-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-root-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
-      - run:
-          name: Build single view
-          command: |
-            cd apps/single-view/
-            export APP_ENV=<<parameters.stage>>
-            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
-            export HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text)
-            export PERSON_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-v1 --query Parameter.Value --output text)
-
-            yarn build
-      - run:
-          name: Deploy to S3 single view
-          command: |
-            cd apps/single-view/
-            aws s3 sync dist s3://lbh-single-view-frontend-staging.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-frontend-staging.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
-
-  clean-s3-buckets:
-    executor: node-executor
-    environment:
-      aws-region: eu-west-2
-    parameters:
-      stage:
-        type: string
-    steps:
-      - *attach_workspace
-      - aws-cli/install
-      - run:
-          name: Clear auth bucket
-          command: |
-            aws s3 rm s3://lbh-single-view-auth-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
-      - run:
-          name: Clear common bucket
-          command: |
-            aws s3 rm s3://lbh-single-view-common-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
-      - run:
-          name: Clear header bucket
-          command: |
-            aws s3 rm s3://lbh-single-view-header-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
-      - run:
-          name: Clear single view bucket
-          command: |
-            aws s3 rm s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
-      - run:
-          name: Clear root bucket
-          command: |
-            aws s3 rm s3://lbh-single-view-root-frontend-<<parameters.stage>>.hackney.gov.uk/ --recursive
+          name: Run E2E
+          command: yarn e2e
+      - store_artifacts:
+          path: ~/project/cypress/screenshots
+      - store_artifacts:
+          path: ~/project/cypress/videos
 
   build-deploy-production:
     executor: node-executor
@@ -587,26 +481,8 @@ workflows:
   version: 2
   cypress:
     jobs:
-      - cypress/install:
-          executor: node-executor
-      #     yarn: true
-      #     install-command: yarn install
-      #     # build: 'yarn build' # run a custom app build step
-      - cypress/run:
-          requires:
-            - cypress/install
-          post-checkout:
-            - run: echo "^_^"
-          parallel: true # split all specs across machines
-          parallelism: 4 # use 4 CircleCI machines to finish quickly
-          executor: node-executor
-          yarn: true
-          wait-on: 'http://localhost:9000'
-          group: 'all tests' # name this group "all tests" on the dashboard
-          install-command: yarn install-ci
-          working_directory: .
-          store_artifacts: true
-          start: 'yarn start' # start server before running tests
+      - e2e
+
   continuous-delivery-development-auth:
     when: << pipeline.parameters.run_development_workflow >>
     jobs:
