@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getToken } from "../Utils/getHackneyToken";
 import { Note } from "../Interfaces";
-import { noNotesFoundPlaceholder } from "../Utils/Note";
 
 export const getNotes = async (id: string): Promise<Note[] | null> => {
   try {

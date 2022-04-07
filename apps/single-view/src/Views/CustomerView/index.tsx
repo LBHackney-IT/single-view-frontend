@@ -7,7 +7,6 @@ import { getNotes } from "../../Gateways/Notes";
 import { voidPerson } from "../../Utils/Person";
 import { Note, Person, UrlParams } from "../../Interfaces";
 import { sortNotes } from "../../Utils/sortNotes";
-import { voidNotes } from "../../Utils/Note";
 
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
