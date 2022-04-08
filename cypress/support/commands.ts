@@ -32,7 +32,7 @@ const makeToken = ({
   sub = '49516349857314',
   email = 'test@hackney.gov.uk',
   iss = 'Hackney',
-  name = 'Testy McTest',
+  name = 'Testy McTestface',
   groups = ['test-group'],
   iat = new Date(),
 }) =>
@@ -79,6 +79,7 @@ const visitAs = (
   role: AuthRoles,
   options?: Partial<Cypress.VisitOptions>
 ) => {
+  cy.clearCookies();
   cy.setCookie(
     'hackneyToken',
     makeToken({

@@ -50,7 +50,7 @@ describe('login', () => {
     })
 
     it('displays the user name', () => {
-      cy.get('.lbh-header__links > p').should('have.text', 'Welcome Testy McTest')
+      cy.get('.lbh-header__links > p').should('have.text', 'Welcome Testy McTestface')
     })
 
     it('appropriatly redirected', () => {
