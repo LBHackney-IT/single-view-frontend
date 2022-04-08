@@ -353,6 +353,11 @@ jobs:
             touch .env
             echo "AUTH_ALLOWED_GROUPS=cypress-users" >> .env
       - run:
+          name: Set single-view params
+          command: |
+            cd apps/single-view
+            cp .env.sample .env
+      - run:
           name: Run E2E
           command: yarn e2e
       - store_artifacts:
