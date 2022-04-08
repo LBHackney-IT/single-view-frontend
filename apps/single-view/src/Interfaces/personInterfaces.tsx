@@ -38,7 +38,7 @@ export interface Person {
   dateOfDeath: string | null;
 }
 
-export interface Tenure {
+interface Tenure {
   id: string;
   type: string;
   startDate: string;

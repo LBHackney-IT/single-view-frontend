@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
 import { Person } from "../../Interfaces/personInterfaces";
-import { formatDateOfBirth } from "../../Utils/formatDateOfBirth";
+import { formatDateOfBirth } from "../../Utils/formatDates";
 
 interface Props {
   person: Person;
