@@ -3,31 +3,35 @@ import { useParams } from "react-router-dom";
 import { Profile } from "./Profile";
 import { Notes } from "./Notes";
 import { getPerson } from "../../Gateways";
-import { getNotes } from "../../Gateways/Notes";
 import { voidPerson } from "../../Utils/Person";
 import { Note, Person, UrlParams } from "../../Interfaces";
 import { sortNotes } from "../../Utils/sortNotes";
+import { loadPersonNotes, loadTenureNotes } from "../../Gateways/Notes";
 
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
   const [person, setPerson] = useState<Person>(voidPerson);
   const [notes, setNotes] = useState<Array<Note>>();
 
-  const loadPerson = async (): Promise<void> => {
-    setPerson(await getPerson(id));
-  };
+  let collatedNotes: Array<Note> = [];
 
-  const loadNotes = async (): Promise<void> => {
-    let result = await getNotes(id);
-
-    if (result) {
-      setNotes(sortNotes(result));
-    }
+  const loadPerson = async (): Promise<Person> => {
+    let person = await getPerson(id);
+    setPerson(person);
+    return person;
   };
 
   useEffect(() => {
-    loadPerson();
-    loadNotes();
+    loadPerson()
+      .then((person) => {
+        return loadPersonNotes(person, collatedNotes);
+      })
+      .then((person) => {
+        return loadTenureNotes(person, collatedNotes);
+      })
+      .then(() => {
+        setNotes(sortNotes(collatedNotes));
+      });
   }, []);
 
   return (
