@@ -347,6 +347,12 @@ jobs:
           name: Install apps
           command: yarn install-ci
       - run:
+          name: Set AUTH_ALLOWED_GROUPS
+          command: |
+            cd apps/common
+            touch .env
+            echo "AUTH_ALLOWED_GROUPS=cypress-users" >> .env
+      - run:
           name: Run E2E
           command: yarn e2e
       - store_artifacts:

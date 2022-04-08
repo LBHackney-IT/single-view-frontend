@@ -46,7 +46,7 @@ export enum AuthRoles {
 }
 
 const roleConfigurations: Record<AuthRoles, Array<string>> = {
-  UnrestrictedGroup: ['single-view-uat-access'],
+  UnrestrictedGroup: [Cypress.env('AUTH_ALLOWED_GROUPS')],
   // UnrestrictedGroup: [Cypress.env('AUTH_ALLOWED_GROUPS')],
   RestrictedGroup: []
 };
