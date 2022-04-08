@@ -11,34 +11,18 @@ import { sortNotes } from "../../Utils/sortNotes";
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
   const [person, setPerson] = useState<Person>(voidPerson);
-  const [notes, setNotes] = useState<Array<Note>>([
-    {
-      id: "",
-      title: "",
-      description: "",
-      targetType: "person",
-      targetId: "",
-      createdAt: String(new Date()),
-      categorisation: {
-        category: "appointments",
-        subCategory: "",
-        description: "",
-      },
-      author: {
-        fullName: "",
-        email: "",
-      },
-      highlight: false,
-    },
-  ]);
+  const [notes, setNotes] = useState<Array<Note>>();
 
   const loadPerson = async (): Promise<void> => {
     setPerson(await getPerson(id));
   };
 
-  //Need to get notes from tenures, without descending into async/await hell
   const loadNotes = async (): Promise<void> => {
-    setNotes(sortNotes(await getNotes(id)));
+    let result = await getNotes(id);
+
+    if (result) {
+      setNotes(sortNotes(result));
+    }
   };
 
   useEffect(() => {

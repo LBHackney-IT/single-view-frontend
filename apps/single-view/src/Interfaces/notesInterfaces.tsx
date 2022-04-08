@@ -22,25 +22,25 @@ interface Author {
 }
 
 export enum NoteTargetType {
-    person = "person",
-    asset = "asset",
-    tenure = "tenure",
-    repair = "repair",
+  person = "person",
+  asset = "asset",
+  tenure = "tenure",
+  repair = "repair",
 }
 
 export enum NoteCategory {
-    appointments = "appointments",
-    asb = "asb",
-    estateManagement = "estateManagement",
-    evictions = "evictions",
-    serviceCharge = "serviceCharge",
-    parking = "parking",
-    rents = "rents",
-    tenureBreaches = "tenureBreaches",
-    repairs = "repairs",
-    plannedMaintenance = "plannedMaintenance",
-    tenureManagement = "tenureManagement",
-    rehousing = "rehousing",
-    temporaryDecant = "temporaryDecant",
-    voids = "voids",
-};
+  appointments = "appointments",
+  asb = "asb",
+  estateManagement = "estateManagement",
+  evictions = "evictions",
+  serviceCharge = "serviceCharge",
+  parking = "parking",
+  rents = "rents",
+  tenureBreaches = "tenureBreaches",
+  repairs = "repairs",
+  plannedMaintenance = "plannedMaintenance",
+  tenureManagement = "tenureManagement",
+  rehousing = "rehousing",
+  temporaryDecant = "temporaryDecant",
+  voids = "voids",
+}

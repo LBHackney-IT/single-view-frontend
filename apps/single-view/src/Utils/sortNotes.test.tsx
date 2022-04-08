@@ -1,5 +1,5 @@
 import { sortNotes } from "./sortNotes";
-import { Note } from "../Interfaces"
+import { Note } from "../Interfaces";
 
 describe("sortNotes function", () => {
   it("sorts the notes in ascending date order", () => {

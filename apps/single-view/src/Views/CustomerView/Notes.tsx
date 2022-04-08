@@ -4,26 +4,30 @@ import { Note as NoteInterface } from "../../Interfaces/notesInterfaces";
 import { Link } from "@mfe/common/lib/components";
 
 interface Props {
-  notes: NoteInterface[];
+  notes?: NoteInterface[];
 }
 
 export const Notes = (props: Props): JSX.Element => {
-  return (
-      <>
-        <Link href="?context=new#notes">Create a new note</Link>
-        <NoteInput></NoteInput>
-        <ol className="lbh-timeline">
+  return props.notes ? (
+    <>
+      <Link href="?context=new#notes">Create a new note</Link>
+      <NoteInput></NoteInput>
+      <ol className="lbh-timeline">
         {props.notes?.map((note: NoteInterface, index: number) => {
-            return (
+          return (
             <li
-                className="lbh-timeline__event lbh-timeline__event--minor"
-                key={index}
+              className="lbh-timeline__event lbh-timeline__event--minor"
+              key={index}
             >
-                <Note note={note} />
+              <Note note={note} />
             </li>
-            );
+          );
         })}
-        </ol>
-      </>
+      </ol>
+    </>
+  ) : (
+    <div className="govuk-inset-text lbh-inset-text">
+      There were no notes found for this customer.
+    </div>
   );
 };

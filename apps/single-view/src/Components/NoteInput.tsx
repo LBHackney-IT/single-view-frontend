@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Note, NoteCategory } from "../Interfaces";
 
 type Props = {
-//   onSubmit: (note: Note, id?: number) => void;
-//   onCancel: () => void;
+  //   onSubmit: (note: Note, id?: number) => void;
+  //   onCancel: () => void;
   notePlaceholder?: string;
 };
-
 
 export const NoteInput = (props: Props): JSX.Element => {
   const [noteContent, setNoteContent] = useState("");
@@ -14,7 +13,7 @@ export const NoteInput = (props: Props): JSX.Element => {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    setHasError(false)
+    setHasError(false);
   }, [noteContent, category]);
 
   let newNote: Note = {
@@ -27,9 +26,9 @@ export const NoteInput = (props: Props): JSX.Element => {
       0 + new Date().getMonth() + 1
     }-${new Date().getDate()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
     categorisation: {
-        category: "appointments",
-        subCategory: "",
-        description: "",
+      category: "appointments",
+      subCategory: "",
+      description: "",
     },
     targetType: "person",
     author: {
@@ -38,34 +37,30 @@ export const NoteInput = (props: Props): JSX.Element => {
     },
   };
 
-  
-
   return (
     <>
       <div className="govuk-form-group lbh-form-group">
-
-          
-
         <ul>
-            {Object.keys(NoteCategory).map((key, index) => {
-                return (
-                    <li key={index}>{NoteCategory[key as keyof typeof NoteCategory]}</li>
-                );
-            })}
+          {Object.keys(NoteCategory).map((key, index) => {
+            return (
+              <li key={index}>
+                {NoteCategory[key as keyof typeof NoteCategory]}
+              </li>
+            );
+          })}
         </ul>
 
-          <textarea name="more-detail" id="moreDetail" cols={30} rows={10}
-                    style={{ height: "150px" }}
-                    className="govuk-textarea lbh-textarea"
-
-                    onChange={(event) => setNoteContent(event.target.value)}
-                    placeholder={
-                        props.notePlaceholder
-                        || "Compose a new note here"
-                   }
-                    value={noteContent}
-          
-                    ></textarea>
+        <textarea
+          name="more-detail"
+          id="moreDetail"
+          cols={30}
+          rows={10}
+          style={{ height: "150px" }}
+          className="govuk-textarea lbh-textarea"
+          onChange={(event) => setNoteContent(event.target.value)}
+          placeholder={props.notePlaceholder || "Compose a new note here"}
+          value={noteContent}
+        ></textarea>
         <div
           className="govuk-form-group lbh-form-group"
           style={{ width: "50%" }}
@@ -94,33 +89,32 @@ export const NoteInput = (props: Props): JSX.Element => {
         </span>
       )}
       <div style={{ display: "flex", justifyContent: "end" }}>
-      <button
-            className="govuk-button lbh-button lbh-button--secondary"
-            style={{ marginTop: 0, marginRight: "0.618em" }}
-            onClick={clearAll}
-            aria-disabled={! hasContent()}
-            disabled={! hasContent()}
+        <button
+          className="govuk-button lbh-button lbh-button--secondary"
+          style={{ marginTop: 0, marginRight: "0.618em" }}
+          onClick={clearAll}
+          aria-disabled={!hasContent()}
+          disabled={!hasContent()}
         >
           Clear All
         </button>
         <button
-            id="saveNote"
-            className="govuk-button lbh-button lbh-button--secondary"
-            data-module="govuk-button"
-            onClick={onNoteSubmit}
-            style={{ marginTop: 0 }}
-            aria-disabled={! hasContent()}
-            disabled={! hasContent()}
+          id="saveNote"
+          className="govuk-button lbh-button lbh-button--secondary"
+          data-module="govuk-button"
+          onClick={onNoteSubmit}
+          style={{ marginTop: 0 }}
+          aria-disabled={!hasContent()}
+          disabled={!hasContent()}
         >
-            Save
+          Save
         </button>
       </div>
     </>
   );
 
   function hasContent(): boolean {
-      return noteContent.length > 0
-        || category.length > 0;
+    return noteContent.length > 0 || category.length > 0;
   }
 
   function clearAll() {
@@ -135,7 +129,7 @@ export const NoteInput = (props: Props): JSX.Element => {
   function onNoteSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
     if (noteContent.length > 0 && category.length > 0) {
-    //   props.onSubmit(newNote, props.id);
+      //   props.onSubmit(newNote, props.id);
       clearAll();
     } else {
       setHasError(true);
