@@ -15,7 +15,7 @@ export const Note = (props: Props) => {
         <div style={{ marginRight: "1em" }}>
           <h5 className="lbh-heading-h5">{formatDate(props.note.createdAt)}</h5>
         </div>
-        {props.note.targetType && (
+        {props.note.categorisation.category && (
           <p className="lbh-body-s">
             <span className="govuk-tag lbh-tag lbh-tag--green">
               {props.note.categorisation.category.charAt(0).toUpperCase() +
