@@ -622,7 +622,10 @@ workflows:
   continuous-delivery-development-single-view:
     when: << pipeline.parameters.run_development_workflow >>
     jobs:
-      - e2e
+      - e2e:
+          filters:
+            branches:
+              only: development
       - install-dependencies-app:
           app: "single-view"
           filters:
@@ -781,7 +784,10 @@ workflows:
   continuous-delivery-staging-single-view:
     when: << pipeline.parameters.run_staging_workflow >>
     jobs:
-      - e2e
+      - e2e:
+          filters:
+            branches:
+              only: main
       - install-dependencies-app:
           app: "single-view"
           filters:
@@ -825,7 +831,9 @@ workflows:
           filters:
             branches:
               only: main
-      - e2e
+      - e2e:
+          requires:
+            - permit-production-terraform-release
       - install-all-dependencies:
           requires:
             - permit-production-terraform-release
