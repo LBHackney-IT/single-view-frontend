@@ -1,0 +1,34 @@
+{
+    "id": "6d7ed1a4",
+    "title": "Miss",
+    "preferredTitle": "Miss",
+    "preferredFirstName": "Luna",
+    "preferredSurname": "Kitty",
+    "preferredMiddleName": "",
+    "firstName": "Luna",
+    "middleName": "Purry",
+    "surname": "Kitty",
+    "placeOfBirth": "London",
+    "dateOfBirth": "2021-01-07",
+    "reason": null,
+    "personTypes": [
+        "HouseholdMember"
+    ],
+    "links": [],
+    "tenures": [
+        {
+            "assetFullAddress": "123 Cute Street, M3 0W",
+            "assetId": "7d569db2",
+            "startDate": "2018-04-23",
+            "endDate": null,
+            "id": "4cd7f0f0",
+            "type": "Secure",
+            "uprn": "100021071691",
+            "paymentReference": "1910274004",
+            "propertyReference": "00010274",
+            "isActive": true
+        }
+    ],
+    "isAMinor": false,
+    "dateOfDeath": null
+}
