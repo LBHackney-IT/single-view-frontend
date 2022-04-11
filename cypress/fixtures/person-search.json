@@ -2,7 +2,7 @@
     "results": {
         "persons": [
             {
-                "id": "57ea3d58-5d8d-793c-9288-2d63c22eb659",
+                "id": "57ea3d58",
                 "title": "Ms",
                 "firstname": "Luna",
                 "middleName": null,
@@ -18,12 +18,12 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "4cd7f0f0-caf8-4898-6ad3-886b10beff08",
+                        "id": "4cd7f0f0",
                         "type": "Temp B&B",
                         "totalBalance": 0.0,
                         "startDate": "2017-01-19",
                         "endDate": "2017-04-12",
-                        "assetFullAddress": "ROOM 608 143 Northumberland Park, N17 0TR",
+                        "assetFullAddress": "ROOM 608 143 Northumberland Park, N17 0TR ",
                         "postCode": null,
                         "paymentReference": "9145123102",
                         "isActive": false
@@ -31,7 +31,7 @@
                 ]
             },
             {
-                "id": "6d7ed1a4-9454-cd1e-ae30-ca18db382c41",
+                "id": "6d7ed1a4",
                 "title": "Other",
                 "firstname": "Luna",
                 "middleName": null,
@@ -47,12 +47,12 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "7d569db2-5b71-ee51-0c8a-b81677c56a84",
+                        "id": "7d569db2",
                         "type": "Secure",
                         "totalBalance": 0.0,
                         "startDate": "2005-11-14",
                         "endDate": "2010-03-28",
-                        "assetFullAddress": "123 Cute Street, M3 W0",
+                        "assetFullAddress": "123 Cute Street, M3 0W ",
                         "postCode": null,
                         "paymentReference": "9406001406",
                         "isActive": false
@@ -60,7 +60,7 @@
                 ]
             },
             {
-                "id": "99a2e3f8-cdc9-d5b3-5999-84df1f417154",
+                "id": "99a2e3f8",
                 "title": "Mrs",
                 "firstname": "Eric",
                 "middleName": null,
@@ -76,7 +76,7 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "a2312908-84b6-7cd7-8137-c3c0ad6947a4",
+                        "id": "a2312908",
                         "type": "Temp B&B",
                         "totalBalance": 0.0,
                         "startDate": "2017-11-02",
@@ -87,7 +87,7 @@
                         "isActive": false
                     },
                     {
-                        "id": "c593aee7-4b0e-7109-0885-2fc002c426e7",
+                        "id": "c593aee7",
                         "type": "Secure",
                         "totalBalance": 0.0,
                         "startDate": "2018-08-13",
@@ -116,7 +116,7 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "5433bad4-8aa4-ba74-dc24-adbc20d44745",
+                        "id": "5433bad4",
                         "type": "Secure",
                         "totalBalance": 0.0,
                         "startDate": "2017-03-06",
@@ -129,7 +129,7 @@
                 ]
             },
             {
-                "id": "a95dc86a-549a-7b96-a732-5957e0aac7a1",
+                "id": "a95dc86a",
                 "title": "Reverend",
                 "firstname": "Andrea",
                 "middleName": null,
@@ -145,7 +145,7 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "d3e435a6-5722-94e9-9e28-557715c119b1",
+                        "id": "d3e435a6",
                         "type": "Secure",
                         "totalBalance": 0.0,
                         "startDate": "2002-04-15",
@@ -158,7 +158,7 @@
                 ]
             },
             {
-                "id": "87419dae-b134-384c-b514-82eb8942383d",
+                "id": "87419dae",
                 "title": "Miss",
                 "firstname": "Oliver",
                 "middleName": null,
@@ -174,7 +174,7 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "767aef93-1fa2-c387-fbaf-74e0fca9bc78",
+                        "id": "767aef93",
                         "type": "Secure",
                         "totalBalance": 0.0,
                         "startDate": "1984-06-25",
@@ -187,7 +187,7 @@
                 ]
             },
             {
-                "id": "e78c4692-aa89-8458-eeda-348e18c8ef0f",
+                "id": "e78c4692",
                 "title": "Other",
                 "firstname": "Kathryn",
                 "middleName": null,
@@ -203,7 +203,7 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "24c6fc44-5cd2-5cd3-b477-28b67cc1f2d1",
+                        "id": "24c6fc44",
                         "type": "Secure",
                         "totalBalance": 0.0,
                         "startDate": "1989-03-13",
@@ -216,7 +216,7 @@
                 ]
             },
             {
-                "id": "72a2d90a-0c3a-b81e-fd91-ebad32bb05be",
+                "id": "72a2d90a",
                 "title": "Master",
                 "firstname": "Gary",
                 "middleName": null,
@@ -232,7 +232,7 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "5c6fc128-7f2b-5cb5-0e98-f811783730d6",
+                        "id": "5c6fc128",
                         "type": "Secure",
                         "totalBalance": 0.0,
                         "startDate": "1998-11-23",
@@ -245,7 +245,7 @@
                 ]
             },
             {
-                "id": "94f8ff03-628a-4ddb-9b68-eab1e22a69fa",
+                "id": "94f8ff03a",
                 "title": "Dr",
                 "firstname": "Beth",
                 "middleName": null,
@@ -261,7 +261,7 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "bc5a9b5b-a4b8-cfc6-06da-7428dc7a9571",
+                        "id": "bc5a9b5b",
                         "type": "Freehold (Serv)",
                         "totalBalance": 0.0,
                         "startDate": "2000-05-01",
@@ -274,7 +274,7 @@
                 ]
             },
             {
-                "id": "79d6932a-0eb4-b8aa-7acc-077e217f2a58",
+                "id": "79d6932a",
                 "title": "Rabbi",
                 "firstname": "Megan",
                 "middleName": null,
@@ -290,7 +290,7 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "73b60d8e-9116-c901-9ed1-6e305ea0ad20",
+                        "id": "73b60d8e",
                         "type": "Secure",
                         "totalBalance": 0.0,
                         "startDate": "2017-01-23",
@@ -303,7 +303,7 @@
                 ]
             },
             {
-                "id": "6dd46a01-51e8-0039-ffbd-77714bdff1d8",
+                "id": "6dd46a01",
                 "title": "Mrs",
                 "firstname": "Olivia",
                 "middleName": null,
@@ -319,7 +319,7 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "4cce0edc-bc58-efb4-d60b-91772a7b03b9",
+                        "id": "4cce0edc",
                         "type": "Secure",
                         "totalBalance": 0.0,
                         "startDate": "2014-03-17",
@@ -332,7 +332,7 @@
                 ]
             },
             {
-                "id": "a1e2a970-b7da-833e-bfd0-3f34451248b2",
+                "id": "a1e2a970",
                 "title": "Mr",
                 "firstname": "Sean",
                 "middleName": null,
@@ -348,7 +348,7 @@
                 "isTenureCautionaryAlert": false,
                 "tenures": [
                     {
-                        "id": "d43caa5a-76f1-28ca-bb09-47541622118e",
+                        "id": "d43caa5a",
                         "type": "Secure",
                         "totalBalance": 0.0,
                         "startDate": "2004-12-13",
