@@ -3,7 +3,6 @@ version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@2.0.0
   aws-cli: circleci/aws-cli@2.0.0
-  cypress: cypress-io/cypress@1
   aws_assume_role: lbh-hackit/aws_assume_role@0.1.0
 
 parameters:
@@ -623,6 +622,7 @@ workflows:
   continuous-delivery-development-single-view:
     when: << pipeline.parameters.run_development_workflow >>
     jobs:
+      - e2e
       - install-dependencies-app:
           app: "single-view"
           filters:
@@ -638,6 +638,7 @@ workflows:
           context: api-assume-role-corporate-development-context
           requires:
             - lint-and-test
+            - e2e
           filters:
             branches:
               only: development
@@ -780,6 +781,7 @@ workflows:
   continuous-delivery-staging-single-view:
     when: << pipeline.parameters.run_staging_workflow >>
     jobs:
+      - e2e
       - install-dependencies-app:
           app: "single-view"
           filters:
@@ -795,6 +797,7 @@ workflows:
           context: api-assume-role-corporate-staging-context
           requires:
             - lint-and-test
+            - e2e
           filters:
             branches:
               only: main
@@ -822,6 +825,7 @@ workflows:
           filters:
             branches:
               only: main
+      - e2e
       - install-all-dependencies:
           requires:
             - permit-production-terraform-release
@@ -832,6 +836,7 @@ workflows:
           context: api-assume-role-corporate-production-context
           requires:
             - lint-and-test
+            - e2e
           filters:
             branches:
               only: main
