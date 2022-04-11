@@ -20,7 +20,6 @@ export const sortResponseByRelevance = (
       }
     }
     result.data = item;
-    console.log(result);
     results.push(result);
   }
   results.sort((a: any, b: any) => {

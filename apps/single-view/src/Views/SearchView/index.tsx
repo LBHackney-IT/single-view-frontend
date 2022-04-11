@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { SearchByResident } from "./searchByResident";
 import { SearchResults } from "./searchResults";
-import { Person } from "../../Interfaces";
+import { housingSearchPerson } from "../../Interfaces";
 
 export const SearchView = (): JSX.Element => {
-  const [results, setResults] = useState<Person[]>();
+  const [results, setResults] = useState<housingSearchPerson[]>();
   return (
     <>
       <h1 className="lbh-heading-h1">
@@ -16,6 +16,6 @@ export const SearchView = (): JSX.Element => {
   );
 };
 
-const setResults = (searchResults: Person[]) => {
+const setResults = (searchResults: housingSearchPerson[]) => {
   setResults(searchResults);
 };

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Person } from "../Interfaces";
+import { Person } from "../Interfaces/personInterfaces";
 import { getToken } from "../Utils/getHackneyToken";
 
 export const getPerson = async (id: string): Promise<Person> => {

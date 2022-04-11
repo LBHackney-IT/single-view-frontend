@@ -326,7 +326,8 @@ jobs:
             export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
             export HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text)
             export PERSON_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-v1 --query Parameter.Value --output text)
-            export PERSON_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-v1 --query Parameter.Value --output text)
+            export NOTES_API_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/notes-v2 --query Parameter.Value --output text)
+
 
             yarn build
       - run:
@@ -445,7 +446,9 @@ jobs:
             export APP_ENV=<<parameters.stage>>
             export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
             export HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text)
+            export NOTES_API_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/notes-v2 --query Parameter.Value --output text)
             export PERSON_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-v1 --query Parameter.Value --output text)
+
 
             yarn build
       - run:
