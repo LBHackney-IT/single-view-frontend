@@ -33,9 +33,10 @@ module.exports = (webpackConfigEnv, argv) => {
     plugins: [
       new webpack.EnvironmentPlugin({
         APP_ENV: process.env.APP_ENV || "development",
-        HOUSING_SEARCH_API_V1: process.env.HOUSING_SEARCH_API_V1 || dotenv.HOUSING_SEARCH_API_V1,
+        HOUSING_SEARCH_API_V1:
+          process.env.HOUSING_SEARCH_API_V1 || dotenv.HOUSING_SEARCH_API_V1,
         PERSON_API_V1: process.env.PERSON_API_V1 || dotenv.PERSON_API_V1,
-        NOTES_API_V2: process.env.NOTES_API_V2 || dotenv.NOTES_API_V2
+        NOTES_API_V2: process.env.NOTES_API_V2 || dotenv.NOTES_API_V2,
       }),
       new ImportMapWebpackPlugin({
         namespace: "@mfe",

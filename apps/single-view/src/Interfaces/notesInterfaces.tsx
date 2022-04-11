@@ -1,8 +1,11 @@
+// TODO: Replace with @mfe common interfaces
+// TODO: Refactor enums living in interfaces
+
 export interface Note {
   id: string;
-  title: string;
+  title: string | null;
   description: string;
-  targetType: keyof typeof NoteTargetType;
+  targetType: string;
   targetId: string;
   createdAt: string;
   categorisation: Categorisation;
@@ -10,13 +13,13 @@ export interface Note {
   highlight: boolean;
 }
 
-interface Categorisation {
-  category: keyof typeof NoteCategory;
-  subCategory: string;
-  description: string;
+export interface Categorisation {
+  category: string | null;
+  subCategory: string | null;
+  description: string | null;
 }
 
-interface Author {
+export interface Author {
   fullName: string;
   email: string;
 }
