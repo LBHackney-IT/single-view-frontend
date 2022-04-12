@@ -7,6 +7,14 @@ interface Props {
 }
 
 export const Note = (props: Props) => {
+  const formatCategory = () => {
+    const category =
+      props.note.categorisation.subCategory ||
+      props.note.categorisation.category ||
+      "";
+    return category.charAt(0).toUpperCase() + category.slice(1);
+  };
+
   return (
     <>
       <div
@@ -18,8 +26,7 @@ export const Note = (props: Props) => {
         {props.note.categorisation.category && (
           <p className="lbh-body-s">
             <span className="govuk-tag lbh-tag lbh-tag--green">
-              {props.note.categorisation.category.charAt(0).toUpperCase() +
-                props.note.categorisation.category.slice(1)}
+              {formatCategory()}
             </span>
           </p>
         )}
