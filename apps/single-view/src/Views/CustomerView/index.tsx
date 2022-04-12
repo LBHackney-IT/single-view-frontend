@@ -32,7 +32,7 @@ export const CustomerView = () => {
       .then(() => {
         setNotes(sortNotes(collatedNotes));
       });
-  });
+  }, []);
 
   return (
     <>
