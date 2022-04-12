@@ -17,16 +17,16 @@ export const Profile = (props: Props) => {
   return (
     <>
       <dl className="govuk-summary-list lbh-summary-list">
-        <DescriptionListItem title="Name">
+        <DescriptionListItem title="Name" testId="name">
           {person.title} {person.firstName} {person.surname}
         </DescriptionListItem>
-        <DescriptionListItem title="Middle Name(s)">
+        <DescriptionListItem title="Middle Name(s)" testId="middleName">
           {person.middleName}
         </DescriptionListItem>
-        <DescriptionListItem title="Date of Birth">
+        <DescriptionListItem title="Date of Birth" testId="dateOfBirth">
           {formatDateOfBirth(person.dateOfBirth)}
         </DescriptionListItem>
-        <DescriptionListItem title="Tenures">
+        <DescriptionListItem title="Tenures" testId="tenures">
           {person.tenures.map((tenure, index) => {
             return (
               <p className="lbh-body-s" key={index}>
@@ -35,16 +35,16 @@ export const Profile = (props: Props) => {
             );
           })}
         </DescriptionListItem>
-        <DescriptionListItem title="Types">
+        <DescriptionListItem title="Types" testId="types">
           {person.personTypes.join(", ")}
         </DescriptionListItem>
-        <DescriptionListItem title="Place of Birth">
+        <DescriptionListItem title="Place of Birth" testId="placeOfBirth">
           {person.placeOfBirth}
         </DescriptionListItem>
-        <DescriptionListItem title="Date of Death">
+        <DescriptionListItem title="Date of Death" testId="dateOfDeath">
           {person.dateOfDeath}
         </DescriptionListItem>
-        <DescriptionListItem title="Is a Minor">
+        <DescriptionListItem title="Is a Minor" testId="isMinor">
           {person.isAMinor ? "Y" : "N"}
         </DescriptionListItem>
       </dl>

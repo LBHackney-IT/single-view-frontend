@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SearchResident } from "../../Gateways/SearchResident";
 import { housingSearchPerson } from "../../Interfaces";
+import { Input } from "../../Components";
 
 interface myProps {
   setResultsFunction: (searchResults: housingSearchPerson[]) => void;
@@ -11,6 +12,8 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const [lastName, setLastName] = useState("");
   const [addressLine1, setAddressLine1] = useState("");
   const [postCode, setPostcode] = useState("");
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
 
   const createSearch = (): string => {
     let searchTerms = [firstName, lastName];
@@ -36,12 +39,20 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   return (
     <>
       <div className="govuk-grid-row">
-        <div className="govuk-grid-column-two-thirds">
+        <div className="govuk-grid-column-one-third">
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              if (!firstName) {
+                setFirstNameError(true);
+              }
+              if (!lastName) {
+                setLastNameError(true);
+              }
               if (firstName && lastName) {
                 handleSearch();
+                setFirstNameError(false);
+                setLastNameError(false);
               }
             }}
           >
