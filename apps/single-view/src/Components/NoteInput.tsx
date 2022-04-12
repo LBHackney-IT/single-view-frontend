@@ -47,6 +47,7 @@ export const NoteInput = (props: Props): JSX.Element => {
           <textarea
             name="more-detail"
             id="moreDetail"
+            data-testid="description"
             cols={30}
             rows={10}
             style={{ height: "150px" }}
@@ -65,6 +66,7 @@ export const NoteInput = (props: Props): JSX.Element => {
             <input
               className="govuk-input lbh-input"
               id="input-example"
+              data-testid="subCategory"
               name="test-name"
               type="text"
               value={category}
@@ -84,6 +86,7 @@ export const NoteInput = (props: Props): JSX.Element => {
         )}
         <div style={{ display: "flex", justifyContent: "end" }}>
           <button
+            data-testid="clearAll"
             className="govuk-button lbh-button lbh-button--secondary"
             style={{ marginTop: 0, marginRight: "0.618em" }}
             onClick={clearAll}
@@ -94,6 +97,7 @@ export const NoteInput = (props: Props): JSX.Element => {
           </button>
           <button
             id="saveNote"
+            data-testid="submit"
             type="submit"
             className="govuk-button lbh-button lbh-button--secondary"
             data-module="govuk-button"
