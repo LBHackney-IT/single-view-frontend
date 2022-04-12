@@ -51,7 +51,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
             >
               <label className="govuk-label lbh-label" htmlFor="firstName">
                 * First name{" "}
-                {<text style={{ fontStyle: "italic" }}> Mandatory</text>}
+                {<em style={{ fontStyle: "italic" }}> Mandatory</em>}
               </label>
               <input
                 className="govuk-input lbh-input"
@@ -67,7 +67,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
             >
               <label className="govuk-label lbh-label" htmlFor="lastName">
                 * Last name{" "}
-                {<text style={{ fontStyle: "italic" }}> Mandatory</text>}
+                {<em style={{ fontStyle: "italic" }}> Mandatory</em>}
               </label>
               <input
                 className="govuk-input lbh-input"
