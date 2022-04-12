@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Note, NoteInput } from "../../Components";
 import { Note as NoteInterface } from "../../Interfaces/notesInterfaces";
-import { Link } from "@mfe/common/lib/components";
-import { Center, Spinner } from "@mfe/common/lib/components";
+import { Center, Link, Spinner } from "@mfe/common/lib/components";
 import { useParams } from "react-router-dom";
 import { UrlParams } from "../../Interfaces";
 import { createNote } from "../../Gateways";
