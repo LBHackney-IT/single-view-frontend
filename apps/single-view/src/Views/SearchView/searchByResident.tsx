@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SearchResident } from "../../Gateways/SearchResident";
 import { housingSearchPerson } from "../../Interfaces";
+import { Input } from "../../Components";
 
 interface myProps {
   setResultsFunction: (searchResults: housingSearchPerson[]) => void;
@@ -11,6 +12,8 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const [lastName, setLastName] = useState("");
   const [addressLine1, setAddressLine1] = useState("");
   const [postCode, setPostcode] = useState("");
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
 
   const createSearch = (): string => {
     let searchTerms = [firstName, lastName];
@@ -36,77 +39,55 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   return (
     <>
       <div className="govuk-grid-row">
-        <div className="govuk-grid-column-two-thirds">
+        <div className="govuk-grid-column-one-third">
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              if (!firstName) {
+                setFirstNameError(true);
+              }
+              if (!lastName) {
+                setLastNameError(true);
+              }
               if (firstName && lastName) {
                 handleSearch();
+                setFirstNameError(false);
+                setLastNameError(false);
               }
             }}
           >
-            <div
-              className="govuk-form-group lbh-form-group"
-              style={{ width: "60%" }}
-            >
-              <label className="govuk-label lbh-label" htmlFor="firstName">
-                * First name{" "}
-                {<text style={{ fontStyle: "italic" }}> Mandatory</text>}
-              </label>
-              <input
-                className="govuk-input lbh-input"
-                id="firstName"
-                name="firstName"
-                type="text"
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </div>
-            <div
-              className="govuk-form-group lbh-form-group"
-              style={{ width: "60%" }}
-            >
-              <label className="govuk-label lbh-label" htmlFor="lastName">
-                * Last name{" "}
-                {<text style={{ fontStyle: "italic" }}> Mandatory</text>}
-              </label>
-              <input
-                className="govuk-input lbh-input"
-                id="lastName"
-                name="lastName"
-                type="text"
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </div>
-            <div
-              className="govuk-form-group lbh-form-group"
-              style={{ width: "60%" }}
-            >
-              <label className="govuk-label lbh-label" htmlFor="addressLine1">
-                First Line of Address
-              </label>
-              <input
-                className="govuk-input lbh-input"
-                id="addressLine1"
-                name="addressLine1"
-                type="text"
-                onChange={(e) => setAddressLine1(e.target.value)}
-              />
-            </div>
-            <div
-              className="govuk-form-group lbh-form-group"
-              style={{ width: "60%" }}
-            >
-              <label className="govuk-label lbh-label" htmlFor="postcode">
-                Postcode
-              </label>
-              <input
-                className="govuk-input lbh-input"
-                id="postcode"
-                name="postcode"
-                type="text"
-                onChange={(e) => setPostcode(e.target.value)}
-              />
-            </div>
+            <Input
+              label="* First name"
+              errorMsg="First name is mandatory"
+              id="firstName"
+              name="firstName"
+              type="text"
+              error={firstNameError}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <Input
+              label="* Last name"
+              errorMsg="Last name is mandatory"
+              id="lastName"
+              name="lastName"
+              type="text"
+              error={lastNameError}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <Input
+              label="First line of address"
+              id="addressLine1"
+              name="addressLine1"
+              type="text"
+              onChange={(e) => setAddressLine1(e.target.value)}
+            />
+            <Input
+              label="Postcode"
+              id="postcode"
+              name="postcode"
+              type="text"
+              onChange={(e) => setPostcode(e.target.value)}
+            />
 
             <button className="govuk-button lbh-button govuk-button--start">
               Search

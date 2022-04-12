@@ -9,14 +9,21 @@ describe('search', () => {
     cy.get('.lbh-heading-h1', { timeout: 10000 })
       .should('be.visible')
       .should('have.text', 'Search resident information')
-  })
+  });
 
   it('displays the form', () => {
-    cy.get('form').contains('* First name Mandatory');
-    cy.get('form').contains('* Last name Mandatory');
-    cy.get('form').contains('First Line of Address');
+    cy.get('form').contains('* First name');
+    cy.get('form').contains('* Last name');
+    cy.get('form').contains('First line of address');
     cy.get('form').contains('Postcode');
-  })
+  });
+
+  it('displays the error messages', () => {
+    cy.get('.govuk-button', { timeout: 10000 }).click();
+
+    cy.contains('First name is mandatory');
+    cy.contains('Last name is mandatory');
+  });
 
   it('displays search results', () => {
     cy.get('#firstName').type('Luna');
@@ -24,7 +31,7 @@ describe('search', () => {
 
     cy.intercept('GET', '**/search/persons*', { fixture: 'person-search.json' }).as('getPersons')
 
-    cy.get('.govuk-button').should('have.text', 'Search').click()
+    cy.get('.govuk-button').should('have.text', 'Search').click();
 
     cy.get('#searchResults', { timeout: 10000 })
       .should('be.visible')
