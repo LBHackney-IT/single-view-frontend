@@ -21,11 +21,7 @@ describe("Note Input", () => {
       target: { value: "test" },
     });
     expect(getByTestId(/clearAll/i)).not.toBeDisabled();
-    fireEvent.change(getByTestId(/subCategory/i), {
-      target: { value: "test" },
-    });
     fireEvent.click(getByTestId(/clearAll/i));
     expect(getByTestId(/description/i).getAttribute("value")).toBeNull();
-    expect(getByTestId(/subCategory/i).getAttribute("value")).toEqual("");
   });
 });
