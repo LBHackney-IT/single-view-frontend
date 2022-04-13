@@ -498,6 +498,7 @@ workflows:
   cypress:
     jobs:
       - e2e
+      - lint-and-test
 
   continuous-delivery-development-auth:
     when: << pipeline.parameters.run_development_workflow >>
