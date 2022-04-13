@@ -196,7 +196,6 @@ jobs:
     executor: node-executor
     steps:
       - *attach_workspace
-      - checkout
       - run:
           name: Run linter
           command: cd ./apps/single-view/ && yarn lint
@@ -499,7 +498,11 @@ workflows:
   cypress:
     jobs:
       - e2e
-      - lint-and-test
+      - install-dependencies-app:
+          app: "single-view"
+      - lint-and-test:
+          requires:
+            - install-dependencies-app
 
   continuous-delivery-development-auth:
     when: << pipeline.parameters.run_development_workflow >>
