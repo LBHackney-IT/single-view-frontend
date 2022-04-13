@@ -13,7 +13,7 @@ interface Props {
 
 export const Notes = (props: Props): JSX.Element => {
   const { id } = useParams<UrlParams>();
-  const [notes, setNotes] = useState(props.notes);
+  const [notes, setNotes] = useState<Array<NoteInterface> | undefined>([]);
   const [displayNoteInput, setDisplayNoteInput] = useState<boolean>(
     !!props.displayNoteInput
   );
@@ -33,13 +33,11 @@ export const Notes = (props: Props): JSX.Element => {
   const submitNote = async (data: any): Promise<void> => {
     let note = await createNote(id, data);
 
-    if (!note) {
+    if (note) {
+      setNotes([...notes, note]);
+    } else {
       console.error("Failed to save note");
-
-      return;
     }
-
-    setNotes([...notes, note]);
   };
 
   return (
