@@ -6,22 +6,27 @@ type Props = {
   hasError?: string;
 };
 
+type SubCategory = {
+  id: string;
+  value: string;
+};
+
 export const NoteInput = (props: Props): JSX.Element => {
   const [noteContent, setNoteContent] = useState("");
-  const [category, setCategory] = useState("");
+  const [subCategory, setSubCategory] = useState("");
   const [hasError, setHasError] = useState(props.hasError || "");
 
   useEffect(() => {
     setHasError("");
-  }, [noteContent, category]);
+  }, [noteContent, setSubCategory]);
 
   const submitNote = (e: React.SyntheticEvent): void => {
     e.preventDefault();
 
-    if (noteContent.length > 0 && category.length > 0) {
+    if (noteContent.length > 0 && setSubCategory.length > 0) {
       let categorisation = {
-        category: category,
-        subCategory: null,
+        category: "Single View",
+        subCategory: subCategory,
         description: null,
       };
 
@@ -36,6 +41,25 @@ export const NoteInput = (props: Props): JSX.Element => {
     }
   };
 
+  const hasContent = (): boolean => {
+    return noteContent.length > 0 || subCategory.length > 0;
+  };
+
+  const clearAll = () => {
+    setNoteContent("");
+  };
+
+  const onCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSubCategory(e.target.value);
+  };
+
+  const subCategories = [
+    { id: "housingBenefits", value: "Housing Benefits" },
+    { id: "councilTax", value: "Council Tax" },
+    { id: "housingNeeds", value: "Housing Needs" },
+    { id: "rentIncome", value: "Rent & Income" },
+  ];
+
   return (
     <form
       onSubmit={(e) => {
@@ -43,6 +67,30 @@ export const NoteInput = (props: Props): JSX.Element => {
       }}
     >
       <div className="note-input-wrapper">
+        <div className="govuk-form-group lbh-form-group">
+          <div className="govuk-radios govuk-radios--inline lbh-radios">
+            {subCategories.map((s: SubCategory, i: number) => {
+              return (
+                <div className="govuk-radios__item" key={i}>
+                  <input
+                    className="govuk-radios__input"
+                    id={s.id}
+                    name="subcategory"
+                    type="radio"
+                    value={s.value}
+                    onChange={onCategoryChange.bind(this)}
+                  />
+                  <label
+                    className="govuk-label govuk-radios__label"
+                    htmlFor={s.id}
+                  >
+                    {s.value}
+                  </label>
+                </div>
+              );
+            })}
+          </div>
+        </div>
         <div className="govuk-form-group lbh-form-group">
           <textarea
             name="more-detail"
@@ -56,23 +104,6 @@ export const NoteInput = (props: Props): JSX.Element => {
             placeholder={props.notePlaceholder || "Compose a new note here"}
             value={noteContent}
           ></textarea>
-          <div
-            className="govuk-form-group lbh-form-group"
-            style={{ width: "50%" }}
-          >
-            <label className="govuk-label lbh-label" htmlFor="input-example">
-              Category
-            </label>
-            <input
-              className="govuk-input lbh-input"
-              id="input-example"
-              data-testid="subCategory"
-              name="test-name"
-              type="text"
-              value={category}
-              onChange={onCategoryChange}
-            />
-          </div>
         </div>
         <></>
         {hasError && (
@@ -111,17 +142,4 @@ export const NoteInput = (props: Props): JSX.Element => {
       </div>
     </form>
   );
-
-  function hasContent(): boolean {
-    return noteContent.length > 0 || category.length > 0;
-  }
-
-  function clearAll() {
-    setNoteContent("");
-    setCategory("");
-  }
-
-  function onCategoryChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setCategory(e.target.value);
-  }
 };
