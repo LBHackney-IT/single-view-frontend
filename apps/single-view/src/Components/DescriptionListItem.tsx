@@ -2,6 +2,7 @@ import React from "react";
 
 interface Props {
   title: string;
+  testId: string;
 }
 
 export const DescriptionListItem: React.FC<Props> = (props) => {
@@ -11,7 +12,9 @@ export const DescriptionListItem: React.FC<Props> = (props) => {
         <h5 className="lbh-heading-h5">{props.title}</h5>
       </dt>
       <dd className="govuk-summary-list__value">
-        <div className="lbh-body-s">{props.children}</div>
+        <div className="lbh-body-s" data-testid={props.testId}>
+          {props.children}
+        </div>
       </dd>
     </div>
   );

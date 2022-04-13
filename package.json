@@ -2,7 +2,9 @@
   "name": "single-view-frontend",
   "scripts": {
     "install-apps": "yarn install-root && yarn install-common && yarn install-auth && yarn install-header && yarn install-single-view",
+    "install-ci": "yarn install-root --frozen-lockfile && yarn install-common --frozen-lockfile && yarn install-auth --frozen-lockfile && yarn install-header --frozen-lockfile && yarn install-single-view --frozen-lockfile",
     "lint": "yarn lint-root && yarn lint-single-view",
+    "e2e": "start-server-and-test start http://localhost:9000 cypress:run",
     "test": "yarn test-single-view",
     "prepare": "husky install",
     "start": "concurrently \"yarn root\" \"yarn common\" \"yarn auth\" \"yarn header\" \"yarn single-view\"",
@@ -21,13 +23,19 @@
     "single-view": "cd apps/single-view && yarn start",
     "format-root": "cd apps/root && yarn format",
     "format-single-view": "cd apps/single-view && yarn format",
-    "format": "yarn format-root && yarn format-single-view"
+    "format": "yarn format-root && yarn format-single-view",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
-    "husky": "^7.0.4"
+    "cypress": "^9.5.3",
+    "husky": "^7.0.4",
+    "typescript": "^4.6.3"
   },
   "dependencies": {
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "start-server-and-test": "^1.14.0"
   }
 }
