@@ -88,7 +88,6 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               type="text"
               onChange={(e) => setPostcode(e.target.value)}
             />
-
             <button className="govuk-button lbh-button govuk-button--start">
               Search
               <svg
