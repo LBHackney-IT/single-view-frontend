@@ -17,6 +17,11 @@ export const CustomerView = () => {
 
   const loadPerson = async (): Promise<Person> => {
     let person = await getPerson(id);
+
+    if (!person) {
+      throw new Error("Error retrieving person");
+    }
+
     setPerson(person);
     return person;
   };
