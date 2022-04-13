@@ -13,6 +13,11 @@ export const getNotes = async (id: string): Promise<Note[] | null> => {
         },
       }
     );
+
+    if (response.status != 200) {
+      throw new Error("Error retrieving notes");
+    }
+
     return response.data.results;
   } catch (e) {
     return null;
@@ -70,11 +75,23 @@ export const createNote = async (
     data
   );
 
-  const response = await axios.post(`${process.env.NOTES_API_V2}/notes`, note, {
-    headers: {
-      Authorization: `${getToken()}`,
-    },
-  });
+  try {
+    const response = await axios.post(
+      `${process.env.NOTES_API_V2}/notes`,
+      note,
+      {
+        headers: {
+          Authorization: `${getToken()}`,
+        },
+      }
+    );
 
-  return response.data;
+    if (response.status != 201) {
+      throw new Error("Error creating note");
+    }
+
+    return response.data;
+  } catch (e) {
+    return null;
+  }
 };
