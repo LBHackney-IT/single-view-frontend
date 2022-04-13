@@ -8,6 +8,7 @@ import {
 import { CustomerView, SearchView } from "./Views";
 
 import "./app.scss";
+import { NotFound } from "./Components";
 
 const App = (): JSX.Element => {
   const [hasSearched, setHasSearched] = useState(false);
@@ -32,7 +33,7 @@ const App = (): JSX.Element => {
             <CustomerView />
           </Route>
           <Route>
-            <p className="lbh-body-s">Page not found</p>
+            <NotFound />
           </Route>
         </Switch>
       </Router>
