@@ -1,4 +1,5 @@
 export const formatDateOfBirth = (dob: string): string => {
+  if (!dob) return "undefined";
   let [year, month, day] = dob.split("-");
   return [day, month, year].join("/");
 };

@@ -5,6 +5,11 @@ describe("formatDateOfBirth function", () => {
     const result = formatDateOfBirth("1990-12-01");
     expect(result).toEqual("01/12/1990");
   });
+
+  it("should return undefined if no date of birth is given", () => {
+    const result = formatDateOfBirth("");
+    expect(result).toEqual("undefined");
+  });
 });
 
 describe("formatDate function", () => {
