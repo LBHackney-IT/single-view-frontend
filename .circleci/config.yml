@@ -191,7 +191,7 @@ jobs:
             - ./**/**/node_modules
       - persist_to_workspace:
           root: *workspace_root
-          paths: ./apps/<<parameters.app>>
+          paths: ./project/apps/<<parameters.app>>/node_modules
   lint-and-test:
     executor: node-executor
     steps:
