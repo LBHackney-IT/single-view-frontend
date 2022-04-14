@@ -149,7 +149,7 @@ jobs:
       - *attach_workspace
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
+          key: dependency-cache-V1-{{ checksum "yarn.lock" }}
       - run:
           name: Install auth dependencies
           command: cd ./apps/auth && yarn
@@ -166,7 +166,7 @@ jobs:
           name: Install single-view dependencies
           command: cd ./apps/single-view && yarn
       - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
+          key: dependency-cache-V1-{{ checksum "yarn.lock" }}
           paths:
             - ./**/**/node_modules
       - persist_to_workspace:
