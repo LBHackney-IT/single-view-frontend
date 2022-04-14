@@ -78,100 +78,7 @@ commands:
             cd ./apps/<<parameters.app>>/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
 
-  terraform-init-then-apply-all:
-    description: "Initialize and apply the terraform configuration"
-    parameters:
-      environment:
-        type: string
-    steps:
-      - *attach_workspace
-      - checkout
-      - run:
-          name: Get and init root
-          command: |
-            cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
-      - run:
-          name: Apply root
-          command: |
-            cd ./apps/root/terraform/<<parameters.environment>>/
-            terraform apply -auto-approve
-      - run:
-          name: Get and init single view
-          command: |
-            cd ./apps/single-view/terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
-      - run:
-          name: Apply single view
-          command: |
-            cd ./apps/single-view/terraform/<<parameters.environment>>/
-            terraform apply -auto-approve
-      - run:
-          name: Get and init auth
-          command: |
-            cd ./apps/auth/terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
-      - run:
-          name: Apply auth
-          command: |
-            cd ./apps/auth/terraform/<<parameters.environment>>/
-            terraform apply -auto-approve
-      - run:
-          name: Get and init common
-          command: |
-            cd ./apps/common/terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
-      - run:
-          name: Apply common
-          command: |
-            cd ./apps/common/terraform/<<parameters.environment>>/
-            terraform apply -auto-approve
-      - run:
-          name: Get and init header
-          command: |
-            cd ./apps/header/terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
-      - run:
-          name: Apply header
-          command: |
-            cd ./apps/header/terraform/<<parameters.environment>>/
-            terraform apply -auto-approve
-
 jobs:
-  install-all-dependencies:
-    executor: node-executor
-    steps:
-      - *attach_workspace
-      - checkout
-      - restore_cache:
-          key: dependency-cache-V1-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install auth dependencies
-          command: cd ./apps/auth && yarn
-      - run:
-          name: Install common dependencies
-          command: cd ./apps/common && yarn
-      - run:
-          name: Install header dependencies
-          command: cd ./apps/header && yarn
-      - run:
-          name: Install root dependencies
-          command: cd ./apps/root && yarn
-      - run:
-          name: Install single-view dependencies
-          command: cd ./apps/single-view && yarn
-      - save_cache:
-          key: dependency-cache-V1-{{ checksum "yarn.lock" }}
-          paths:
-            - ./**/**/node_modules
-      - persist_to_workspace:
-          root: *workspace_root
-          paths: .
   install-dependencies-app:
     executor: node-executor
     parameters:
@@ -371,98 +278,6 @@ jobs:
       - store_artifacts:
           path: ~/project/cypress/videos
 
-  build-deploy-production:
-    executor: node-executor
-    environment:
-      aws-region: eu-west-2
-    parameters:
-      stage:
-        type: string
-    steps:
-      - *attach_workspace
-      - aws-cli/install
-      - run:
-          name: Build auth
-          command: |
-            cd apps/auth/
-            export APP_ENV=<<parameters.stage>>
-            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
-            yarn build
-      - run:
-          name: Deploy to S3 auth
-          command: |
-            cd apps/auth/
-            aws s3 sync dist s3://lbh-single-view-auth-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-auth-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
-      - run:
-          name: Build common
-          command: |
-            cd apps/common/
-            export APP_ENV=production
-            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/common-app-url --query Parameter.Value --output text)
-            export AUTH_ALLOWED_GROUPS=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-allowed-groups --query Parameter.Value --output text)
-            export AUTH_DOMAIN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-domain --query Parameter.Value --output text)
-            export COOKIE_DOMAIN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/cookie-domain --query Parameter.Value --output text)
-            export AUTH_TOKEN_NAME=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-token-name --query Parameter.Value --output text)
-            export CONFIGURATION_API_URL_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/configuration-api-url --query Parameter.Value --output text)
-            yarn build
-      - run:
-          name: Deploy to S3 common
-          command: |
-            cd apps/common/
-            aws s3 sync dist s3://lbh-single-view-common-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-common-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
-      - run:
-          name: Build header
-          command: |
-            cd apps/header/
-            export APP_ENV=<<parameters.stage>>
-            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
-            yarn build
-      - run:
-          name: Deploy to S3 header
-          command: |
-            cd apps/header/
-            aws s3 sync dist s3://lbh-single-view-header-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-header-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
-      - run:
-          name: Build root
-          command: |
-            cd apps/root/
-            export ROOT_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/root-app-url --query Parameter.Value --output text)
-            export SINGLE_VIEW_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
-            export HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text)
-            export PERSON_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-v1 --query Parameter.Value --output text)
-
-            export HEADER_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
-            export AUTH_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
-            export COMMON_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/common-app-url --query Parameter.Value --output text)
-            yarn build:webpack
-      - run:
-          name: Deploy to S3 root
-          command: |
-            cd apps/root/
-            aws s3 sync dist s3://lbh-single-view-root-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-root-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
-      - run:
-          name: Build single view
-          command: |
-            cd apps/single-view/
-            export APP_ENV=<<parameters.stage>>
-            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
-            export HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text)
-            export NOTES_API_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/notes-v2 --query Parameter.Value --output text)
-            export PERSON_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-v1 --query Parameter.Value --output text)
-
-
-            yarn build
-      - run:
-          name: Deploy to S3 single view
-          command: |
-            cd apps/single-view/
-            aws s3 sync dist s3://lbh-single-view-frontend-production.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-frontend-production.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
-
   assume-role-development:
     executor: docker-python
     steps:
@@ -492,12 +307,6 @@ jobs:
       - terraform-init-then-apply:
           environment: <<parameters.environment>>
           app: <<parameters.app>>
-
-  terraform-init-and-apply-to-production:
-    executor: docker-terraform
-    steps:
-      - terraform-init-then-apply-all:
-          environment: "production"
 
 workflows:
   version: 2
@@ -887,13 +696,6 @@ workflows:
           filters:
             branches:
               only: main
-      # - assume-role-production:
-      #     context: api-assume-role-corporate-production-context
-      #     requires:
-      #       - install-dependencies-app
-      #     filters:
-      #       branches:
-      #         only: main
       - terraform-init-and-apply:
           name: terraform-init-and-apply-common
           app: "common"
@@ -918,13 +720,6 @@ workflows:
           filters:
             branches:
               only: main
-      # - assume-role-production:
-      #     context: api-assume-role-corporate-production-context
-      #     requires:
-      #       - install-dependencies-app
-      #     filters:
-      #       branches:
-      #         only: main
       - terraform-init-and-apply:
           name: terraform-init-and-apply-header
           app: "header"
@@ -949,13 +744,6 @@ workflows:
           filters:
             branches:
               only: main
-      # - assume-role-production:
-      #     context: api-assume-role-corporate-production-context
-      #     requires:
-      #       - install-dependencies-app
-      #     filters:
-      #       branches:
-      #         only: main
       - terraform-init-and-apply:
           name: terraform-init-and-apply-root
           app: "root"
@@ -992,14 +780,6 @@ workflows:
           filters:
             branches:
               only: main
-      # - assume-role-production:
-      #     context: api-assume-role-corporate-production-context
-      #     requires:
-      #       - lint-and-test
-      #       - e2e
-      #     filters:
-      #       branches:
-      #         only: main
       - terraform-init-and-apply:
           name: terraform-init-and-apply-single-view
           app: "single-view"
@@ -1016,42 +796,3 @@ workflows:
           filters:
             branches:
               only: main
-
-  # continuous-delivery-production:
-  #   when: << pipeline.parameters.run_production_workflow >>
-  #   jobs:
-  #     - permit-production-terraform-release:
-  #         type: approval
-  #         filters:
-  #           branches:
-  #             only: main
-  #     - e2e:
-          # requires:
-          #   - permit-production-terraform-release
-  #     - install-all-dependencies:
-  #         requires:
-  #           - permit-production-terraform-release
-  #     - lint-and-test:
-  #         requires:
-  #           - install-all-dependencies
-  #     - assume-role-production:
-  #         context: api-assume-role-corporate-production-context
-  #         requires:
-  #           - lint-and-test
-  #           - e2e
-  #         filters:
-  #           branches:
-  #             only: main
-  #     - terraform-init-and-apply-to-production:
-  #         requires:
-  #           - assume-role-production
-  #         filters:
-  #           branches:
-  #             only: main
-  #     - build-deploy-production:
-  #         stage: "production"
-  #         requires:
-  #           - terraform-init-and-apply-to-production
-  #         filters:
-  #           branches:
-  #             only: main
