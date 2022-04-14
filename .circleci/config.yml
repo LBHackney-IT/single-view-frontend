@@ -191,7 +191,7 @@ jobs:
             - ./**/**/node_modules
       - persist_to_workspace:
           root: *workspace_root
-          paths: .
+          paths: ./apps/<<parameters.app>>
   lint-and-test:
     executor: node-executor
     steps:
@@ -967,6 +967,8 @@ workflows:
             branches:
               only: main
       - e2e:
+          requires:
+            - permit-production-terraform-release
           filters:
             branches:
               only: main
