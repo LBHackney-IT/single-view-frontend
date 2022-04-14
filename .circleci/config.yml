@@ -64,8 +64,8 @@ commands:
       app:
         type: string
     steps:
-      - *attach_workspace
       - checkout
+      - *attach_workspace
       - run:
           name: Get and init <<parameters.app>>
           command: |
@@ -195,6 +195,7 @@ jobs:
   lint-and-test:
     executor: node-executor
     steps:
+      - checkout
       - *attach_workspace
       - run:
           name: Run linter
