@@ -31,7 +31,7 @@ describe('login', () => {
     })
 
     it('displays an error message', () => {
-      cy.get('#error-summary-title').should('have.text', 'You do not have permission to access this service.');
+      cy.get('#error-summary-title').should('have.text', 'You may not have permission to use this service. If this is your first time using Single View, please sign in below.');
       cy.get('.govuk-error-summary__body').should('have.text', 'To request access please complete this form. Request access');
     })
 
