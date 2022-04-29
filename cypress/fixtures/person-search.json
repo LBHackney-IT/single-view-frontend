@@ -4,38 +4,33 @@
             {
                 "id": "57ea3d58",
                 "title": "Ms",
-                "firstname": "Luna",
+                "firstName": "Luna",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Luna",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
+                "preferredSurname": "Kitty",                
                 "dateOfBirth": "1977-10-06",
                 "personTypes": [
                     "Tenant"
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "4cd7f0f0",
-                        "type": "Temp B&B",
-                        "totalBalance": 0.0,
+                        "id": "4cd7f0f0",                        
                         "startDate": "2017-01-19",
                         "endDate": "2017-04-12",
-                        "assetFullAddress": "ROOM 608 143 Northumberland Park, N17 0TR ",
-                        "postCode": null,
-                        "paymentReference": "9145123102",
-                        "isActive": false
+                        "fullAddress": "ROOM 608 143 Northumberland Park, N17 0TR ",                        
+                        "currentAddress": false
                     }
                 ]
             },
             {
                 "id": "6d7ed1a4",
                 "title": "Other",
-                "firstname": "Luna",
+                "firstName": "Luna",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Luna",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -45,26 +40,22 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "7d569db2",
-                        "type": "Secure",
-                        "totalBalance": 0.0,
+                        "id": "7d569db2",                        
                         "startDate": "2005-11-14",
                         "endDate": "2010-03-28",
-                        "assetFullAddress": "123 Cute Street, M3 0W ",
-                        "postCode": null,
-                        "paymentReference": "9406001406",
-                        "isActive": false
+                        "fullAddress": "123 Cute Street, M3 0W ",                        
+                        "currentAddress": false
                     }
                 ]
             },
             {
                 "id": "99a2e3f8",
                 "title": "Mrs",
-                "firstname": "Eric",
+                "firstName": "Eric",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Eric",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -74,37 +65,29 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "a2312908",
-                        "type": "Temp B&B",
-                        "totalBalance": 0.0,
+                        "id": "a2312908",                       
                         "startDate": "2017-11-02",
                         "endDate": "2018-08-12",
-                        "assetFullAddress": "Room 35 Cape House 39 Dalston Lane, E8 3DF",
-                        "postCode": null,
-                        "paymentReference": "9156782406",
-                        "isActive": false
+                        "fullAddress": "Room 35 Cape House 39 Dalston Lane, E8 3DF",                     
+                        "currentAddress": false
                     },
                     {
-                        "id": "c593aee7",
-                        "type": "Secure",
-                        "totalBalance": 0.0,
+                        "id": "c593aee7",                       
                         "startDate": "2018-08-13",
                         "endDate": null,
-                        "assetFullAddress": "16 Rivington Walk, E8 4JT",
-                        "postCode": null,
-                        "paymentReference": "1938458402",
-                        "isActive": true
+                        "fullAddress": "16 Rivington Walk, E8 4JT",                      
+                        "currentAddress": true
                     }
                 ]
             },
             {
                 "id": "eaa645d5-518f-22c6-7a63-44f788002033",
                 "title": "Reverend",
-                "firstname": "Tracey",
+                "firstName": "Tracey",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Tracey",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -114,26 +97,22 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "5433bad4",
-                        "type": "Secure",
-                        "totalBalance": 0.0,
+                        "id": "5433bad4",                       
                         "startDate": "2017-03-06",
                         "endDate": null,
-                        "assetFullAddress": "231 Fellows Court  Weymouth Terrace, E2 8LJ",
-                        "postCode": null,
-                        "paymentReference": "1932354502",
-                        "isActive": true
+                        "fullAddress": "231 Fellows Court  Weymouth Terrace, E2 8LJ",                       
+                        "currentAddress": true
                     }
                 ]
             },
             {
                 "id": "a95dc86a",
                 "title": "Reverend",
-                "firstname": "Andrea",
+                "firstName": "Andrea",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Andrea",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -143,26 +122,22 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "d3e435a6",
-                        "type": "Secure",
-                        "totalBalance": 0.0,
+                        "id": "d3e435a6",                        
                         "startDate": "2002-04-15",
                         "endDate": null,
-                        "assetFullAddress": "4 Croston Street, E8 4PQ",
-                        "postCode": null,
-                        "paymentReference": "3174004106",
-                        "isActive": true
+                        "fullAddress": "4 Croston Street, E8 4PQ",                     
+                        "currentAddress": true
                     }
                 ]
             },
             {
                 "id": "87419dae",
                 "title": "Miss",
-                "firstname": "Oliver",
+                "firstName": "Oliver",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Oliver",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -172,26 +147,22 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "767aef93",
-                        "type": "Secure",
-                        "totalBalance": 0.0,
+                        "id": "767aef93",                        
                         "startDate": "1984-06-25",
                         "endDate": "2000-12-03",
-                        "assetFullAddress": "74 Sylvester House  Sylvester Road, E8 1ET",
-                        "postCode": null,
-                        "paymentReference": "9060074004",
-                        "isActive": false
+                        "fullAddress": "74 Sylvester House  Sylvester Road, E8 1ET",                     
+                        "currentAddress": false
                     }
                 ]
             },
             {
                 "id": "e78c4692",
                 "title": "Other",
-                "firstname": "Kathryn",
+                "firstName": "Kathryn",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Kathryn",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -201,26 +172,22 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "24c6fc44",
-                        "type": "Secure",
-                        "totalBalance": 0.0,
+                        "id": "24c6fc44",                       
                         "startDate": "1989-03-13",
                         "endDate": null,
-                        "assetFullAddress": "305 Nisbet House  Homerton High Street, E9 6AR",
-                        "postCode": null,
-                        "paymentReference": "7172331604",
-                        "isActive": true
+                        "fullAddress": "305 Nisbet House  Homerton High Street, E9 6AR",                        
+                        "currentAddress": true
                     }
                 ]
             },
             {
                 "id": "72a2d90a",
                 "title": "Master",
-                "firstname": "Gary",
+                "firstName": "Gary",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Gary",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -230,26 +197,22 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "5c6fc128",
-                        "type": "Secure",
-                        "totalBalance": 0.0,
+                        "id": "5c6fc128",                       
                         "startDate": "1998-11-23",
                         "endDate": "2006-05-21",
-                        "assetFullAddress": "124 Conch Street, BK4 7BM",
-                        "postCode": null,
-                        "paymentReference": "1727139806",
-                        "isActive": false
+                        "fullAddress": "124 Conch Street, BK4 7BM",                        
+                        "currentAddress": false
                     }
                 ]
             },
             {
                 "id": "94f8ff03a",
                 "title": "Dr",
-                "firstname": "Beth",
+                "firstName": "Beth",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Beth",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -259,26 +222,22 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "bc5a9b5b",
-                        "type": "Freehold (Serv)",
-                        "totalBalance": 0.0,
+                        "id": "bc5a9b5b",                       
                         "startDate": "2000-05-01",
                         "endDate": null,
-                        "assetFullAddress": "16 Orient Way, E5 0DJ",
-                        "postCode": null,
-                        "paymentReference": "228001548",
-                        "isActive": true
+                        "fullAddress": "16 Orient Way, E5 0DJ",                        
+                        "currentAddress": true
                     }
                 ]
             },
             {
                 "id": "79d6932a",
                 "title": "Rabbi",
-                "firstname": "Megan",
+                "firstName": "Megan",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Megan",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -288,26 +247,22 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "73b60d8e",
-                        "type": "Secure",
-                        "totalBalance": 0.0,
+                        "id": "73b60d8e",                        
                         "startDate": "2017-01-23",
                         "endDate": null,
-                        "assetFullAddress": "20 Sherard House  Frampton Park Road, E9 7PE",
-                        "postCode": null,
-                        "paymentReference": "1925000302",
-                        "isActive": true
+                        "fullAddress": "20 Sherard House  Frampton Park Road, E9 7PE",                        
+                        "currentAddress": true
                     }
                 ]
             },
             {
                 "id": "6dd46a01",
                 "title": "Mrs",
-                "firstname": "Olivia",
+                "firstName": "Olivia",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Olivia",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -317,26 +272,22 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "4cce0edc",
-                        "type": "Secure",
-                        "totalBalance": 0.0,
+                        "id": "4cce0edc",                        
                         "startDate": "2014-03-17",
                         "endDate": "2020-04-19",
-                        "assetFullAddress": "1 Thornbury Close, N16 8UX",
-                        "postCode": null,
-                        "paymentReference": "1925640502",
-                        "isActive": false
+                        "fullAddress": "1 Thornbury Close, N16 8UX",                        
+                        "currentAddress": false
                     }
                 ]
             },
             {
                 "id": "a1e2a970",
                 "title": "Mr",
-                "firstname": "Sean",
+                "firstName": "Sean",
                 "middleName": null,
-                "surname": "Kitty",
+                "surName": "Kitty",
                 "preferredFirstname": "Sean",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -346,17 +297,13 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "tenures": [
+                "knownAddresses": [
                     {
-                        "id": "d43caa5a",
-                        "type": "Secure",
-                        "totalBalance": 0.0,
+                        "id": "d43caa5a",                       
                         "startDate": "2004-12-13",
                         "endDate": null,
-                        "assetFullAddress": "9 Sheldon House  Wick Road, E9 5AD",
-                        "postCode": null,
-                        "paymentReference": "8533009608",
-                        "isActive": true
+                        "fullAddress": "9 Sheldon House  Wick Road, E9 5AD",                        
+                        "currentAddress": true
                     }
                 ]
             }
