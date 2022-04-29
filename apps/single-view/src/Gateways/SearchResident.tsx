@@ -9,7 +9,7 @@ export const SearchResident = async (
   page: number
 ): Promise<housingSearchPerson[]> => {
   const response = await axios.get(
-    `${process.env.SV_API}/search?searchText=${searchParams}&page=${page}`,
+    `${process.env.SV_API_V1}/search?searchText=${searchParams}&page=${page}`,
     {
       headers: {
         authorization: `${getToken()}`,

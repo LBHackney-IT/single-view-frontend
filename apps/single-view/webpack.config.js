@@ -37,7 +37,7 @@ module.exports = (webpackConfigEnv, argv) => {
           process.env.HOUSING_SEARCH_API_V1 || dotenv.HOUSING_SEARCH_API_V1,
         PERSON_API_V1: process.env.PERSON_API_V1 || dotenv.PERSON_API_V1,
         NOTES_API_V2: process.env.NOTES_API_V2 || dotenv.NOTES_API_V2,
-        SV_API: process.env.SV_API || dotenv.SV_API
+        SV_API_V1: process.env.SV_API_V1 || dotenv.SV_API_V1
       }),
       new ImportMapWebpackPlugin({
         namespace: "@mfe",
