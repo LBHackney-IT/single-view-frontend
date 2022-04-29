@@ -5,10 +5,11 @@ import { housingSearchPerson } from "../Interfaces";
 
 export const SearchResident = async (
   searchParams: string,
-  address: string | null
+  address: string | null,
+  page: number
 ): Promise<housingSearchPerson[]> => {
   const response = await axios.get(
-    `${process.env.SV_API}/search?searchText=${searchParams}&page=1`, //allow multiple page searching
+    `${process.env.SV_API}/search?searchText=${searchParams}&page=${page}`,
     {
       headers: {
         authorization: `${getToken()}`,
