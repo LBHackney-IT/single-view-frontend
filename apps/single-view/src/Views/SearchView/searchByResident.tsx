@@ -18,7 +18,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const createSearch = (): string => {
     let searchTerms = [firstName.trim(), lastName.trim()];
 
-    let formattedSearch = searchTerms.filter((term) => term !== "").join("+");
+    let formattedSearch = searchTerms.filter((term) => term !== "").join("%2B");
 
     return formattedSearch;
   };

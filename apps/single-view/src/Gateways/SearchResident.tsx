@@ -8,12 +8,15 @@ export const SearchResident = async (
   address: string | null
 ): Promise<housingSearchPerson[]> => {
   const response = await axios.get(
-    `${process.env.HOUSING_SEARCH_API_V1}/search/persons?searchText=${searchParams}`,
+    `${process.env.SV_API}/search?searchText=${searchParams}&page=1`, //allow multiple page searching
     {
       headers: {
-        Authorization: `${getToken()}`,
+        authorization: `${getToken()}`,
       },
     }
   );
-  return sortResponseByRelevance(response.data.results.persons, address);
+  return sortResponseByRelevance(
+    response.data.searchResponse.searchResults,
+    address
+  );
 };
