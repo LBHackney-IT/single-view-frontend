@@ -25,8 +25,8 @@ export const SearchResults = (props: myProps): JSX.Element => {
                     {formatDateOfBirth(person.dateOfBirth)}
                   </a>
                   <div className="lbh-body-s">
-                    {person.knownAddresses.map((tenure) => {
-                      return tenure.fullAddress;
+                    {person.knownAddresses.map((address) => {
+                      return address.fullAddress;
                     })}
                     <br />
                     Person API id: {person.id}
