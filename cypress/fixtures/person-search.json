@@ -1,6 +1,6 @@
 {
-    "results": {
-        "persons": [
+    "searchResponse": {
+        "searchResults": [
             {
                 "id": "57ea3d58",
                 "title": "Ms",
