@@ -1,5 +1,4 @@
 import React from "react";
-import { formatDateOfBirth } from "../../Utils/formatDates";
 import { housingSearchPerson } from "../../Interfaces";
 import { formatDate } from "@mfe/common/lib/utils";
 
