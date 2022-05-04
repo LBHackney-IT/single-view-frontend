@@ -24,7 +24,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
                   >
                     {person.firstName} {person.surName}
                     {person.dateOfBirth &&
-                      " , Date of Birth: " + formatDate(person.dateOfBirth)}
+                      ", Date of Birth: " + formatDate(person.dateOfBirth)}
                   </a>
                   <div className="lbh-body-s">
                     {person.knownAddresses.map((address) => {
