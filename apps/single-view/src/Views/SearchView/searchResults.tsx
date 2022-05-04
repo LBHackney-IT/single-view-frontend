@@ -1,6 +1,6 @@
 import React from "react";
-import { formatDateOfBirth } from "../../Utils/formatDates";
 import { housingSearchPerson } from "../../Interfaces";
+import { formatDate } from "@mfe/common/lib/utils";
 
 interface myProps {
   searchResults: housingSearchPerson[];
@@ -21,8 +21,9 @@ export const SearchResults = (props: myProps): JSX.Element => {
                     href={`/customers/${person.id}`}
                     className="lbh-link lbh-link--no-visited-state"
                   >
-                    {person.firstName} {person.surName}, Date of Birth:{" "}
-                    {formatDateOfBirth(person.dateOfBirth)}
+                    {person.firstName} {person.surName}
+                    {person.dateOfBirth &&
+                      ", Date of Birth: " + formatDate(person.dateOfBirth)}
                   </a>
                   <div className="lbh-body-s">
                     {person.knownAddresses.map((address) => {
