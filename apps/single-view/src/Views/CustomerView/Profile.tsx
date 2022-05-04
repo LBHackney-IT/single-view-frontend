@@ -23,9 +23,11 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Middle Name(s)" testId="middleName">
           {person.middleName}
         </DescriptionListItem>
-        <DescriptionListItem title="Date of Birth" testId="dateOfBirth">
-          {formatDateOfBirth(person.dateOfBirth)}
-        </DescriptionListItem>
+        {person.dateOfBirth && (
+          <DescriptionListItem title="Date of Birth" testId="dateOfBirth">
+            {formatDateOfBirth(person.dateOfBirth)}
+          </DescriptionListItem>
+        )}
         <DescriptionListItem title="Tenures" testId="tenures">
           {person.tenures.map((tenure, index) => {
             return (

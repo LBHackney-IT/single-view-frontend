@@ -5,15 +5,19 @@ import { housingSearchPerson } from "../Interfaces";
 
 export const SearchResident = async (
   searchParams: string,
-  address: string | null
+  address: string | null,
+  page: number
 ): Promise<housingSearchPerson[]> => {
   const response = await axios.get(
-    `${process.env.HOUSING_SEARCH_API_V1}/search/persons?searchText=${searchParams}`,
+    `${process.env.SV_API_V1}/search?searchText=${searchParams}&page=${page}`,
     {
       headers: {
-        Authorization: `${getToken()}`,
+        authorization: `${getToken()}`,
       },
     }
   );
-  return sortResponseByRelevance(response.data.results.persons, address);
+  return sortResponseByRelevance(
+    response.data.searchResponse.searchResults,
+    address
+  );
 };
