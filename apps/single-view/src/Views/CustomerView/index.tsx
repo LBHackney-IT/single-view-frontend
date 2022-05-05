@@ -15,7 +15,7 @@ export const CustomerView = () => {
 
   let collatedNotes: Array<Note> = [];
 
-  const loadPerson = async (): Promise<Person> => {
+  const loadPerson = async (): Promise<Person | null> => {
     try {
       let person = await getPerson(id);
       setPerson(person);
@@ -29,10 +29,14 @@ export const CustomerView = () => {
   useEffect(() => {
     loadPerson()
       .then((person) => {
-        return loadPersonNotes(person, collatedNotes);
+        if (person) {
+          return loadPersonNotes(person, collatedNotes);
+        }
       })
       .then((person) => {
-        return loadTenureNotes(person, collatedNotes);
+        if (person) {
+          return loadTenureNotes(person, collatedNotes);
+        }
       })
       .then(() => {
         setNotes(sortNotes(collatedNotes));
