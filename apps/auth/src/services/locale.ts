@@ -1,5 +1,5 @@
 const locale = {
-  unauthorisedToViewService: "You do not have permission to access this service.",
+  unauthorisedToViewService: "You may not have permission to use this service. If this is your first time using Single View, please sign in below.",
   contactToRequestPermission: "To request access please complete this form.",
   signIn: "Sign in",
   signInUsingHackney: "Sign in with Google",

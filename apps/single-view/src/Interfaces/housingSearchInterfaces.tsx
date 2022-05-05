@@ -1,27 +1,22 @@
 export interface housingSearchPerson {
   id: string;
   title: string;
-  firstname: string;
+  firstName: string;
   middleName: string | null;
-  surname: string;
+  surName: string;
   preferredFirstname: string | null;
   preferredSurname: string | null;
   dateOfBirth: string;
-  totalBalance: number;
   personTypes: string[];
   IsPersonCautionaryAlerted: boolean;
   IsTenureCautionaryAlerted: boolean;
-  tenures: Tenure[];
+  knownAddresses: knownAddress[];
 }
 
-export interface Tenure {
+export interface knownAddress {
+  fullAddress: string;
   id: string;
-  type: string;
+  currentAddress: boolean;
   startDate: string;
   endDate: string | null;
-  assetFullAddress: string;
-  totalBalance: number;
-  postCode: string | null;
-  paymentReference: string | null;
-  isActive: true;
 }

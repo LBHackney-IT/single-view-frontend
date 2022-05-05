@@ -29,7 +29,7 @@ describe('search', () => {
     cy.get('#firstName').type('Luna');
     cy.get('#lastName').type('Kitty');
 
-    cy.intercept('GET', '**/search/persons*', { fixture: 'person-search.json' }).as('getPersons')
+    cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
 
     cy.get('.govuk-button').should('have.text', 'Search').click();
 
@@ -47,7 +47,7 @@ describe('search', () => {
   it('displays first restult with provided postcode', ()=> {
     cy.get('#postcode').type('M3 0W');
 
-    cy.intercept('GET', '**/search/persons*', { fixture: 'person-search.json' }).as('getPersons');
+    cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons');
 
     cy.get('.govuk-button').should('have.text', 'Search').click();
 

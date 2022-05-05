@@ -2,17 +2,26 @@ import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
 import { Person } from "../../Interfaces/personInterfaces";
 import { formatDateOfBirth } from "../../Utils/formatDates";
+import { Center, Spinner } from "@mfe/common/lib/components";
 
 interface Props {
-  person: Person;
+  person?: Person;
 }
 
 export const Profile = (props: Props) => {
-  const [person, setPerson] = useState<Person>(props.person);
+  const [person, setPerson] = useState<Person | undefined>();
 
   useEffect(() => {
     setPerson(props.person);
   }, [props.person]);
+
+  if (typeof person == "undefined") {
+    return (
+      <Center>
+        <Spinner />
+      </Center>
+    );
+  }
 
   return (
     <>
@@ -23,9 +32,11 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Middle Name(s)" testId="middleName">
           {person.middleName}
         </DescriptionListItem>
-        <DescriptionListItem title="Date of Birth" testId="dateOfBirth">
-          {formatDateOfBirth(person.dateOfBirth)}
-        </DescriptionListItem>
+        {person.dateOfBirth && (
+          <DescriptionListItem title="Date of Birth" testId="dateOfBirth">
+            {formatDateOfBirth(person.dateOfBirth)}
+          </DescriptionListItem>
+        )}
         <DescriptionListItem title="Tenures" testId="tenures">
           {person.tenures.map((tenure, index) => {
             return (

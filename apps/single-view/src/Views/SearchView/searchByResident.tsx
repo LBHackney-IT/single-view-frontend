@@ -16,9 +16,9 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const [lastNameError, setLastNameError] = useState(false);
 
   const createSearch = (): string => {
-    let searchTerms = [firstName, lastName];
+    let searchTerms = [firstName.trim(), lastName.trim()];
 
-    let formattedSearch = searchTerms.filter((term) => term !== "").join("+");
+    let formattedSearch = searchTerms.filter((term) => term !== "").join("%2B");
 
     return formattedSearch;
   };
@@ -29,7 +29,11 @@ export const SearchByResident = (props: myProps): JSX.Element => {
 
   const handleSearch = async () => {
     try {
-      let searchResults = await SearchResident(createSearch(), joinAddresses());
+      let searchResults = await SearchResident(
+        createSearch(),
+        joinAddresses(),
+        1
+      );
       props.setResultsFunction(searchResults);
     } catch (e) {
       console.log(e);
