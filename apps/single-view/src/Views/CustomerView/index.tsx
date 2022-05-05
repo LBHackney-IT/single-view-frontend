@@ -3,22 +3,27 @@ import { useParams } from "react-router-dom";
 import { Profile } from "./Profile";
 import { Notes } from "./Notes";
 import { getPerson } from "../../Gateways";
-import { voidPerson } from "../../Utils/Person";
 import { Note, Person, UrlParams } from "../../Interfaces";
 import { sortNotes } from "../../Utils/sortNotes";
 import { loadPersonNotes, loadTenureNotes } from "../../Gateways/Notes";
+import { NotFound } from "../../Components";
 
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
-  const [person, setPerson] = useState<Person>(voidPerson);
+  const [person, setPerson] = useState<Person | null>();
   const [notes, setNotes] = useState<Array<Note>>();
 
   let collatedNotes: Array<Note> = [];
 
   const loadPerson = async (): Promise<Person> => {
-    let person = await getPerson(id);
-    setPerson(person);
-    return person;
+    try {
+      let person = await getPerson(id);
+      setPerson(person);
+      return person;
+    } catch (e) {
+      setPerson(null);
+      throw e;
+    }
   };
 
   useEffect(() => {
@@ -34,7 +39,9 @@ export const CustomerView = () => {
       });
   }, []);
 
-  return (
+  return person === null ? (
+    <NotFound />
+  ) : (
     <>
       <div className="govuk-tabs lbh-tabs sv-space-t" data-module="govuk-tabs">
         <h2 className="govuk-tabs__title">Contents</h2>

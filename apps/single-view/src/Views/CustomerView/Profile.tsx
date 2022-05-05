@@ -2,17 +2,26 @@ import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
 import { Person } from "../../Interfaces/personInterfaces";
 import { formatDateOfBirth } from "../../Utils/formatDates";
+import { Center, Spinner } from "@mfe/common/lib/components";
 
 interface Props {
-  person: Person;
+  person?: Person;
 }
 
 export const Profile = (props: Props) => {
-  const [person, setPerson] = useState<Person>(props.person);
+  const [person, setPerson] = useState<Person | undefined>();
 
   useEffect(() => {
     setPerson(props.person);
   }, [props.person]);
+
+  if (typeof person == "undefined") {
+    return (
+      <Center>
+        <Spinner />
+      </Center>
+    );
+  }
 
   return (
     <>
