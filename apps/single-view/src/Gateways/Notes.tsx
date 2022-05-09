@@ -2,13 +2,14 @@ import axios from "axios";
 import { getToken } from "../Utils/getHackneyToken";
 import { Note } from "../Interfaces";
 import { $auth } from "@mfe/common/lib/auth";
+import { SystemId } from "../Interfaces/systemIdInterface";
 
 export const getNotesError = new Error("Error retrieving notes");
 export const createNoteError = new Error("Error creating note");
 
-export const getNotes = async (systemIds: string): Promise<Note[]> => {
+export const getNotes = async (systemIds: Array<SystemId>): Promise<Note[]> => {
   const response = await axios.get(
-    `${process.env.SV_API_V1}/notes?systemIds=${systemIds}`,
+    `${process.env.SV_API_V1}/notes?systemIds=${JSON.stringify(systemIds)}`,
     {
       headers: {
         Authorization: `${getToken()}`,
