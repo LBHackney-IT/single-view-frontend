@@ -9,7 +9,9 @@ export const createNoteError = new Error("Error creating note");
 
 export const getNotes = async (systemIds: Array<SystemId>): Promise<Note[]> => {
   const response = await axios.get(
-    `${process.env.SV_API_V1}/notes?systemIds=${JSON.stringify(systemIds)}`,
+    encodeURI(
+      `${process.env.SV_API_V1}/notes?systemIds=${JSON.stringify(systemIds)}`
+    ),
     {
       headers: {
         Authorization: `${getToken()}`,
