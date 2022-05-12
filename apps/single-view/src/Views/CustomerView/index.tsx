@@ -3,19 +3,16 @@ import { useParams } from "react-router-dom";
 import { Profile } from "./Profile";
 import { Notes } from "./Notes";
 import { getPerson } from "../../Gateways";
-import { Note, Person, UrlParams } from "../../Interfaces";
-import { sortNotes } from "../../Utils/sortNotes";
-import { loadPersonNotes, loadTenureNotes } from "../../Gateways/Notes";
+import { Person, UrlParams } from "../../Interfaces";
 import { NotFound } from "../../Components";
+import { SystemId } from "../../Interfaces/systemIdInterface";
 
 export const CustomerView = () => {
   const { id } = useParams<UrlParams>();
   const [person, setPerson] = useState<Person | null>();
-  const [notes, setNotes] = useState<Array<Note>>();
+  const [systemIds, setSystemIds] = useState<Array<SystemId>>();
 
-  let collatedNotes: Array<Note> = [];
-
-  const loadPerson = async (): Promise<Person> => {
+  const loadPerson = async (): Promise<Person | null> => {
     try {
       let person = await getPerson(id);
       setPerson(person);
@@ -26,17 +23,27 @@ export const CustomerView = () => {
     }
   };
 
-  useEffect(() => {
-    loadPerson()
-      .then((person) => {
-        return loadPersonNotes(person, collatedNotes);
-      })
-      .then((person) => {
-        return loadTenureNotes(person, collatedNotes);
-      })
-      .then(() => {
-        setNotes(sortNotes(collatedNotes));
+  const loadSystemIds = (person: Person | null): void => {
+    let derivedSystemIds: Array<SystemId> = [];
+    if (person) {
+      derivedSystemIds.push({
+        systemName: "PersonApi",
+        id: person.id,
       });
+      if (person.tenures) {
+        for (const tenure of person.tenures) {
+          derivedSystemIds.push({
+            systemName: "PersonApi",
+            id: tenure.id,
+          });
+        }
+      }
+    }
+    setSystemIds(derivedSystemIds);
+  };
+
+  useEffect(() => {
+    loadPerson().then((person) => loadSystemIds(person));
   }, []);
 
   return person === null ? (
@@ -62,7 +69,7 @@ export const CustomerView = () => {
           <Profile person={person} />
         </section>
         <section className="govuk-tabs__panel" id="notes">
-          <Notes notes={notes} />
+          <Notes systemIds={systemIds} />
         </section>
       </div>
     </>

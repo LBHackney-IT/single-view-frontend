@@ -1,26 +1,58 @@
 import React, { useEffect, useState } from "react";
-import { Note, NoteInput } from "../../Components";
-import { Note as NoteInterface } from "../../Interfaces/notesInterfaces";
-import { Center, Link, Spinner } from "@mfe/common/lib/components";
 import { useParams } from "react-router-dom";
-import { UrlParams } from "../../Interfaces";
-import { createNote } from "../../Gateways";
+import { Note, NoteInput } from "../../Components";
+import { createNote, getNotes } from "../../Gateways";
+import { UrlParams, Note as NoteInterface, SystemId } from "../../Interfaces";
+import {
+  Center,
+  Link,
+  Spinner,
+  ErrorSummary,
+} from "@mfe/common/lib/components";
 
 interface Props {
-  notes?: NoteInterface[];
+  systemIds?: Array<SystemId>;
   displayNoteInput?: boolean;
 }
 
 export const Notes = (props: Props): JSX.Element => {
   const { id } = useParams<UrlParams>();
-  const [notes, setNotes] = useState<Array<NoteInterface> | undefined>([]);
+  const [notes, setNotes] = useState<Array<NoteInterface>>();
+  const [getNotesError, setGetNotesError] = useState<boolean>(false);
   const [displayNoteInput, setDisplayNoteInput] = useState<boolean>(
     !!props.displayNoteInput
   );
 
+  const loadNotes = async (systemIds: Array<SystemId>): Promise<void> => {
+    setGetNotesError(false);
+    try {
+      let notes = await getNotes(systemIds);
+      setNotes(notes);
+    } catch (e: any) {
+      setGetNotesError(true);
+    }
+  };
+
+  const submitNote = async (data: any): Promise<void> => {
+    let note = await createNote(id, data);
+    setNotes([note, ...(notes || [])]);
+  };
+
   useEffect(() => {
-    setNotes(props.notes);
-  }, [props.notes]);
+    if (props.systemIds) {
+      loadNotes(props.systemIds);
+    }
+  }, [props.systemIds]);
+
+  if (getNotesError) {
+    return (
+      <ErrorSummary
+        id="singleViewNotesError"
+        title="Error"
+        description="Unable to load notes"
+      />
+    );
+  }
 
   if (typeof notes == "undefined") {
     return (
@@ -29,16 +61,6 @@ export const Notes = (props: Props): JSX.Element => {
       </Center>
     );
   }
-
-  const submitNote = async (data: any): Promise<void> => {
-    let note = await createNote(id, data);
-
-    if (note) {
-      setNotes([...notes, note]);
-    } else {
-      console.error("Failed to save note");
-    }
-  };
 
   return (
     <>
