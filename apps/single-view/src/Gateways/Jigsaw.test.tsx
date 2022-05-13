@@ -15,7 +15,7 @@ describe("Jigsaw gateway", () => {
       const response = { status: 200, data: token };
       mockAxios.get.mockImplementationOnce(async () => response);
 
-      expect(await authoriseJigsaw("")).toEqual(token);
+      expect(await authoriseJigsaw("", "")).toEqual(token);
     });
 
     it("should throw an error if the request is not OK", async () => {
@@ -23,7 +23,7 @@ describe("Jigsaw gateway", () => {
       mockAxios.get.mockImplementationOnce(async () => response);
 
       try {
-        await authoriseJigsaw("");
+        await authoriseJigsaw("", "");
       } catch (e: any) {
         expect(e.message).toBe(authoriseJigsawError.message);
       }
