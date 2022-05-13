@@ -40,6 +40,15 @@ module.exports = (webpackConfigEnv, argv) => {
         namespace: "@mfe",
         basePath: process.env.APP_CDN || "http://localhost:8005",
       }),
+      new webpack.ProvidePlugin({
+        Buffer: ["buffer", "Buffer"],
+      }),
     ],
+    resolve: {
+      fallback: {
+        crypto: require.resolve("crypto-browserify"),
+        stream: require.resolve("stream-browserify"),
+      },
+    },
   });
 };
