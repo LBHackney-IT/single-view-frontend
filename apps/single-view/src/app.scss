@@ -1,10 +1,21 @@
 $lbh-asset-path: "../node_modules/lbh-frontend/dist/assets";
 
 @import "node_modules/lbh-frontend/lbh/all";
+@import "node_modules/govuk-frontend/govuk/overrides/all";
+
+@import "node_modules/govuk-frontend/govuk/components/notification-banner";
 
 .no-underline {
   text-decoration: none;
   &:hover {
     text-decoration: underline;
   }
+}
+
+.align-right {
+  float: right;
+}
+
+.govuk-notification-banner__content {
+  margin-top: 0;
 }

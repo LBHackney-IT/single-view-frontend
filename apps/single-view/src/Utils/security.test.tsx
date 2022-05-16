@@ -1,23 +1,19 @@
-import { decrypt, encrypt } from "./security";
+import { encrypt } from "./security";
 
 describe("security", () => {
   describe("encrypt", () => {
     it("should return a string", () => {
-      const encryptedText = encrypt("text");
-      expect(typeof encryptedText).toBe("string");
-    });
-  });
+      const key = "GVitnm.QjsXUYjTTJ@_@.hAr-Lh2GVAX";
+      const iv = "J@_@.hAr-Lh2GVAX";
 
-  describe("decrypt", () => {
-    it("should return a string", () => {
-      const encryptedText = encrypt("text");
-      expect(typeof decrypt(encryptedText)).toBe("string");
-    });
-
-    it("should return the same value that was passed to encrypt", () => {
-      const value = "testValue";
-      const encryptedText = encrypt(value);
-      expect(decrypt(encryptedText)).toBe(value);
+      const encryptedText = encrypt(
+        '{"username": "testUser", "password": "lkjahf43jht"}',
+        key,
+        iv
+      );
+      expect(encryptedText).toBe(
+        "9JXbsm6zx5QFg7eUKIfxk8A+ZBGn+snIWDmSjLQNBUYVquE71prAbMhn4IoGqqoDz9zDjs7To547TjXdzajBsA=="
+      );
     });
   });
 });

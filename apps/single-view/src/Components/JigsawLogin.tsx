@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { authoriseJigsaw } from "../Gateways/Jigsaw";
-import { decrypt } from "../Utils/security";
+import { Input } from "./index";
 
 export const JigsawLogin = () => {
   const [username, setUsername] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const [usernameError, setUsernameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [formError, setFormError] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
 
   const login = async (): Promise<string | void> => {
     if (username && password) {
@@ -14,34 +18,118 @@ export const JigsawLogin = () => {
 
   const submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    Promise.resolve(login()).then((res) => {
-      console.log(res);
-      console.log(decrypt(res || ""));
-    });
+    if (!username) {
+      setUsernameError(true);
+    }
+    if (!password) {
+      setPasswordError(true);
+    }
+    if (username && password) {
+      setUsernameError(false);
+      setPasswordError(false);
+      Promise.resolve(login()).then((res) => {
+        console.log(res);
+        if (res) {
+          // set cookie with res
+          setDismissed(true);
+        }
+        setFormError(true);
+      });
+    }
   };
 
   const dismiss = () => {
-    console.log("dismissed");
+    setDismissed(true);
+    document.cookie = "jigsawDismissed=true";
   };
 
   return (
     <>
-      <form action="" onSubmit={(e) => submit(e)}>
-        <input
-          type="text"
-          placeholder="username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-        <button type="button" onClick={dismiss}>
-          Dismiss
-        </button>
-      </form>
+      {!dismissed && (
+        <div
+          className="govuk-notification-banner"
+          aria-labelledby="govuk-notification-banner-title"
+          data-module="govuk-notification-banner"
+        >
+          <div className="govuk-notification-banner__header">
+            <h2
+              className="govuk-notification-banner__title"
+              id="govuk-notification-banner-title"
+            >
+              Important
+            </h2>
+          </div>
+          <div className="govuk-notification-banner__content">
+            <details
+              className="govuk-details lbh-details"
+              data-module="govuk-details"
+            >
+              <summary className="govuk-details__summary">
+                <span className="govuk-details__summary-text">
+                  Please use your Jigsaw user name & password to login, granting
+                  you access to the data presented at Single view from Jigsaw.
+                </span>
+              </summary>
+              <div className="govuk-details__text">
+                {formError && (
+                  <div
+                    className="govuk-error-summary"
+                    aria-labelledby="error-summary-title"
+                    role="alert"
+                    data-module="govuk-error-summary"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div className="govuk-error-summary__body">
+                      Please ensure that you have entered your credentials
+                      correctly
+                    </div>
+                  </div>
+                )}
+                <form action="" onSubmit={(e) => submit(e)}>
+                  <Input
+                    label="Username"
+                    errorMsg="Username is mandatory"
+                    id="username"
+                    name="username"
+                    type="text"
+                    error={usernameError}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  <Input
+                    label="Password"
+                    errorMsg="Password is mandatory"
+                    id="password"
+                    name="password"
+                    type="password"
+                    error={passwordError}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button
+                    className="govuk-button lbh-button govuk-!-margin-bottom-5"
+                    data-module="govuk-button"
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                  <br />
+                  <a
+                    href="#"
+                    className="govuk-link lbh-link--no-visited-state"
+                    onClick={dismiss}
+                  >
+                    I don’t have access to Jigsaw, dismiss this message
+                  </a>
+                </form>
+              </div>
+            </details>
+          </div>
+        </div>
+      )}
     </>
   );
 };
