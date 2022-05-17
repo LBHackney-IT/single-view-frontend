@@ -7,7 +7,7 @@ export const JigsawLogin = () => {
   const [password, setPassword] = useState<string>();
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [formError, setFormError] = useState(false);
+  const [formError, setFormError] = useState(true);
 
   const login = async (): Promise<string | void> => {
     if (username && password) {
@@ -65,6 +65,7 @@ export const JigsawLogin = () => {
                 href="/search"
                 className="govuk-link lbh-link--no-visited-state"
                 onClick={dismiss}
+                data-testid="dismiss-jigsaw-login"
               >
                 I don’t have access to Jigsaw.
               </a>
