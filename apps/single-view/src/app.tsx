@@ -5,7 +5,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { CustomerView, SearchView } from "./Views";
+import { CustomerView, SearchView, JigsawLoginView } from "./Views";
 
 import "./app.scss";
 import { NotFound } from "./Components";
@@ -19,15 +19,32 @@ const App = (): JSX.Element => {
     }
   }, []);
 
+  const homeRedirect = () => {
+    const dismissed = document.cookie
+      .split("; ")
+      .find((c) => c == "jigsawDismissed=true");
+
+    const jigsawCookieSet = false; // need to check for it properly
+
+    if (dismissed || jigsawCookieSet) {
+      return "/search";
+    }
+
+    return "/jigsawLogin";
+  };
+
   return (
     <>
       <Router>
         <Switch>
           <Route exact path="/">
-            <Redirect to="/search" />
+            <Redirect to={homeRedirect()} />
           </Route>
           <Route path="/search">
             <SearchView />
+          </Route>
+          <Route path="/jigsawLogin">
+            <JigsawLoginView />
           </Route>
           <Route path="/customers/:id">
             <CustomerView />
