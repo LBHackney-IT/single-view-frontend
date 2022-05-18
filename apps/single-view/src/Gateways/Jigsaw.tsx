@@ -22,6 +22,7 @@ export const authoriseJigsaw = async (
     encryptedCreds,
     {
       headers: {
+        "Content-Type": "application/json",
         Authorization: `${getToken()}`,
       },
     }
