@@ -20,7 +20,7 @@ const App = (): JSX.Element => {
   const homeRedirect = () => {
     const dismissed = document.cookie.indexOf("jigsawDismissed=true") !== -1;
     const jigsawTokenSet = document.cookie.indexOf("jigsawToken=") !== -1;
-    return dismissed || jigsawTokenSet ? "/search" : "/jigsawToken";
+    return dismissed || jigsawTokenSet ? "/search" : "/jigsawLogin";
   };
 
   return (
