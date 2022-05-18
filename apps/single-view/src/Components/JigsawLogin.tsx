@@ -7,7 +7,7 @@ export const JigsawLogin = () => {
   const [password, setPassword] = useState<string>();
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [formError, setFormError] = useState(true);
+  const [formError, setFormError] = useState(false);
 
   const login = async (): Promise<string | void> => {
     if (username && password) {
@@ -28,7 +28,9 @@ export const JigsawLogin = () => {
       setPasswordError(false);
       Promise.resolve(login())
         .then((token) => {
-          document.cookie = `jigsawToken=${token}`;
+          let date = new Date();
+          date.setTime(date.getTime() + 10 * 60 * 60 * 1000);
+          document.cookie = `jigsawToken=${token}; expires=${date.toUTCString()}`;
           document.location = "/";
         })
         .catch((reason) => {
