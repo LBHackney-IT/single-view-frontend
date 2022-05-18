@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { JigsawLogin } from "../../Components";
 
 export const JigsawLoginView = (): JSX.Element => {

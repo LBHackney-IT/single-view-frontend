@@ -11,8 +11,6 @@ import "./app.scss";
 import { NotFound } from "./Components";
 
 const App = (): JSX.Element => {
-  const [hasSearched, setHasSearched] = useState(false);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       require("lbh-frontend").initAll();
@@ -24,9 +22,9 @@ const App = (): JSX.Element => {
       .split("; ")
       .find((c) => c == "jigsawDismissed=true");
 
-    const jigsawCookieSet = false; // need to check for it properly
+    const jigsawTokenSet = document.cookie.indexOf("jigsawToken=") > -1;
 
-    if (dismissed || jigsawCookieSet) {
+    if (dismissed || jigsawTokenSet) {
       return "/search";
     }
 

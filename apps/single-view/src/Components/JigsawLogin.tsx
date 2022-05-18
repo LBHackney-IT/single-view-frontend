@@ -26,13 +26,15 @@ export const JigsawLogin = () => {
     if (username && password) {
       setUsernameError(false);
       setPasswordError(false);
-      Promise.resolve(login()).then((res) => {
-        console.log(res);
-        if (res) {
-          // set cookie with res
-        }
-        setFormError(true);
-      });
+      Promise.resolve(login())
+        .then((token) => {
+          document.cookie = `jigsawToken=${token}`;
+          document.location = "/";
+        })
+        .catch((reason) => {
+          console.error(reason.message);
+          setFormError(true);
+        });
     }
   };
 
