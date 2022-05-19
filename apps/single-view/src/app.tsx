@@ -5,34 +5,42 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { CustomerView, SearchView } from "./Views";
+import { CustomerView, SearchView, JigsawLoginView } from "./Views";
 
 import "./app.scss";
+import { NotFound } from "./Components";
 
 const App = (): JSX.Element => {
-  const [hasSearched, setHasSearched] = useState(false);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       require("lbh-frontend").initAll();
     }
   }, []);
 
+  const homeRedirect = () => {
+    const dismissed = document.cookie.indexOf("jigsawDismissed=true") !== -1;
+    const jigsawTokenSet = document.cookie.indexOf("jigsawToken=") !== -1;
+    return dismissed || jigsawTokenSet ? "/search" : "/jigsawLogin";
+  };
+
   return (
     <>
       <Router>
         <Switch>
           <Route exact path="/">
-            <Redirect to="/search" />
+            <Redirect to={homeRedirect()} />
           </Route>
           <Route path="/search">
             <SearchView />
+          </Route>
+          <Route path="/jigsawLogin">
+            <JigsawLoginView />
           </Route>
           <Route path="/customers/:id">
             <CustomerView />
           </Route>
           <Route>
-            <p className="lbh-body-s">Page not found</p>
+            <NotFound />
           </Route>
         </Switch>
       </Router>

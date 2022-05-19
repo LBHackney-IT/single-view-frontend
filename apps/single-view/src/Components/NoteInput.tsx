@@ -23,22 +23,29 @@ export const NoteInput = (props: Props): JSX.Element => {
   const submitNote = (e: React.SyntheticEvent): void => {
     e.preventDefault();
 
-    if (noteContent.length > 0 && setSubCategory.length > 0) {
-      let categorisation = {
-        category: "Single View",
-        subCategory: subCategory,
-        description: null,
-      };
+    if (noteContent.length < 1) {
+      setHasError("You must add some text to your note");
+      return;
+    }
 
+    let categorisation = {
+      category: "Single View",
+      subCategory: subCategory,
+      description: null,
+    };
+
+    Promise.resolve(
       props.submit({
         description: noteContent,
         categorisation: categorisation,
+      })
+    )
+      .then(() => {
+        clearAll();
+      })
+      .catch((reason) => {
+        setHasError(reason.message);
       });
-
-      clearAll();
-    } else {
-      setHasError("You must add some text to your note");
-    }
   };
 
   const hasContent = (): boolean => {

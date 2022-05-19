@@ -46,17 +46,29 @@ describe('login', () => {
     })
 
     it('displays appropriate head link', () => {
-      cy.get('.govuk-link').should('have.text', 'Sign out')
+      cy.get('.lbh-header__links > .govuk-link').should('have.text', 'Sign out')
     })
 
     it('displays the user name', () => {
       cy.get('.lbh-header__links > p').should('have.text', 'Welcome Testy McTestface')
     })
 
-    it('appropriatly redirected', () => {
+    it('appropriately redirected to jigsaw', () => {
       cy.location().should((location) => {
-        expect(location.pathname).to.eq('/search')
+        expect(location.pathname).to.eq('/jigsawLogin')
       })
-    })
+    });
+
+    describe('when jigsaw login is dismissed', ()=> {
+
+      it('appropriately redirected to search', () => {
+
+        cy.get('[data-testid="dismiss-jigsaw-login"]').should('have.text', "I don’t have access to Jigsaw.").click();
+
+        cy.location().should((location) => {
+          expect(location.pathname).to.eq('/search')
+        })
+      });
+    });
   });
-})
+});
