@@ -52,10 +52,10 @@ describe('jigsaw login', () => {
 
     cy.intercept('POST', '**/storeCredentialS', {
       statusCode: 401,
-    }).as('submitWrongCreds');
+    }).as('submitWrongCreds'); 
 
     cy.get('.govuk-button').should('have.text', 'Login').click().then(() => {
-      cy.get('.govuk-error-summary').should('be.visible').should('have.text', 'boo')
+      cy.get('.govuk-error-summary').should('be.visible').should('have.text', 'There is a problemPlease ensure that you have entered your credentials correctly')
     });
   });
 
