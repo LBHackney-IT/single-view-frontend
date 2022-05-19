@@ -9,7 +9,7 @@ export const authoriseJigsaw = async (
   username: string,
   password: string
 ): Promise<string> => {
-  const key = process.env.AES_KEY || "keykeykeykeykeykeykeykeykeykeyke"; // 32 bytes
+  const key = process.env.AES_KEY || "keykeykeykeykeykeykeykeykeykeyke"; // 32 bytes /
   const iv = process.env.AES_IV || "iviviviviviviviv"; // 16 bytes
   const jigsawCredentials: JigsawCredentials = {
     username: username,
