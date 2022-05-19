@@ -27,12 +27,12 @@ describe('jigsaw login', () => {
     cy.contains('Password is mandatory');
   });
 
-  it('cookie is set when looked in', () => {
+  it('cookie is set when logged in', () => {
     cy.get('#username', { timeout: 10000 }).type('Luna');
     cy.get('#password').type('pa$$w0rd');
 
     const someThing = "lorem";
-    cy.intercept('POST', '**/storeCredentialS', (req) => {
+    cy.intercept('POST', '**/storeCredentials', (req) => {
       req.continue(res => {
         res.body = someThing
       })
