@@ -36,7 +36,7 @@ describe('jigsaw login', () => {
       req.continue(res => {
         res.body = someThing
       })
-    }).as('submitCreds');
+    })
 
     cy.get('.govuk-button').should('have.text', 'Login').click().then(() => {
       cy.getCookie('jigsawToken')
