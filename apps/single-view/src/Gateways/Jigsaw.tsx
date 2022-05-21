@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getToken } from "../Utils/getHackneyToken";
 import { encrypt } from "../Utils/security";
-import { JigsawCredentials } from "../Interfaces";
+import { JigsawCredentials } from "../Interfaces/jigsawInterfaces";
 
 export const authoriseJigsawError = new Error("Error authorising with Jigsaw");
 
