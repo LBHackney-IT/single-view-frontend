@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { housingSearchPerson, SystemId } from "../../Interfaces";
+import { housingSearchPerson } from "../../Interfaces";
 import { formatDate } from "@mfe/common/lib/utils";
 
 interface myProps {
@@ -15,12 +15,10 @@ export const SearchResults = (props: myProps): JSX.Element => {
   );
 
   const filterSystem = (dataSource: string) => {
-    if (dataSource == "all") {
+    if (dataSource == "All") {
       return setResults(allResults);
     }
-    return setResults(
-      props.searchResults.filter((p) => p.dataSource == dataSource)
-    );
+    return setResults(allResults.filter((p) => p.dataSource == dataSource));
   };
 
   return (
@@ -46,7 +44,6 @@ export const SearchResults = (props: myProps): JSX.Element => {
           </div>
 
           {results.map((person: housingSearchPerson, index: number) => {
-            console.log(person);
             return (
               <div className="lbh-body" key={index}>
                 <a
