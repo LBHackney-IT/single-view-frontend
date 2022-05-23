@@ -7,10 +7,11 @@ export const SearchResident = async (
   firstName: string,
   lastName: string,
   address: string | null,
-  page: number
+  page: number,
+  jigsawToken: string | null
 ): Promise<housingSearchPerson[]> => {
   const response = await axios.get(
-    `${process.env.SV_API_V1}/search?firstName=${firstName}&lastName=${lastName}&page=${page}`,
+    `${process.env.SV_API_V1}/search?firstName=${firstName}&lastName=${lastName}&page=${page}&redisId=${jigsawToken}`,
     {
       headers: {
         authorization: `${getToken()}`,
