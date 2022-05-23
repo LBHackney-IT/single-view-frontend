@@ -25,24 +25,23 @@ export const SearchResults = (props: myProps): JSX.Element => {
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-two-thirds">
         <h2 className="lbh-heading-h3">{`${results.length} results found`}</h2>
+        <div className="govuk-form-group lbh-form-group">
+          <label className="govuk-label lbh-label" htmlFor="system-filter">
+            Filter by system
+          </label>
+          <select
+            className="govuk-select lbh-select"
+            id="system-filter"
+            name="system-filter"
+            onChange={(e) => filterSystem(e.target.value)}
+          >
+            <option defaultValue="all">All</option>
+            <option value="0">Housing Search</option>
+            <option value="1">Jigsaw</option>
+          </select>
+        </div>
         <hr />
         <div id="searchResults">
-          <div className="govuk-form-group lbh-form-group">
-            <label className="govuk-label lbh-label" htmlFor="system-filter">
-              Filter by system
-            </label>
-            <select
-              className="govuk-select lbh-select"
-              id="system-filter"
-              name="system-filter"
-              onChange={(e) => filterSystem(e.target.value)}
-            >
-              <option defaultValue="all">All</option>
-              <option value="0">Housing Search</option>
-              <option value="1">Jigsaw</option>
-            </select>
-          </div>
-
           {results.map((person: housingSearchPerson, index: number) => {
             return (
               <div className="lbh-body" key={index}>
