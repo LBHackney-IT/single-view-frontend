@@ -11,7 +11,7 @@ export const sortResponseByRelevance = (
     };
     let item = personData[index];
 
-    if (item.knownAddresses != undefined) {
+    if (item.knownAddresses.fullAddress) {
       for (let i = 0; i < item.knownAddresses.length; i++) {
         itemAddress = item.knownAddresses[i].fullAddress.toLowerCase();
         if (address && itemAddress.indexOf(address.toLowerCase()) > -1) {

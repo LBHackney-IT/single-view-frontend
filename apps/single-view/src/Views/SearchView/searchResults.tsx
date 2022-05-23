@@ -1,5 +1,5 @@
-import React from "react";
-import { housingSearchPerson } from "../../Interfaces";
+import React, { useState } from "react";
+import { housingSearchPerson, SystemId } from "../../Interfaces";
 import { formatDate } from "@mfe/common/lib/utils";
 
 interface myProps {
@@ -7,35 +7,66 @@ interface myProps {
 }
 
 export const SearchResults = (props: myProps): JSX.Element => {
+  const [results, setResults] = useState<housingSearchPerson[]>(
+    props.searchResults
+  );
+  const [allResults, setAllResults] = useState<housingSearchPerson[]>(
+    props.searchResults
+  );
+
+  const filterSystem = (dataSource: string) => {
+    if (dataSource == "all") {
+      return setResults(allResults);
+    }
+    return setResults(
+      props.searchResults.filter((p) => p.dataSource == dataSource)
+    );
+  };
+
   return (
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-two-thirds">
-        <h2 className="lbh-heading-h3">{`${props.searchResults.length} results found`}</h2>
+        <h2 className="lbh-heading-h3">{`${results.length} results found`}</h2>
         <hr />
         <div id="searchResults">
-          {props.searchResults.map(
-            (person: housingSearchPerson, index: number) => {
-              return (
-                <div className="lbh-body" key={index}>
-                  <a
-                    href={`/customers/${person.id}`}
-                    className="lbh-link lbh-link--no-visited-state"
-                  >
-                    {person.firstName} {person.surName}
-                    {person.dateOfBirth &&
-                      ", Date of Birth: " + formatDate(person.dateOfBirth)}
-                  </a>
-                  <div className="lbh-body-s">
-                    {person.knownAddresses.map((address) => {
-                      return address.fullAddress;
-                    })}
-                    <br />
-                    Person API id: {person.id}
-                  </div>
+          <div className="govuk-form-group lbh-form-group">
+            <label className="govuk-label lbh-label" htmlFor="system-filter">
+              Filter by system
+            </label>
+            <select
+              className="govuk-select lbh-select"
+              id="system-filter"
+              name="system-filter"
+              onChange={(e) => filterSystem(e.target.value)}
+            >
+              <option defaultValue="all">All</option>
+              <option value="0">Housing Search</option>
+              <option value="1">Jigsaw</option>
+            </select>
+          </div>
+
+          {results.map((person: housingSearchPerson, index: number) => {
+            console.log(person);
+            return (
+              <div className="lbh-body" key={index}>
+                <a
+                  href={`/customers/${person.id}`}
+                  className="lbh-link lbh-link--no-visited-state"
+                >
+                  {person.firstName} {person.surName}
+                  {person.dateOfBirth &&
+                    ", Date of Birth: " + formatDate(person.dateOfBirth)}
+                </a>
+                <div className="lbh-body-s">
+                  {person.knownAddresses.map((address) => {
+                    return address.fullAddress;
+                  })}
+                  <br />
+                  Person API id: {person.id}
                 </div>
-              );
-            }
-          )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
