@@ -32,11 +32,8 @@ describe('jigsaw login', () => {
     cy.get('#password').type('pa$$w0rd');
 
     const someThing = "lorem";
-    cy.intercept('POST', '**/storeCredentials', (req) => {
-      req.continue(res => {
-        res.body = someThing
-      })
-    })
+
+    cy.intercept('**/storeCredentials', {body: someThing});
 
     cy.get('.govuk-button').should('have.text', 'Login').click().then(() => {
       cy.getCookie('jigsawToken')
@@ -50,7 +47,7 @@ describe('jigsaw login', () => {
     cy.get('#username').type('Luna');
     cy.get('#password').type('pa$$w0rd');
 
-    cy.intercept('POST', '**/storeCredentialS', {
+    cy.intercept('POST', '**/storeCredentials', {
       statusCode: 401,
     }).as('submitWrongCreds'); 
 
