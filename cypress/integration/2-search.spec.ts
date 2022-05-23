@@ -44,7 +44,7 @@ describe('search', () => {
       .should('have.text', 'ROOM 608 143 Northumberland Park, N17 0TR Person API id: 57ea3d58');
   })
 
-  xit('displays first restult with provided postcode', ()=> {
+  it('displays first restult with provided postcode', ()=> {
     cy.get('#postcode').type('M3 0W');
 
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons');
