@@ -35,8 +35,7 @@ module.exports = (webpackConfigEnv, argv) => {
         APP_ENV: process.env.APP_ENV || "development",
         PERSON_API_V1: process.env.PERSON_API_V1 || dotenv.PERSON_API_V1,
         SV_API_V1: process.env.SV_API_V1 || dotenv.SV_API_V1,
-        AES_KEY: process.env.AES_KEY || dotenv.AES_KEY,
-        AES_IV: process.env.AES_IV || dotenv.AES_IV,
+        RSA_PUBLIC_KEY: process.env.RSA_PUBLIC_KEY || dotenv.RSA_PUBLIC_KEY,
       }),
       new ImportMapWebpackPlugin({
         namespace: "@mfe",
@@ -48,7 +47,6 @@ module.exports = (webpackConfigEnv, argv) => {
     ],
     resolve: {
       fallback: {
-        crypto: require.resolve("crypto-browserify"),
         stream: require.resolve("stream-browserify"),
       },
     },
