@@ -47,7 +47,7 @@ export const Profile = (props: Props) => {
           })}
         </DescriptionListItem>
         <DescriptionListItem title="Types" testId="types">
-          {person.personTypes.join(", ")}
+          {person.personTypes?.join(", ")}
         </DescriptionListItem>
         <DescriptionListItem title="Place of Birth" testId="placeOfBirth">
           {person.placeOfBirth}
