@@ -31,6 +31,7 @@ export const getPerson = async (
       throw new Error("Error retrieving person");
     }
 
+    console.log(response);
     return response.data;
   } catch (e) {
     return null;
