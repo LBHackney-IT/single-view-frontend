@@ -27,7 +27,7 @@ export const Profile = (props: Props) => {
     <>
       <dl className="govuk-summary-list lbh-summary-list">
         <DescriptionListItem title="Name" testId="name">
-          {person.title} {person.firstName} {person.surName}
+          {person.title} {person.firstName} {person.surname}
         </DescriptionListItem>
         <DescriptionListItem title="Middle Name(s)" testId="middleName">
           {person.middleName}

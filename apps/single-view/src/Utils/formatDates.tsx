@@ -1,6 +1,7 @@
 export const formatDateOfBirth = (dob: string): string => {
   if (!dob) return "undefined";
-  let [year, month, day] = dob.split("-");
+  let [date, time] = dob.split("T");
+  let [year, month, day] = date.split("-");
   return [day, month, year].join("/");
 };
 

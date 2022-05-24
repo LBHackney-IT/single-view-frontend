@@ -6,7 +6,7 @@ export interface customerProfile {
   firstName: string;
   dataSource: string;
   middleName: string | null;
-  surName: string;
+  surname: string;
   preferredFirstname: string | null;
   preferredSurname: string | null;
   dateOfBirth: string;
