@@ -11,11 +11,14 @@ export const getPerson = async (
     let response;
 
     if (dataSource == 0) {
-      response = await axios.get(`${process.env.SV_API_V1}/customers/${id}`, {
-        headers: {
-          Authorization: `${getToken()}`,
-        },
-      });
+      response = await axios.get(
+        `${process.env.SV_API_V1}/customers?id=${id}`,
+        {
+          headers: {
+            Authorization: `${getToken()}`,
+          },
+        }
+      );
     } else {
       response = await axios.get(
         `${
