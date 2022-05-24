@@ -6,4 +6,5 @@ export * from "./systemIdInterface";
 
 export interface UrlParams {
   id: string;
+  dataSource: string;
 }

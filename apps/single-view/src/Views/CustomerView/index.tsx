@@ -8,13 +8,13 @@ import { NotFound } from "../../Components";
 import { SystemId } from "../../Interfaces/systemIdInterface";
 
 export const CustomerView = () => {
-  const { id } = useParams<UrlParams>();
+  const { id, dataSource } = useParams<UrlParams>();
   const [person, setPerson] = useState<Person | null>();
   const [systemIds, setSystemIds] = useState<Array<SystemId>>();
 
   const loadPerson = async (): Promise<Person | null> => {
     try {
-      let person = await getPerson(id);
+      let person = await getPerson(id, parseInt(dataSource));
       setPerson(person);
       return person;
     } catch (e) {
