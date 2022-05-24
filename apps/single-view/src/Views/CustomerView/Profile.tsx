@@ -38,7 +38,7 @@ export const Profile = (props: Props) => {
           </DescriptionListItem>
         )}
         <DescriptionListItem title="Tenures" testId="tenures">
-          {person.tenures.map((tenure, index) => {
+          {person.tenures?.map((tenure, index) => {
             return (
               <p className="lbh-body-s" key={index}>
                 {tenure.assetFullAddress}
