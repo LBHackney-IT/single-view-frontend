@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
-import { Person } from "../../Interfaces/personInterfaces";
+import { customerProfile } from "../../Interfaces/customerProfileInterfaces";
 import { formatDateOfBirth } from "../../Utils/formatDates";
 import { Center, Spinner } from "@mfe/common/lib/components";
 
 interface Props {
-  person?: Person;
+  profile?: customerProfile;
 }
 
 export const Profile = (props: Props) => {
-  const [person, setPerson] = useState<Person | undefined>();
+  const [person, setPerson] = useState<customerProfile | undefined>();
 
   useEffect(() => {
-    setPerson(props.person);
-  }, [props.person]);
+    setPerson(props.profile);
+  }, [props.profile]);
 
   if (typeof person == "undefined") {
     return (
@@ -27,7 +27,7 @@ export const Profile = (props: Props) => {
     <>
       <dl className="govuk-summary-list lbh-summary-list">
         <DescriptionListItem title="Name" testId="name">
-          {person.title} {person.firstName} {person.surname}
+          {person.title} {person.firstName} {person.surName}
         </DescriptionListItem>
         <DescriptionListItem title="Middle Name(s)" testId="middleName">
           {person.middleName}
@@ -38,10 +38,10 @@ export const Profile = (props: Props) => {
           </DescriptionListItem>
         )}
         <DescriptionListItem title="Tenures" testId="tenures">
-          {person.tenures?.map((tenure, index) => {
+          {person.knownAddresses?.map((address, index) => {
             return (
               <p className="lbh-body-s" key={index}>
-                {tenure.assetFullAddress}
+                {address.fullAddress}
               </p>
             );
           })}
@@ -53,7 +53,10 @@ export const Profile = (props: Props) => {
           {person.placeOfBirth}
         </DescriptionListItem>
         <DescriptionListItem title="Date of Death" testId="dateOfDeath">
-          {person.dateOfDeath}
+          {person.dateofDeath}
+        </DescriptionListItem>
+        <DescriptionListItem title="National Insurance Number" testId="nino">
+          {person.nino}
         </DescriptionListItem>
         <DescriptionListItem title="Is a Minor" testId="isMinor">
           {person.isAMinor ? "Y" : "N"}

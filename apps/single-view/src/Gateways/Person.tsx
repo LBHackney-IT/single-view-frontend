@@ -1,12 +1,12 @@
 import axios from "axios";
-import { Person } from "../Interfaces/personInterfaces";
+import { customerProfile } from "../Interfaces/customerProfileInterfaces";
 import { getToken } from "../Utils/getHackneyToken";
 import { getCookie } from "../Utils/getCookie";
 
 export const getPerson = async (
   id: string,
   dataSource: number
-): Promise<Person | null> => {
+): Promise<customerProfile | null> => {
   try {
     let response;
 

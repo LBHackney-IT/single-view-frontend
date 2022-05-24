@@ -45,9 +45,6 @@ export const SearchResults = (props: myProps): JSX.Element => {
           {results.map((person: housingSearchPerson, index: number) => {
             return (
               <div className="lbh-body" key={index}>
-                {console.log(
-                  `Data source for customer is ${person.dataSource}`
-                )}
                 <a
                   href={`/customers/${person.id}/${person.dataSource}`}
                   className="lbh-link lbh-link--no-visited-state"
