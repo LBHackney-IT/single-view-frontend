@@ -32,7 +32,7 @@ export const getPerson = async (
     }
 
     console.log(response);
-    return response.data;
+    return response.data.customer;
   } catch (e) {
     return null;
   }
