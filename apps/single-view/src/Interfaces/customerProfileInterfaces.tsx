@@ -1,3 +1,5 @@
+import { knownAddress } from ".";
+
 export interface customerProfile {
   id: string;
   title: string | null;
@@ -14,12 +16,4 @@ export interface customerProfile {
   nino: string | null;
   knownAddresses: knownAddress[];
   isAMinor: boolean;
-}
-
-export interface knownAddress {
-  fullAddress: string;
-  id: string;
-  currentAddress: boolean;
-  startDate: string;
-  endDate: string | null;
 }

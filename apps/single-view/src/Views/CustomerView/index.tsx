@@ -3,16 +3,16 @@ import { useParams } from "react-router-dom";
 import { Profile } from "./Profile";
 import { Notes } from "./Notes";
 import { getPerson } from "../../Gateways";
-import { Person, UrlParams } from "../../Interfaces";
+import { customerProfile, UrlParams } from "../../Interfaces";
 import { NotFound } from "../../Components";
 import { SystemId } from "../../Interfaces/systemIdInterface";
 
 export const CustomerView = () => {
   const { id, dataSource } = useParams<UrlParams>();
-  const [person, setPerson] = useState<Person | null>();
+  const [person, setPerson] = useState<customerProfile | null>();
   const [systemIds, setSystemIds] = useState<Array<SystemId>>();
 
-  const loadPerson = async (): Promise<Person | null> => {
+  const loadPerson = async (): Promise<customerProfile | null> => {
     try {
       let person = await getPerson(id, parseInt(dataSource));
       setPerson(person);
@@ -23,15 +23,15 @@ export const CustomerView = () => {
     }
   };
 
-  const loadSystemIds = (person: Person | null): void => {
+  const loadSystemIds = (person: customerProfile | null): void => {
     let derivedSystemIds: Array<SystemId> = [];
     if (person) {
       derivedSystemIds.push({
         systemName: "PersonApi",
         id: person.id,
       });
-      if (person.tenures) {
-        for (const tenure of person.tenures) {
+      if (person.knownAddresses) {
+        for (const tenure of person.knownAddresses) {
           derivedSystemIds.push({
             systemName: "PersonApi",
             id: tenure.id,
@@ -66,7 +66,7 @@ export const CustomerView = () => {
         </ul>
 
         <section className="govuk-tabs__panel" id="profile">
-          <Profile person={person} />
+          <Profile profile={person} />
         </section>
         <section className="govuk-tabs__panel" id="notes">
           <Notes systemIds={systemIds} />
