@@ -11,7 +11,7 @@ export const getPerson = async (
     let response;
 
     if (dataSource == 0) {
-      response = await axios.get(`${process.env.SV_API_V1}/customers/${id}`, {
+      response = await axios.get(`${process.env.PERSON_API_V1}/persons/${id}`, {
         headers: {
           Authorization: `${getToken()}`,
         },
