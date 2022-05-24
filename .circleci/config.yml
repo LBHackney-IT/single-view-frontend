@@ -239,7 +239,7 @@ jobs:
             export PERSON_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-v1 --query Parameter.Value --output text)
             export NOTES_API_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/notes-v2 --query Parameter.Value --output text)
             export SV_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/sv-api-url --query Parameter.Value --output text)
-
+            export RSA_PUBLIC_KEY=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/rsa_public_key --query Parameter.Value --output text)
 
             yarn build
       - run:

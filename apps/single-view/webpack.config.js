@@ -35,11 +35,20 @@ module.exports = (webpackConfigEnv, argv) => {
         APP_ENV: process.env.APP_ENV || "development",
         PERSON_API_V1: process.env.PERSON_API_V1 || dotenv.PERSON_API_V1,
         SV_API_V1: process.env.SV_API_V1 || dotenv.SV_API_V1,
+        RSA_PUBLIC_KEY: process.env.RSA_PUBLIC_KEY || dotenv.RSA_PUBLIC_KEY,
       }),
       new ImportMapWebpackPlugin({
         namespace: "@mfe",
         basePath: process.env.APP_CDN || "http://localhost:8005",
       }),
+      new webpack.ProvidePlugin({
+        Buffer: ["buffer", "Buffer"],
+      }),
     ],
+    resolve: {
+      fallback: {
+        stream: require.resolve("stream-browserify"),
+      },
+    },
   });
 };

@@ -7,6 +7,21 @@ interface myProps {
   setResultsFunction: (searchResults: housingSearchPerson[]) => void;
 }
 
+function getCookie(cname: string) {
+  let name = cname + "=";
+  let ca = document.cookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 export const SearchByResident = (props: myProps): JSX.Element => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -15,14 +30,6 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
 
-  const createSearch = (): string => {
-    let searchTerms = [firstName.trim(), lastName.trim()];
-
-    let formattedSearch = searchTerms.filter((term) => term !== "").join("%2B");
-
-    return formattedSearch;
-  };
-
   const joinAddresses = (): string => {
     return [addressLine1, postCode].filter((term) => term !== "").join(" ");
   };
@@ -30,9 +37,11 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const handleSearch = async () => {
     try {
       let searchResults = await SearchResident(
-        createSearch(),
+        firstName.trim(),
+        lastName.trim(),
         joinAddresses(),
-        1
+        1,
+        getCookie("jigsawToken")
       );
       props.setResultsFunction(searchResults);
     } catch (e) {

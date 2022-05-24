@@ -2,6 +2,7 @@ export interface housingSearchPerson {
   id: string;
   title: string;
   firstName: string;
+  dataSource: string;
   middleName: string | null;
   surName: string;
   preferredFirstname: string | null;

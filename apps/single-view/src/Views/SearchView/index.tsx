@@ -5,6 +5,7 @@ import { housingSearchPerson } from "../../Interfaces";
 
 export const SearchView = (): JSX.Element => {
   const [results, setResults] = useState<housingSearchPerson[]>();
+
   return (
     <>
       <h1 className="lbh-heading-h1">

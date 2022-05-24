@@ -13,7 +13,7 @@ export const sortResponseByRelevance = (
 
     if (item.knownAddresses != undefined) {
       for (let i = 0; i < item.knownAddresses.length; i++) {
-        itemAddress = item.knownAddresses[i].fullAddress.toLowerCase();
+        itemAddress = item.knownAddresses[i].fullAddress?.toLowerCase();
         if (address && itemAddress.indexOf(address.toLowerCase()) > -1) {
           result.score += 1;
         }
