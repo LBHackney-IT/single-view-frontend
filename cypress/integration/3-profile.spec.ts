@@ -3,8 +3,8 @@ import { AuthRoles } from '../support/commands';
 describe('Profile', () => {
   describe('Basic Information', () => {
     before(() => {
-      cy.intercept('GET', '**/persons/*', { fixture: 'person-profile.json' }).as('getPerson');
-      cy.visitAs('/customers/6d7ed1a4', AuthRoles.UnrestrictedGroup);
+      cy.intercept('GET', '**/customers/*', { fixture: 'person-profile.json' }).as('getPerson');
+      cy.visitAs('/customers/6d7ed1a4/0', AuthRoles.UnrestrictedGroup);
     })
 
     it('displays the profile tab', () => {
