@@ -15,14 +15,14 @@ describe("Person API gateway", () => {
       const response = { status: 200, data: person };
       mockAxios.get.mockImplementationOnce(async () => response);
 
-      expect(await getPerson("")).toEqual(person);
+      expect(await getPerson("", 0)).toEqual(person);
     });
 
     it("should return null on error", async () => {
       const response = { status: 404 };
       mockAxios.get.mockImplementationOnce(async () => response);
 
-      expect(await getPerson("")).toBeNull();
+      expect(await getPerson("", 0)).toBeNull();
     });
   });
 });
