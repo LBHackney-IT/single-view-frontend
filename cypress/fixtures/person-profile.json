@@ -10,6 +10,9 @@
         "firstName": "Luna",
         "middleName": "Purry",
         "surname": "Kitty",
+        "personTypes": [
+        "HouseholdMember"
+        ],
         "placeOfBirth": "London",
         "knownAddresses": [
             {

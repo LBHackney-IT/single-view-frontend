@@ -28,9 +28,9 @@ describe('Profile', () => {
       cy.get('[data-testid="tenures"]').should('have.text', "123 Cute Street, M3 0W", {timeout: 10000});
     });
 
-    // it('displays types', ()=>{
-    //   cy.get('[data-testid="types"]').should('have.text', "HouseholdMember", {timeout: 10000});
-    // });
+    it('displays types', ()=>{
+      cy.get('[data-testid="types"]').should('have.text', "HouseholdMember", {timeout: 10000});
+    });
 
     it('displays place of birth', ()=>{
       cy.get('[data-testid="placeOfBirth"]').should('have.text', "London", {timeout: 10000});
