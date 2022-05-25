@@ -46,7 +46,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
             return (
               <div className="lbh-body" key={index}>
                 <a
-                  href={`/customers/${person.id}/${person.dataSource}`}
+                  href={`/customers/${person.dataSource}/${person.id}`}
                   className="lbh-link lbh-link--no-visited-state"
                 >
                   {person.firstName} {person.surName}
