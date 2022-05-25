@@ -4,8 +4,8 @@ import { getToken } from "../Utils/getHackneyToken";
 import { getCookie } from "../Utils/getCookie";
 
 export const getPerson = async (
-  id: string,
-  dataSource: number
+  dataSource: number,
+  id: string
 ): Promise<customerProfile | null> => {
   try {
     let response;
@@ -19,6 +19,8 @@ export const getPerson = async (
           },
         }
       );
+
+      console.log(`Response from SV API is ${response}`);
     } else {
       response = await axios.get(
         `${
@@ -31,7 +33,6 @@ export const getPerson = async (
       throw new Error("Error retrieving person");
     }
 
-    console.log(response);
     return response.data.customer;
   } catch (e) {
     return null;
