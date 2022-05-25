@@ -1,34 +1,46 @@
 {
-    "id": "6d7ed1a4",
-    "title": "Miss",
-    "preferredTitle": "Miss",
-    "preferredFirstName": "Luna",
-    "preferredSurname": "Kitty",
-    "preferredMiddleName": "",
-    "firstName": "Luna",
-    "middleName": "Purry",
-    "surname": "Kitty",
-    "placeOfBirth": "London",
-    "dateOfBirth": "2021-01-07",
-    "reason": null,
-    "personTypes": [
-        "HouseholdMember"
-    ],
-    "links": [],
-    "tenures": [
+    "customer": {
+        "id": "e749f036-3183-49cb-8504-59b76c1a8f88",
+        "title": "Miss",
+        "dataSource": 0,
+        "preferredTitle": "Miss",
+        "preferredFirstName": "Luna",
+        "preferredMiddleName": null,
+        "preferredSurname": "Purry",
+        "firstName": "Luna",
+        "middleName": "Purry",
+        "surname": "Kitty",
+        "placeOfBirth": "London",
+        "knownAddresses": [
+            {
+                "fullAddress": "123 Cute Street, M3 0W",
+                "id": "a26bf5da-2869-8180-6294-906aec451c7a",
+                "currentAddress": true,
+                "startDate": "1996-06-10T00:00:00Z",
+                "endDate": "1999-07-22T00:00:00Z"
+            }
+        ],
+        "contactDetails": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "targetId": "00000000-0000-0000-0000-000000000000",
+            "targetType": "person",
+            "contactInformation": null,
+            "sourceServiceArea": null,
+            "recordValidUntil": null,
+            "isActive": false,
+            "createdBy": null,
+            "lastModified": null
+        },
+        "dateOfBirth": "1980-02-01T00:00:00Z",
+        "niNo": null,
+        "dateOfDeath": null,
+        "isAMinor": false
+    },
+    "systemIds": [
         {
-            "assetFullAddress": "123 Cute Street, M3 0W",
-            "assetId": "7d569db2",
-            "startDate": "2018-04-23",
-            "endDate": null,
-            "id": "4cd7f0f0",
-            "type": "Secure",
-            "uprn": "100021071691",
-            "paymentReference": "1910274004",
-            "propertyReference": "00010274",
-            "isActive": true
+            "systemName": "PersonApi",
+            "id": "e749f036-3183-49cb-8504-59b76c1a8f88",
+            "error": null
         }
-    ],
-    "isAMinor": false,
-    "dateOfDeath": null
+    ]
 }

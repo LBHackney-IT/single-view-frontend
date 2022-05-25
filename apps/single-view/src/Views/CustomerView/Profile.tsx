@@ -49,14 +49,14 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Types" testId="types">
           {person.personTypes?.join(", ")}
         </DescriptionListItem>
+        <DescriptionListItem title="National Insurance Number" testId="nino">
+          {person.nino}
+        </DescriptionListItem>
         <DescriptionListItem title="Place of Birth" testId="placeOfBirth">
           {person.placeOfBirth}
         </DescriptionListItem>
         <DescriptionListItem title="Date of Death" testId="dateOfDeath">
           {person.dateofDeath}
-        </DescriptionListItem>
-        <DescriptionListItem title="National Insurance Number" testId="nino">
-          {person.nino}
         </DescriptionListItem>
         <DescriptionListItem title="Is a Minor" testId="isMinor">
           {person.isAMinor ? "Y" : "N"}
