@@ -14,7 +14,7 @@ describe("Person API gateway", () => {
       const response = { status: 404 };
       mockAxios.get.mockImplementationOnce(async () => response);
 
-      expect(await getPerson("", 0)).toBeNull();
+      expect(await getPerson(0, "")).toBeNull();
     });
   });
 });
