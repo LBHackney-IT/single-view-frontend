@@ -15,6 +15,7 @@ export const CustomerView = () => {
   const loadPerson = async (): Promise<customerProfile | null> => {
     try {
       let person = await getPerson(id, parseInt(dataSource));
+      console.log(`Person has been returned as ${person}`);
       setPerson(person);
       return person;
     } catch (e) {
