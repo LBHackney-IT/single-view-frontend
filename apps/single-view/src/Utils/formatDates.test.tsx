@@ -2,8 +2,11 @@ import { formatDateOfBirth, formatDate } from "./formatDates";
 
 describe("formatDateOfBirth function", () => {
   it("should display a person's date of birth in the format, DD/MM/YYYY", () => {
-    const result = formatDateOfBirth("1980-02-01T00:00:00Z");
-    expect(result).toEqual("01/02/1980");
+    const resultwithTime = formatDateOfBirth("1980-02-01T00:00:00Z");
+    const resultwithoutTime = formatDateOfBirth("1990-12-01");
+
+    expect(resultwithoutTime).toEqual("01/12/1990");
+    expect(resultwithTime).toEqual("01/02/1980");
   });
 
   it("should return undefined if no date of birth is given", () => {
