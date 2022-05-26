@@ -46,7 +46,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
             return (
               <div className="lbh-body" key={index}>
                 <a
-                  href={`/customers/${person.id}`}
+                  href={`/customers/${person.dataSource}/${person.id}`}
                   className="lbh-link lbh-link--no-visited-state"
                 >
                   {person.firstName} {person.surName}
@@ -58,7 +58,8 @@ export const SearchResults = (props: myProps): JSX.Element => {
                     return address.fullAddress;
                   })}
                   <br />
-                  Person API id: {person.id}
+                  {person.dataSource == "0" ? "Person API" : "Jigsaw"} id:{" "}
+                  {person.id}
                 </div>
               </div>
             );

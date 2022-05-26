@@ -36,7 +36,7 @@ const App = (): JSX.Element => {
           <Route path="/jigsawLogin">
             <JigsawLoginView />
           </Route>
-          <Route path="/customers/:id">
+          <Route path="/customers/:dataSource/:id">
             <CustomerView />
           </Route>
           <Route>

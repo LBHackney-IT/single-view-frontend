@@ -3,8 +3,8 @@ import { AuthRoles } from '../support/commands';
 describe('Profile', () => {
   describe('Basic Information', () => {
     before(() => {
-      cy.intercept('GET', '**/persons/*', { fixture: 'person-profile.json' }).as('getPerson');
-      cy.visitAs('/customers/6d7ed1a4', AuthRoles.UnrestrictedGroup);
+      cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
+      cy.visitAs('/customers/0/6d7ed1a4', AuthRoles.UnrestrictedGroup);
     })
 
     it('displays the profile tab', () => {
@@ -21,7 +21,7 @@ describe('Profile', () => {
     });
 
     it('displays date of birth', ()=>{
-      cy.get('[data-testid="dateOfBirth"]').should('have.text', "07/01/2021", {timeout: 10000});
+      cy.get('[data-testid="dateOfBirth"]').should('have.text', "01/02/1980", {timeout: 10000});
     });
 
     it('displays tenures', ()=>{
