@@ -1,5 +1,5 @@
 import React from "react";
-import { Note as NoteInterface } from "../Interfaces";
+import { DataSource, Note as NoteInterface } from "../Interfaces";
 import { formatDate } from "../Utils/formatDates";
 
 interface Props {
@@ -7,6 +7,9 @@ interface Props {
 }
 
 export const Note = (props: Props) => {
+  const dataSourceIndex: number = parseInt(
+    props.note.dataSource ?? DataSource.NotesApi
+  );
   const formatCategory = () => {
     const category =
       props.note.categorisation.subCategory ||
@@ -22,6 +25,7 @@ export const Note = (props: Props) => {
       >
         <div style={{ marginRight: "1em" }}>
           <h5 className="lbh-heading-h5">{formatDate(props.note.createdAt)}</h5>
+          <p className="lbh-body-s">{DataSource[dataSourceIndex]}</p>
         </div>
         {props.note.categorisation.category && (
           <p className="lbh-body-s">
