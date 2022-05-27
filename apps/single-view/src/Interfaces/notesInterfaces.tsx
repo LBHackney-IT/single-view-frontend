@@ -11,6 +11,10 @@ export interface Note {
   categorisation: Categorisation;
   author: Author;
   highlight: boolean;
+  isSensitive: boolean;
+  isPinned: boolean;
+  dataSource: string;
+  dataSourceId: string;
 }
 
 export interface Categorisation {
