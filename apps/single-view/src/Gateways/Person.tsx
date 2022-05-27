@@ -25,7 +25,12 @@ export const getPerson = async (
       response = await axios.get(
         `${
           process.env.SV_API_V1
-        }/getJigsawCustomer?id=${id}&redisId=${getCookie("jigsawToken")}`
+        }/getJigsawCustomer?id=${id}&redisId=${getCookie("jigsawToken")}`,
+        {
+          headers: {
+            Authorization: `${getToken()}`,
+          },
+        }
       );
     }
 
