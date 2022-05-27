@@ -26,6 +26,10 @@ const mockData: Note[] = [
       email: "Mary.Smith@test.com",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "14e00ab1-9fd6-4f10-a6bd-bd84171bfb1b",
   },
   {
     id: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
@@ -45,6 +49,10 @@ const mockData: Note[] = [
       email: "charli.wild@hackney.gov.uk",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
   },
   {
     id: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
@@ -64,6 +72,10 @@ const mockData: Note[] = [
       email: "charli.wild@hackney.gov.uk",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
   },
   {
     id: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
@@ -83,6 +95,10 @@ const mockData: Note[] = [
       email: "charli.wild@hackney.gov.uk",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
   },
 ];
 
@@ -105,6 +121,10 @@ const mockDataSortedAscending = [
       email: "charli.wild@hackney.gov.uk",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
   },
   {
     id: "14e00ab1-9fd6-4f10-a6bd-bd84171bfb1b",
@@ -123,6 +143,10 @@ const mockDataSortedAscending = [
       email: "Mary.Smith@test.com",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "14e00ab1-9fd6-4f10-a6bd-bd84171bfb1b",
   },
   {
     id: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
@@ -142,6 +166,10 @@ const mockDataSortedAscending = [
       email: "charli.wild@hackney.gov.uk",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
   },
   {
     id: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
@@ -161,6 +189,10 @@ const mockDataSortedAscending = [
       email: "charli.wild@hackney.gov.uk",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
   },
 ];
 
@@ -183,6 +215,10 @@ const mockDataSortedDescending = [
       email: "charli.wild@hackney.gov.uk",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
   },
   {
     id: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
@@ -202,6 +238,10 @@ const mockDataSortedDescending = [
       email: "charli.wild@hackney.gov.uk",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
   },
   {
     id: "14e00ab1-9fd6-4f10-a6bd-bd84171bfb1b",
@@ -220,6 +260,10 @@ const mockDataSortedDescending = [
       email: "Mary.Smith@test.com",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "14e00ab1-9fd6-4f10-a6bd-bd84171bfb1b",
   },
   {
     id: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
@@ -239,5 +283,9 @@ const mockDataSortedDescending = [
       email: "charli.wild@hackney.gov.uk",
     },
     highlight: true,
+    isSensitive: false,
+    isPinned: false,
+    dataSource: "PersonApi",
+    dataSourceId: "1069d599-7c36-4aaf-9b23-58e67cef2d53",
   },
 ];

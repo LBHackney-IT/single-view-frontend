@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Note, NoteInput } from "../../Components";
 import { createNote, getNotes } from "../../Gateways";
 import { UrlParams, Note as NoteInterface, SystemId } from "../../Interfaces";
+import { getCookie } from "../../Utils/getCookie";
 import {
   Center,
   Link,
@@ -26,7 +27,7 @@ export const Notes = (props: Props): JSX.Element => {
   const loadNotes = async (systemIds: Array<SystemId>): Promise<void> => {
     setGetNotesError(false);
     try {
-      let notes = await getNotes(systemIds);
+      let notes = await getNotes(systemIds, getCookie("jigsawToken"));
       setNotes(notes);
     } catch (e: any) {
       setGetNotesError(true);

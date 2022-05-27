@@ -17,7 +17,7 @@ describe("Notes API gateway", () => {
       const response = { status: 200, data: { notes: notes } };
       mockAxios.get.mockImplementationOnce(async () => response);
 
-      expect(await getNotes([])).toEqual(notes);
+      expect(await getNotes([], "")).toEqual(notes);
     });
 
     it("should throw an error if the request is not OK", async () => {
@@ -25,7 +25,7 @@ describe("Notes API gateway", () => {
       mockAxios.get.mockImplementationOnce(async () => response);
 
       try {
-        const notes = await getNotes([]);
+        await getNotes([], "");
       } catch (e: any) {
         expect(e.message).toBe(getNotesError.message);
       }
