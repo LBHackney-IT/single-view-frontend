@@ -10,14 +10,15 @@ export const SearchResident = async (
   page: number,
   jigsawToken: string | null
 ): Promise<housingSearchPerson[]> => {
-  const response = await axios.get(
-    `${process.env.SV_API_V1}/search?firstName=${firstName}&lastName=${lastName}&page=${page}&redisId=${jigsawToken}`,
-    {
-      headers: {
-        authorization: `${getToken()}`,
-      },
-    }
-  );
+  let requestUrl = `${process.env.SV_API_V1}/search?firstName=${firstName}&lastName=${lastName}&page=${page}`;
+  if (jigsawToken) {
+    requestUrl += `&redisId=${jigsawToken}`;
+  }
+  const response = await axios.get(requestUrl, {
+    headers: {
+      authorization: `${getToken()}`,
+    },
+  });
 
   return sortResponseByRelevance(
     response.data.searchResponse.searchResults,

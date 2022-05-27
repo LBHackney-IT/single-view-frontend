@@ -10,13 +10,16 @@ import { SystemId } from "../../Interfaces/systemIdInterface";
 export const CustomerView = () => {
   const { dataSource, id } = useParams<UrlParams>();
   const [person, setPerson] = useState<customerProfile | null>();
+  const [mmhUrl, setMhUrl] = useState<string>("");
   const [systemIds, setSystemIds] = useState<Array<SystemId>>();
 
   const loadPerson = async (): Promise<customerProfile | null> => {
     try {
       let person = await getPerson(parseInt(dataSource), id);
-      console.log(`Person has been returned as ${person}`);
       setPerson(person);
+      if (person?.dataSource == "0") {
+        setMhUrl(`${process.env.MMH_URL}/person/${person.id}`);
+      }
       return person;
     } catch (e) {
       setPerson(null);
@@ -51,6 +54,15 @@ export const CustomerView = () => {
     <NotFound />
   ) : (
     <>
+      {mmhUrl && (
+        <a
+          className="govuk-link lbh-link lbh-link--no-visited-state align-right"
+          href={mmhUrl}
+          target="_blank"
+        >
+          View on MMH
+        </a>
+      )}
       <div className="govuk-tabs lbh-tabs sv-space-t" data-module="govuk-tabs">
         <h2 className="govuk-tabs__title">Contents</h2>
         <ul className="govuk-tabs__list">
