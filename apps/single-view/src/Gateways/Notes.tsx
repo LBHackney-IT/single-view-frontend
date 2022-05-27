@@ -7,17 +7,22 @@ import { SystemId } from "../Interfaces/systemIdInterface";
 export const getNotesError = new Error("Error retrieving notes");
 export const createNoteError = new Error("Error creating note");
 
-export const getNotes = async (systemIds: Array<SystemId>): Promise<Note[]> => {
-  const response = await axios.get(
-    encodeURI(
-      `${process.env.SV_API_V1}/notes?systemIds=${JSON.stringify(systemIds)}`
-    ),
-    {
-      headers: {
-        Authorization: `${getToken()}`,
-      },
-    }
-  );
+export const getNotes = async (
+  systemIds: Array<SystemId>,
+  jigsawToken: string | null
+): Promise<Note[]> => {
+  let url = `${process.env.SV_API_V1}/notes?systemIds=${JSON.stringify(
+    systemIds
+  )}`;
+  if (jigsawToken) {
+    url += `&redisId=${jigsawToken}`;
+  }
+
+  const response = await axios.get(encodeURI(url), {
+    headers: {
+      Authorization: `${getToken()}`,
+    },
+  });
 
   if (response.status != 200) {
     throw getNotesError;
