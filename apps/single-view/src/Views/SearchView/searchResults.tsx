@@ -36,8 +36,8 @@ export const SearchResults = (props: myProps): JSX.Element => {
             onChange={(e) => filterSystem(e.target.value)}
           >
             <option defaultValue="all">All</option>
-            <option value="0">Housing Search</option>
-            <option value="1">Jigsaw</option>
+            <option value="HousingSearchApi">Housing Search</option>
+            <option value="Jigsaw">Jigsaw</option>
           </select>
         </div>
         <hr />
