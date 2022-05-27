@@ -9,10 +9,3 @@ export interface UrlParams {
   id: string;
   dataSource: string;
 }
-
-export enum DataSource {
-  HousingSearchApi,
-  Jigsaw,
-  NotesApi,
-  PersonApi,
-}

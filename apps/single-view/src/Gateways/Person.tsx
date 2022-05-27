@@ -4,13 +4,13 @@ import { getToken } from "../Utils/getHackneyToken";
 import { getCookie } from "../Utils/getCookie";
 
 export const getPerson = async (
-  dataSource: number,
+  dataSource: string,
   id: string
 ): Promise<customerProfile | null> => {
   try {
     let response;
 
-    if (dataSource == 0) {
+    if (dataSource == "HousingSearchApi") {
       response = await axios.get(
         `${process.env.SV_API_V1}/customers?id=${id}`,
         {
@@ -19,8 +19,6 @@ export const getPerson = async (
           },
         }
       );
-
-      console.log(`Response from SV API is ${response}`);
     } else {
       response = await axios.get(
         `${

@@ -15,9 +15,9 @@ export const CustomerView = () => {
 
   const loadPerson = async (): Promise<customerProfile | null> => {
     try {
-      let person = await getPerson(parseInt(dataSource), id);
+      let person = await getPerson(dataSource, id);
       setPerson(person);
-      if (person?.dataSource == "0") {
+      if (person?.dataSource == "HousingSearchApi") {
         setMhUrl(`${process.env.MMH_URL}/person/${person.id}`);
       }
       return person;
