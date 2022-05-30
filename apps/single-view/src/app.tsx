@@ -9,6 +9,7 @@ import { CustomerView, SearchView, JigsawLoginView } from "./Views";
 
 import "./app.scss";
 import { NotFound } from "./Components";
+import { isProduction } from "./Utils/isProduction";
 
 const App = (): JSX.Element => {
   useEffect(() => {
@@ -25,6 +26,23 @@ const App = (): JSX.Element => {
 
   return (
     <>
+      {isProduction() && (
+        <>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-R4PKCNV7HK"
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-R4PKCNV7HK', { page_path: window.location.pathname });
+               `,
+            }}
+          />
+        </>
+      )}
       <Router>
         <Switch>
           <Route exact path="/">
