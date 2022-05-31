@@ -15,6 +15,7 @@ export const getNotes = async (
     systemIds
   )}`;
   if (jigsawToken) {
+    console.log("Getting jigsaw notes...");
     url += `&redisId=${jigsawToken}`;
   }
 
