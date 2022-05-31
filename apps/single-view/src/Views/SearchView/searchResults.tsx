@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { housingSearchPerson } from "../../Interfaces";
 import { formatDate } from "@mfe/common/lib/utils";
-import { Pagination } from "@mfe/common/lib/components";
+import { Pagination } from "../../Components/pagination";
 
 interface myProps {
   searchResults: housingSearchPerson[];
@@ -68,7 +68,6 @@ export const SearchResults = (props: myProps): JSX.Element => {
             );
           })}
         </div>
-        <Pagination />
       </div>
     </div>
   );
