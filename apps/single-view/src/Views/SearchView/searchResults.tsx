@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { housingSearchPerson } from "../../Interfaces";
 import { formatDate } from "@mfe/common/lib/utils";
-import { Pagination } from "../../Components/pagination";
+import { Pagination } from "../../Components/Pagination";
 
 interface myProps {
   searchResults: housingSearchPerson[];
