@@ -15,6 +15,7 @@ export const getNotes = async (
     systemIds
   )}`;
   if (jigsawToken) {
+    console.log("Getting jigsaw notes...");
     url += `&redisId=${jigsawToken}`;
   }
 
@@ -27,6 +28,8 @@ export const getNotes = async (
   if (response.status != 200) {
     throw getNotesError;
   }
+
+  console.log(response.data.notes);
 
   return response.data.notes;
 };

@@ -31,7 +31,8 @@ export const CustomerView = () => {
     let derivedSystemIds: Array<SystemId> = [];
     if (person) {
       derivedSystemIds.push({
-        systemName: "PersonApi",
+        systemName:
+          person.dataSource == "HousingSearchApi" ? "PersonApi" : "Jigsaw",
         id: person.id,
       });
       if (person.knownAddresses) {
