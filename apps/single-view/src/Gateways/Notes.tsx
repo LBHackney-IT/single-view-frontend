@@ -28,6 +28,8 @@ export const getNotes = async (
     throw getNotesError;
   }
 
+  console.log(response.data.notes);
+
   return response.data.notes;
 };
 
