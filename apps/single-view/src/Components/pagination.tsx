@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-export const Pagination = (): JSX.Element => {
+type Props = {
+  total: number;
+  onPageChange: (page: number) => void;
+  pageLimit: number;
+};
+
+export const Pagination = (props: Props): JSX.Element => {
+  const handleClick = (page: number, e: React.SyntheticEvent): void => {
+    e.preventDefault;
+    props.onPageChange(page);
+  };
+
   return (
     <nav className="lbh-simple-pagination">
       <a className="lbh-simple-pagination__link" href="/#">
