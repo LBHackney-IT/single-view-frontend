@@ -92,7 +92,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               onChange={(e) => setPostcode(e.target.value)}
             />
             {searching ? (
-              <div className="mtfh-spinner">
+              <div className="sv-spinner">
                 <svg
                   viewBox="0 0 42 42"
                   stroke="#00703c"
