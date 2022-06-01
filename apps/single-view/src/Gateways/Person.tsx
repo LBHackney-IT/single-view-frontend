@@ -36,6 +36,9 @@ export const getPerson = async (
       throw new Error("Error retrieving person");
     }
 
+    console.log(
+      `got customer: customer is ${JSON.stringify(response.data.customer)}`
+    );
     return response.data.customer;
   } catch (e) {
     return null;

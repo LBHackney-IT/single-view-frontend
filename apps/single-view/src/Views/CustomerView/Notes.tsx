@@ -27,6 +27,7 @@ export const Notes = (props: Props): JSX.Element => {
   const loadNotes = async (systemIds: Array<SystemId>): Promise<void> => {
     setGetNotesError(false);
     try {
+      console.log(`In notes view - getting notes with System ids ${systemIds}`);
       let notes = await getNotes(systemIds, getCookie("jigsawToken"));
       setNotes(notes);
     } catch (e: any) {
