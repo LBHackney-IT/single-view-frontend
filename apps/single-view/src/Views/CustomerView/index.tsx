@@ -35,7 +35,7 @@ export const CustomerView = () => {
           person.dataSource == "HousingSearchApi" ? "PersonApi" : "Jigsaw",
         id: person.id,
       });
-      if (person.knownAddresses) {
+      if (person.knownAddresses && person.dataSource != "Jigsaw") {
         for (const tenure of person.knownAddresses) {
           derivedSystemIds.push({
             systemName: "PersonApi",

@@ -35,7 +35,6 @@ export const getPerson = async (
     if (response.status != 200) {
       throw new Error("Error retrieving person");
     }
-
     return response.data.customer;
   } catch (e) {
     return null;
