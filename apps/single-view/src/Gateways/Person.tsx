@@ -35,10 +35,6 @@ export const getPerson = async (
     if (response.status != 200) {
       throw new Error("Error retrieving person");
     }
-
-    console.log(
-      `got customer: customer is ${JSON.stringify(response.data.customer)}`
-    );
     return response.data.customer;
   } catch (e) {
     return null;
