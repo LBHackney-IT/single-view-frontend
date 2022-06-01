@@ -83,7 +83,10 @@ export const CustomerView = () => {
           <Profile profile={person} />
         </section>
         <section className="govuk-tabs__panel" id="notes">
-          <Notes systemIds={systemIds} />
+          <Notes
+            systemIds={systemIds}
+            isHousing={person?.dataSource == "HousingSearchApi"}
+          />
         </section>
       </div>
     </>
