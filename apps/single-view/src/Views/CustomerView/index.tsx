@@ -30,7 +30,7 @@ export const CustomerView = () => {
   const loadSystemIds = (person: customerProfile | null): void => {
     let derivedSystemIds: Array<SystemId> = [];
     if (person) {
-      console.log(`adding notes for person ${person}`);
+      console.log(`adding notes for person ${JSON.stringify(person)}`);
       derivedSystemIds.push({
         systemName:
           person.dataSource == "HousingSearchApi" ? "PersonApi" : "Jigsaw",
