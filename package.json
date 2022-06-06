@@ -24,8 +24,8 @@
     "format-root": "cd apps/root && yarn format",
     "format-single-view": "cd apps/single-view && yarn format",
     "format": "yarn format-root && yarn format-single-view",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:open": "cypress open --env APP_ENV=production",
+    "cypress:run": "cypress run --env APP_ENV=production"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
