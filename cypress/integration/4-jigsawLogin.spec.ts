@@ -1,6 +1,7 @@
 import { AuthRoles } from '../support/commands';
 
-describe('jigsaw login', () => {
+describe('jigsaw login',  () => {
+  
   before(() => {
     cy.visitAs('/', AuthRoles.UnrestrictedGroup);
   })
@@ -41,34 +42,34 @@ describe('jigsaw login', () => {
     });
   })
 
-  it('displays displays error when creds are wrong', ()=> {
-    cy.visitAs('/jigsawLogin', AuthRoles.UnrestrictedGroup);
+  // it('displays displays error when creds are wrong', ()=> {
+  //   cy.visitAs('/jigsawLogin', AuthRoles.UnrestrictedGroup);
 
-    cy.get('#username').type('Luna');
-    cy.get('#password').type('pa$$w0rd');
+  //   cy.get('#username').type('Luna');
+  //   cy.get('#password').type('pa$$w0rd');
 
-    cy.intercept('POST', '**/storeCredentials', {
-      statusCode: 401,
-    }).as('submitWrongCreds'); 
+  //   cy.intercept('POST', '**/storeCredentials', {
+  //     statusCode: 401,
+  //   }).as('submitWrongCreds'); 
 
-    cy.get('.govuk-button').should('have.text', 'Login').click().then(() => {
-      cy.get('.govuk-error-summary').should('be.visible').should('have.text', 'There is a problemPlease ensure that you have entered your credentials correctly')
-    });
-  });
+  //   cy.get('.govuk-button').should('have.text', 'Login').click().then(() => {
+  //     cy.get('.govuk-error-summary').should('be.visible').should('have.text', 'There is a problemPlease ensure that you have entered your credentials correctly')
+  //   });
+  // });
 
-  describe('when user dismisses login', ()=>{
-    it('dismissed cookie is set', () => {
-      cy.get('[data-testid="dismiss-jigsaw-login"]').should('have.text', "I don’t have access to Jigsaw.")
-          .click().then(() => {
-            cy.getCookie('jigsawDismissed')
-                .should('have.property', 'value', 'true');
-          });
-    });
+  // describe('when user dismisses login', ()=>{
+  //   it('dismissed cookie is set', () => {
+  //     cy.get('[data-testid="dismiss-jigsaw-login"]').should('have.text', "I don’t have access to Jigsaw.")
+  //         .click().then(() => {
+  //           cy.getCookie('jigsawDismissed')
+  //               .should('have.property', 'value', 'true');
+  //         });
+  //   });
 
-    it('redirects to search', () => {
-      cy.location().should((location) => {
-        expect(location.pathname).to.eq('/search')
-      })
-    });
-  });
+  //   it('redirects to search', () => {
+  //     cy.location().should((location) => {
+  //       expect(location.pathname).to.eq('/search')
+  //     })
+  //   });
+  // });
 })
