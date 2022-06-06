@@ -31,7 +31,7 @@ describe('jigsaw login', () => {
     cy.get('#username', { timeout: 10000 }).type('Luna');
     cy.get('#password').type('pa$$w0rd');
 
-    const someThing = "lorem";
+    const someThing = "Placeholder-Jigsaw-Token";
 
     cy.intercept('**/storeCredentials', {body: someThing});
 
