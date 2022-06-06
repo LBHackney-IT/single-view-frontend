@@ -14,6 +14,7 @@ import {
 interface Props {
   systemIds?: Array<SystemId>;
   displayNoteInput?: boolean;
+  isHousing: boolean;
 }
 
 export const Notes = (props: Props): JSX.Element => {
@@ -65,15 +66,17 @@ export const Notes = (props: Props): JSX.Element => {
 
   return (
     <>
-      <Link
-        href="#notes"
-        onClick={(e) => {
-          e.preventDefault();
-          setDisplayNoteInput(!displayNoteInput);
-        }}
-      >
-        Create a new note
-      </Link>
+      {props.isHousing && (
+        <Link
+          href="#notes"
+          onClick={(e) => {
+            e.preventDefault();
+            setDisplayNoteInput(!displayNoteInput);
+          }}
+        >
+          Create a new note
+        </Link>
+      )}
 
       {displayNoteInput && <NoteInput submit={submitNote} />}
 

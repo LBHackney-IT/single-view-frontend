@@ -27,7 +27,6 @@ export const getNotes = async (
   if (response.status != 200) {
     throw getNotesError;
   }
-
   return response.data.notes;
 };
 

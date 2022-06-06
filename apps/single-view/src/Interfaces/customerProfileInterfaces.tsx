@@ -13,7 +13,7 @@ export interface customerProfile {
   dateofDeath: string | null;
   placeOfBirth: string;
   personTypes: string[] | null;
-  nino: string | null;
+  niNo: string | null;
   knownAddresses: knownAddress[];
   isAMinor: boolean;
 }

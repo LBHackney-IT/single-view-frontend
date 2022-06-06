@@ -50,7 +50,7 @@ export const Profile = (props: Props) => {
           {person.personTypes?.join(", ")}
         </DescriptionListItem>
         <DescriptionListItem title="National Insurance Number" testId="nino">
-          {person.nino}
+          {person.niNo}
         </DescriptionListItem>
         <DescriptionListItem title="Place of Birth" testId="placeOfBirth">
           {person.placeOfBirth}

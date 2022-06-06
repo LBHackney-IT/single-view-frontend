@@ -31,10 +31,11 @@ export const CustomerView = () => {
     let derivedSystemIds: Array<SystemId> = [];
     if (person) {
       derivedSystemIds.push({
-        systemName: "PersonApi",
+        systemName:
+          person.dataSource == "HousingSearchApi" ? "PersonApi" : "Jigsaw",
         id: person.id,
       });
-      if (person.knownAddresses) {
+      if (person.knownAddresses && person.dataSource != "Jigsaw") {
         for (const tenure of person.knownAddresses) {
           derivedSystemIds.push({
             systemName: "PersonApi",
@@ -82,7 +83,10 @@ export const CustomerView = () => {
           <Profile profile={person} />
         </section>
         <section className="govuk-tabs__panel" id="notes">
-          <Notes systemIds={systemIds} />
+          <Notes
+            systemIds={systemIds}
+            isHousing={person?.dataSource == "HousingSearchApi"}
+          />
         </section>
       </div>
     </>
