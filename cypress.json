@@ -1,6 +1,7 @@
 {
   "baseUrl": "http://localhost:9000",
   "env": {
-    "AUTH_ALLOWED_GROUPS": "cypress-users"
+    "AUTH_ALLOWED_GROUPS": "cypress-users",
+    "APP_ENV": "production"
   }
 }
