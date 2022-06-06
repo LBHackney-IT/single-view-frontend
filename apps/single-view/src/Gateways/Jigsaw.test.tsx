@@ -11,7 +11,7 @@ const mockAxios = axios as jest.Mocked<typeof axios>;
 describe("Jigsaw gateway", () => {
   describe("authoriseJigsaw", () => {
     it("should return a string if the request is OK", async () => {
-      const token: string = "";
+      const token: string = "Placeholder-Jigsaw-Token";
       const response = { status: 200, data: token };
       mockAxios.post.mockImplementationOnce(async () => response);
 
