@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 
 type Props = {
   total: number;
-  onPageChange: (
-    currentPage: number,
-    pageSize: number,
-    isNext: boolean
-  ) => void;
+  onPageChange: (currentPage: number, isNext: boolean) => void;
   pageSize: number;
 };
 
@@ -14,13 +10,13 @@ export const Pagination = (props: Props): JSX.Element => {
   const previousPage = (e: React.FormEvent) => {
     e.preventDefault();
     setCurrentPage(currentPage - 1);
-    props.onPageChange(currentPage, props.pageSize, false);
+    props.onPageChange(currentPage, false);
   };
 
   const nextPage = (e: React.FormEvent) => {
     e.preventDefault();
     setCurrentPage(currentPage + 1);
-    props.onPageChange(currentPage, props.pageSize, true);
+    props.onPageChange(currentPage, true);
   };
 
   const [currentPage, setCurrentPage] = useState(1);

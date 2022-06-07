@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { housingSearchPerson } from "../../Interfaces";
 import { formatDate } from "@mfe/common/lib/utils";
-import { Pagination } from "../../Components/Pagination";
+import { Pagination } from "../../Components/pagination";
 
 interface myProps {
   searchResults: housingSearchPerson[];
@@ -29,14 +29,10 @@ export const SearchResults = (props: myProps): JSX.Element => {
     if (dataSource == "All") {
       return setResults(results);
     }
-    return setResults(allResults.filter((p) => p.dataSource == dataSource));
+    return setResults(results.filter((p) => p.dataSource == dataSource));
   };
 
-  const onPageChange = (
-    currentPage: number,
-    pageSize: number,
-    isNext: boolean
-  ) => {
+  const onPageChange = (currentPage: number, isNext: boolean) => {
     if (isNext) {
       setResults(splitResults[currentPage]);
     } else {
