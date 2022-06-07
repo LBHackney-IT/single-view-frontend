@@ -7,7 +7,8 @@ const locale = {
     manageMyHome: "Single View 2.0",
   },
   betaBanner: {
-    manageMyHomeUnderDev: "Single View 2.0 is a new service.",
+    manageMyHomeUnderDev: "This is a new service",
+    feedbackLink: 'https://docs.google.com/forms/d/e/1FAIpQLScxdnTRg-kPfeyR7UG_MM2K9KRjMOGClEVBOF3FwKnENvg80Q/viewform',
     reportIssue: "Report an issue",
     or: "or",
     suggestFeature: "suggest a new feature",
