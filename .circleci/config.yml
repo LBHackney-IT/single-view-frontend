@@ -181,7 +181,7 @@ jobs:
           command: |
             cd apps/header/
             export APP_ENV=<<parameters.stage>>
-            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)    
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
             yarn build
       - run:
           name: Deploy to S3 header
