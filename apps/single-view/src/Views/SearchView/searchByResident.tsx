@@ -27,7 +27,6 @@ export const SearchByResident = (props: myProps): JSX.Element => {
         firstName.trim(),
         lastName.trim(),
         joinAddresses(),
-        1,
         getCookie("jigsawToken")
       );
       props.setResultsFunction(searchResults);
