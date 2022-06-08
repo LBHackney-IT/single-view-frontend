@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { housingSearchPerson } from "../../Interfaces";
 import { formatDate } from "@mfe/common/lib/utils";
 
@@ -13,6 +13,11 @@ export const SearchResults = (props: myProps): JSX.Element => {
   const [allResults, setAllResults] = useState<housingSearchPerson[]>(
     props.searchResults
   );
+
+  useEffect(() => {
+    setResults(props.searchResults);
+    setAllResults(props.searchResults);
+  }, [props.searchResults]);
 
   const filterSystem = (dataSource: string) => {
     if (dataSource == "All") {
@@ -42,9 +47,9 @@ export const SearchResults = (props: myProps): JSX.Element => {
         </div>
         <hr />
         <div id="searchResults">
-          {results.map((person: housingSearchPerson, index: number) => {
+          {results.map((person: housingSearchPerson) => {
             return (
-              <div className="lbh-body" key={index}>
+              <div className="lbh-body" key={person.id}>
                 <a
                   href={`/customers/${person.dataSource}/${person.id}`}
                   className="lbh-link lbh-link--no-visited-state"
