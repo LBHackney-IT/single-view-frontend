@@ -13,7 +13,7 @@ const {
   branding: { hackney, manageMyHome },
 } = locale;
 
-const { manageMyHomeUnderDev } = locale.betaBanner;
+const { manageMyHomeUnderDev, feedbackLink } = locale.betaBanner;
 const { headerNavigation } = locale.a11y;
 
 const App = (): JSX.Element => {
@@ -84,7 +84,11 @@ const App = (): JSX.Element => {
       </div>
       <PhaseBanner tag="alpha" variant="green">
         <span>
-          {manageMyHomeUnderDev}
+          This is a new service - your{" "}
+          <a href={feedbackLink} target="_blank">
+            feedback
+          </a>{" "}
+          will help us to improve it.
         </span>
       </PhaseBanner>
     </>
