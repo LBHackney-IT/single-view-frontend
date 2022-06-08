@@ -1,6 +1,5 @@
 import axios from "axios";
-import { getToken } from "../Utils/getHackneyToken";
-import { encrypt } from "../Utils/security";
+import { getToken, encrypt, isProduction } from "../Utils";
 import { JigsawCredentials } from "../Interfaces/jigsawInterfaces";
 
 export const authoriseJigsawError = new Error("Error authorising with Jigsaw");
@@ -16,20 +15,24 @@ export const authoriseJigsaw = async (
   };
   const encryptedCreds = encrypt(JSON.stringify(jigsawCredentials), key);
 
-  const response = await axios.post(
-    `${process.env.SV_API_V1}/storeCredentials`,
-    encryptedCreds,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${getToken()}`,
-      },
+  if (isProduction()) {
+    const response = await axios.post(
+      `${process.env.SV_API_V1}/storeCredentials`,
+      encryptedCreds,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${getToken()}`,
+        },
+      }
+    );
+
+    if (response.status != 200) {
+      throw authoriseJigsawError;
     }
-  );
 
-  if (response.status != 200) {
-    throw authoriseJigsawError;
+    return response.data;
+  } else {
+    return "Placeholder-Jigsaw-Token";
   }
-
-  return response.data;
 };

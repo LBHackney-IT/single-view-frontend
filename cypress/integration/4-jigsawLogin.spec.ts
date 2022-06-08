@@ -1,6 +1,7 @@
 import { AuthRoles } from '../support/commands';
 
-describe('jigsaw login', () => {
+describe('jigsaw login',  () => {
+  
   before(() => {
     cy.visitAs('/', AuthRoles.UnrestrictedGroup);
   })
@@ -31,7 +32,7 @@ describe('jigsaw login', () => {
     cy.get('#username', { timeout: 10000 }).type('Luna');
     cy.get('#password').type('pa$$w0rd');
 
-    const someThing = "lorem";
+    const someThing = "Placeholder-Jigsaw-Token";
 
     cy.intercept('**/storeCredentials', {body: someThing});
 
@@ -40,8 +41,8 @@ describe('jigsaw login', () => {
           .should('have.property', 'value', someThing);
     });
   })
-
-  it('displays displays error when creds are wrong', ()=> {
+ if (Cypress.env('APP_ENV') == 'production') {
+    it('displays displays error when creds are wrong', ()=> {
     cy.visitAs('/jigsawLogin', AuthRoles.UnrestrictedGroup);
 
     cy.get('#username').type('Luna');
@@ -71,4 +72,6 @@ describe('jigsaw login', () => {
       })
     });
   });
+ }
+  
 })

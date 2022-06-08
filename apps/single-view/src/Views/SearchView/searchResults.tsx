@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { housingSearchPerson } from "../../Interfaces";
 import { formatDate } from "@mfe/common/lib/utils";
+import { Pagination } from "../../Components";
 
 interface myProps {
   searchResults: housingSearchPerson[];
+  maxSearchResults: number;
 }
 
 export const SearchResults = (props: myProps): JSX.Element => {
+  const sliceIntoChunks = (arr: any, chunkSize: number) => {
+    const res = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      const chunk = arr.slice(i, i + chunkSize);
+      res.push(chunk);
+    }
+    return res;
+  };
+  const [splitResults] = useState<housingSearchPerson[][]>(
+    sliceIntoChunks(props.searchResults, props.maxSearchResults)
+  );
   const [results, setResults] = useState<housingSearchPerson[]>(
-    props.searchResults
+    splitResults[0]
   );
-  const [allResults, setAllResults] = useState<housingSearchPerson[]>(
-    props.searchResults
-  );
+  const [allResults] = useState<housingSearchPerson[]>(props.searchResults);
 
   useEffect(() => {
     setResults(props.searchResults);
@@ -21,15 +32,23 @@ export const SearchResults = (props: myProps): JSX.Element => {
 
   const filterSystem = (dataSource: string) => {
     if (dataSource == "All") {
-      return setResults(allResults);
+      return setResults(results);
     }
-    return setResults(allResults.filter((p) => p.dataSource == dataSource));
+    return setResults(results.filter((p) => p.dataSource == dataSource));
+  };
+
+  const onPageChange = (currentPage: number, isNext: boolean) => {
+    if (isNext) {
+      setResults(splitResults[currentPage]);
+    } else {
+      setResults(splitResults[currentPage - 2]);
+    }
   };
 
   return (
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-two-thirds">
-        <h2 className="lbh-heading-h3">{`${results.length} results found`}</h2>
+        <h2 className="lbh-heading-h3">{`${allResults.length} results found`}</h2>
         <div className="govuk-form-group lbh-form-group">
           <label className="govuk-label lbh-label" htmlFor="system-filter">
             Filter by system
@@ -72,6 +91,11 @@ export const SearchResults = (props: myProps): JSX.Element => {
             );
           })}
         </div>
+        <Pagination
+          total={allResults.length}
+          onPageChange={onPageChange}
+          pageSize={props.maxSearchResults}
+        />
       </div>
     </div>
   );
