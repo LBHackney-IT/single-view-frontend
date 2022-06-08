@@ -40,7 +40,7 @@ export const Pagination = (props: Props): JSX.Element => {
           </span>
         </a>
       )}
-      {currentPage != props.total / props.pageSize && (
+      {currentPage != totalPages && (
         <a
           className="lbh-simple-pagination__link lbh-simple-pagination__link--next"
           href="/#"
