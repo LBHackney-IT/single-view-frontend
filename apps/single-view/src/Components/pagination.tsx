@@ -21,6 +21,8 @@ export const Pagination = (props: Props): JSX.Element => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
+  const totalPages = Math.ceil(props.total / props.pageSize);
+
   return (
     <nav className="lbh-simple-pagination">
       {currentPage > 1 && (
@@ -34,7 +36,7 @@ export const Pagination = (props: Props): JSX.Element => {
           </svg>
           Previous page
           <span className="lbh-simple-pagination__title">
-            {currentPage - 1} of {props.total / props.pageSize}
+            {currentPage - 1} of {totalPages}
           </span>
         </a>
       )}
@@ -46,7 +48,7 @@ export const Pagination = (props: Props): JSX.Element => {
         >
           Next page
           <span className="lbh-simple-pagination__title">
-            {currentPage + 1} of {props.total / props.pageSize}
+            {currentPage + 1} of {totalPages}
           </span>
           <svg width="11" height="19" viewBox="0 0 11 19" fill="none">
             <path d="M1 18L9 9.5L1 1" stroke-width="2" />
