@@ -9,7 +9,6 @@ interface myProps {
 }
 
 export const SearchResults = (props: myProps): JSX.Element => {
-  console.log(`search results are ${JSON.stringify(props.searchResults)}`);
   const sliceIntoChunks = (arr: any, chunkSize: number) => {
     const res = [];
     for (let i = 0; i < arr.length; i += chunkSize) {
