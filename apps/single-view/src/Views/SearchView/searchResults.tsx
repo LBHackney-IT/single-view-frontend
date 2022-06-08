@@ -28,7 +28,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
   );
 
   useEffect(() => {
-    setResults(splitResults[0]);
+    setResults(sliceIntoChunks(props.searchResults, props.maxSearchResults)[0]);
     setAllResults(props.searchResults);
   }, [props.searchResults]);
 
