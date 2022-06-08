@@ -23,7 +23,9 @@ export const SearchResults = (props: myProps): JSX.Element => {
   const [results, setResults] = useState<housingSearchPerson[]>(
     splitResults[0]
   );
-  const [allResults] = useState<housingSearchPerson[]>(props.searchResults);
+  const [allResults, setAllResults] = useState<housingSearchPerson[]>(
+    props.searchResults
+  );
 
   useEffect(() => {
     setResults(props.searchResults);
