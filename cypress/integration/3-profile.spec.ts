@@ -4,7 +4,7 @@ describe('Profile', () => {
   describe('Basic Information', () => {
     before(() => {
       cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
-      cy.visitAs('/customers/HousingSearchApi/6d7ed1a4', AuthRoles.UnrestrictedGroup);
+      cy.visitAs('/customers/PersonAPI/6d7ed1a4', AuthRoles.UnrestrictedGroup);
     })
 
     it('displays the profile tab', () => {
