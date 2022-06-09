@@ -10,7 +10,7 @@ export const getPerson = async (
   try {
     let response;
 
-    if (dataSource == "HousingSearchApi") {
+    if (dataSource == "PersonAPI") {
       response = await axios.get(
         `${process.env.SV_API_V1}/customers?id=${id}`,
         {

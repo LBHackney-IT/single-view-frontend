@@ -86,7 +86,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
                     return address.fullAddress;
                   })}
                   <br />
-                  {person.dataSource == "HousingSearchApi"
+                  {person.dataSource == "PersonAPI"
                     ? "Person API"
                     : "Jigsaw"}{" "}
                   id: {person.id}
