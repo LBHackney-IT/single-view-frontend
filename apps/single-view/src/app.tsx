@@ -18,10 +18,11 @@ const App = (): JSX.Element => {
     }
   }, []);
 
-  const homeRedirect = () => {
+  const hasInteractedWithJigsaw = (): boolean => {
     const dismissed = document.cookie.indexOf("jigsawDismissed=true") !== -1;
     const jigsawTokenSet = document.cookie.indexOf("jigsawToken=") !== -1;
-    return dismissed || jigsawTokenSet ? "/search" : "/jigsawLogin";
+
+    return dismissed || jigsawTokenSet;
   };
 
   return (
@@ -46,10 +47,12 @@ const App = (): JSX.Element => {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Redirect to={homeRedirect()} />
+            <Redirect
+              to={hasInteractedWithJigsaw() ? "/search" : "jigsawLogin"}
+            />
           </Route>
           <Route path="/search">
-            <SearchView />
+            {hasInteractedWithJigsaw() ? <SearchView /> : <JigsawLoginView />}
           </Route>
           <Route path="/jigsawLogin">
             <JigsawLoginView />
