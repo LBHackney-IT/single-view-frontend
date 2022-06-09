@@ -12,6 +12,7 @@ export interface housingSearchPerson {
   IsPersonCautionaryAlerted: boolean;
   IsTenureCautionaryAlerted: boolean;
   knownAddresses: knownAddress[];
+  isSelected: boolean;
 }
 
 export interface knownAddress {
