@@ -64,7 +64,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
             onChange={(e) => filterSystem(e.target.value)}
           >
             <option defaultValue="all">All</option>
-            <option value="HousingSearchApi">Housing Search</option>
+            <option value="PersonAPI">Housing Search</option>
             <option value="Jigsaw">Jigsaw</option>
           </select>
         </div>
@@ -86,7 +86,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
                     return address.fullAddress;
                   })}
                   <br />
-                  {person.dataSource == "HousingSearchApi"
+                  {person.dataSource == "PersonAPI"
                     ? "Person API"
                     : "Jigsaw"}{" "}
                   id: {person.id}

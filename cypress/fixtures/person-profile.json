@@ -2,7 +2,7 @@
     "customer": {
         "id": "e749f036-3183-49cb-8504-59b76c1a8f88",
         "title": "Miss",
-        "dataSource": "HousingSearchApi",
+        "dataSource": "PersonAPI",
         "preferredTitle": "Miss",
         "preferredFirstName": "Luna",
         "preferredMiddleName": null,

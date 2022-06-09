@@ -17,7 +17,7 @@ export const CustomerView = () => {
     try {
       let person = await getPerson(dataSource, id);
       setPerson(person);
-      if (person?.dataSource == "HousingSearchApi") {
+      if (person?.dataSource == "PersonAPI") {
         setMhUrl(`${process.env.MMH_URL}/person/${person.id}`);
       }
       return person;
@@ -31,8 +31,7 @@ export const CustomerView = () => {
     let derivedSystemIds: Array<SystemId> = [];
     if (person) {
       derivedSystemIds.push({
-        systemName:
-          person.dataSource == "HousingSearchApi" ? "PersonApi" : "Jigsaw",
+        systemName: person.dataSource == "PersonAPI" ? "PersonApi" : "Jigsaw",
         id: person.id,
       });
       if (person.knownAddresses && person.dataSource != "Jigsaw") {
@@ -85,7 +84,7 @@ export const CustomerView = () => {
         <section className="govuk-tabs__panel" id="notes">
           <Notes
             systemIds={systemIds}
-            isHousing={person?.dataSource == "HousingSearchApi"}
+            isHousing={person?.dataSource == "PersonAPI"}
           />
         </section>
       </div>
