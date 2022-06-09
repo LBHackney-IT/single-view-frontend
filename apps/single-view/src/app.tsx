@@ -18,10 +18,17 @@ const App = (): JSX.Element => {
     }
   }, []);
 
-  const homeRedirect = () => {
+  const homeRedirect = (): string => {
     const dismissed = document.cookie.indexOf("jigsawDismissed=true") !== -1;
     const jigsawTokenSet = document.cookie.indexOf("jigsawToken=") !== -1;
     return dismissed || jigsawTokenSet ? "/search" : "/jigsawLogin";
+  };
+
+  const hasInteractedWithJigsaw = (): boolean => {
+    const dismissed = document.cookie.indexOf("jigsawDismissed=true") !== -1;
+    const jigsawTokenSet = document.cookie.indexOf("jigsawToken=") !== -1;
+
+    return dismissed || jigsawTokenSet;
   };
 
   return (
@@ -49,7 +56,7 @@ const App = (): JSX.Element => {
             <Redirect to={homeRedirect()} />
           </Route>
           <Route path="/search">
-            <SearchView />
+            {hasInteractedWithJigsaw() ? <SearchView /> : <JigsawLoginView />}
           </Route>
           <Route path="/jigsawLogin">
             <JigsawLoginView />
