@@ -34,9 +34,11 @@ export const SearchResults = (props: myProps): JSX.Element => {
 
   const filterSystem = (dataSource: string) => {
     if (dataSource == "All") {
-      return setResults(results);
+      return setResults(splitResults[0]);
     }
-    return setResults(results.filter((p) => p.dataSource == dataSource));
+    return setResults(
+      splitResults[0].filter((p) => p.dataSource == dataSource)
+    );
   };
 
   const onPageChange = (currentPage: number, isNext: boolean) => {
