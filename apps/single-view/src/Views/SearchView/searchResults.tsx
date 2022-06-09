@@ -63,24 +63,37 @@ export const SearchResults = (props: myProps): JSX.Element => {
         <div id="searchResults">
           {results.map((person: housingSearchPerson, index: number) => {
             return (
-              <div className="lbh-body" key={index}>
-                <a
-                  href={`/customers/${person.dataSource}/${person.id}`}
-                  className="lbh-link lbh-link--no-visited-state"
-                >
-                  {person.firstName} {person.surName}
-                  {person.dateOfBirth &&
-                    ", Date of Birth: " + formatDate(person.dateOfBirth)}
-                </a>
-                <div className="lbh-body-s">
-                  {person.knownAddresses.map((address) => {
-                    return address.fullAddress;
-                  })}
-                  <br />
-                  {person.dataSource == "HousingSearchApi"
-                    ? "Person API"
-                    : "Jigsaw"}{" "}
-                  id: {person.id}
+              <div className="lbh-body sv-result-wrapper" key={index}>
+                <div className="govuk-checkboxes lbh-checkboxes">
+                  <div className="govuk-checkboxes_item">
+                    <input
+                      className="govuk-checkboxes_input sv-checkboxes"
+                      id="match"
+                      name="match"
+                      type="checkbox"
+                      value="match"
+                    />
+                  </div>
+                </div>
+                <div className="sv-result">
+                  <a
+                    href={`/customers/${person.dataSource}/${person.id}`}
+                    className="lbh-link lbh-link--no-visited-state"
+                  >
+                    {person.firstName} {person.surName}
+                    {person.dateOfBirth &&
+                      ", Date of Birth: " + formatDate(person.dateOfBirth)}
+                  </a>
+                  <div className="lbh-body-s">
+                    {person.knownAddresses.map((address) => {
+                      return address.fullAddress;
+                    })}
+                    <br />
+                    {person.dataSource == "HousingSearchApi"
+                      ? "Person API"
+                      : "Jigsaw"}{" "}
+                    id: {person.id}
+                  </div>
                 </div>
               </div>
             );
