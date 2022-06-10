@@ -38,6 +38,12 @@ $lbh-asset-path: "../node_modules/lbh-frontend/dist/assets";
   }
 }
 
+.sv-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .sv-result-wrapper {
   display: flex;
   flex-direction: row;

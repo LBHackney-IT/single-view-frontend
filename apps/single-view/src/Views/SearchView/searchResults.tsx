@@ -23,6 +23,10 @@ export const SearchResults = (props: myProps): JSX.Element => {
   const [results, setResults] = useState<housingSearchPerson[]>(
     splitResults[0]
   );
+  const [selectedRecords, setSelectedRecords] = useState<housingSearchPerson[]>(
+    []
+  );
+
   const [allResults] = useState<housingSearchPerson[]>(props.searchResults);
 
   const filterSystem = (dataSource: string) => {
@@ -40,24 +44,51 @@ export const SearchResults = (props: myProps): JSX.Element => {
     }
   };
 
+  const selectMatch = (person: housingSearchPerson) => {
+    if (!person.isSelected) {
+      console.log("selecting record...");
+      person.isSelected = true;
+      setSelectedRecords([...selectedRecords, person]);
+    } else {
+      console.log("deselecting record...");
+      setSelectedRecords(
+        selectedRecords.filter((p) => {
+          return p != person;
+        })
+      );
+      person.isSelected = false;
+    }
+  };
+
   return (
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-two-thirds">
         <h2 className="lbh-heading-h3">{`${allResults.length} results found`}</h2>
-        <div className="govuk-form-group lbh-form-group">
-          <label className="govuk-label lbh-label" htmlFor="system-filter">
-            Filter by system
-          </label>
-          <select
-            className="govuk-select lbh-select"
-            id="system-filter"
-            name="system-filter"
-            onChange={(e) => filterSystem(e.target.value)}
+        <div className="sv-group">
+          <div className="govuk-form-group lbh-form-group">
+            <label className="govuk-label lbh-label" htmlFor="system-filter">
+              Filter by system
+            </label>
+            <select
+              className="govuk-select lbh-select"
+              id="system-filter"
+              name="system-filter"
+              onChange={(e) => filterSystem(e.target.value)}
+            >
+              <option defaultValue="all">All</option>
+              <option value="HousingSearchApi">Housing Search</option>
+              <option value="Jigsaw">Jigsaw</option>
+            </select>
+          </div>
+          <button
+            className={
+              selectedRecords?.length == 0
+                ? "govuk-button lbh-button lbh-button--disabled govuk-button--disabled"
+                : "govuk-button lbh-button"
+            }
           >
-            <option defaultValue="all">All</option>
-            <option value="HousingSearchApi">Housing Search</option>
-            <option value="Jigsaw">Jigsaw</option>
-          </select>
+            Merge {selectedRecords?.length} Records
+          </button>
         </div>
         <hr />
         <div id="searchResults">
@@ -72,6 +103,8 @@ export const SearchResults = (props: myProps): JSX.Element => {
                       name="match"
                       type="checkbox"
                       value="match"
+                      checked={person.isSelected}
+                      onChange={() => selectMatch(person)}
                     />
                   </div>
                 </div>
