@@ -85,6 +85,8 @@ export const SearchResults = (props: myProps): JSX.Element => {
             </select>
           </div>
           <button
+            id="match-button"
+            disabled={selectedRecords?.length <= 1}
             className={
               selectedRecords?.length <= 1
                 ? "govuk-button lbh-button lbh-button--disabled govuk-button--disabled"
@@ -92,7 +94,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
             }
             onClick={() => mergeSelectedRecords(selectedRecords)}
           >
-            Merge {selectedRecords?.length} Records
+            Merge {selectedRecords?.length} records
           </button>
         </div>
         <hr />
