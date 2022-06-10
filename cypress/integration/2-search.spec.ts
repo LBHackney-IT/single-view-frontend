@@ -39,23 +39,20 @@ describe('search', () => {
 
     cy.get('.lbh-heading-h3').should('have.text', '12 results found')
 
-    cy.get(':nth-child(1) > .lbh-link')
-      .should('have.text', 'Luna Kitty, Date of Birth: 06/10/1977');
-    cy.get(':nth-child(1) > .lbh-body-s')
-      .should('have.text', 'ROOM 608 143 Northumberland Park, N17 0TR Person API id: 57ea3d58');
-  })
+    cy.get(':nth-child(1) > .sv-result')
+      .should('have.text', 'Luna Kitty, Date of Birth: 06/10/1977ROOM 608 143 Northumberland Park, N17 0TR Person API id: 57ea3d58');
+     })
 
-  xit('displays first restult with provided postcode', ()=> {
+  xit('displays first result with provided postcode', ()=> {
     cy.get('#postcode').type('M3 0W');
 
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons');
 
-    cy.get('.govuk-button').should('have.text', 'Search').click();
+    cy.get('.govuk-button').first().should('have.text', 'Search').click();
 
-    cy.get(':nth-child(1) > .lbh-link')
-      .should('have.text', 'Luna Kitty, Date of Birth: 07/01/2021');
-    cy.get(':nth-child(1) > .lbh-body-s')
-      .should('have.text', '123 Cute Street, M3 0W Person API id: 6d7ed1a4');
+    cy.get(':nth-child(1) > .sv-result')
+      .should('have.text', 'Luna Kitty, Date of Birth: 07/01/2021 123 Cute Street, M3 0W Person API id: 6d7ed1a4');
+
   })
 
 })
