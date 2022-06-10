@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { housingSearchPerson } from "../../Interfaces";
 import { formatDate } from "@mfe/common/lib/utils";
 import { Pagination } from "../../Components";
+import { mergeRecords } from "../../Gateways/mergeRecords";
 
 interface myProps {
   searchResults: housingSearchPerson[];
@@ -46,11 +47,9 @@ export const SearchResults = (props: myProps): JSX.Element => {
 
   const selectMatch = (person: housingSearchPerson) => {
     if (!person.isSelected) {
-      console.log("selecting record...");
       person.isSelected = true;
       setSelectedRecords([...selectedRecords, person]);
     } else {
-      console.log("deselecting record...");
       setSelectedRecords(
         selectedRecords.filter((p) => {
           return p != person;
@@ -58,6 +57,11 @@ export const SearchResults = (props: myProps): JSX.Element => {
       );
       person.isSelected = false;
     }
+  };
+
+  const mergeSelectedRecords = async (records: housingSearchPerson[]) => {
+    const sv_id = await mergeRecords(records);
+    return (window.location.href = `/customers/single-view/${sv_id}`);
   };
 
   return (
@@ -82,10 +86,11 @@ export const SearchResults = (props: myProps): JSX.Element => {
           </div>
           <button
             className={
-              selectedRecords?.length == 0
+              selectedRecords?.length <= 1
                 ? "govuk-button lbh-button lbh-button--disabled govuk-button--disabled"
                 : "govuk-button lbh-button"
             }
+            onClick={() => mergeSelectedRecords(selectedRecords)}
           >
             Merge {selectedRecords?.length} Records
           </button>
