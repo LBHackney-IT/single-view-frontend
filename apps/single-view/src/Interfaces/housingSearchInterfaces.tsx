@@ -9,6 +9,7 @@ export interface housingSearchPerson {
   preferredSurname: string | null;
   dateOfBirth: string;
   personTypes: string[];
+  niNo: string | null;
   IsPersonCautionaryAlerted: boolean;
   IsTenureCautionaryAlerted: boolean;
   knownAddresses: knownAddress[];
