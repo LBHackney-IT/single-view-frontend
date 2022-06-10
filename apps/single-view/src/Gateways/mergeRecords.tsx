@@ -1,5 +1,5 @@
 import axios from "axios";
-import { housingSearchPerson } from "../Interfaces";
+import { housingSearchPerson, mapRecordsToMatchedRecord } from "../Interfaces";
 import { getToken } from "../Utils";
 
 export const mergeError = new Error("Error merging records");
@@ -7,9 +7,10 @@ export const mergeError = new Error("Error merging records");
 export const mergeRecords = async (
   records: housingSearchPerson[]
 ): Promise<string | Error> => {
+  const matchedRecord = mapRecordsToMatchedRecord(records);
   const response = await axios.post(
     `${process.env.SV_API_V1}/customers`,
-    records,
+    matchedRecord,
     {
       headers: {
         "Content-Type": "application/json",
