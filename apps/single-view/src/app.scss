@@ -59,3 +59,7 @@ $lbh-asset-path: "../node_modules/lbh-frontend/dist/assets";
   width: 44px;
   margin-top: 10px;
 }
+
+.sv-checkboxes:checked {
+  background-color: green;
+}
