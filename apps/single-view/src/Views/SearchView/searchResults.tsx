@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { housingSearchPerson } from "../../Interfaces";
 import { formatDate } from "@mfe/common/lib/utils";
 import { Pagination } from "../../Components";
 import { mergeRecords } from "../../Gateways/mergeRecords";
+import { ErrorSummary } from "@mfe/common/lib/components";
 
 interface myProps {
   searchResults: housingSearchPerson[];
@@ -22,13 +23,13 @@ export const SearchResults = (props: myProps): JSX.Element => {
     sliceIntoChunks(props.searchResults, props.maxSearchResults)
   );
   const [results, setResults] = useState<housingSearchPerson[]>(
-    splitResults[0]
+    sliceIntoChunks(props.searchResults, props.maxSearchResults)[0]
   );
+
   const [selectedRecords, setSelectedRecords] = useState<housingSearchPerson[]>(
     []
   );
-
-  const [allResults] = useState<housingSearchPerson[]>(props.searchResults);
+  const [mergeError, setMergeError] = useState<boolean>(false);
 
   const filterSystem = (dataSource: string) => {
     if (dataSource == "All") {
@@ -36,6 +37,12 @@ export const SearchResults = (props: myProps): JSX.Element => {
     }
     return setResults(results.filter((p) => p.dataSource == dataSource));
   };
+
+  useEffect(() => {
+    setMergeError(false);
+    setResults(sliceIntoChunks(props.searchResults, props.maxSearchResults)[0]);
+    setSelectedRecords([]);
+  }, [props.searchResults]);
 
   const onPageChange = (currentPage: number, isNext: boolean) => {
     if (isNext) {
@@ -60,14 +67,29 @@ export const SearchResults = (props: myProps): JSX.Element => {
   };
 
   const mergeSelectedRecords = async (records: housingSearchPerson[]) => {
-    const sv_id = await mergeRecords(records);
-    return (window.location.href = `/customers/single-view/${sv_id}`);
+    try {
+      setMergeError(false);
+      const sv_id = await mergeRecords(records);
+      return (window.location.href = `/customers/single-view/${sv_id}`);
+    } catch (e) {
+      setMergeError(true);
+    }
   };
+
+  if (mergeError) {
+    return (
+      <ErrorSummary
+        id="singleViewMergeError"
+        title="Error"
+        description="Unable to create merged record. Please search again."
+      />
+    );
+  }
 
   return (
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-two-thirds">
-        <h2 className="lbh-heading-h3">{`${allResults.length} results found`}</h2>
+        <h2 className="lbh-heading-h3">{`${props.searchResults.length} results found`}</h2>
         <div className="sv-group">
           <div className="govuk-form-group lbh-form-group">
             <label className="govuk-label lbh-label" htmlFor="system-filter">
@@ -140,7 +162,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
           })}
         </div>
         <Pagination
-          total={allResults.length}
+          total={props.searchResults.length}
           onPageChange={onPageChange}
           pageSize={props.maxSearchResults}
         />
