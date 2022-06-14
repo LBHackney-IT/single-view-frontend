@@ -460,9 +460,9 @@ workflows:
               only: development
       - assume-role-development:
           context: api-assume-role-corporate-development-context
-          # requires:
-          #   - lint-and-test
-          #   - e2e
+          requires:
+            - lint-and-test
+            - e2e
           filters:
             branches:
               only: development
