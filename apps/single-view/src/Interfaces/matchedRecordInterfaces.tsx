@@ -9,8 +9,8 @@ export interface matchedRecord {
 }
 
 export interface dataSource {
-  data_source: string;
-  source_id: string;
+  dataSource: string;
+  sourceId: string;
 }
 
 export const mapRecordsToMatchedRecord = (
@@ -32,11 +32,11 @@ export const mapRecordsToMatchedRecord = (
   }
 
   const result: matchedRecord = {
-    first_name: personApiResult[0].firstName,
-    last_name: personApiResult[0].surName,
-    date_of_birth: personApiResult[0].dateOfBirth,
-    ni_number: jigsawResult[0]?.niNo,
-    data_sources: dataSources,
+    firstName: personApiResult[0].firstName,
+    lastName: personApiResult[0].surName,
+    dateOfBirth: personApiResult[0].dateOfBirth,
+    niNumber: jigsawResult[0]?.niNo,
+    dataSources: dataSources,
   };
 
   return result;

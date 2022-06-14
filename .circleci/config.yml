@@ -235,7 +235,7 @@ jobs:
           command: |
             cd apps/single-view/
             export APP_ENV=<<parameters.stage>>
-            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)            
+            export APP_CDN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
             export PERSON_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/person-v1 --query Parameter.Value --output text)
             export NOTES_API_V2=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/notes-v2 --query Parameter.Value --output text)
             export SV_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/sv-api-url --query Parameter.Value --output text)
@@ -460,9 +460,9 @@ workflows:
               only: development
       - assume-role-development:
           context: api-assume-role-corporate-development-context
-          requires:
-            - lint-and-test
-            - e2e
+          # requires:
+          #   - lint-and-test
+          #   - e2e
           filters:
             branches:
               only: development
