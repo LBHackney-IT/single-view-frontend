@@ -55,6 +55,11 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Place of Birth" testId="placeOfBirth">
           {person.placeOfBirth}
         </DescriptionListItem>
+        {person.nhsNumber && (
+          <DescriptionListItem title="NHS number" testId="nhsNo">
+            {person.nhsNumber}
+          </DescriptionListItem>
+        )}
         <DescriptionListItem title="Date of Death" testId="dateOfDeath">
           {person.dateofDeath}
         </DescriptionListItem>

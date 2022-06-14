@@ -14,6 +14,7 @@ export interface customerProfile {
   placeOfBirth: string;
   personTypes: string[] | null;
   niNo: string | null;
+  nhsNumber: string | null;
   knownAddresses: knownAddress[];
   isAMinor: boolean;
 }
