@@ -25,7 +25,6 @@ export const Profile = (props: Props) => {
 
   return (
     <>
-      {console.log(person)}
       <dl className="govuk-summary-list lbh-summary-list">
         <DescriptionListItem title="Name" testId="name">
           {person.title} {person.firstName} {person.surname}
