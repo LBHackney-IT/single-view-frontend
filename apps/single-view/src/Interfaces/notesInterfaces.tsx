@@ -28,6 +28,11 @@ export interface Author {
   email: string;
 }
 
+export interface DataSource {
+  id: string;
+  name: string;
+}
+
 export enum NoteTargetType {
   person = "person",
   asset = "asset",

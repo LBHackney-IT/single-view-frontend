@@ -83,6 +83,7 @@ export const Notes = (props: Props): JSX.Element => {
       {notes.length > 0 ? (
         <ol className="lbh-timeline">
           {notes.map((note: NoteInterface, index: number) => {
+            console.log(`Note is ${JSON.stringify(note)}`);
             return (
               <li
                 className="lbh-timeline__event lbh-timeline__event--minor"
