@@ -25,6 +25,7 @@ export const Profile = (props: Props) => {
 
   return (
     <>
+      {console.log(person)}
       <dl className="govuk-summary-list lbh-summary-list">
         <DescriptionListItem title="Name" testId="name">
           {person.title} {person.firstName} {person.surname}
@@ -55,6 +56,11 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Place of Birth" testId="placeOfBirth">
           {person.placeOfBirth}
         </DescriptionListItem>
+        {person.nhsNumber && (
+          <DescriptionListItem title="NHS number" testId="nhsNo">
+            {person.nhsNumber}
+          </DescriptionListItem>
+        )}
         <DescriptionListItem title="Date of Death" testId="dateOfDeath">
           {person.dateofDeath}
         </DescriptionListItem>
