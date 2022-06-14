@@ -37,3 +37,29 @@ $lbh-asset-path: "../node_modules/lbh-frontend/dist/assets";
     animation: rotate 1s linear infinite;
   }
 }
+
+.sv-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sv-result-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.sv-result {
+  margin: initial;
+  margin-left: 25px;
+}
+
+.sv-checkboxes {
+  height: 44px;
+  width: 44px;
+  margin-top: 10px;
+}
+
+.sv-checkboxes:checked {
+  background-color: green;
+}
