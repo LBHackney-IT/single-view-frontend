@@ -25,8 +25,8 @@ export const mapRecordsToMatchedRecord = (
 
   for (let person of persons) {
     let dataSource: dataSource = {
-      data_source: person.dataSource,
-      source_id: person.id,
+      dataSource: person.dataSource,
+      sourceId: person.id,
     };
     dataSources.push(dataSource);
   }
