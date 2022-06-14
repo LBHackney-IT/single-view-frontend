@@ -1,11 +1,11 @@
 import { housingSearchPerson } from ".";
 
 export interface matchedRecord {
-  first_name: string;
-  last_name: string;
-  date_of_birth: string;
-  ni_number: string | null;
-  data_sources: dataSource[];
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  niNumber: string | null;
+  dataSources: dataSource[];
 }
 
 export interface dataSource {
