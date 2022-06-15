@@ -29,9 +29,6 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Name" testId="name">
           {person.title} {person.firstName} {person.surname}
         </DescriptionListItem>
-        <DescriptionListItem title="Middle Name(s)" testId="middleName">
-          {person.middleName}
-        </DescriptionListItem>
         {person.dateOfBirth && (
           <DescriptionListItem title="Date of Birth" testId="dateOfBirth">
             {formatDateOfBirth(person.dateOfBirth)}
