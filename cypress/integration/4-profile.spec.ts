@@ -25,8 +25,10 @@ describe('Profile', () => {
     });
 
     it('displays tenures', ()=>{
-      cy.get('[data-testid="tenures"]').should('have.text', "123 Cute Street, M3 0W", {timeout: 10000});
-    });
+      cy.get('[data-testid="tenureFullAddress"]').should('have.text', "123 Cute Street, M3 0W", {timeout: 10000});
+      cy.get('[data-testid="tenureStartDate"]').should('have.text', "Start Date: 10/06/1996", {timeout: 10000});
+      cy.get('[data-testid="tenureEndDate"]').should('have.text', "End Date: 22/07/1999", {timeout: 10000});
+});
 
     it('displays types', ()=>{
       cy.get('[data-testid="types"]').should('have.text', "HouseholdMember", {timeout: 10000});
