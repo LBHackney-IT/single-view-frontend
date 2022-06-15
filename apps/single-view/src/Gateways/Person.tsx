@@ -21,15 +21,16 @@ export const getPerson = async (
       );
     } else if (dataSource == "sv") {
       response = await axios.get(
-        `${process.env.SV_API_V1}/customers?id=${id}&redisId=${getCookie("jigsawToken")}`,
+        `${process.env.SV_API_V1}/customers?id=${id}&redisId=${getCookie(
+          "jigsawToken"
+        )}`,
         {
           headers: {
             Authorization: `${getToken()}`,
           },
         }
       );
-    }
-    else {
+    } else {
       response = await axios.get(
         `${
           process.env.SV_API_V1
