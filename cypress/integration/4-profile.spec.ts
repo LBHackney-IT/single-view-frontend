@@ -14,7 +14,8 @@ describe('Profile', () => {
 
     it('displays name', ()=>{
       cy.get('[data-testid="name"]').should('have.text', "Miss Luna Kitty", {timeout: 10000});
-    });    
+    });   
+
 
     it('displays date of birth', ()=>{
       cy.get('[data-testid="dateOfBirth"]').should('have.text', "01/02/1980", {timeout: 10000});
