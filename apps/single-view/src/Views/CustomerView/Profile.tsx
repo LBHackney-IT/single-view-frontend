@@ -30,9 +30,6 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Name" testId="name">
           {person.title} {person.firstName} {person.surname}
         </DescriptionListItem>
-        <DescriptionListItem title="Middle Name(s)" testId="middleName">
-          {person.middleName}
-        </DescriptionListItem>
         {person.dateOfBirth && (
           <DescriptionListItem title="Date of Birth" testId="dateOfBirth">
             {formatDateOfBirth(person.dateOfBirth)}
@@ -66,11 +63,9 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Place of Birth" testId="placeOfBirth">
           {person.placeOfBirth}
         </DescriptionListItem>
-        {person.nhsNumber && (
-          <DescriptionListItem title="NHS number" testId="nhsNo">
-            {person.nhsNumber}
-          </DescriptionListItem>
-        )}
+        <DescriptionListItem title="NHS number" testId="nhsNo">
+          {person.nhsNumber}
+        </DescriptionListItem>
         <DescriptionListItem title="Date of Death" testId="dateOfDeath">
           {person.dateofDeath}
         </DescriptionListItem>

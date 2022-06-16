@@ -66,18 +66,18 @@ const mockSearchResults: housingSearchPerson[] = [
 ];
 
 const expectedMatchedRecord: matchedRecord = {
-  first_name: "Test",
-  last_name: "McTestFace",
-  date_of_birth: "2020-11-15",
-  ni_number: "JN8058495C",
-  data_sources: [
+  firstName: "Test",
+  lastName: "McTestFace",
+  dateOfBirth: "2020-11-15",
+  niNumber: "JN8058495C",
+  dataSources: [
     {
-      data_source: "PersonAPI",
-      source_id: "test-source-id",
+      dataSource: "PersonAPI",
+      sourceId: "test-source-id",
     },
     {
-      data_source: "Jigsaw",
-      source_id: "jigsaw-test-id",
+      dataSource: "Jigsaw",
+      sourceId: "jigsaw-test-id",
     },
   ],
 };
