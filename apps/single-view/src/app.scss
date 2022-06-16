@@ -60,6 +60,7 @@ $lbh-asset-path: "../node_modules/lbh-frontend/dist/assets";
   margin-top: 10px;
 }
 
-.sv-checkboxes:checked {
-  background-color: green;
+.sv-null-field {
+  font-weight: 500;
+  color: #8c9296;
 }

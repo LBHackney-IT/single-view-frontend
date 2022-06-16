@@ -130,10 +130,11 @@ export const SearchResults = (props: myProps): JSX.Element => {
                   <div className="govuk-checkboxes_item">
                     <input
                       className="govuk-checkboxes_input sv-checkboxes"
-                      id="match"
+                      id={`match-${person.id}`}
                       name="match"
                       type="checkbox"
                       value="match"
+                      aria-label="match-checkbox"
                       checked={person.isSelected}
                       onChange={() => selectMatch(person)}
                     />
