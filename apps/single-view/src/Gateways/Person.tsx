@@ -12,7 +12,7 @@ export const getPerson = async (
 
     if (dataSource == "PersonAPI") {
       response = await axios.get(
-        `${process.env.SV_API_V1}/customers?id=${id}`,
+        `${process.env.SV_API_V1}/getPersonApiCustomer?id=${id}`,
         {
           headers: {
             Authorization: `${getToken()}`,
