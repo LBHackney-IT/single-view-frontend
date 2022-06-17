@@ -44,11 +44,13 @@ export const Profile = (props: Props) => {
                 </span>
                 <br />
                 <span data-testid="tenureStartDate">
-                  Start Date: {formatDate(address.startDate) || "N/A"}
+                  <span className="govuk-!-font-weight-bold">Start date</span>{" "}
+                  {formatDate(address.startDate) || "N/A"}
                 </span>
                 <br />
                 <span data-testid="tenureEndDate">
-                  End Date: {formatDate(address.endDate) || "N/A"}
+                  <span className="govuk-!-font-weight-bold">End date</span>{" "}
+                  {formatDate(address.endDate) || "N/A"}
                 </span>
               </p>
             );
