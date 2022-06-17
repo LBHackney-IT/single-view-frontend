@@ -14,7 +14,7 @@ describe("MergeRecords Gateway", () => {
     it("should return an id string if the request is ok", async () => {
       const sv_id: string = "test-id";
       const selectedRecords: housingSearchPerson[] = mockSearchResults;
-      const response = { status: 201, data: sv_id };
+      const response = { status: 200, data: sv_id };
       mockAxios.post.mockImplementationOnce(async () => response);
       expect(await mergeRecords(selectedRecords)).toEqual(sv_id);
     });
