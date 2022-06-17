@@ -86,14 +86,14 @@ export const Notes = (props: Props): JSX.Element => {
         <ListSnapshot list={notes} snapshot={notesSnapshot}>
           <ol className="lbh-timeline">
             {notes.map((note: NoteInterface, index: number) => {
-              let attributes = index == notesSnapshot - 1 ? { "data-snapshot": 1 } : null;
-
+              let attributes = {
+                className: "lbh-timeline__event lbh-timeline__event--minor",
+                key: index,
+                "data-snapshot": index == notesSnapshot - 1 ? 1 : null,
+                "data-testid": `note_${index}`,
+              };
               return (
-                <li
-                  className="lbh-timeline__event lbh-timeline__event--minor"
-                  key={index}
-                  {...attributes}
-                >
+                <li {...attributes}>
                   <Note note={note} />
                 </li>
               );
@@ -101,7 +101,7 @@ export const Notes = (props: Props): JSX.Element => {
           </ol>
         </ListSnapshot>
       ) : (
-        <div className="govuk-inset-text lbh-inset-text">
+        <div className="govuk-inset-text lbh-inset-text" data-testid="notFound">
           There were no notes found for this customer.
         </div>
       )}

@@ -3,23 +3,18 @@ import { Link } from "@mfe/common/lib/components";
 
 interface Props {
   list: Array<any>;
-  snapshot: number
+  snapshot: number;
 }
 
 export const ListSnapshot: React.FC<Props> = (props) => {
-
-
   const toggleTexts = ["Show more", "Show less"];
-
   const getThresholdEl = (): HTMLElement | null => {
     if (props.list.length == props.snapshot) return null;
     return document.querySelector("[data-snapshot]") as HTMLElement;
   };
-
   const [thresholdEl, setThresholdEl] = useState<HTMLElement | null>(
     getThresholdEl
   );
-  
   const [height, setHeight] = useState<number>(0);
   const [expanded, setExpanded] = useState<boolean>(false);
   const [toggleText, setToggleText] = useState<string>(toggleTexts[0]);
@@ -46,7 +41,7 @@ export const ListSnapshot: React.FC<Props> = (props) => {
 
     let thresholdElRect = thresholdEl.getBoundingClientRect();
     setHeight(thresholdElRect.y + thresholdElRect.height - wrapperElRect.y);
-  }, [thresholdEl]);
+  }, [props.list, thresholdEl]);
 
   return (
     <>
