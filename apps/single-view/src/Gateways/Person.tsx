@@ -19,7 +19,7 @@ export const getPerson = async (
           },
         }
       );
-    } else if (dataSource == "sv") {
+    } else if (dataSource == "single-view") {
       response = await axios.get(
         `${process.env.SV_API_V1}/customers?id=${id}&redisId=${getCookie(
           "jigsawToken"
