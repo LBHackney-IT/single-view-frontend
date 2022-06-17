@@ -3,6 +3,7 @@ import { DescriptionListItem } from "../../Components";
 import { customerProfile } from "../../Interfaces/customerProfileInterfaces";
 import { formatDateOfBirth } from "../../Utils/formatDates";
 import { Center, Spinner } from "@mfe/common/lib/components";
+import { formatDate } from "@mfe/common/lib/utils";
 
 interface Props {
   profile?: customerProfile;
@@ -38,7 +39,17 @@ export const Profile = (props: Props) => {
           {person.knownAddresses?.map((address, index) => {
             return (
               <p className="lbh-body-s" key={index}>
-                {address.fullAddress}
+                <span data-testid="tenureFullAddress">
+                  {address.fullAddress}
+                </span>
+                <br />
+                <span data-testid="tenureStartDate">
+                  Start Date: {formatDate(address.startDate) || "N/A"}
+                </span>
+                <br />
+                <span data-testid="tenureEndDate">
+                  End Date: {formatDate(address.endDate) || "N/A"}
+                </span>
               </p>
             );
           })}
