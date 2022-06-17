@@ -12,14 +12,14 @@ export const getPerson = async (
 
     if (dataSource == "PersonAPI") {
       response = await axios.get(
-        `${process.env.SV_API_V1}/customers?id=${id}`,
+        `${process.env.SV_API_V1}/getPersonApiCustomer?id=${id}`,
         {
           headers: {
             Authorization: `${getToken()}`,
           },
         }
       );
-    } else if (dataSource == "sv") {
+    } else if (dataSource == "single-view") {
       response = await axios.get(
         `${process.env.SV_API_V1}/customers?id=${id}&redisId=${getCookie(
           "jigsawToken"

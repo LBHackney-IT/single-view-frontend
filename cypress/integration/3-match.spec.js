@@ -4,7 +4,7 @@ describe('matching', () => {
   before(() => {
     cy.visitAs('/search', AuthRoles.UnrestrictedGroup);
     cy.setCookie('jigsawToken', 'testValue')
-  }) 
+  })
 
   it('displays search results', () => {
     cy.get('#firstName').type('Luna');
@@ -26,12 +26,12 @@ describe('matching', () => {
  it('allows user to match results', () => {
     cy.get('#match-button').should('be.disabled');
 
-     cy.get(".sv-checkboxes").eq(0).click();  
-     cy.get(".sv-checkboxes").eq(1).click();   
+     cy.get(".sv-checkboxes").eq(0).click();
+     cy.get(".sv-checkboxes").eq(1).click();
      cy.get('#match-button').should('have.text', 'Merge 2 records');
 
      cy.intercept('POST', '**/customers**', {
-         statusCode: 201,
+         statusCode: 200,
          body: 'cypress-sv-id'
      }).as('mergeRecords')
 

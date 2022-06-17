@@ -19,7 +19,7 @@ export const mergeRecords = async (
     }
   );
 
-  if (response.status != 201) {
+  if (response.status != 200) {
     throw mergeError;
   }
   return response.data;

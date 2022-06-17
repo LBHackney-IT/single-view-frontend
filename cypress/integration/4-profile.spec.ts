@@ -3,7 +3,7 @@ import { AuthRoles } from '../support/commands';
 describe('Profile', () => {
   describe('Basic Information', () => {
     before(() => {
-      cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
+      cy.intercept('GET', '**/getPersonApiCustomer*', { fixture: 'person-profile.json' }).as('getPerson');
       cy.visitAs('/customers/PersonAPI/6d7ed1a4', AuthRoles.UnrestrictedGroup);
     })
 
@@ -14,7 +14,7 @@ describe('Profile', () => {
 
     it('displays name', ()=>{
       cy.get('[data-testid="name"]').should('have.text', "Miss Luna Kitty", {timeout: 10000});
-    });   
+    });
 
 
     it('displays date of birth', ()=>{
