@@ -3,7 +3,7 @@ import { AuthRoles } from '../support/commands';
 describe('Notes', () => {
   context('Has notes', () => {
     before(() => {
-      cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
+      cy.intercept('GET', '**/getPersonApiCustomer*', { fixture: 'person-profile.json' }).as('getPerson');
       cy.intercept('GET', '**/notes*', { fixture: 'customer-notes.json' }).as('getNotes');
       cy.visitAs('/customers/PersonAPI/6d7ed1a4#notes', AuthRoles.UnrestrictedGroup);
     })
@@ -23,8 +23,8 @@ describe('Notes', () => {
 
   context('No notes', () => {
     before(() => {
-      cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
-      cy.intercept('GET', '**/notes*', {notes: []}).as('getNotes');
+      cy.intercept('GET', '**/getPersonApiCustomer*', { fixture: 'person-profile.json' }).as('getPerson');
+      cy.intercept('GET', '**/notes*', {notes: []}).as('getNotesEmpty');
       cy.visitAs('/customers/PersonAPI/6d7ed1a4#notes', AuthRoles.UnrestrictedGroup);
     });
 
