@@ -12,6 +12,11 @@ describe('Profile', () => {
         .should('be.visible')
     });
 
+    it('displays jigsaw login error', ()=>{
+      cy.get('.govuk-warning-text__text > :nth-child(1)').should('have.text', "Warning", {timeout: 10000});
+      cy.get('.govuk-warning-text__text > :nth-child(2)').should('have.text', "If you have access to Jigsaw, please login here.", {timeout: 10000});
+    });
+
     it('displays name', ()=>{
       cy.get('[data-testid="name"]').should('have.text', "Miss Luna Kitty", {timeout: 10000});
     });

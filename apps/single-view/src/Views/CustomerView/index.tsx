@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Profile } from "./Profile";
 import { Notes } from "./Notes";
 import { getPerson } from "../../Gateways";
-import { customerProfile, UrlParams } from "../../Interfaces";
+import { customerProfile, UrlParams, customerResponse } from "../../Interfaces";
 import { NotFound } from "../../Components";
 import { SystemId } from "../../Interfaces/systemIdInterface";
 
@@ -11,14 +11,21 @@ export const CustomerView = () => {
   const { dataSource, id } = useParams<UrlParams>();
   const [person, setPerson] = useState<customerProfile | null>();
   const [mmhUrl, setMhUrl] = useState<string>("");
+  const [dataSourceError, setDataSourceError] =
+    useState<Array<SystemId> | null>();
   const [systemIds, setSystemIds] = useState<Array<SystemId>>();
 
-  const loadPerson = async (): Promise<customerProfile | null> => {
+  const loadPerson = async (): Promise<customerResponse | null> => {
     try {
       let person = await getPerson(dataSource, id);
-      setPerson(person);
-      if (person?.dataSource == "PersonAPI") {
-        setMhUrl(`${process.env.MMH_URL}/person/${person.id}`);
+      setPerson(person?.customer);
+      setSystemIds(person?.systemIds);
+      setDataSourceError(person?.systemIds?.filter((id: SystemId) => id.error));
+      var mmhId = person?.systemIds?.find(
+        (id: SystemId) => id.systemName == "PersonAPI"
+      );
+      if (mmhId) {
+        setMhUrl(`${process.env.MMH_URL}/person/${mmhId.id}`);
       }
       return person;
     } catch (e) {
@@ -27,33 +34,54 @@ export const CustomerView = () => {
     }
   };
 
-  const loadSystemIds = (person: customerProfile | null): void => {
-    let derivedSystemIds: Array<SystemId> = [];
-    if (person) {
-      derivedSystemIds.push({
-        systemName: person.dataSource == "PersonAPI" ? "PersonApi" : "Jigsaw",
-        id: person.id,
-      });
-      if (person.knownAddresses && person.dataSource != "Jigsaw") {
-        for (const tenure of person.knownAddresses) {
-          derivedSystemIds.push({
-            systemName: "PersonApi",
-            id: tenure.id,
-          });
-        }
-      }
-    }
-    setSystemIds(derivedSystemIds);
+  const systemIdError = (dataSource: any) => {
+    const ifJigsaw =
+      dataSource.systemName == "Jigsaw" && dataSource.error == "Unauthorised";
+    const jigsawLink = (
+      <span>
+        If you have access to Jigsaw, please login{" "}
+        <a
+          className="govuk-link lbh-link lbh-link--no-visited-state"
+          href="/jigsawLogin"
+          target="_blank"
+        >
+          here.
+        </a>
+      </span>
+    );
+
+    return (
+      <div
+        className="govuk-warning-text lbh-warning-text govuk-!-margin-bottom-2"
+        key={dataSource.id}
+      >
+        <span className="govuk-warning-text__icon" aria-hidden="true">
+          !
+        </span>
+        <strong className="govuk-warning-text__text">
+          <span className="govuk-warning-text__assistive">Warning</span>
+          Some information from {dataSource.systemName} may not be displayed.{" "}
+          {ifJigsaw ? jigsawLink : ` Error: ${dataSource.error}`}
+        </strong>
+      </div>
+    );
   };
 
   useEffect(() => {
-    loadPerson().then((person) => loadSystemIds(person));
+    loadPerson();
   }, []);
 
   return person === null ? (
     <NotFound />
   ) : (
     <>
+      {dataSourceError && (
+        <div style={{ marginTop: "-45px" }}>
+          {dataSourceError.map((dataSource) => {
+            return systemIdError(dataSource);
+          })}
+        </div>
+      )}
       {mmhUrl && (
         <a
           className="govuk-link lbh-link lbh-link--no-visited-state align-right"

@@ -1,12 +1,12 @@
 import axios from "axios";
-import { customerProfile } from "../Interfaces/customerProfileInterfaces";
+import { customerResponse } from "../Interfaces";
 import { getToken } from "../Utils/getHackneyToken";
 import { getCookie } from "../Utils/getCookie";
 
 export const getPerson = async (
   dataSource: string,
   id: string
-): Promise<customerProfile | null> => {
+): Promise<customerResponse | null> => {
   try {
     let response;
 
@@ -46,7 +46,7 @@ export const getPerson = async (
     if (response.status != 200) {
       throw new Error("Error retrieving person");
     }
-    return response.data.customer;
+    return response.data;
   } catch (e) {
     return null;
   }

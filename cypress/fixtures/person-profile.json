@@ -44,6 +44,10 @@
             "systemName": "PersonApi",
             "id": "e749f036-3183-49cb-8504-59b76c1a8f88",
             "error": null
+        }, {
+            "systemName": "Jigsaw",
+            "id": "1234",
+            "error": "Unauthorised"
         }
     ]
 }
