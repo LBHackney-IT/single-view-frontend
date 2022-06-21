@@ -126,20 +126,22 @@ export const SearchResults = (props: myProps): JSX.Element => {
           {results.map((person: housingSearchPerson, index: number) => {
             return (
               <div className="lbh-body sv-result-wrapper" key={index}>
-                <div className="govuk-checkboxes lbh-checkboxes">
-                  <div className="govuk-checkboxes_item">
-                    <input
-                      className="govuk-checkboxes_input sv-checkboxes"
-                      id={`match-${person.id}`}
-                      name="match"
-                      type="checkbox"
-                      value="match"
-                      aria-label="match-checkbox"
-                      checked={person.isSelected}
-                      onChange={() => selectMatch(person)}
-                    />
+                {person.dataSource != "single-view" && (
+                  <div className="govuk-checkboxes lbh-checkboxes">
+                    <div className="govuk-checkboxes_item">
+                      <input
+                        className="govuk-checkboxes_input sv-checkboxes"
+                        id={`match-${person.id}`}
+                        name="match"
+                        type="checkbox"
+                        value="match"
+                        aria-label="match-checkbox"
+                        checked={person.isSelected}
+                        onChange={() => selectMatch(person)}
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
                 <div className="sv-result">
                   <a
                     href={`/customers/${person.dataSource}/${person.id}`}
