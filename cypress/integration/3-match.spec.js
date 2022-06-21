@@ -4,7 +4,7 @@ describe('matching', () => {
   before(() => {
     cy.visitAs('/search', AuthRoles.UnrestrictedGroup);
     cy.setCookie('jigsawToken', 'testValue')
-  })
+  });
 
   it('displays search results', () => {
     cy.get('#firstName').type('Luna');
@@ -20,8 +20,14 @@ describe('matching', () => {
     cy.get('.lbh-heading-h3').should('have.text', '12 results found')
 
     cy.get(':nth-child(1) > .sv-result')
-      .should('have.text', 'Luna Kitty, Date of Birth: 06/10/1977ROOM 608 143 Northumberland Park, N17 0TR Person API id: 57ea3d58');
-     })
+      .should('have.text', 'Luna Kitty, Date of Birth: 06/10/1977ROOM 608 143 Northumberland Park, N17 0TR Jigsaw id: 57ea3d58');
+  });
+
+  it('does not display merge option for single view records', () => {
+    cy.get('#searchResults > :nth-child(1) > .govuk-checkboxes').should('exist');
+    cy.get('#searchResults > :nth-child(2) > .govuk-checkboxes').should('exist');
+    cy.get('#searchResults > :nth-child(3) > .govuk-checkboxes').should('not.exist');
+  });
 
  it('allows user to match results', () => {
     cy.get('#match-button').should('be.disabled');
@@ -38,8 +44,6 @@ describe('matching', () => {
      cy.get('#match-button').click();
 
      cy.location('pathname').should('eq', '/customers/single-view/cypress-sv-id');
-
-
- })
+ });
 
 })
