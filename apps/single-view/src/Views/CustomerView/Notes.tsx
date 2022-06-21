@@ -10,6 +10,7 @@ import {
   Spinner,
   ErrorSummary,
 } from "@mfe/common/lib/components";
+import { ListSnapshot } from "../../Components/ListSnapshot";
 
 interface Props {
   systemIds?: Array<SystemId>;
@@ -24,6 +25,7 @@ export const Notes = (props: Props): JSX.Element => {
   const [displayNoteInput, setDisplayNoteInput] = useState<boolean>(
     !!props.displayNoteInput
   );
+  const notesSnapshot = 5;
 
   const loadNotes = async (systemIds: Array<SystemId>): Promise<void> => {
     setGetNotesError(false);
@@ -81,20 +83,25 @@ export const Notes = (props: Props): JSX.Element => {
       {displayNoteInput && <NoteInput submit={submitNote} />}
 
       {notes.length > 0 ? (
-        <ol className="lbh-timeline">
-          {notes.map((note: NoteInterface, index: number) => {
-            return (
-              <li
-                className="lbh-timeline__event lbh-timeline__event--minor"
-                key={index}
-              >
-                <Note note={note} />
-              </li>
-            );
-          })}
-        </ol>
+        <ListSnapshot list={notes} snapshot={notesSnapshot}>
+          <ol className="lbh-timeline">
+            {notes.map((note: NoteInterface, index: number) => {
+              let attributes = {
+                className: "lbh-timeline__event lbh-timeline__event--minor",
+                key: index,
+                "data-snapshot": index == notesSnapshot - 1 ? 1 : null,
+                "data-testid": `note_${index}`,
+              };
+              return (
+                <li {...attributes}>
+                  <Note note={note} />
+                </li>
+              );
+            })}
+          </ol>
+        </ListSnapshot>
       ) : (
-        <div className="govuk-inset-text lbh-inset-text">
+        <div className="govuk-inset-text lbh-inset-text" data-testid="notFound">
           There were no notes found for this customer.
         </div>
       )}
