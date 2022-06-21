@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { housingSearchPerson } from "../../Interfaces";
 import { formatDate } from "@mfe/common/lib/utils";
+import { humanize } from "../../Utils";
 import { Pagination } from "../../Components";
 import { mergeRecords } from "../../Gateways/mergeRecords";
 import { ErrorSummary } from "@mfe/common/lib/components";
@@ -151,15 +152,14 @@ export const SearchResults = (props: myProps): JSX.Element => {
                     {person.dateOfBirth &&
                       ", Date of Birth: " + formatDate(person.dateOfBirth)}
                   </a>
-                  <div className="lbh-body-s">
-                    {person.knownAddresses.map((address) => {
-                      return address.fullAddress;
-                    })}
+                  <div className="lbh-body-s govuk-!-margin-top-1">
+                    {humanize(person.dataSource)} id: {person.id}
                     <br />
-                    {person.dataSource == "PersonAPI"
-                      ? "Person API"
-                      : "Jigsaw"}{" "}
-                    id: {person.id}
+                    {person.knownAddresses?.length > 0
+                      ? person.knownAddresses.map((address) => {
+                          return address.fullAddress + " ";
+                        })
+                      : ""}
                   </div>
                 </div>
               </div>

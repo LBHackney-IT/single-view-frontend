@@ -68,22 +68,7 @@
                 ],
                 "isPersonCautionaryAlert": false,
                 "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "a2312908",
-                        "startDate": "2017-11-02",
-                        "endDate": "2018-08-12",
-                        "fullAddress": "Room 35 Cape House 39 Dalston Lane, E8 3DF",
-                        "currentAddress": false
-                    },
-                    {
-                        "id": "c593aee7",
-                        "startDate": "2018-08-13",
-                        "endDate": null,
-                        "fullAddress": "16 Rivington Walk, E8 4JT",
-                        "currentAddress": true
-                    }
-                ]
+                "knownAddresses": []
             },
             {
                 "id": "eaa645d5-518f-22c6-7a63-44f788002033",

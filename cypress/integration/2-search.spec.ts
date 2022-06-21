@@ -40,7 +40,7 @@ describe('search', () => {
     cy.get('.lbh-heading-h3').should('have.text', '12 results found')
 
     cy.get(':nth-child(1) > .sv-result')
-      .should('have.text', 'Luna Kitty, Date of Birth: 06/10/1977ROOM 608 143 Northumberland Park, N17 0TR Jigsaw id: 57ea3d58');
+      .should('have.text', 'Luna Kitty, Date of Birth: 06/10/1977Jigsaw id: 57ea3d58ROOM 608 143 Northumberland Park, N17 0TR  ');
   });
 
   xit('displays first result with provided postcode', ()=> {
