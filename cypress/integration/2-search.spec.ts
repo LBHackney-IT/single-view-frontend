@@ -43,7 +43,7 @@ describe('search', () => {
       .should('have.text', 'Luna Kitty, Date of Birth: 06/10/1977Jigsaw id: 57ea3d58ROOM 608 143 Northumberland Park, N17 0TR  ');
   });
 
-  xit('displays first result with provided postcode', ()=> {
+  it('displays first result with provided postcode', ()=> {
     cy.get('#postcode').type('M3 0W');
 
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons');
@@ -51,7 +51,7 @@ describe('search', () => {
     cy.get('.govuk-button').first().should('have.text', 'Search').click();
 
     cy.get(':nth-child(1) > .sv-result')
-      .should('have.text', 'Luna Kitty, Date of Birth: 07/01/2021 123 Cute Street, M3 0W Person API id: 6d7ed1a4');
+      .should('have.text', 'Luna Kitty, Date of Birth: 07/01/2021PersonAPI id: 6d7ed1a4123 Cute Street, M3 0W  ');
 
   })
 

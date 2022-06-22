@@ -92,23 +92,8 @@ export const SearchResults = (props: myProps): JSX.Element => {
   return (
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-two-thirds">
-        <h2 className="lbh-heading-h3">{`${props.searchResults.length} results found`}</h2>
         <div className="sv-group">
-          <div className="govuk-form-group lbh-form-group">
-            <label className="govuk-label lbh-label" htmlFor="system-filter">
-              Filter by system
-            </label>
-            <select
-              className="govuk-select lbh-select"
-              id="system-filter"
-              name="system-filter"
-              onChange={(e) => filterSystem(e.target.value)}
-            >
-              <option defaultValue="all">All</option>
-              <option value="HousingSearchApi">Housing Search</option>
-              <option value="Jigsaw">Jigsaw</option>
-            </select>
-          </div>
+          <h2 className="lbh-heading-h3 govuk-!-margin-top-7">{`${props.searchResults.length} results found`}</h2>
           <button
             id="match-button"
             disabled={selectedRecords?.length <= 1}
