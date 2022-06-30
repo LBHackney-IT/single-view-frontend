@@ -1,4 +1,4 @@
-import { housingSearchPerson } from ".";
+import { Housing, housingSearchPerson, Jigsaw } from ".";
 
 export interface matchedRecord {
   firstName: string;
@@ -17,9 +17,9 @@ export const mapRecordsToMatchedRecord = (
   persons: housingSearchPerson[]
 ): matchedRecord => {
   let personApiResult = persons.filter(
-    (person) => person.dataSource == "PersonAPI"
+    (person) => person.dataSource == Housing
   );
-  let jigsawResult = persons.filter((person) => person.dataSource == "Jigsaw");
+  let jigsawResult = persons.filter((person) => person.dataSource == Jigsaw);
 
   const dataSources: dataSource[] = [];
 

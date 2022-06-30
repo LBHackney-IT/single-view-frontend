@@ -8,6 +8,7 @@ import {
   UrlParams,
   customerResponse,
   Jigsaw,
+  Housing,
 } from "../../Interfaces";
 import { NotFound } from "../../Components";
 import { SystemId } from "../../Interfaces/systemIdInterface";
@@ -27,7 +28,7 @@ export const CustomerView = () => {
       setSystemIds(person?.systemIds);
       setDataSourceError(person?.systemIds?.filter((id: SystemId) => id.error));
       var mmhId = person?.systemIds?.find(
-        (id: SystemId) => id.systemName == "PersonAPI"
+        (id: SystemId) => id.systemName == Housing
       );
       if (mmhId) {
         setMhUrl(`${process.env.MMH_URL}/person/${mmhId.id}`);
