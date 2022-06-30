@@ -3,7 +3,12 @@ import { useParams } from "react-router-dom";
 import { Profile } from "./Profile";
 import { Notes } from "./Notes";
 import { getPerson } from "../../Gateways";
-import { customerProfile, UrlParams, customerResponse } from "../../Interfaces";
+import {
+  customerProfile,
+  UrlParams,
+  customerResponse,
+  Jigsaw,
+} from "../../Interfaces";
 import { NotFound } from "../../Components";
 import { SystemId } from "../../Interfaces/systemIdInterface";
 
@@ -36,7 +41,7 @@ export const CustomerView = () => {
 
   const systemIdError = (dataSource: any) => {
     const ifJigsaw =
-      dataSource.systemName == "Jigsaw" && dataSource.error == "Unauthorised";
+      dataSource.systemName == Jigsaw && dataSource.error == "Unauthorised";
     const jigsawLink = (
       <span>
         If you have access to Jigsaw, please login{" "}
