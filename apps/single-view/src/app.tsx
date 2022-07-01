@@ -39,6 +39,11 @@ const App = (): JSX.Element => {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', 'G-R4PKCNV7HK', { page_path: window.location.pathname });
+                history.listen((location) => {
+                if (window.ga) {
+                 window.ga('send', 'pageview', location.pathname);
+                }
+                });
                `,
             }}
           />
