@@ -1,5 +1,5 @@
 import axios from "axios";
-import { customerResponse } from "../Interfaces";
+import { customerResponse, Housing } from "../Interfaces";
 import { getToken } from "../Utils/getHackneyToken";
 import { getCookie } from "../Utils/getCookie";
 
@@ -10,7 +10,7 @@ export const getPerson = async (
   try {
     let response;
 
-    if (dataSource == "PersonAPI") {
+    if (dataSource == Housing) {
       response = await axios.get(
         `${process.env.SV_API_V1}/getPersonApiCustomer?id=${id}`,
         {

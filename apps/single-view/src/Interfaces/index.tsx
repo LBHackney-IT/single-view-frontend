@@ -6,6 +6,7 @@ export * from "./systemIdInterface";
 export * from "./customerProfileInterfaces";
 export * from "./matchedRecordInterfaces";
 export * from "./customerResponseInterface";
+export * from "./dataSources";
 
 export interface UrlParams {
   id: string;
