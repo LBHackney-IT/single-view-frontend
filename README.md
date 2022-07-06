@@ -9,6 +9,7 @@ frontends taken from the @mtfh scope and repurposed for Single View.
 
 - Install all dependencies by running `yarn` in each `/apps` subdirectory
 - Run the application with `yarn start`
+- Configure your host file by adding the following line `127.0.0.1 local.hackney.gov.uk` to `/etc/hosts`
 - Load `http://local.hackney.gov.uk:9000` in your browser
 - NB the FE is currently pointing at the Staging API
 
