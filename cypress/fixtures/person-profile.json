@@ -34,10 +34,6 @@
             "createdBy": null,
             "lastModified": null
         },
-        "dateOfBirth": "1980-02-01T00:00:00Z",
-        "niNo": null,
-        "dateOfDeath": null,
-        "isAMinor": false,
         "councilTaxRecord": {
         "accountRef": "34596507",
         "accountCheckDigit": "5",
@@ -48,9 +44,12 @@
             "line2": "Springfield",
             "line3": "USA",
             "postCode": "SW19 1AA"
-        }
+        }},
+        "dateOfBirth": "1980-02-01T00:00:00Z",
+        "niNo": null,
+        "dateOfDeath": null,
+        "isAMinor": false
     },
-    
     "systemIds": [
         {
             "systemName": "PersonApi",
@@ -64,10 +63,7 @@
         {
             "systemName": "Academy-CouncilTax",
             "id": "34596507",
-            "error": null
+            "error": ""
         }
     ]
 }
-}
-
-
