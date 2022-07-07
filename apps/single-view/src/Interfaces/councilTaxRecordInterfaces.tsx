@@ -1,5 +1,3 @@
-import { add } from "date-fns";
-
 export interface councilTaxRecord {
   accountRef: string;
   accountCheckDigit: string;
@@ -16,9 +14,3 @@ export interface councilTaxAddress {
   line4: string;
   postCode: string;
 }
-
-export const councilTaxAddressToString = (
-  address: councilTaxAddress
-): string => {
-  return `${address.line1} ${address.line2} ${address.line3} ${address.line4} ${address.postCode}`;
-};
