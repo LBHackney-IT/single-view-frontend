@@ -33,7 +33,6 @@ module.exports = (webpackConfigEnv, argv) => {
     plugins: [
       new webpack.EnvironmentPlugin({
         APP_ENV: process.env.APP_ENV || "development",
-        PERSON_API_V1: process.env.PERSON_API_V1 || dotenv.PERSON_API_V1,
         SV_API_V1: process.env.SV_API_V1 || dotenv.SV_API_V1,
         MMH_URL: process.env.MMH_URL || dotenv.MMH_URL,
         RSA_PUBLIC_KEY: process.env.RSA_PUBLIC_KEY || dotenv.RSA_PUBLIC_KEY,

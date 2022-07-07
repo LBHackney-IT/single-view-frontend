@@ -80,7 +80,7 @@ export const Notes = (props: Props): JSX.Element => {
         </Link>
       )} */}
 
-      {displayNoteInput && <NoteInput submit={submitNote} />}
+      {/* {displayNoteInput && <NoteInput submit={submitNote} />} */}
 
       {notes.length > 0 ? (
         <ListSnapshot list={notes} snapshot={notesSnapshot}>

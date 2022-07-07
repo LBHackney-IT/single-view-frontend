@@ -13,7 +13,7 @@
         "personTypes": [
         "HouseholdMember"
         ],
-        "placeOfBirth": "London",
+        "placeOfBirth": "",
         "knownAddresses": [
             {
                 "fullAddress": "123 Cute Street, M3 0W",

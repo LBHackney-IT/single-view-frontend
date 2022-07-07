@@ -37,8 +37,12 @@ describe('Profile', () => {
     });
 
     it('displays place of birth', ()=>{
-      cy.get('[data-testid="placeOfBirth"]').should('have.text', "London", {timeout: 10000});
+      cy.get('[data-testid="placeOfBirth"]').should('have.text', "", {timeout: 10000});
     });
+
+    it('place of birth is greyed out', () => {
+      cy.get('[data-testid="placeOfBirth"]').parent().parent().children("dt").children("h5").should('have.class', 'sv-null-field', {timeout: 10000});
+    })
 
     it('displays date of death', ()=>{
       cy.get('[data-testid="dateOfDeath"]').should('have.text', "", {timeout: 10000});
