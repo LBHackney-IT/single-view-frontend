@@ -3,8 +3,8 @@ export interface councilTaxRecord {
   accountCheckDigit: string;
   paymentMethod: string;
   accountBalance: number;
-  propertyAddress: string;
-  forwardingAddress: string | null;
+  propertyAddress: councilTaxAddress;
+  forwardingAddress: councilTaxAddress | null;
 }
 
 export interface councilTaxAddress {

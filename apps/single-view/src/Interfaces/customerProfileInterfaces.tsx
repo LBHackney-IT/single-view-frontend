@@ -1,4 +1,4 @@
-import { knownAddress } from ".";
+import { councilTaxRecord, knownAddress } from ".";
 
 export interface customerProfile {
   id: string;
@@ -16,4 +16,5 @@ export interface customerProfile {
   nhsNumber: string | null;
   knownAddresses: knownAddress[];
   isAMinor: boolean;
+  councilTaxRecord: councilTaxRecord | null;
 }
