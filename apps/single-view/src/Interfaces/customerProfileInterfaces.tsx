@@ -1,4 +1,5 @@
 import { knownAddress } from ".";
+import { cautionaryAlert } from "./CautionaryAlertInterfaces";
 
 export interface customerProfile {
   id: string;
@@ -15,5 +16,6 @@ export interface customerProfile {
   niNo: string | null;
   nhsNumber: string | null;
   knownAddresses: knownAddress[];
+  cautionaryAlerts: cautionaryAlert[];
   isAMinor: boolean;
 }

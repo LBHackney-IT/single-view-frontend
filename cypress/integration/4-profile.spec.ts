@@ -17,6 +17,14 @@ describe('Profile', () => {
       cy.get('.govuk-warning-text__text > :nth-child(2)').should('have.text', "If you have access to Jigsaw, please login here.", {timeout: 10000});
     });
 
+    it('displays cautionary alert warning title', ()=>{
+      cy.get('[data-testid="cautionaryAlert-alertCode"]').should('have.text', "Warning: Risk to adults", {timeout: 10000});
+    });
+
+    it('displays cautionary alert warning message', () => {
+      cy.get('[data-testid="cautionaryAlert-alertMessage"]').should('have.text', "Added 01 Mar 2018 by Luna Purry. Last reviewed 01 Feb 2020.");
+    });
+
     it('displays name', ()=>{
       cy.get('[data-testid="name"]').should('have.text', "Miss Luna Kitty", {timeout: 10000});
     });
