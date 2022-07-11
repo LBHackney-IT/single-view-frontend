@@ -34,7 +34,7 @@
             "createdBy": null,
             "lastModified": null
         },
-        "councilTaxRecord": {
+        "councilTaxAccount": {
         "accountRef": "34596507",
         "accountCheckDigit": "5",
         "paymentMethod": "Direct Debit",

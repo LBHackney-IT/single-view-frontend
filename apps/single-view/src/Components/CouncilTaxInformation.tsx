@@ -1,10 +1,10 @@
 import React from "react";
-import { councilTaxRecord } from "../Interfaces";
+import { councilTaxAccount } from "../Interfaces";
 import { DescriptionListItem } from "./DescriptionListItem";
 import { councilTaxAddressToString } from "../Utils/academyAddressToString";
 
 interface Props {
-  councilTaxRecord: councilTaxRecord | null;
+  councilTaxAccount: councilTaxAccount | null;
 }
 
 export const CouncilTaxInformation: React.FC<Props> = (props) => {
@@ -12,22 +12,22 @@ export const CouncilTaxInformation: React.FC<Props> = (props) => {
     <>
       <h3>Council Tax</h3>
       <DescriptionListItem title="Account Reference" testId="accountRef">
-        {props.councilTaxRecord?.accountRef}
+        {props.councilTaxAccount?.accountRef}
       </DescriptionListItem>
       <DescriptionListItem title="Balance" testId="accountBalance">
-        {props.councilTaxRecord?.accountBalance}
+        {props.councilTaxAccount?.accountBalance}
       </DescriptionListItem>
       <DescriptionListItem title="Payment Method" testId="paymentMethod">
-        {props.councilTaxRecord?.paymentMethod}
+        {props.councilTaxAccount?.paymentMethod}
       </DescriptionListItem>
       <DescriptionListItem title="Property Address" testId="propertyAddress">
-        {councilTaxAddressToString(props.councilTaxRecord?.propertyAddress)}
+        {councilTaxAddressToString(props.councilTaxAccount?.propertyAddress)}
       </DescriptionListItem>
       <DescriptionListItem
         title="Forwarding Address"
         testId="forwardingAddress"
       >
-        {councilTaxAddressToString(props.councilTaxRecord?.forwardingAddress)}
+        {councilTaxAddressToString(props.councilTaxAccount?.forwardingAddress)}
       </DescriptionListItem>
     </>
   );

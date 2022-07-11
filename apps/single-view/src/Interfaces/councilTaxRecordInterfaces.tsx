@@ -1,4 +1,4 @@
-export interface councilTaxRecord {
+export interface councilTaxAccount {
   accountRef: string;
   accountCheckDigit: string;
   paymentMethod: string;

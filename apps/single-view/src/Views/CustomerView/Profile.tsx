@@ -75,7 +75,7 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Is a Minor" testId="isMinor">
           {person.isAMinor ? "Y" : "N"}
         </DescriptionListItem>
-        <CouncilTaxInformation councilTaxRecord={person.councilTaxRecord} />
+        <CouncilTaxInformation councilTaxAccount={person.councilTaxAccount} />
       </dl>
     </>
   );
