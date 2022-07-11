@@ -8,6 +8,8 @@ import {
 import { Center, Spinner } from "@mfe/common/lib/components";
 import { formatDate } from "@mfe/common/lib/utils";
 import { Alert } from "../../Components/Alert";
+import { CouncilTaxInformation } from "../../Components/CouncilTaxInformation";
+
 
 interface Props {
   profile?: customerProfile;
@@ -95,6 +97,7 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Is a Minor" testId="isMinor">
           {person.isAMinor ? "Y" : "N"}
         </DescriptionListItem>
+        <CouncilTaxInformation councilTaxAccount={person.councilTaxAccount} />
       </dl>
     </>
   );

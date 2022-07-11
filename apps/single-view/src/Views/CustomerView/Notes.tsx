@@ -68,7 +68,7 @@ export const Notes = (props: Props): JSX.Element => {
 
   return (
     <>
-      {props.isHousing && (
+      {/* {props.isHousing && (
         <Link
           href="#notes"
           onClick={(e) => {
@@ -78,9 +78,9 @@ export const Notes = (props: Props): JSX.Element => {
         >
           Create a new note
         </Link>
-      )}
+      )} */}
 
-      {displayNoteInput && <NoteInput submit={submitNote} />}
+      {/* {displayNoteInput && <NoteInput submit={submitNote} />} */}
 
       {notes.length > 0 ? (
         <ListSnapshot list={notes} snapshot={notesSnapshot}>

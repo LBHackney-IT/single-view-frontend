@@ -13,7 +13,7 @@ describe('Profile', () => {
     });
 
     it('displays jigsaw login error', ()=>{
-      cy.get('.govuk-warning-text__text > :nth-child(1)').should('have.text', "Warning", {timeout: 10000});
+      cy.get('.govuk-warning-text__text > :nth-child(1)').debug().should('have.text', "Warning", {timeout: 10000});
       cy.get('.govuk-warning-text__text > :nth-child(2)').should('have.text', "If you have access to Jigsaw, please login here.", {timeout: 10000});
     });
 
@@ -63,6 +63,12 @@ describe('Profile', () => {
     it('displays is a minor', ()=>{
       cy.get('[data-testid="isMinor"]').should('have.text', "N", {timeout: 10000});
     });
+    it('displays Council Tax Information', () => {
+      cy.get('[data-testid="accountRef"]').should('have.text', "34596507", {timeout: 10000});
+      cy.get('[data-testid="accountBalance"]').should('have.text', 15465, {timeout: 10000});
+      cy.get('[data-testid="paymentMethod"]').should('have.text', "Direct Debit", {timeout: 10000});
+      cy.get('[data-testid="propertyAddress"]').should('have.text', "123 Fake Street Springfield USA  SW19 1AA", {timeout: 10000});
+    })
 
   });
 

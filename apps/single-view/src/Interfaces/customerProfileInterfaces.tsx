@@ -1,5 +1,6 @@
 import { knownAddress } from ".";
 import { cautionaryAlert } from "./CautionaryAlertInterfaces";
+import { councilTaxAccount, knownAddress } from ".";
 
 export interface customerProfile {
   id: string;
@@ -15,7 +16,8 @@ export interface customerProfile {
   personTypes: string[] | null;
   niNo: string | null;
   nhsNumber: string | null;
-  knownAddresses: knownAddress[];
-  cautionaryAlerts: cautionaryAlert[];
+  cautionaryAlerts: cautionaryAlert[] | null;
+  knownAddresses: knownAddress[] | null;
   isAMinor: boolean;
+  councilTaxAccount: councilTaxAccount | null;
 }

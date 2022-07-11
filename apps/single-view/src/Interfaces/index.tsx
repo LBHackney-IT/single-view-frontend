@@ -5,6 +5,7 @@ export * from "./personInterfaces";
 export * from "./systemIdInterface";
 export * from "./customerProfileInterfaces";
 export * from "./matchedRecordInterfaces";
+export * from "./councilTaxRecordInterfaces";
 export * from "./customerResponseInterface";
 export * from "./dataSources";
 
