@@ -10,7 +10,6 @@ import { formatDate } from "@mfe/common/lib/utils";
 import { Alert } from "../../Components/Alert";
 import { CouncilTaxInformation } from "../../Components/CouncilTaxInformation";
 
-
 interface Props {
   profile?: customerProfile;
 }
