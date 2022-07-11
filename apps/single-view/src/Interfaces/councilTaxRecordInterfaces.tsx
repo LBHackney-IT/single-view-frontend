@@ -1,5 +1,5 @@
 export interface councilTaxAccount {
-  accountRef: string;
+  accountReference: string;
   accountCheckDigit: string;
   paymentMethod: string;
   accountBalance: number;
@@ -12,5 +12,5 @@ export interface councilTaxAddress {
   line2: string;
   line3: string;
   line4: string | null;
-  postCode: string;
+  postcode: string;
 }

@@ -12,7 +12,7 @@ export const CouncilTaxInformation: React.FC<Props> = (props) => {
     <>
       <h3>Council Tax</h3>
       <DescriptionListItem title="Account Reference" testId="accountRef">
-        {props.councilTaxAccount?.accountRef}
+        {props.councilTaxAccount?.accountReference}
       </DescriptionListItem>
       <DescriptionListItem title="Balance" testId="accountBalance">
         {props.councilTaxAccount?.accountBalance}

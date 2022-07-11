@@ -35,7 +35,7 @@
             "lastModified": null
         },
         "councilTaxAccount": {
-        "accountRef": "34596507",
+        "accountReference": "34596507",
         "accountCheckDigit": "5",
         "paymentMethod": "Direct Debit",
         "accountBalance": 15465,
@@ -43,7 +43,7 @@
             "line1": "123 Fake Street",
             "line2": "Springfield",
             "line3": "USA",
-            "postCode": "SW19 1AA"
+            "postcode": "SW19 1AA"
         }},
         "dateOfBirth": "1980-02-01T00:00:00Z",
         "niNo": null,

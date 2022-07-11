@@ -9,6 +9,6 @@ export const councilTaxAddressToString = (
     address.line2,
     address.line3,
     address.line4,
-    address.postCode,
+    address.postcode,
   ].join(" ");
 };
