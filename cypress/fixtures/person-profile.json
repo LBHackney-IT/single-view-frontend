@@ -34,6 +34,17 @@
             "createdBy": null,
             "lastModified": null
         },
+        "councilTaxAccount": {
+        "accountReference": "34596507",
+        "accountCheckDigit": "5",
+        "paymentMethod": "Direct Debit",
+        "accountBalance": 15465,
+        "propertyAddress": {
+            "line1": "123 Fake Street",
+            "line2": "Springfield",
+            "line3": "USA",
+            "postcode": "SW19 1AA"
+        }},
         "dateOfBirth": "1980-02-01T00:00:00Z",
         "niNo": null,
         "dateOfDeath": null,
@@ -48,6 +59,11 @@
             "systemName": "Jigsaw",
             "id": "1234",
             "error": "Unauthorised"
+        },
+        {
+            "systemName": "Academy-CouncilTax",
+            "id": "34596507",
+            "error": ""
         }
     ]
 }
