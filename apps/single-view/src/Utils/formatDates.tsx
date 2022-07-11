@@ -6,15 +6,15 @@ export const formatDateOfBirth = (dob: string): string => {
 };
 
 export const formatCautionaryAlertsDate = (date: string): string => {
-  if(!date) return "undefined";
+  if (!date) return "undefined";
   let d = new Date(date);
 
-  const day   = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+  const day = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
   const month = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
-  const year  = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
+  const year = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
 
   return `${day} ${month} ${year}`;
-}
+};
 
 export const formatDate = (dateString: string): string => {
   let d = new Date(dateString);

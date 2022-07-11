@@ -1,4 +1,8 @@
-import { formatDateOfBirth, formatDate, formatCautionaryAlertsDate } from "./formatDates";
+import {
+  formatDateOfBirth,
+  formatDate,
+  formatCautionaryAlertsDate,
+} from "./formatDates";
 
 describe("formatDateOfBirth function", () => {
   it("should display a person's date of birth in the format, DD/MM/YYYY", () => {
@@ -15,7 +19,7 @@ describe("formatDateOfBirth function", () => {
   });
 });
 
-describe("formateCautionaryAlertsDate function", () =>{
+describe("formateCautionaryAlertsDate function", () => {
   it("should display cautionary alerts date in the format, DD MMM YYYY", () => {
     const result = formatCautionaryAlertsDate("2020-04-01T00:00:00Z");
     expect(result).toEqual("01 Apr 2020");

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
 import { customerProfile } from "../../Interfaces/customerProfileInterfaces";
-import {formatCautionaryAlertsDate, formatDateOfBirth} from "../../Utils/formatDates";
+import {
+  formatCautionaryAlertsDate,
+  formatDateOfBirth,
+} from "../../Utils/formatDates";
 import { Center, Spinner } from "@mfe/common/lib/components";
 import { formatDate } from "@mfe/common/lib/utils";
-import {Alert} from "../../Components/Alert";
+import { Alert } from "../../Components/Alert";
 
 interface Props {
   profile?: customerProfile;
@@ -27,17 +30,22 @@ export const Profile = (props: Props) => {
 
   return (
     <>
-      
       {person.cautionaryAlerts &&
-          person.cautionaryAlerts.map((cautionaryAlert, index) => {
-            return(
-              <Alert
-                  index={index}
-                  title = {`Warning: ${cautionaryAlert.alertCode}`}
-                  message = {`Added ${formatCautionaryAlertsDate(cautionaryAlert.startDate)} by ${cautionaryAlert.modifiedBy}. Last reviewed ${formatCautionaryAlertsDate(cautionaryAlert.dateModified)}.`}
-              />
-            )
-      })}
+        person.cautionaryAlerts.map((cautionaryAlert, index) => {
+          return (
+            <Alert
+              index={index}
+              title={`Warning: ${cautionaryAlert.alertCode}`}
+              message={`Added ${formatCautionaryAlertsDate(
+                cautionaryAlert.startDate
+              )} by ${
+                cautionaryAlert.modifiedBy
+              }. Last reviewed ${formatCautionaryAlertsDate(
+                cautionaryAlert.dateModified
+              )}.`}
+            />
+          );
+        })}
 
       <dl className="govuk-summary-list lbh-summary-list">
         <DescriptionListItem title="Name" testId="name">
