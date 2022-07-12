@@ -38,6 +38,7 @@ export const getPerson = async (
             },
           }
         );
+        break;
       case AcademyCT:
         response = await axios.get(
           `${process.env.SV_API_V1}/council-tax?id=${id}`,
