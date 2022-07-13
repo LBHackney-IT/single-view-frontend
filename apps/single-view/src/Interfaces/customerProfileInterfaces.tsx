@@ -1,3 +1,4 @@
+import { cautionaryAlert } from "./CautionaryAlertInterfaces";
 import { councilTaxAccount, knownAddress } from ".";
 
 export interface customerProfile {
@@ -14,6 +15,7 @@ export interface customerProfile {
   personTypes: string[] | null;
   niNo: string | null;
   nhsNumber: string | null;
+  cautionaryAlerts: cautionaryAlert[] | null;
   knownAddresses: knownAddress[] | null;
   isAMinor: boolean;
   councilTaxAccount: councilTaxAccount | null;

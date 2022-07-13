@@ -17,6 +17,14 @@ describe('Profile', () => {
       cy.get('.govuk-warning-text__text > :nth-child(2)').should('have.text', "If you have access to Jigsaw, please login here.", {timeout: 10000});
     });
 
+    it('displays cautionary alert warning title', ()=>{
+      cy.get('[data-testid="cautionaryAlert-alertCode"]').should('have.text', "Warning: Risk to adults", {timeout: 10000});
+    });
+
+    it('displays cautionary alert warning message', () => {
+      cy.get('[data-testid="cautionaryAlert-alertMessage"]').should('have.text', "Added 01 Mar 2018 by Luna Purry. Last reviewed 01 Feb 2020.");
+    });
+
     it('displays name', ()=>{
       cy.get('[data-testid="name"]').should('have.text', "Miss Luna Kitty", {timeout: 10000});
     });
@@ -57,7 +65,7 @@ describe('Profile', () => {
     });
     it('displays Council Tax Information', () => {
       cy.get('[data-testid="accountRef"]').should('have.text', "34596507", {timeout: 10000});
-      cy.get('[data-testid="accountBalance"]').should('have.text', 15465, {timeout: 10000});
+      cy.get('[data-testid="accountBalance"]').should('have.text', "15465", {timeout: 10000});
       cy.get('[data-testid="paymentMethod"]').should('have.text', "Direct Debit", {timeout: 10000});
       cy.get('[data-testid="propertyAddress"]').should('have.text', "123 Fake Street Springfield USA  SW19 1AA", {timeout: 10000});
     })
