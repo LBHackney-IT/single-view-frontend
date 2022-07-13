@@ -15,7 +15,7 @@ export const CouncilTaxInformation: React.FC<Props> = (props) => {
         {props.councilTaxAccount?.accountReference}
       </DescriptionListItem>
       <DescriptionListItem title="Balance" testId="accountBalance">
-        {props.councilTaxAccount?.accountBalance}
+        £{props.councilTaxAccount?.accountBalance}
       </DescriptionListItem>
       <DescriptionListItem title="Payment Method" testId="paymentMethod">
         {props.councilTaxAccount?.paymentMethod}
