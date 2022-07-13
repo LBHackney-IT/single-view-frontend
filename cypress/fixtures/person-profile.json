@@ -48,7 +48,18 @@
         "dateOfBirth": "1980-02-01T00:00:00Z",
         "niNo": null,
         "dateOfDeath": null,
-        "isAMinor": false
+        "isAMinor": false,
+        "cautionaryAlerts": [
+            {
+                "dateModified": "2020-02-01T00:00:00Z",
+                "modifiedBy": "Luna Purry",
+                "startDate": "2018-03-01T00:00:00Z",
+                "endDate": "2019-03-01T00:00:00Z",
+                "alertCode": "Risk to adults",
+                "description": "Description",
+                "reason": "Reason"
+            }
+        ]
     },
     "systemIds": [
         {
