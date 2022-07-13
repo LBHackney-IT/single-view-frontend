@@ -5,10 +5,10 @@ export const councilTaxAddressToString = (
 ): string | null => {
   if (!address) return null;
   return [
-    address.addressline1,
-    address.addressline2,
-    address.addressline3,
-    address.addressline4,
+    address.line1,
+    address.line2,
+    address.line3,
+    address.line4,
     address.postcode,
   ].join(" ");
 };

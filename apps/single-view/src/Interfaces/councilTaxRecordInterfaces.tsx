@@ -8,9 +8,9 @@ export interface councilTaxAccount {
 }
 
 export interface councilTaxAddress {
-  addressline1: string;
-  addressline2: string;
-  addressline3: string;
-  addressline4: string | null;
+  line1: string;
+  line2: string;
+  line3: string;
+  line4: string | null;
   postcode: string;
 }

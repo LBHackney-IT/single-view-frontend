@@ -40,9 +40,9 @@
         "paymentMethod": "Direct Debit",
         "accountBalance": 15465,
         "propertyAddress": {
-            "addressline1": "123 Fake Street",
-            "addressline2": "Springfield",
-            "addressline3": "USA",
+            "line1": "123 Fake Street",
+            "line2": "Springfield",
+            "line3": "USA",
             "postcode": "SW19 1AA"
         }},
         "dateOfBirth": "1980-02-01T00:00:00Z",
