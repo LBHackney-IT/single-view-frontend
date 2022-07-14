@@ -9,6 +9,7 @@ import { Center, Spinner } from "@mfe/common/lib/components";
 import { formatDate } from "@mfe/common/lib/utils";
 import { Alert } from "../../Components/Alert";
 import { CouncilTaxInformation } from "../../Components/CouncilTaxInformation";
+import { HousingBenefitsInformation } from "../../Components/HousingBenefitsInformation";
 
 interface Props {
   profile?: customerProfile;
@@ -97,6 +98,9 @@ export const Profile = (props: Props) => {
           {person.isAMinor ? "Y" : "N"}
         </DescriptionListItem>
         <CouncilTaxInformation councilTaxAccount={person.councilTaxAccount} />
+        <HousingBenefitsInformation
+          housingBenefitsAccount={person.housingBenefitsAccount}
+        />
       </dl>
     </>
   );
