@@ -52,8 +52,12 @@ export const HousingBenefitsInformation: React.FC<Props> = (props) => {
                 {benefit.description}
               </span>
               <span data-testid={`benefitFrequency_${index}`}>
-                <span className="govuk-!-font-weight-bold">Frequency</span> `
-                {benefit.frequency} {benefit.period}`
+                <span className="govuk-!-font-weight-bold">Frequency</span>{" "}
+                {benefit.frequency}
+              </span>
+              <span data-testid={`benefitPeriod_${index}`}>
+                <span className="govuk-!-font-weight-bold">Period</span>{" "}
+                {benefit.period}
               </span>
             </p>
           );
