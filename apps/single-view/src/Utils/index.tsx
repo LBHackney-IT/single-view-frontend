@@ -1,3 +1,4 @@
+export * from "./formatCurrency";
 export * from "./formatDates";
 export * from "./getCookie";
 export * from "./getHackneyToken";
