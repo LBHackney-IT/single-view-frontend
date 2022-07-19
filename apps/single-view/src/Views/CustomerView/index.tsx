@@ -113,7 +113,7 @@ export const CustomerView = () => {
         </ul>
 
         <section className="govuk-tabs__panel" id="profile">
-          <Profile profile={person} />
+          <Profile profile={person} systemIds={systemIds} />
         </section>
         <section className="govuk-tabs__panel" id="notes">
           <Notes
