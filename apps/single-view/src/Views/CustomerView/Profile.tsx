@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
-import { customerProfile } from "../../Interfaces/customerProfileInterfaces";
+import { customerProfile, SystemId } from "../../Interfaces";
 import {
   formatCautionaryAlertsDate,
   formatDateOfBirth,
@@ -13,14 +13,20 @@ import { HousingBenefitsInformation } from "../../Components/HousingBenefitsInfo
 
 interface Props {
   profile?: customerProfile;
+  systemIds?: Array<SystemId>;
 }
 
 export const Profile = (props: Props) => {
   const [person, setPerson] = useState<customerProfile | undefined>();
+  const [systemIds, setSystemIds] = useState<Array<SystemId> | undefined>();
 
   useEffect(() => {
     setPerson(props.profile);
   }, [props.profile]);
+
+  useEffect(() => {
+    setSystemIds(props.systemIds);
+  }, [props.systemIds]);
 
   if (typeof person == "undefined") {
     return (
@@ -97,6 +103,19 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Is a Minor" testId="isMinor">
           {person.isAMinor ? "Y" : "N"}
         </DescriptionListItem>
+        <h3>System Ids</h3>
+        {systemIds &&
+          systemIds.map((systemId) => {
+            return (
+              <DescriptionListItem
+                title={systemId.systemName}
+                key={systemId.id}
+                testId={systemId.systemName}
+              >
+                {systemId.id}
+              </DescriptionListItem>
+            );
+          })}
         <CouncilTaxInformation councilTaxAccount={person.councilTaxAccount} />
         <HousingBenefitsInformation
           housingBenefitsAccount={person.housingBenefitsAccount}
