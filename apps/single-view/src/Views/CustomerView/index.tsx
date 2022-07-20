@@ -12,11 +12,14 @@ import {
 } from "../../Interfaces";
 import { NotFound } from "../../Components";
 import { SystemId } from "../../Interfaces/systemIdInterface";
+import { Cases } from "./Cases";
+import id from "date-fns/esm/locale/id/index.js";
 
 export const CustomerView = () => {
   const { dataSource, id } = useParams<UrlParams>();
   const [person, setPerson] = useState<customerProfile | null>();
   const [mmhUrl, setMhUrl] = useState<string>("");
+  const [jigsawId, setJigsawId] = useState<string>("");
   const [dataSourceError, setDataSourceError] =
     useState<Array<SystemId> | null>();
   const [systemIds, setSystemIds] = useState<Array<SystemId>>();
@@ -27,6 +30,15 @@ export const CustomerView = () => {
       setPerson(person?.customer);
       setSystemIds(person?.systemIds);
       setDataSourceError(person?.systemIds?.filter((id: SystemId) => id.error));
+      if (dataSource == Jigsaw) {
+        setJigsawId(id);
+      } else {
+        var jigsawId = person?.systemIds.find(
+          (id: SystemId) => id.systemName == Jigsaw
+        );
+        if (jigsawId) setJigsawId(jigsawId.id);
+      }
+
       var mmhId = person?.systemIds?.find(
         (id: SystemId) => id.systemName == Housing
       );
@@ -110,6 +122,11 @@ export const CustomerView = () => {
               Notes
             </a>
           </li>
+          <li className="govuk-tabs__list-item govuk-tabs__list-item--selected">
+            <a className="govuk-tabs__tab" href="#cases">
+              Active Case
+            </a>
+          </li>
         </ul>
 
         <section className="govuk-tabs__panel" id="profile">
@@ -120,6 +137,9 @@ export const CustomerView = () => {
             systemIds={systemIds}
             isHousing={person?.dataSource == "PersonAPI"}
           />
+        </section>
+        <section className="govuk-tabs__panel" id="cases">
+          <Cases customerId={jigsawId} />
         </section>
       </div>
     </>

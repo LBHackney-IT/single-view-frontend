@@ -1,5 +1,5 @@
 export interface jigsawCasesResponse {
-  cases: Array<Case>;
+  currentCase: Case;
   placementInformation: Array<Placement>;
   caseOverviews: Array<CaseOverview>;
 }
