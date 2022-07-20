@@ -9,7 +9,7 @@
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4PKCNV7HK"></script>
   <script>
-    if (process.env.APP_ENV == "production") {
+    if ('<%= APP_ENV %>' == "production") {
       window.dataLayer = window.dataLayer || [];
       function
         gtag() {
@@ -91,6 +91,9 @@
   <script type="systemjs-importmap" src="<%= AUTH_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
   <script type="systemjs-importmap" src="<%= HEADER_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
   <script type="systemjs-importmap" src="<%= SINGLE_VIEW_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
+  <script type="systemjs-importmap" src="<%= APP_ENV %>/import-map.json"
+    crossorigin="use-credentials"></script>
+  
 
   <!--
     If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
