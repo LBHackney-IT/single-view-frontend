@@ -1,7 +1,7 @@
 export interface jigsawCasesResponse {
   currentCase: Case;
   placementInformation: Array<Placement>;
-  caseOverviews: Array<CaseOverview>;
+  caseOverview: CaseOverview;
 }
 
 export interface Case {
@@ -17,7 +17,7 @@ export interface CaseOverview {
   id: string;
   currentFlowchartPosition: string;
   currentDecision: string;
-  houseHoldCompoistion: string;
+  houseHoldComposition: string;
 }
 
 export interface Placement {
