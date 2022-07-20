@@ -6,7 +6,7 @@ interface Props {
   jigsawCaseResponse: jigsawCasesResponse | null;
 }
 
-export const CouncilTaxInformation: React.FC<Props> = (props) => {
+export const CaseSummary: React.FC<Props> = (props) => {
   return (
     <>
       <h3>Case Summary</h3>
@@ -22,8 +22,8 @@ export const CouncilTaxInformation: React.FC<Props> = (props) => {
       <DescriptionListItem title="Assigned To" testId="assignedTo">
         {props.jigsawCaseResponse?.currentCase.assignedTo}
       </DescriptionListItem>
-      <DescriptionListItem title="Case Id" testId="accountRef">
-        {props.jigsawCaseResponse?.currentCase.id}
+      <DescriptionListItem title="V2 Legacy Case?" testId="isV2Legacy">
+        {props.jigsawCaseResponse?.currentCase.isV2LegacyCase.toString()}
       </DescriptionListItem>
       <h4>Case Overview</h4>
       <DescriptionListItem
@@ -44,30 +44,42 @@ export const CouncilTaxInformation: React.FC<Props> = (props) => {
       <h4>Placement Details</h4>
       {props.jigsawCaseResponse?.placementInformation.map(
         (placement: Placement) => {
-          <DescriptionListItem title="Placement Type" testId="placementType">
-            {placement.placementType}
-          </DescriptionListItem>;
-          <DescriptionListItem title="Full Address" testId="fullAddress">
-            {placement.fullAddressDetails}
-          </DescriptionListItem>;
-          <DescriptionListItem title="Duty" testId="placementDuty">
-            {placement.placementDuty}
-          </DescriptionListItem>;
-          <DescriptionListItem
-            title="Placement Duty Full Name"
-            testId="placementDutyFullName"
-          >
-            {placement.placementDutyFullName}
-          </DescriptionListItem>;
-          <DescriptionListItem title="Usage" testId="placementUsage">
-            {placement.usage}
-          </DescriptionListItem>;
-          <DescriptionListItem
-            title="DCLG Classification"
-            testId="dclgClassification"
-          >
-            {placement.dclgClassificationType}
-          </DescriptionListItem>;
+          return (
+            <>
+              <DescriptionListItem
+                title="Placement Type"
+                testId="placementType"
+              >
+                {placement.placementType}
+              </DescriptionListItem>
+              <DescriptionListItem title="Full Address" testId="fullAddress">
+                {/* TODO: Write Utility Function To Parse Address */}
+                {"Address"}
+              </DescriptionListItem>
+
+              <DescriptionListItem title="Duty" testId="placementDuty">
+                {placement.placementDuty}
+              </DescriptionListItem>
+
+              <DescriptionListItem
+                title="Placement Duty Full Name"
+                testId="placementDutyFullName"
+              >
+                {placement.placementDutyFullName}
+              </DescriptionListItem>
+
+              <DescriptionListItem title="Usage" testId="placementUsage">
+                {placement.usage}
+              </DescriptionListItem>
+
+              <DescriptionListItem
+                title="DCLG Classification"
+                testId="dclgClassification"
+              >
+                {placement.dclgClassificationType}
+              </DescriptionListItem>
+            </>
+          );
         }
       )}
     </>

@@ -4,14 +4,14 @@
             "statusName": "Relief",
             "dateOfApproach": "2022-05-05T01:00:00",
             "isCurrent": true,
-            "assignedTo": "string",
-            "isV2LegacyCase": false
+            "assignedTo": "Agent Carter",
+            "isV2LegacyCase": true
     },
     "caseOverview": {
             "id": 641056,
             "currentFlowchartPosition": "Relief",
             "currentDecision": "56 days relief duty - help to secure accommodation s.189B",
-            "householdComposition": "F"
+            "houseHoldComposition": "F"
     },
     "placementInformation": [
         {
