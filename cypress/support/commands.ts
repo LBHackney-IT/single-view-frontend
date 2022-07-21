@@ -79,8 +79,7 @@ const visitAs = (
   role: AuthRoles,
   options?: Partial<Cypress.VisitOptions>
 ) => {
-  cy.clearCookies();
-  cy.setCookie('jigsawToken', 'testValue');
+  cy.clearCookies();  
   cy.setCookie(
     'hackneyToken',
     makeToken({
