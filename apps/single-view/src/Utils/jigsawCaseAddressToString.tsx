@@ -13,5 +13,5 @@ export const jigsawAddressToString = (
     address.town,
     address.postcode,
     address.county,
-  ].join(", ");
+  ].join(" ");
 };
