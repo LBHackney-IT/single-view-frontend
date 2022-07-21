@@ -18,6 +18,9 @@ describe('Cases', () => {
     it('displays the case Status', ()=>{
       cy.get('[data-testid="statusName"]').should('have.text', "Relief", {timeout: 10000});
     }); 
+     it('displays the case date of approach', ()=>{
+      cy.get('[data-testid="dateOfApproach"]').should('have.text', "05/05/2022 1:00", {timeout: 10000});
+    }); 
     it('displays the Assigned Agent', ()=>{
       cy.get('[data-testid="assignedTo"]').should('have.text', "Agent Carter", {timeout: 10000});
     }); 

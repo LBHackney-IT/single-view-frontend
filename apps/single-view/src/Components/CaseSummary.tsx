@@ -1,5 +1,6 @@
 import React from "react";
 import { jigsawCasesResponse, Placement } from "../Interfaces";
+import { formatDate } from "../Utils";
 import { jigsawAddressToString } from "../Utils/jigsawCaseAddressToString";
 import { DescriptionListItem } from "./DescriptionListItem";
 
@@ -18,7 +19,7 @@ export const CaseSummary: React.FC<Props> = (props) => {
         {props.jigsawCaseResponse?.currentCase.statusName}
       </DescriptionListItem>
       <DescriptionListItem title="Date of Approach" testId="dateOfApproach">
-        {props.jigsawCaseResponse?.currentCase.dateOfApproach}
+        {formatDate(props.jigsawCaseResponse?.currentCase.dateOfApproach || "")}
       </DescriptionListItem>
       <DescriptionListItem title="Assigned To" testId="assignedTo">
         {props.jigsawCaseResponse?.currentCase.assignedTo}
