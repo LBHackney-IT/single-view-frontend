@@ -124,7 +124,7 @@ export const CustomerView = () => {
           </li>
           <li className="govuk-tabs__list-item govuk-tabs__list-item--selected">
             <a className="govuk-tabs__tab" href="#cases">
-              Active Case
+              Active Homelessness Case
             </a>
           </li>
         </ul>

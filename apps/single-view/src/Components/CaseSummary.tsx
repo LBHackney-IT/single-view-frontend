@@ -1,5 +1,6 @@
 import React from "react";
 import { jigsawCasesResponse, Placement } from "../Interfaces";
+import { jigsawAddressToString } from "../Utils/jigsawCaseAddressToString";
 import { DescriptionListItem } from "./DescriptionListItem";
 
 interface Props {
@@ -53,8 +54,7 @@ export const CaseSummary: React.FC<Props> = (props) => {
                 {placement.placementType}
               </DescriptionListItem>
               <DescriptionListItem title="Full Address" testId="fullAddress">
-                {/* TODO: Write Utility Function To Parse Address */}
-                {"Address"}
+                {jigsawAddressToString(placement.fullAddressDetails)}
               </DescriptionListItem>
 
               <DescriptionListItem title="Duty" testId="placementDuty">

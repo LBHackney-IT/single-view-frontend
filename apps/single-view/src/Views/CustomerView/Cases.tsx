@@ -1,6 +1,5 @@
 import { Center, Spinner } from "@mfe/common/lib/components";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { getCasesByCustomerId } from "../../Gateways/JigsawCases";
 import { getCookie } from "../../Utils";
 import { jigsawCasesResponse, UrlParams } from "../../Interfaces";
@@ -41,9 +40,7 @@ export const Cases = (props: Props): JSX.Element => {
 
   {
     return cases.currentCase ? (
-      <div className="govuk-inset-text lbh-inset-text" data-testid="notFound">
-        <CaseSummary jigsawCaseResponse={cases} />
-      </div>
+      <CaseSummary jigsawCaseResponse={cases} />
     ) : (
       <div className="govuk-inset-text lbh-inset-text" data-testid="notFound">
         There were no active cases found.
