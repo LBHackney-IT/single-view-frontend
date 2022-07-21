@@ -5,7 +5,7 @@ describe('Notes', () => {
     before(() => {
       cy.intercept('GET', '**/getPersonApiCustomer*', { fixture: 'person-profile.json' }).as('getPerson');
       cy.intercept('GET', '**/getJigsawCases*', { fixture: 'person-cases.json' }).as('getCases');
-      cy.visitAs('/customers/PersonAPI/6d7ed1a4#cases', AuthRoles.UnrestrictedGroup);
+      cy.visitAs('/customers/Jigsaw/6d7ed1a4#cases', AuthRoles.UnrestrictedGroup);
     });
 
     it('displays the cases tab', () => {

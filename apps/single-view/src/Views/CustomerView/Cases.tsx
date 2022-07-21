@@ -39,7 +39,7 @@ export const Cases = (props: Props): JSX.Element => {
   }
 
   {
-    return cases.currentCase ? (
+    return cases.currentCase != null ? (
       <CaseSummary jigsawCaseResponse={cases} />
     ) : (
       <div className="govuk-inset-text lbh-inset-text" data-testid="notFound">
