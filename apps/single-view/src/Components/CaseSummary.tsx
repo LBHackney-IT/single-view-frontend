@@ -67,6 +67,9 @@ export const CaseSummary: React.FC<Props> = (props) => {
               >
                 {placement.placementDutyFullName}
               </DescriptionListItem>
+              {console.log(
+                `----DEBuG --- Placement duty is ${placement.placementDutyFullName}`
+              )}
 
               <DescriptionListItem title="Usage" testId="placementUsage">
                 {placement.usage}
