@@ -22,4 +22,5 @@ export interface knownAddress {
   currentAddress: boolean;
   startDate: string;
   endDate: string | null;
+  dataSourceName: string;
 }
