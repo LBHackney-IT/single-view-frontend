@@ -73,13 +73,18 @@ export const Profile = (props: Props) => {
                 </span>
                 <br />
                 <span data-testid="tenureStartDate">
-                  <span className="govuk-!-font-weight-bold">Start date</span>{" "}
+                  <span className="govuk-!-font-weight-bold">Start date:</span>{" "}
                   {formatDate(address.startDate) || "N/A"}
                 </span>
                 <br />
                 <span data-testid="tenureEndDate">
-                  <span className="govuk-!-font-weight-bold">End date</span>{" "}
+                  <span className="govuk-!-font-weight-bold">End date:</span>{" "}
                   {formatDate(address.endDate) || "N/A"}
+                </span>
+                <br />
+                <span data-testid="tenureDataSource">
+                  <span className="govuk-!-font-weight-bold">Data Source:</span>{" "}
+                  {address.dataSourceName}
                 </span>
               </p>
             );
