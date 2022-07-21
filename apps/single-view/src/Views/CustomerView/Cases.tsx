@@ -13,11 +13,14 @@ export const Cases = (props: Props): JSX.Element => {
   const [cases, setCases] = useState<jigsawCasesResponse>();
 
   const loadCases = async (customerId: string): Promise<void> => {
+    let cases = null;
+
+    if (!customerId) {
+      return;
+    }
+
     try {
-      let cases = await getCasesByCustomerId(
-        props.customerId || "",
-        getCookie("jigsawToken")
-      );
+      cases = await getCasesByCustomerId(customerId, getCookie("jigsawToken"));
       setCases(cases);
     } catch (e: any) {
       console.log(`Error is ${e.message}`);
