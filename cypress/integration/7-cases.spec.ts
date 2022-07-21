@@ -11,9 +11,6 @@ describe('Notes', () => {
     it('displays the cases tab', () => {
       cy.get('#cases', { timeout: 10000 })
         .should('be.visible')
-    });
-    
-
-    // TODO: Add tests of note display
+    });     
   });
 });
