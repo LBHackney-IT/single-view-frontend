@@ -138,11 +138,9 @@ export const CustomerView = () => {
             isHousing={person?.dataSource == "PersonAPI"}
           />
         </section>
-        {jigsawId && (
-          <section className="govuk-tabs__panel" id="cases">
-            <Cases customerId={jigsawId} />
-          </section>
-        )}
+        <section className="govuk-tabs__panel" id="cases">
+          <Cases customerId={jigsawId} />
+        </section>
       </div>
     </>
   );
