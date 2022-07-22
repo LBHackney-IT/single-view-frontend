@@ -27,28 +27,6 @@ const App = (): JSX.Element => {
 
   return (
     <>
-      {isProduction() && (
-        <>
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-R4PKCNV7HK"
-          ></script>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-R4PKCNV7HK', { page_path: window.location.pathname });
-                history.listen((location) => {
-                if (window.ga) {
-                 window.ga('send', 'pageview', location.pathname);
-                }
-                });
-               `,
-            }}
-          />
-        </>
-      )}
       <Router>
         <Switch>
           <Route exact path="/">

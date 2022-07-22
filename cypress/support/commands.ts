@@ -79,12 +79,13 @@ const visitAs = (
   role: AuthRoles,
   options?: Partial<Cypress.VisitOptions>
 ) => {
-  cy.clearCookies();
+  cy.clearCookies();  
   cy.setCookie(
     'hackneyToken',
     makeToken({
       groups: roleConfigurations[role],
     })
+    
   );
   cy.getCookie('hackneyToken').should(
     'have.property',

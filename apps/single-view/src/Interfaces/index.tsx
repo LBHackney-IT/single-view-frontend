@@ -8,6 +8,7 @@ export * from "./matchedRecordInterfaces";
 export * from "./councilTaxRecordInterfaces";
 export * from "./customerResponseInterface";
 export * from "./dataSources";
+export * from "./jigsawCasesInterfaces";
 
 export interface UrlParams {
   id: string;

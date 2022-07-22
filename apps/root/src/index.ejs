@@ -6,6 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Single View - Hackney Council</title>
 
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4PKCNV7HK"></script>
+  <script>
+    if ('<%= APP_ENV %>' == "production") {
+      window.dataLayer = window.dataLayer || [];
+      function
+        gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-R4PKCNV7HK')
+    }
+    
+  </script>
+  
+          
+  
+
   <!--
     Remove this if you only support browsers that support async/await.
     This is needed by babel to share largeish helper code for compiling async/await in older
@@ -73,6 +91,9 @@
   <script type="systemjs-importmap" src="<%= AUTH_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
   <script type="systemjs-importmap" src="<%= HEADER_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
   <script type="systemjs-importmap" src="<%= SINGLE_VIEW_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
+  <script type="systemjs-importmap" src="<%= APP_ENV %>/import-map.json"
+    crossorigin="use-credentials"></script>
+  
 
   <!--
     If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded

@@ -5,7 +5,7 @@ export const formatDateOfBirth = (dob: string): string => {
   return [day, month, year].join("/");
 };
 
-export const formatCautionaryAlertsDate = (date: string): string => {
+export const formatCautionaryAlertsDate = (date: string | null): string => {
   if (!date) return "undefined";
   let d = new Date(date);
 
