@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
-import { customerProfile } from "../../Interfaces/customerProfileInterfaces";
+import { customerProfile, SystemId } from "../../Interfaces";
 import {
   formatCautionaryAlertsDate,
   formatDateOfBirth,
@@ -9,17 +9,24 @@ import { Center, Spinner } from "@mfe/common/lib/components";
 import { formatDate } from "@mfe/common/lib/utils";
 import { Alert } from "../../Components/Alert";
 import { CouncilTaxInformation } from "../../Components/CouncilTaxInformation";
+import { HousingBenefitsInformation } from "../../Components/HousingBenefitsInformation";
 
 interface Props {
   profile?: customerProfile;
+  systemIds?: Array<SystemId>;
 }
 
 export const Profile = (props: Props) => {
   const [person, setPerson] = useState<customerProfile | undefined>();
+  const [systemIds, setSystemIds] = useState<Array<SystemId> | undefined>();
 
   useEffect(() => {
     setPerson(props.profile);
   }, [props.profile]);
+
+  useEffect(() => {
+    setSystemIds(props.systemIds);
+  }, [props.systemIds]);
 
   if (typeof person == "undefined") {
     return (
@@ -66,13 +73,18 @@ export const Profile = (props: Props) => {
                 </span>
                 <br />
                 <span data-testid="tenureStartDate">
-                  <span className="govuk-!-font-weight-bold">Start date</span>{" "}
+                  <span className="govuk-!-font-weight-bold">Start date:</span>{" "}
                   {formatDate(address.startDate) || "N/A"}
                 </span>
                 <br />
                 <span data-testid="tenureEndDate">
-                  <span className="govuk-!-font-weight-bold">End date</span>{" "}
+                  <span className="govuk-!-font-weight-bold">End date:</span>{" "}
                   {formatDate(address.endDate) || "N/A"}
+                </span>
+                <br />
+                <span data-testid="tenureDataSource">
+                  <span className="govuk-!-font-weight-bold">Data Source:</span>{" "}
+                  {address.dataSourceName}
                 </span>
               </p>
             );
@@ -96,7 +108,23 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Is a Minor" testId="isMinor">
           {person.isAMinor ? "Y" : "N"}
         </DescriptionListItem>
+        <h3>System Ids</h3>
+        {systemIds &&
+          systemIds.map((systemId) => {
+            return (
+              <DescriptionListItem
+                title={systemId.systemName}
+                key={systemId.id}
+                testId={systemId.systemName}
+              >
+                {systemId.id}
+              </DescriptionListItem>
+            );
+          })}
         <CouncilTaxInformation councilTaxAccount={person.councilTaxAccount} />
+        <HousingBenefitsInformation
+          housingBenefitsAccount={person.housingBenefitsAccount}
+        />
       </dl>
     </>
   );

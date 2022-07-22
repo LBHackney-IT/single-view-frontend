@@ -6,7 +6,7 @@ describe('Cases', () => {
       cy.intercept('GET', "**/getJigsawCustomer*", {fixture: 'person-profile.json'}).as('getJigsawCustomer')   
       cy.intercept('GET', '**/getJigsawCases*', { fixture: 'person-cases.json' }).as("getJigsawCases")
       cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup);
-      cy.setCookie('jigsawToken', 'testValue')
+      cy.setCookie('jigsawToken', 'testValue');
     });
 
     it('displays the cases tab', () => {

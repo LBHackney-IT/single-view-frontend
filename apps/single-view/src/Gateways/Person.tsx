@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   AcademyCT,
+  Benefits,
   customerResponse,
   Housing,
   Jigsaw,
@@ -41,7 +42,17 @@ export const getPerson = async (
         break;
       case AcademyCT:
         response = await axios.get(
-          `${process.env.SV_API_V1}/council-tax?id=${id}`,
+          `${process.env.SV_API_V1}/academy/council-tax?id=${id}`,
+          {
+            headers: {
+              Authorization: `${getToken()}`,
+            },
+          }
+        );
+        break;
+      case Benefits:
+        response = await axios.get(
+          `${process.env.SV_API_V1}/academy/benefits?id=${id}`,
           {
             headers: {
               Authorization: `${getToken()}`,
