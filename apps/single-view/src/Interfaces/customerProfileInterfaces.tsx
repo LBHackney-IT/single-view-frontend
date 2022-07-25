@@ -1,5 +1,5 @@
 import { cautionaryAlert } from "./CautionaryAlertInterfaces";
-import { councilTaxAccount, knownAddress } from ".";
+import { councilTaxAccount, knownAddress, contactDetail } from ".";
 import { housingBenefitsAccount } from "./housingBenefitsRecordInterfaces";
 
 export interface customerProfile {
@@ -17,6 +17,7 @@ export interface customerProfile {
   niNo: string | null;
   nhsNumber: string | null;
   cautionaryAlerts: cautionaryAlert[] | null;
+  contactDetails: contactDetail[] | null;
   knownAddresses: knownAddress[] | null;
   isAMinor: boolean;
   councilTaxAccount: councilTaxAccount | null;
