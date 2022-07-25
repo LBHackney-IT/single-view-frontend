@@ -1,5 +1,3 @@
-import { NullLiteral } from "@babel/types";
-
 export interface housingSearchPerson {
   id: string;
   title: string;
@@ -41,14 +39,35 @@ export interface knownAddress {
 }
 */
 
-export interface contactDetail {
+export interface allContactDetails {
+  dataSourceName: string;
+  contactDetails: contactDetails[];
+}
+
+export interface contactDetails {
   id: string;
   targetId: string;
   targetType: number;
-  contactInformation: Array<object> | null; // CHECK! Somehow?
+  contactInformation: contactInformation;
   sourceServiceArea: string | null;
   recordValidUntil: string | null;
   isActive: boolean;
   createdBy: string | null;
   lastModified: string | null;
+}
+
+// {
+//   "contactType": 0,
+//   "subType": 1,
+//   "value": "(07700) 900 557",
+//   "description": "",
+//   "addressExtended": null
+// }
+
+export interface contactInformation {
+  contactType: number;
+  subType: number | null;
+  value: string;
+  description: string | null;
+  addressExtended: object | null;
 }
