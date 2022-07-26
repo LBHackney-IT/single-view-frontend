@@ -64,22 +64,20 @@ export const Profile = (props: Props) => {
             {formatDateOfBirth(person.dateOfBirth)}
           </DescriptionListItem>
         )}
-        {(
-          <DescriptionListItem title="Contact Details" testId="contactDetails">
-            {person.allContactDetails &&
-              person.allContactDetails.map((allContactDetail) => {
-                console.log("Contact Information", allContactDetail)
 
-                return allContactDetail.contactDetails.map((contactDetail) => {
-                  return (
-                    <p>{allContactDetail.dataSourceName}:  {contactDetail.contactInformation.value}</p>
-                    )
-                })
-              })
-            }
+        <DescriptionListItem title="Contact Details" testId="contactDetails">
+          {person.allContactDetails &&
+            person.allContactDetails.map((contactDetail, index) => {
+              console.log(contactDetail)
+              return <div key={index} className="contact-detail">
+                  <p><span className="govuk-!-font-weight-bold">{contactDetail.contactType} ({contactDetail.subType})</span>{contactDetail.description && " - " + contactDetail.description}:<br/>
+                  {contactDetail.value}</p>
+                </div>
 
-          </DescriptionListItem>
-        )}
+            })
+          }
+        </DescriptionListItem>
+
         <DescriptionListItem title="Tenures" testId="tenures">
           {person.knownAddresses?.map((address, index) => {
             return (
