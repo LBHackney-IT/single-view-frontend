@@ -39,7 +39,7 @@ describe('Profile', () => {
     });
 
     it('displays contact details', ()=>{
-      cy.get('[data-testid="contactDetails"]').should('have.text', "phone (mobile):(07700) 900 557", {timeout: 10000});
+      cy.get('[data-testid="contactDetails"]').should('have.text', "phone (mobile)(07700) 900 557", {timeout: 10000});
     });
 
     it('displays tenures', ()=>{
