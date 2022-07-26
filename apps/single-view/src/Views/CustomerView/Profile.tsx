@@ -59,16 +59,14 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Name" testId="name">
           {person.title} {person.firstName} {person.surname}
         </DescriptionListItem>
-
-        {(
-          (person.preferredFirstName && (person.preferredFirstName != person.firstName)) ||
-          (person.preferredSurname && (person.preferredSurname != person.surname))
-        ) && (
+        {((person.preferredFirstName &&
+          person.preferredFirstName != person.firstName) ||
+          (person.preferredSurname &&
+            person.preferredSurname != person.surname)) && (
           <DescriptionListItem title="Preferred Name" testId="preferredName">
             {person.title} {person.preferredFirstName} {person.preferredSurname}
           </DescriptionListItem>
         )}
-        
 
         {person.dateOfBirth && (
           <DescriptionListItem title="Date of Birth" testId="dateOfBirth">
@@ -79,14 +77,20 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Contact Details" testId="contactDetails">
           {person.allContactDetails &&
             person.allContactDetails.map((contactDetail, index) => {
-              console.log(contactDetail)
-              return <div key={index} className="contact-detail">
-                  <p><span className="govuk-!-font-weight-bold">{contactDetail.contactType} ({contactDetail.subType})</span>{contactDetail.description && " - " + contactDetail.description}:<br/>
-                  {contactDetail.value}</p>
+              return (
+                <div key={index} className="contact-detail">
+                  <p>
+                    <span className="govuk-!-font-weight-bold">
+                      {contactDetail.contactType} ({contactDetail.subType})
+                    </span>
+                    {contactDetail.description &&
+                      " - " + contactDetail.description + ":"}
+                    <br />
+                    {contactDetail.value}
+                  </p>
                 </div>
-
-            })
-          }
+              );
+            })}
         </DescriptionListItem>
 
         <DescriptionListItem title="Tenures" testId="tenures">
