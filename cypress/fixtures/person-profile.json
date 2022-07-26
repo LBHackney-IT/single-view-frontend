@@ -24,17 +24,18 @@
                 "dataSourceName": "PersonAPI"
             }
         ],
-        "contactDetails": {
-            "id": "00000000-0000-0000-0000-000000000000",
-            "targetId": "00000000-0000-0000-0000-000000000000",
-            "targetType": "person",
-            "contactInformation": null,
-            "sourceServiceArea": null,
-            "recordValidUntil": null,
-            "isActive": false,
-            "createdBy": null,
-            "lastModified": null
-        },
+        "allContactDetails": [
+            {
+                "dataSourceName": "PersonAPI",
+                "isActive": true,
+                "sourceServiceArea": "Housing",
+                "contactType": "phone",
+                "subType": "mobile",
+                "value": "(07700) 900 557",
+                "description": "",
+                "addressExtended": null
+            }
+        ],
         "councilTaxAccount": {
         "accountReference": "34596507",
         "accountCheckDigit": "5",

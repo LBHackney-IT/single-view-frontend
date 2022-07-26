@@ -59,6 +59,17 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Name" testId="name">
           {person.title} {person.firstName} {person.surname}
         </DescriptionListItem>
+
+        {(
+          (person.preferredFirstName && (person.preferredFirstName != person.firstName)) ||
+          (person.preferredSurname && (person.preferredSurname != person.surname))
+        ) && (
+          <DescriptionListItem title="Preferred Name" testId="preferredName">
+            {person.title} {person.preferredFirstName} {person.preferredSurname}
+          </DescriptionListItem>
+        )}
+        
+
         {person.dateOfBirth && (
           <DescriptionListItem title="Date of Birth" testId="dateOfBirth">
             {formatDateOfBirth(person.dateOfBirth)}

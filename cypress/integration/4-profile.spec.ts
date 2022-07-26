@@ -29,14 +29,18 @@ describe('Profile', () => {
       cy.get('[data-testid="name"]').should('have.text', "Miss Luna Kitty", {timeout: 10000});
     });
 
+    it('displays preferred name', ()=>{
+      cy.get('[data-testid="preferredName"]').should('have.text', "Miss Luna Purry", {timeout: 10000});
+    });
+
 
     it('displays date of birth', ()=>{
       cy.get('[data-testid="dateOfBirth"]').should('have.text', "01/02/1980", {timeout: 10000});
     });
 
-    // it('displays contact details', ()=>{
-    //   cy.get('[data-testid="contactDetailsPhoneNumber"]').should('have.text', "Phone: 031415926535", {timeout: 10000});
-    // });
+    it('displays contact details', ()=>{
+      cy.get('[data-testid="contactDetails"]').should('have.text', "phone (mobile):(07700) 900 557", {timeout: 10000});
+    });
 
     it('displays tenures', ()=>{
       cy.get('[data-testid="tenureFullAddress"]').should('have.text', "123 Cute Street, M3 0W", {timeout: 10000});

@@ -8,7 +8,7 @@ export interface customerProfile {
   firstName: string;
   dataSource: string;
   surname: string;
-  preferredFirstname: string | null;
+  preferredFirstName: string | null;
   preferredSurname: string | null;
   dateOfBirth: string;
   dateofDeath: string | null;
