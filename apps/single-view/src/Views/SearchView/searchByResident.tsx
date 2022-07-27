@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { SearchResident } from "../../Gateways/SearchResident";
-import { housingSearchPerson } from "../../Interfaces";
+import { housingSearchPerson, housingSearchResults } from "../../Interfaces";
 import { getCookie } from "../../Utils/getCookie";
 import { Input } from "../../Components";
 
 interface myProps {
-  setResultsFunction: (searchResults: housingSearchPerson[]) => void;
+  setResultsFunction: (searchResults: housingSearchResults) => void;
 }
 
 export const SearchByResident = (props: myProps): JSX.Element => {
@@ -27,7 +27,8 @@ export const SearchByResident = (props: myProps): JSX.Element => {
         firstName.trim(),
         lastName.trim(),
         joinAddresses(),
-        getCookie("jigsawToken")
+        getCookie("jigsawToken"),
+        null
       );
       props.setResultsFunction(searchResults);
       setIsSearching(false);
