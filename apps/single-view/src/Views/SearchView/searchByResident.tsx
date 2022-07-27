@@ -25,12 +25,16 @@ export const SearchByResident = (props: myProps): JSX.Element => {
 
   const validateAndSetDateOfBirth = (dateOfBirth: string) => {
     const dateOfBirthYear = parseInt(dateOfBirth.split("-")[0]);
+    const dateOfBirthMonth = parseInt(dateOfBirth.split("-")[1]);
+    const dateOfBirthDay = parseInt(dateOfBirth.split("-")[2]);
     const currentYear = new Date().getFullYear();
 
     setDateOfBirthError(dateOfBirthYear > currentYear);
 
     if (!dateOfBirthError) {
-      setDateOfBirth(dateOfBirth);
+      setDateOfBirth(
+        `${dateOfBirthDay}/${dateOfBirthMonth}/${dateOfBirthYear}`
+      );
     }
   };
 
@@ -40,6 +44,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
         firstName.trim(),
         lastName.trim(),
         joinAddresses(),
+        dateOfBirth,
         getCookie("jigsawToken")
       );
       props.setResultsFunction(searchResults);

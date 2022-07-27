@@ -7,9 +7,13 @@ export const SearchResident = async (
   firstName: string,
   lastName: string,
   address: string | null,
-  jigsawToken: string | null
+  jigsawToken: string | null,
+  dateOfBirth: string | null
 ): Promise<housingSearchPerson[]> => {
   let requestUrl = `${process.env.SV_API_V1}/search?firstName=${firstName}&lastName=${lastName}`;
+  if (dateOfBirth) {
+    requestUrl += `&dateOfBirth=${dateOfBirth}`;
+  }
   if (jigsawToken) {
     requestUrl += `&redisId=${jigsawToken}`;
   }
