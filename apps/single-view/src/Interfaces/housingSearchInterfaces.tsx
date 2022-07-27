@@ -26,11 +26,14 @@ export interface knownAddress {
 }
 
 export interface contactDetail {
-  contactType: number;
-  subType: number | null;
-  value: string;
-  description: string | null;
   addressExtended: object | null;
+  contactType: number;
+  dataSourceName: string;
+  description: string | null;
+  isActive: boolean;
+  sourceServiceArea: string;
+  subType: string | null;
+  value: string;
 }
 
 export interface sourceServiceArea {

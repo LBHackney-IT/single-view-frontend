@@ -39,7 +39,10 @@ describe('Profile', () => {
     });
 
     it('displays contact details', ()=>{
-      cy.get('[data-testid="contactDetails"]').should('have.text', "phone (mobile)(07700) 900 557", {timeout: 10000});
+      cy.get('[data-testid="contactDetailsContactType"]').should('have.text', "phone (mobile)", {timeout: 10000});
+      cy.get('[data-testid="contactDetailsDescription"]').should('have.text', " - Personal phone:", {timeout: 10000});
+      cy.get('[data-testid="contactDetailsValue"]').should('have.text', "(07700) 900 557", {timeout: 10000});
+      cy.get('[data-testid="contactDetailsDataSource"]').should('have.text', "Data Source: PersonAPI", {timeout: 10000});
     });
 
     it('displays tenures', ()=>{

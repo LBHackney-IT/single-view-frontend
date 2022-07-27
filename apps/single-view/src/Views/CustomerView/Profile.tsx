@@ -80,14 +80,23 @@ export const Profile = (props: Props) => {
               return (
                 <div key={index} className="contact-detail">
                   <p>
-                    <span className="govuk-!-font-weight-bold">
+                    <span data-testid="contactDetailsContactType" className="govuk-!-font-weight-bold">
                       {contactDetail.contactType} ({contactDetail.subType})
                     </span>
-                    {contactDetail.description &&
-                      " - " + contactDetail.description + ":"}
+                    <span data-testid="contactDetailsDescription">
+                      {contactDetail.description && " - " + contactDetail.description + ":"}
+                    </span>
                     <br />
-                    {contactDetail.value}
+                    <span data-testid="contactDetailsValue">
+                      {contactDetail.value}
+                    </span>
+                    <br />
+                    <span data-testid="contactDetailsDataSource">
+                      <span className="govuk-!-font-weight-bold">Data Source: </span>
+                      {contactDetail.dataSourceName}
+                    </span>
                   </p>
+                 
                 </div>
               );
             })}
