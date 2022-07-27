@@ -19,7 +19,11 @@ export const SearchView = (): JSX.Element => {
       </h1>
       <SearchByResident setResultsFunction={setResultsFunction} />
       {results && (
-        <SearchResults searchResults={results} maxSearchResults={10} />
+        <SearchResults
+          matchedResults={matchedResults}
+          otherResults={results}
+          maxSearchResults={10}
+        />
       )}
     </>
   );

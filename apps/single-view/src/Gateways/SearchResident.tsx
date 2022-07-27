@@ -24,7 +24,7 @@ export const SearchResident = async (
   });
 
   const results: housingSearchResults = {
-    matchedResults: response.data.groupedResults,
+    matchedResults: response.data.searchResponse.groupedResults,
     otherResults: sortResponseByRelevance(
       response.data.searchResponse.ungroupedResults,
       address
