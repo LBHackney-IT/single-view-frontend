@@ -23,7 +23,7 @@ https://github.com/nvm-sh/nvm
 
 `npm install -g npm`
 
-### Install Yarn Package Manager Globally
+### Install Yarn package manager globally
 
 `npm install --global yarn`
 
@@ -78,7 +78,15 @@ NB the FE is currently pointing at the Staging API
 
 Run `yarn start` and in a separate terminal run `yarn cypress:open`
 
-### Resources
+## Committing to GitHub
+### Linting
+By default, Husky will run a lint check before each commit and prevent the commit if this fails.
+
+These failures can often be resolved automatically by opening a terminal, `cd`-ing into the /app/single-view directory, then running `yarn lint:fix`
+
+After each commit, [CircleCI](https://app.circleci.com/pipelines/github/LBHackney-IT/single-view-frontend) will run the cypress tests and lint checks.
+
+## Resources
 
 [Hackney Design System](https://design-system.hackney.gov.uk/developing/installing-from-npm/)
 [Single SPA Framework](https://single-spa.js.org/docs/getting-started-overview)
