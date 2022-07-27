@@ -13,12 +13,27 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const [lastName, setLastName] = useState("");
   const [addressLine1, setAddressLine1] = useState("");
   const [postCode, setPostcode] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [dateOfBirthError, setDateOfBirthError] = useState(false);
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
   const [searching, setIsSearching] = useState<boolean>(false);
 
   const joinAddresses = (): string => {
     return [addressLine1, postCode].filter((term) => term !== "").join(" ");
+  };
+
+  const validateDateOfBirthIsNotGreaterThanCurrentYear = (
+    dateOfBirth: string
+  ) => {
+    const dateOfBirthYear = parseInt(dateOfBirth.split("-")[0]);
+    const currentYear = new Date().getFullYear();
+
+    setDateOfBirthError(dateOfBirthYear > currentYear);
+
+    if (!dateOfBirthError) {
+      setDateOfBirth(dateOfBirth);
+    }
   };
 
   const handleSearch = async () => {
@@ -89,6 +104,17 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               name="postcode"
               type="text"
               onChange={(e) => setPostcode(e.target.value)}
+            />
+            <Input
+              label="Date of birth"
+              errorMsg="Date of birth cannot be in future"
+              id="dateOfBirth"
+              name="dateOfBirth"
+              type="date"
+              error={dateOfBirthError}
+              onChange={(e) =>
+                validateDateOfBirthIsNotGreaterThanCurrentYear(e.target.value)
+              }
             />
             {searching ? (
               <div className="sv-spinner">
