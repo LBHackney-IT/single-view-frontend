@@ -59,11 +59,54 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Name" testId="name">
           {person.title} {person.firstName} {person.surname}
         </DescriptionListItem>
+        {((person.preferredFirstName &&
+          person.preferredFirstName != person.firstName) ||
+          (person.preferredSurname &&
+            person.preferredSurname != person.surname)) && (
+          <DescriptionListItem title="Preferred Name" testId="preferredName">
+            {person.title} {person.preferredFirstName} {person.preferredSurname}
+          </DescriptionListItem>
+        )}
+
         {person.dateOfBirth && (
           <DescriptionListItem title="Date of Birth" testId="dateOfBirth">
             {formatDateOfBirth(person.dateOfBirth)}
           </DescriptionListItem>
         )}
+
+        <DescriptionListItem title="Contact Details" testId="contactDetails">
+          {person.allContactDetails &&
+            person.allContactDetails.map((contactDetail, index) => {
+              return (
+                <div key={index} className="contact-detail">
+                  <p>
+                    <span
+                      data-testid="contactDetailsContactType"
+                      className="govuk-!-font-weight-bold"
+                    >
+                      {contactDetail.contactType} ({contactDetail.subType})
+                    </span>
+                    <span data-testid="contactDetailsDescription">
+                      {contactDetail.description &&
+                        " - " + contactDetail.description + ":"}
+                    </span>
+                    <br />
+                    <span data-testid="contactDetailsValue">
+                      {contactDetail.value}
+                    </span>
+                    <br />
+                    <span data-testid="contactDetailsDataSource">
+                      <span className="govuk-!-font-weight-bold">
+                        Data Source:{" "}
+                      </span>
+                      {contactDetail.dataSourceName}
+                    </span>
+                  </p>
+                </div>
+              );
+            })}
+        </DescriptionListItem>
+
         <DescriptionListItem title="Tenures" testId="tenures">
           {person.knownAddresses?.map((address, index) => {
             return (
