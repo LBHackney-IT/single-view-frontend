@@ -29,20 +29,9 @@ describe('Profile', () => {
       cy.get('[data-testid="name"]').should('have.text', "Miss Luna Kitty", {timeout: 10000});
     });
 
-    it('displays preferred name', ()=>{
-      cy.get('[data-testid="preferredName"]').should('have.text', "Miss Luna Purry", {timeout: 10000});
-    });
-
 
     it('displays date of birth', ()=>{
       cy.get('[data-testid="dateOfBirth"]').should('have.text', "01/02/1980", {timeout: 10000});
-    });
-
-    it('displays contact details', ()=>{
-      cy.get('[data-testid="contactDetailsContactType"]').should('have.text', "phone (mobile)", {timeout: 10000});
-      cy.get('[data-testid="contactDetailsDescription"]').should('have.text', " - Personal phone:", {timeout: 10000});
-      cy.get('[data-testid="contactDetailsValue"]').should('have.text', "(07700) 900 557", {timeout: 10000});
-      cy.get('[data-testid="contactDetailsDataSource"]').should('have.text', "Data Source: PersonAPI", {timeout: 10000});
     });
 
     it('displays tenures', ()=>{

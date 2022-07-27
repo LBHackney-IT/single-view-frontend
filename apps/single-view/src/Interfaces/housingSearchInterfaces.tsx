@@ -24,19 +24,3 @@ export interface knownAddress {
   endDate: string | null;
   dataSourceName: string;
 }
-
-export interface contactDetail {
-  addressExtended: object | null;
-  contactType: number;
-  dataSourceName: string;
-  description: string | null;
-  isActive: boolean;
-  sourceServiceArea: string;
-  subType: string | null;
-  value: string;
-}
-
-export interface sourceServiceArea {
-  area: string;
-  isDefault: boolean;
-}
