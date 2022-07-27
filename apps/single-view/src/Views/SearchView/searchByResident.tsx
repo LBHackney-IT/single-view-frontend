@@ -23,9 +23,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
     return [addressLine1, postCode].filter((term) => term !== "").join(" ");
   };
 
-  const validateDateOfBirthIsNotGreaterThanCurrentYear = (
-    dateOfBirth: string
-  ) => {
+  const validateAndSetDateOfBirth = (dateOfBirth: string) => {
     const dateOfBirthYear = parseInt(dateOfBirth.split("-")[0]);
     const currentYear = new Date().getFullYear();
 
@@ -112,9 +110,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               name="dateOfBirth"
               type="date"
               error={dateOfBirthError}
-              onChange={(e) =>
-                validateDateOfBirthIsNotGreaterThanCurrentYear(e.target.value)
-              }
+              onChange={(e) => validateAndSetDateOfBirth(e.target.value)}
             />
             {searching ? (
               <div className="sv-spinner">
