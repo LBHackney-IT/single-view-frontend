@@ -17,6 +17,7 @@ describe('search', () => {
     cy.get('form').contains('* Last name');
     cy.get('form').contains('First line of address');
     cy.get('form').contains('Postcode');
+    cy.get('form').contains('Date of birth');
   });
 
   it('displays the error messages', () => {
@@ -24,6 +25,14 @@ describe('search', () => {
 
     cy.contains('First name is mandatory');
     cy.contains('Last name is mandatory');
+  });
+  
+  it('displays the error message when date of birth is in future', () => {
+    cy.get('#dateOfBirth').type('2050-12-01');
+    
+    cy.get('.govuk-button', { timeout: 1000 }).click();
+    
+    cy.contains('Date of birth cannot be in future');
   });
 
   it('displays search results', () => {
