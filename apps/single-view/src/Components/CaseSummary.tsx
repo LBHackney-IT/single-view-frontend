@@ -9,6 +9,8 @@ interface Props {
 }
 
 export const CaseSummary: React.FC<Props> = (props) => {
+  console.log(props.jigsawCaseResponse);
+
   return (
     <dl className="govuk-summary-list lbh-summary-list">
       <h3>Case Summary</h3>
@@ -86,6 +88,7 @@ export const CaseSummary: React.FC<Props> = (props) => {
       )}
 
       <h3>Additional Factors</h3>
+
       <table className="govuk-table">
         <caption className="govuk-table__caption govuk-table__caption--m">Dates and amounts</caption>
         <tbody className="govuk-table__body">
