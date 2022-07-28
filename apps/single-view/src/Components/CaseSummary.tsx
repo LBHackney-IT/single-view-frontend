@@ -27,7 +27,7 @@ export const CaseSummary: React.FC<Props> = (props) => {
       <DescriptionListItem title="V2 Legacy Case?" testId="isV2Legacy">
         {props.jigsawCaseResponse?.currentCase.isV2LegacyCase.toString()}
       </DescriptionListItem>
-      <h4>Case Overview</h4>
+      <h3>Case Overview</h3>
       <DescriptionListItem
         title="Flowchart Position"
         testId="currentFlowChartPosition"
@@ -44,7 +44,7 @@ export const CaseSummary: React.FC<Props> = (props) => {
         {props.jigsawCaseResponse?.caseOverview.houseHoldComposition}
       </DescriptionListItem>
 
-      <h4>Placement Details</h4>
+      <h3>Placement Details</h3>
       {props.jigsawCaseResponse?.placementInformation.map(
         (placement: Placement) => {
           return (
@@ -84,6 +84,25 @@ export const CaseSummary: React.FC<Props> = (props) => {
           );
         }
       )}
+
+      <h3>Additional Factors</h3>
+      <table className="govuk-table">
+        <caption className="govuk-table__caption govuk-table__caption--m">Dates and amounts</caption>
+        <tbody className="govuk-table__body">
+          <tr className="govuk-table__row">
+            <th scope="row" className="govuk-table__header">First 6 weeks</th>
+            <td className="govuk-table__cell">£109.80 per week</td>
+          </tr>
+          <tr className="govuk-table__row">
+            <th scope="row" className="govuk-table__header">Next 33 weeks</th>
+            <td className="govuk-table__cell">£109.80 per week</td>
+          </tr>
+          <tr className="govuk-table__row">
+            <th scope="row" className="govuk-table__header">Total estimated pay</th>
+            <td className="govuk-table__cell">£4,282.20</td>
+          </tr>
+        </tbody>
+      </table>
     </dl>
   );
 };

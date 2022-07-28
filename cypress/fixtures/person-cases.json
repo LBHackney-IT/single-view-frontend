@@ -1,40 +1,71 @@
 {
-    "currentCase": {
-            "id": 641056,
-            "statusName": "Relief",
-            "dateOfApproach": "2022-05-05T01:00:00",
-            "isCurrent": true,
-            "assignedTo": "Agent Carter",
-            "isV2LegacyCase": true
-    },
-    "caseOverview": {
-            "id": 641056,
-            "currentFlowchartPosition": "Relief",
-            "currentDecision": "56 days relief duty - help to secure accommodation s.189B",
-            "houseHoldComposition": "F"
-    },
-    "placementInformation": [
+  "currentCase": {
+    "id": 641056,
+    "statusName": "Relief",
+    "dateOfApproach": "2022-05-05T01:00:00",
+    "isCurrent": true,
+    "assignedTo": "Agent Carter",
+    "isV2LegacyCase": true
+  },
+  "caseOverview": {
+    "id": 641056,
+    "currentFlowchartPosition": "Relief",
+    "currentDecision": "56 days relief duty - help to secure accommodation s.189B",
+    "houseHoldComposition": "F"
+  },
+  "placementInformation": [
+    {
+      "placementType": "Accommodation secured by the Local Authority",
+      "fullAddressDetails": {
+        "id": 438203,
+        "apartment": null,
+        "roomNumber": null,
+        "houseName": null,
+        "houseNumber": "435",
+        "street": "Loxford Lane",
+        "locality": null,
+        "town": "Ilford",
+        "county": "",
+        "postcode": "SW1 1AA",
+        "latitude": null,
+        "longitude": null,
+        "freetext": null
+      },
+      "placementDuty": "Section 188",
+      "placementDutyFullName": "Section 188 – Interim duty to accommodate in case of apparent priority need",
+      "usage": "Temporary Accommodation",
+      "dclgClassificationType": "Hostels (including reception centres and emergency units)"
+    }
+  ],
+  "additionalFactors": [
+    {
+      "legend": "Overview of additional factors",
+      "info": [
         {
-           "placementType": "Accommodation secured by the Local Authority",
-            "fullAddressDetails": {
-                "id": 438203,
-                "apartment": null,
-                "roomNumber": null,
-                "houseName": null,
-                "houseNumber": "435",
-                "street": "Loxford Lane",
-                "locality": null,
-                "town": "Ilford",
-                "county": "",
-                "postcode": "SW1 1AA",
-                "latitude": null,
-                "longitude": null,
-                "freetext": null
-            },
-            "placementDuty": "Section 188",
-            "placementDutyFullName": "Section 188 – Interim duty to accommodate in case of apparent priority need",
-            "usage": "Temporary Accommodation",
-            "dclgClassificationType": "Hostels (including reception centres and emergency units)"
+          "question": "Drug/alcohol use?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Care history?",
+          "answer": "No"
+        },
+        {
+          "question": "Served in the Armed Forces?",
+          "answer": "No"
+        },
+        {
+          "question": "Prison history?",
+          "answer": "No"
+        },
+        {
+          "question": "Health Issues?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Detail current medication and dosage for all household members",
+          "answer": "Mertazerpene x 1 per day."
         }
-    ]
+      ]
+    }
+  ]
 }

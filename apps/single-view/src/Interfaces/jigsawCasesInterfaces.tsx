@@ -2,6 +2,7 @@ export interface jigsawCasesResponse {
   currentCase: Case;
   placementInformation: Array<Placement>;
   caseOverview: CaseOverview;
+  additionalFactors: Array<AdditionalInfo>;
 }
 
 export interface Case {
@@ -42,4 +43,14 @@ export interface FullAddressDetails {
   locality: string | null;
   latitude: string | null;
   freetext: string | null;
+}
+
+export interface Info {
+  question: string;
+  answer: string;
+}
+
+export interface AdditionalInfo {
+  legend: string;
+  info: Array<Info>;
 }
