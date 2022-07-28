@@ -3,6 +3,7 @@ import { councilTaxAccount, knownAddress, contactDetail } from ".";
 import { housingBenefitsAccount } from "./housingBenefitsRecordInterfaces";
 
 export interface customerProfile {
+  preferredTitle: string | null;
   id: string;
   title: string | null;
   firstName: string;

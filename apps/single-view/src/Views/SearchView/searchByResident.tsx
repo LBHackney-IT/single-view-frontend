@@ -13,6 +13,8 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const [lastName, setLastName] = useState("");
   const [addressLine1, setAddressLine1] = useState("");
   const [postCode, setPostcode] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [dateOfBirthError, setDateOfBirthError] = useState(false);
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
   const [searching, setIsSearching] = useState<boolean>(false);
@@ -21,14 +23,29 @@ export const SearchByResident = (props: myProps): JSX.Element => {
     return [addressLine1, postCode].filter((term) => term !== "").join(" ");
   };
 
+  const validateAndSetDateOfBirth = (dateOfBirth: string) => {
+    const dateOfBirthYear = parseInt(dateOfBirth.split("-")[0]);
+    const dateOfBirthMonth = parseInt(dateOfBirth.split("-")[1]);
+    const dateOfBirthDay = parseInt(dateOfBirth.split("-")[2]);
+    const currentYear = new Date().getFullYear();
+
+    setDateOfBirthError(dateOfBirthYear > currentYear);
+
+    if (!dateOfBirthError) {
+      setDateOfBirth(
+        `${dateOfBirthDay}-${dateOfBirthMonth}-${dateOfBirthYear}`
+      );
+    }
+  };
+
   const handleSearch = async () => {
     try {
       let searchResults = await SearchResident(
         firstName.trim(),
         lastName.trim(),
         joinAddresses(),
-        getCookie("jigsawToken"),
-        null
+        dateOfBirth,
+        getCookie("jigsawToken")
       );
       props.setResultsFunction(searchResults);
       setIsSearching(false);
@@ -90,6 +107,15 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               name="postcode"
               type="text"
               onChange={(e) => setPostcode(e.target.value)}
+            />
+            <Input
+              label="Date of birth"
+              errorMsg="Date of birth cannot be in future"
+              id="dateOfBirth"
+              name="dateOfBirth"
+              type="date"
+              error={dateOfBirthError}
+              onChange={(e) => validateAndSetDateOfBirth(e.target.value)}
             />
             {searching ? (
               <div className="sv-spinner">

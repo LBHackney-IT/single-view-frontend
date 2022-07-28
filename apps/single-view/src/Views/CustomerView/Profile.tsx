@@ -59,12 +59,20 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Name" testId="name">
           {person.title} {person.firstName} {person.surname}
         </DescriptionListItem>
-        {((person.preferredFirstName &&
-          person.preferredFirstName != person.firstName) ||
+
+        {/* Display preferred title+name only if it doesn't match the default title+name */}
+        {((person.preferredTitle && person.preferredTitle != person.title) ||
+          (person.preferredFirstName &&
+            person.preferredFirstName != person.firstName) ||
           (person.preferredSurname &&
             person.preferredSurname != person.surname)) && (
           <DescriptionListItem title="Preferred Name" testId="preferredName">
-            {person.title} {person.preferredFirstName} {person.preferredSurname}
+            {(person.preferredTitle ? person.preferredTitle : person.title) +
+              " "}
+            {(person.preferredFirstName
+              ? person.preferredFirstName
+              : person.firstName) + " "}
+            {person.preferredSurname ? person.preferredSurname : person.surname}
           </DescriptionListItem>
         )}
 
