@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const CaseSummary: React.FC<Props> = (props) => {
-  console.log(props.jigsawCaseResponse);
+  const additionalFactors = props.jigsawCaseResponse?.additionalFactors;
 
   return (
     <dl className="govuk-summary-list lbh-summary-list">
@@ -89,23 +89,19 @@ export const CaseSummary: React.FC<Props> = (props) => {
 
       <h3>Additional Factors</h3>
 
-      <table className="govuk-table">
-        <caption className="govuk-table__caption govuk-table__caption--m">Dates and amounts</caption>
-        <tbody className="govuk-table__body">
-          <tr className="govuk-table__row">
-            <th scope="row" className="govuk-table__header">First 6 weeks</th>
-            <td className="govuk-table__cell">£109.80 per week</td>
-          </tr>
-          <tr className="govuk-table__row">
-            <th scope="row" className="govuk-table__header">Next 33 weeks</th>
-            <td className="govuk-table__cell">£109.80 per week</td>
-          </tr>
-          <tr className="govuk-table__row">
-            <th scope="row" className="govuk-table__header">Total estimated pay</th>
-            <td className="govuk-table__cell">£4,282.20</td>
-          </tr>
-        </tbody>
-      </table>
+      {additionalFactors &&
+        additionalFactors.map((additionalFactor) => {
+          return [
+            <h4>{additionalFactor.legend}</h4>,
+            additionalFactor.info.map((factorInfo) => {
+              return (
+                <DescriptionListItem title={factorInfo.question} testId="dli">
+                  {factorInfo.answer}
+                </DescriptionListItem>
+              );
+            }),
+          ];
+        })}
     </dl>
   );
 };

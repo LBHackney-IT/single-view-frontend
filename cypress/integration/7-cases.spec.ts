@@ -4,7 +4,7 @@ describe('Cases', () => {
   describe("Displays active case", () => {
     before(() => {
       cy.intercept('GET', "**/getJigsawCustomer*", {fixture: 'person-profile.json'}).as('getJigsawCustomer');
-      cy.intercept('GET', '**/getJigsawCases*', { fixture: 'person-cases.json' }).as("getJigsawCases");
+      cy.intercept('GET', 'https://jogrx1a5a4.execute-api.eu-west-2.amazonaws.com/staging/api/v1/getJigsawCases?id=641056', { fixture: 'person-cases.json' }).as("getJigsawCases");
       cy.setCookie('jigsawToken', 'testValue');
       cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup);
     });
@@ -37,7 +37,8 @@ describe('Cases', () => {
     it('displays the placement detail full name', ()=>{
       cy.get('[data-testid="placementDutyFullName"]').should('have.text', "Section 188 – Interim duty to accommodate in case of apparent priority need", {timeout: 10000});
     });
-
-
+    it('displays the additional factors', ()=>{
+      cy.get('[data-testid="dli"]').should('have.text', "cor blimey m8")
+    });
   });
 });
