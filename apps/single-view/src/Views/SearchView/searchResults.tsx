@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { housingSearchPerson } from "../../Interfaces";
-import { formatDate } from "@mfe/common/lib/utils";
-import { humanize } from "../../Utils";
 import { Pagination } from "../../Components";
 import { mergeRecords } from "../../Gateways/mergeRecords";
 import { ErrorSummary } from "@mfe/common/lib/components";
+import { SearchResultsGroup } from "../../Components/SearchResultsGroup";
 
 interface myProps {
   matchedResults: housingSearchPerson[] | undefined;
@@ -112,91 +111,16 @@ export const SearchResults = (props: myProps): JSX.Element => {
           {props.matchedResults
             ? "The following results were matched on name and date of birth, if provided"
             : "No exact matches found"}
-          {matchedResults?.map((person: housingSearchPerson, index: number) => {
-            return (
-              <div className="lbh-body sv-result-wrapper" key={index}>
-                {person.dataSource != "single-view" && (
-                  <div className="govuk-checkboxes lbh-checkboxes">
-                    <div className="govuk-checkboxes_item">
-                      <input
-                        className="govuk-checkboxes_input sv-checkboxes"
-                        id={`match-${person.id}`}
-                        name="match"
-                        type="checkbox"
-                        value="match"
-                        aria-label="match-checkbox"
-                        checked={person.isSelected}
-                        onChange={() => selectMatch(person)}
-                      />
-                    </div>
-                  </div>
-                )}
-                <div className="sv-result">
-                  <a
-                    href={`/customers/${person.dataSource}/${person.id}`}
-                    className="lbh-link lbh-link--no-visited-state"
-                  >
-                    {person.firstName} {person.surName}
-                    {person.dateOfBirth &&
-                      ", Date of Birth: " + formatDate(person.dateOfBirth)}
-                  </a>
-                  <div className="lbh-body-s govuk-!-margin-top-1">
-                    {humanize(person.dataSource)} id: {person.id}
-                    <br />
-                    {person.knownAddresses?.length > 0
-                      ? person.knownAddresses.map((address) => {
-                          return address.fullAddress + " ";
-                        })
-                      : ""}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {props.matchedResults && (
+            <SearchResultsGroup
+              results={props.matchedResults}
+              selectMatch={selectMatch}
+            />
+          )}
         </div>
         <div id="searchResults">
           The following results were partial matches.
-          {results.map((person: housingSearchPerson, index: number) => {
-            return (
-              <div className="lbh-body sv-result-wrapper" key={index}>
-                {person.dataSource != "single-view" && (
-                  <div className="govuk-checkboxes lbh-checkboxes">
-                    <div className="govuk-checkboxes_item">
-                      <input
-                        className="govuk-checkboxes_input sv-checkboxes"
-                        id={`match-${person.id}`}
-                        name="match"
-                        type="checkbox"
-                        value="match"
-                        aria-label="match-checkbox"
-                        checked={person.isSelected}
-                        onChange={() => selectMatch(person)}
-                      />
-                    </div>
-                  </div>
-                )}
-                <div className="sv-result">
-                  <a
-                    href={`/customers/${person.dataSource}/${person.id}`}
-                    className="lbh-link lbh-link--no-visited-state"
-                  >
-                    {person.firstName} {person.surName}
-                    {person.dateOfBirth &&
-                      ", Date of Birth: " + formatDate(person.dateOfBirth)}
-                  </a>
-                  <div className="lbh-body-s govuk-!-margin-top-1">
-                    {humanize(person.dataSource)} id: {person.id}
-                    <br />
-                    {person.knownAddresses?.length > 0
-                      ? person.knownAddresses.map((address) => {
-                          return address.fullAddress + " ";
-                        })
-                      : ""}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          <SearchResultsGroup results={results} selectMatch={selectMatch} />
         </div>
         <Pagination
           total={props.otherResults.length}
