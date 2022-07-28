@@ -24,9 +24,9 @@ describe('matching', () => {
   });
 
   it('does not display merge option for single view records', () => {
-    cy.get('#searchResults > :nth-child(1) > .govuk-checkboxes').should('exist');
-    cy.get('#searchResults > :nth-child(2) > .govuk-checkboxes').should('exist');
-    cy.get('#searchResults > :nth-child(3) > .govuk-checkboxes').should('not.exist');
+    cy.get(".sv-checkboxes").eq(0).should('exist');
+    cy.get(".sv-checkboxes").eq(1).should('exist');
+    cy.get('#searchResults > :nth-child(4) > .govuk-checkboxes').should('not.exist');
   });
 
  it('allows user to match results', () => {
