@@ -10,7 +10,7 @@ interface Props {
 
 export const CaseSummary: React.FC<Props> = (props) => {
   return (
-    <>
+    <dl className="govuk-summary-list lbh-summary-list">
       <h3>Case Summary</h3>
       <DescriptionListItem title="Case Id" testId="caseId">
         {props.jigsawCaseResponse?.currentCase.id}
@@ -43,6 +43,7 @@ export const CaseSummary: React.FC<Props> = (props) => {
       >
         {props.jigsawCaseResponse?.caseOverview.houseHoldComposition}
       </DescriptionListItem>
+
       <h4>Placement Details</h4>
       {props.jigsawCaseResponse?.placementInformation.map(
         (placement: Placement) => {
@@ -83,6 +84,6 @@ export const CaseSummary: React.FC<Props> = (props) => {
           );
         }
       )}
-    </>
+    </dl>
   );
 };
