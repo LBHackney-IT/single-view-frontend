@@ -108,7 +108,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
         </div>
         <hr />
         <div id="matchedResults">
-          {props.matchedResults ? (
+          {matchedResults ? (
             <h4>
               The following results were matched on name and date of birth, if
               provided
@@ -116,9 +116,9 @@ export const SearchResults = (props: myProps): JSX.Element => {
           ) : (
             <h5>No exact matches found.</h5>
           )}
-          {props.matchedResults && (
+          {matchedResults && (
             <SearchResultsGroup
-              results={props.matchedResults}
+              results={matchedResults}
               selectMatch={selectMatch}
             />
           )}
