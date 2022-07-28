@@ -108,9 +108,14 @@ export const SearchResults = (props: myProps): JSX.Element => {
         </div>
         <hr />
         <div id="matchedResults">
-          {props.matchedResults
-            ? "The following results were matched on name and date of birth, if provided"
-            : "No exact matches found"}
+          {props.matchedResults ? (
+            <h4>
+              The following results were matched on name and date of birth, if
+              provided
+            </h4>
+          ) : (
+            <h5>No exact matches found.</h5>
+          )}
           {props.matchedResults && (
             <SearchResultsGroup
               results={props.matchedResults}
@@ -119,7 +124,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
           )}
         </div>
         <div id="searchResults">
-          The following results were partial matches.
+          <h4>The following results were partial matches.</h4>
           <SearchResultsGroup results={results} selectMatch={selectMatch} />
         </div>
         <Pagination
