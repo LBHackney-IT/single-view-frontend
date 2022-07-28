@@ -33,7 +33,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
 
     if (!dateOfBirthError) {
       setDateOfBirth(
-        `${dateOfBirthDay}/${dateOfBirthMonth}/${dateOfBirthYear}`
+        `${dateOfBirthDay}-${dateOfBirthMonth}-${dateOfBirthYear}`
       );
     }
   };
