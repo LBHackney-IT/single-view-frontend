@@ -1,6 +1,60 @@
 {
     "searchResponse": {
-        "searchResults": [
+        "groupedResults": [                
+            {
+                "id": "6dd46a01",
+                "title": "Mrs",
+                "firstName": "Olivia",
+                "middleName": null,
+                "surName": "Kitty",
+                "dataSource": "PersonAPI",
+                "preferredFirstname": "Olivia",
+                "preferredSurname": "Kitty",
+                "totalBalance": 0.0,
+                "dateOfBirth": "1951-10-01",
+                "personTypes": [
+                    "HouseholdMember"
+                ],
+                "isPersonCautionaryAlert": false,
+                "isTenureCautionaryAlert": false,
+                "knownAddresses": [
+                    {
+                        "id": "4cce0edc",
+                        "startDate": "2014-03-17",
+                        "endDate": "2020-04-19",
+                        "fullAddress": "1 Thornbury Close, N16 8UX",
+                        "currentAddress": false
+                    }
+                ]
+            },
+            {
+                "id": "a1e2a970",
+                "title": "Mr",
+                "firstName": "Olivia",
+                "middleName": null,
+                "surName": "Kitty",
+                "dataSource": "PersonAPI",
+                "preferredFirstname": "Olivia",
+                "preferredSurname": "Kitty",
+                "totalBalance": 0.0,
+                "dateOfBirth": "1949-02-18",
+                "personTypes": [
+                    "Tenant"
+                ],
+                "isPersonCautionaryAlert": false,
+                "isTenureCautionaryAlert": false,
+                "knownAddresses": [
+                    {
+                        "id": "d43caa5a",
+                        "startDate": "2004-12-13",
+                        "endDate": null,
+                        "fullAddress": "9 Sheldon House  Wick Road, E9 5AD",
+                        "currentAddress": true
+                    }
+                ]
+            }
+        ],
+        "ungroupedResults": [
             {
                 "id": "57ea3d58",
                 "title": "Ms",

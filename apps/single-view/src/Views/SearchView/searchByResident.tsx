@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { SearchResident } from "../../Gateways/SearchResident";
-import { housingSearchPerson } from "../../Interfaces";
+import { housingSearchPerson, housingSearchResults } from "../../Interfaces";
 import { getCookie } from "../../Utils/getCookie";
 import { Input } from "../../Components";
 
 interface myProps {
-  setResultsFunction: (searchResults: housingSearchPerson[]) => void;
+  setResultsFunction: (searchResults: housingSearchResults) => void;
 }
 
 export const SearchByResident = (props: myProps): JSX.Element => {

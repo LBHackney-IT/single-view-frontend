@@ -40,3 +40,8 @@ export interface sourceServiceArea {
   area: string;
   isDefault: boolean;
 }
+
+export interface housingSearchResults {
+  matchedResults: housingSearchPerson[];
+  otherResults: housingSearchPerson[];
+}

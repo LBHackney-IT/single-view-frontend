@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { SearchByResident } from "./searchByResident";
 import { SearchResults } from "./searchResults";
-import { housingSearchPerson } from "../../Interfaces";
+import { housingSearchPerson, housingSearchResults } from "../../Interfaces";
 
 export const SearchView = (): JSX.Element => {
+  const [matchedResults, setMatchedResults] = useState<housingSearchPerson[]>();
   const [results, setResults] = useState<housingSearchPerson[]>();
 
-  const setResultsFunction = (searchResults: housingSearchPerson[]) => {
-    setResults(searchResults);
+  const setResultsFunction = (searchResults: housingSearchResults) => {
+    setMatchedResults(searchResults.matchedResults);
+    setResults(searchResults.otherResults);
   };
 
   return (
@@ -17,7 +19,11 @@ export const SearchView = (): JSX.Element => {
       </h1>
       <SearchByResident setResultsFunction={setResultsFunction} />
       {results && (
-        <SearchResults searchResults={results} maxSearchResults={10} />
+        <SearchResults
+          matchedResults={matchedResults}
+          otherResults={results}
+          maxSearchResults={10}
+        />
       )}
     </>
   );

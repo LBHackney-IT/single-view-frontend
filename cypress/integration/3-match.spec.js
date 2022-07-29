@@ -17,16 +17,16 @@ describe('matching', () => {
     cy.get('#searchResults', { timeout: 10000 })
       .should('be.visible')
 
-    cy.get('.lbh-heading-h3').should('have.text', '12 results found')
+    cy.get('.lbh-heading-h3').should('have.text', '14 results found')
 
-    cy.get(':nth-child(1) > .sv-result')
-      .should('have.text', 'Luna Kitty, Date of Birth: 06/10/1977Jigsaw id: 57ea3d58ROOM 608 143 Northumberland Park, N17 0TR  ');
+    cy.get('.sv-result').first()
+      .should('have.text', 'Olivia Kitty, Date of Birth: 01/10/1951PersonAPI id: 6dd46a011 Thornbury Close, N16 8UX ');
   });
 
   it('does not display merge option for single view records', () => {
-    cy.get('#searchResults > :nth-child(1) > .govuk-checkboxes').should('exist');
-    cy.get('#searchResults > :nth-child(2) > .govuk-checkboxes').should('exist');
-    cy.get('#searchResults > :nth-child(3) > .govuk-checkboxes').should('not.exist');
+    cy.get(".sv-checkboxes").eq(0).should('exist');
+    cy.get(".sv-checkboxes").eq(1).should('exist');
+    cy.get('#searchResults > :nth-child(4) > .govuk-checkboxes').should('not.exist');
   });
 
  it('allows user to match results', () => {
