@@ -11,9 +11,6 @@ export const SearchResident = async (
   dateOfBirth: string | null
 ): Promise<housingSearchResults> => {
   let requestUrl = `${process.env.SV_API_V1}/search?firstName=${firstName}&lastName=${lastName}`;
-  // if (dateOfBirth != "") {
-  //   requestUrl += `&dateOfBirth=${dateOfBirth}`;
-  // }
   if (jigsawToken) {
     requestUrl += `&redisId=${jigsawToken}`;
   }
