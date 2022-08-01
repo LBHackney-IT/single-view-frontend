@@ -153,11 +153,39 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="NHS number" testId="nhsNo">
           {person.nhsNumber}
         </DescriptionListItem>
-        <DescriptionListItem title="Date of Death" testId="dateOfDeath">
-          {person.dateofDeath}
+        <DescriptionListItem
+          title={"Pregnancy due Date"}
+          testId={"pregnancyDueDate"}
+        >
+          {person.pregnancyDueDate &&
+            formatDateOfBirth(person.pregnancyDueDate)}
+        </DescriptionListItem>
+        <DescriptionListItem
+          title={"Accommodation type Id"}
+          testId={"accommodationTypeId"}
+        >
+          {person.accommodationTypeId}
+        </DescriptionListItem>
+        <DescriptionListItem
+          title={"Housing circumstance Id"}
+          testId={"housingCircumstanceId"}
+        >
+          {person.housingCircumstanceId}
+        </DescriptionListItem>
+        <DescriptionListItem title={"Settled"} testId={"isSettled"}>
+          {person.isSettled ? "Y" : "N"}
+        </DescriptionListItem>
+        <DescriptionListItem title={"Support worker"} testId={"supportWorker"}>
+          {person.supportWorker}
+        </DescriptionListItem>
+        <DescriptionListItem title={"Gender"} testId={"gender"}>
+          {person.gender}
         </DescriptionListItem>
         <DescriptionListItem title="Is a Minor" testId="isMinor">
           {person.isAMinor ? "Y" : "N"}
+        </DescriptionListItem>
+        <DescriptionListItem title="Date of Death" testId="dateOfDeath">
+          {person.dateofDeath}
         </DescriptionListItem>
         <h3>System Ids</h3>
         {systemIds &&
