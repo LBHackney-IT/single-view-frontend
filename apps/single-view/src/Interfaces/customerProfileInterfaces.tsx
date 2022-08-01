@@ -12,6 +12,12 @@ export interface customerProfile {
   preferredFirstName: string | null;
   preferredSurname: string | null;
   dateOfBirth: string;
+  pregnancyDueDate: string | null;
+  accommodationTypeId: string | null;
+  housingCircumstanceId: string | null;
+  isSettled: boolean | null;
+  supportWorker: string | null;
+  gender: string | null;
   dateofDeath: string | null;
   placeOfBirth: string;
   personTypes: string[] | null;

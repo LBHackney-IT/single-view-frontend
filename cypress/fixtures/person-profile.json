@@ -48,9 +48,15 @@
             "postcode": "SW19 1AA"
         }},
         "dateOfBirth": "1980-02-01T00:00:00Z",
-        "niNo": null,
+        "niNo": "SL203040",
         "dateOfDeath": null,
         "isAMinor": false,
+        "pregnancyDueDate": "2022-12-25T00:00:00",
+        "accommodationTypeId": 10,
+        "housingCircumstanceId": 11,
+        "isSettled": false,
+        "supportWorker": "James Brown",
+        "gender": "Female",
         "cautionaryAlerts": [
             {
                 "dateModified": "2020-02-01T00:00:00Z",
