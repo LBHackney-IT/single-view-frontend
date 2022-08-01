@@ -252,9 +252,9 @@ jobs:
     executor: node-executor
     steps:
       - checkout
-      # - run:
-      #     name: Install
-      #     command: yarn install
+      - run:
+          name: Install
+          command: yarn install
       - run:
           name: Install apps
           command: yarn install-ci
