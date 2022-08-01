@@ -94,7 +94,10 @@ export const CaseSummary: React.FC<Props> = (props) => {
             <h3>{additionalFactor.legend}</h3>,
             additionalFactor.info.map((factorInfo, factorIndex) => {
               return (
-                <DescriptionListItem title={factorInfo.question} testId={"AdditionalFactor " + factorIndex}>
+                <DescriptionListItem
+                  title={factorInfo.question}
+                  testId={"AdditionalFactor " + factorIndex}
+                >
                   {factorInfo.answer}
                 </DescriptionListItem>
               );
@@ -108,7 +111,10 @@ export const CaseSummary: React.FC<Props> = (props) => {
             <h3>{wellBeingFactor.legend}</h3>,
             wellBeingFactor.info.map((factorInfo, factorIndex) => {
               return (
-                <DescriptionListItem title={factorInfo.question} testId={"WellBeingFactor " + factorIndex}>
+                <DescriptionListItem
+                  title={factorInfo.question}
+                  testId={"WellBeingFactor " + factorIndex}
+                >
                   {factorInfo.answer}
                 </DescriptionListItem>
               );

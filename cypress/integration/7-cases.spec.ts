@@ -41,6 +41,6 @@ describe('Cases', () => {
     cy.get('[data-testid="AdditionalFactor 0"]').should('have.text', "Yes")
   });
   it('displays the health and wellbeing information', ()=>{
-    cy.get('[data-testid="WellBeingFactor 0"]').should('have.text', "Yes")
+    cy.get('[data-testid="WellBeingFactor 1"]').should('have.text', "wheelchair/depression")
   });
 });
