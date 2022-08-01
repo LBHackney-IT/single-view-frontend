@@ -40,13 +40,13 @@ export const SearchByResident = (props: myProps): JSX.Element => {
 
   const handleSearch = async () => {
     try {
-      let searchResults = await SearchResident(
-        firstName.trim(),
-        lastName.trim(),
-        joinAddresses(),
-        dateOfBirth,
-        getCookie("jigsawToken")
-      );
+      let searchResults = await SearchResident({
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        address: joinAddresses(),
+        dateOfBirth: dateOfBirth,
+        jigsawToken: getCookie("jigsawToken"),
+      });
       props.setResultsFunction(searchResults);
       setIsSearching(false);
     } catch (e) {
