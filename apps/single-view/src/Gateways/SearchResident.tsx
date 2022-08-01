@@ -3,19 +3,23 @@ import { getToken } from "../Utils/getHackneyToken";
 import { sortResponseByRelevance } from "../Utils/sortResponse";
 import { housingSearchPerson, housingSearchResults } from "../Interfaces";
 
+interface params {
+  firstName: string;
+  lastName: string;
+  address: string | null;
+  jigsawToken: string | null;
+  dateOfBirth: string | null;
+}
+
 export const SearchResident = async (
-  firstName: string,
-  lastName: string,
-  address: string | null,
-  jigsawToken: string | null,
-  dateOfBirth: string | null
+  params: params
 ): Promise<housingSearchResults> => {
-  let requestUrl = `${process.env.SV_API_V1}/search?firstName=${firstName}&lastName=${lastName}`;
-  if (jigsawToken) {
-    requestUrl += `&redisId=${jigsawToken}`;
+  let requestUrl = `${process.env.SV_API_V1}/search?firstName=${params.firstName}&lastName=${params.lastName}`;
+  if (params.jigsawToken) {
+    requestUrl += `&redisId=${params.jigsawToken}`;
   }
-  if (dateOfBirth) {
-    requestUrl += `&dateOfBirth=${dateOfBirth}`;
+  if (params.dateOfBirth) {
+    requestUrl += `&dateOfBirth=${params.dateOfBirth}`;
   }
   const response = await axios.get(requestUrl, {
     headers: {
@@ -27,7 +31,7 @@ export const SearchResident = async (
     matchedResults: response.data.searchResponse.groupedResults,
     otherResults: sortResponseByRelevance(
       response.data.searchResponse.ungroupedResults,
-      address
+      params.address
     ),
   };
 
