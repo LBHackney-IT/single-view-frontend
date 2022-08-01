@@ -10,6 +10,7 @@ interface Props {
 
 export const CaseSummary: React.FC<Props> = (props) => {
   const additionalFactors = props.jigsawCaseResponse?.additionalFactors;
+  const healthAndWellBeing = props.jigsawCaseResponse?.healthAndWellBeing;
 
   return (
     <dl className="govuk-summary-list lbh-summary-list">
@@ -87,15 +88,27 @@ export const CaseSummary: React.FC<Props> = (props) => {
         }
       )}
 
-      <h3>Additional Factors</h3>
-
       {additionalFactors &&
-        additionalFactors.map((additionalFactor) => {
+        additionalFactors.map((additionalFactor, index) => {
           return [
-            <h4>{additionalFactor.legend}</h4>,
-            additionalFactor.info.map((factorInfo) => {
+            <h3>{additionalFactor.legend}</h3>,
+            additionalFactor.info.map((factorInfo, factorIndex) => {
               return (
-                <DescriptionListItem title={factorInfo.question} testId="dli">
+                <DescriptionListItem title={factorInfo.question} testId={"AdditionalFactor " + factorIndex}>
+                  {factorInfo.answer}
+                </DescriptionListItem>
+              );
+            }),
+          ];
+        })}
+
+      {healthAndWellBeing &&
+        healthAndWellBeing.map((wellBeingFactor, index) => {
+          return [
+            <h3>{wellBeingFactor.legend}</h3>,
+            wellBeingFactor.info.map((factorInfo, factorIndex) => {
+              return (
+                <DescriptionListItem title={factorInfo.question} testId={"WellBeingFactor " + factorIndex}>
                   {factorInfo.answer}
                 </DescriptionListItem>
               );

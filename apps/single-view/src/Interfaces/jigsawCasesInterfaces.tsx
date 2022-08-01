@@ -3,6 +3,7 @@ export interface jigsawCasesResponse {
   placementInformation: Array<Placement>;
   caseOverview: CaseOverview;
   additionalFactors: Array<AdditionalInfo>;
+  healthAndWellBeing: Array<AdditionalInfo>;
 }
 
 export interface Case {

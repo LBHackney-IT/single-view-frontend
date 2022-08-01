@@ -67,5 +67,122 @@
         }
       ]
     }
-  ]
+  ],
+  "healthAndWellBeing": [
+    {
+        "legend": "Health and wellbeing",
+        "info": [
+            {
+                "question": "Do you or any of your household members have any self-reported vulnerabilities - including physical or mental health needs? ",
+                "answer": "Yes"
+            },
+            {
+                "question": "If yes, please provide details:",
+                "answer": "wheelchair/depression"
+            },
+            {
+                "question": "Do you or any member of your household have any confirmed medical conditions?",
+                "answer": "Yes"
+            },
+            {
+                "question": "If yes, please provide details:",
+                "answer": null
+            },
+            {
+                "question": "Are you or your family members on any medication?",
+                "answer": "Yes"
+            },
+            {
+                "question": "If yes, please provide details:",
+                "answer": "anti depressant"
+            },
+            {
+                "question": "Does your current housing situation impact on your medical condition? ",
+                "answer": "Yes"
+            },
+            {
+                "question": "If yes, please provide details:",
+                "answer": null
+            },
+            {
+                "question": "Do you or your family members have any other health care professionals working with you?",
+                "answer": "No"
+            },
+            {
+                "question": "If yes, please provide details including consultants, health visitors, community psychiatric nurse, occupational therapist etc.",
+                "answer": null
+            },
+            {
+                "question": "Do you use alcohol and/or drugs?",
+                "answer": "No"
+            },
+            {
+                "question": "If yes, please provide details including how this affects your life",
+                "answer": null
+            },
+            {
+                "question": "Does any member of your household require any assistance with addiction (gambling, drugs or alcohol)?",
+                "answer": "No"
+            },
+            {
+                "question": "If so, who and what addiction",
+                "answer": null
+            },
+            {
+                "question": "Do you or any member of your household need support to be able to live independently or to develop independent living skills?",
+                "answer": "No"
+            },
+            {
+                "question": "If yes, please provide details:",
+                "answer": null
+            },
+            {
+                "question": "Have you or any member of your household ever been in local authority care? ",
+                "answer": "No"
+            },
+            {
+                "question": "If yes, please provide details: ",
+                "answer": null
+            },
+            {
+                "question": "What is the name of your family GP?",
+                "answer": null
+            }
+        ]
+    },
+    {
+        "legend": "Mobility or support issues - Jacqueline Marcus",
+        "info": [
+            {
+                "question": "Does this member of the household have any of the following mobility or support issues?",
+                "answer": null
+            }
+        ]
+    },
+    {
+        "legend": "COVID-19 - Jacqueline Marcus",
+        "info": [
+            {
+                "question": "Have you or anyone close to you had any Covid 19 related symptoms within the last 14 days?",
+                "answer": "No"
+            },
+            {
+                "question": "Date symptoms presented or best estimate",
+                "answer": null
+            },
+            {
+                "question": "Have you received your COVID-19 Vaccinations?",
+                "answer": "No"
+            },
+            {
+                "question": "Date of first dose",
+                "answer": null
+            },
+            {
+                "question": "Date of second dose",
+                "answer": null
+            }
+        ]
+    }
+]
 }
