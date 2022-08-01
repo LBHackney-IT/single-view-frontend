@@ -3,16 +3,14 @@ import { AuthRoles } from '../support/commands';
 describe('Cases', () => {
   before(() => {
     cy.intercept('GET', "**/getJigsawCustomer*", {fixture: 'person-profile.json'}).as('getJigsawCustomer');
-    cy.intercept('GET', 'https://jogrx1a5a4.execute-api.eu-west-2.amazonaws.com/staging/api/v1/getJigsawCases?id=641056', { fixture: 'person-cases.json' }).as("getJigsawCases");
-    cy.setCookie('jigsawToken', 'testValue');
-    cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup);
+    cy.intercept('GET', '**/getJigsawCases?id=641056', { fixture: 'person-cases.json' }).as("getJigsawCases");
+    cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup, true);
   });
 
-  // No idea why but the tests run more reliably without this? Otherwise sometimes freezes at records not found.
-  // it('displays the cases tab', () => {
-  //   cy.get('#cases', { timeout: 10000 })
-  //     .should('be.visible')
-  // });
+  it('displays the cases tab', () => {
+    cy.get('#cases', { timeout: 10000 })
+      .should('be.visible')
+  });
   it('displays the case ID', ()=>{
     cy.get('[data-testid="caseId"]').should('have.text', "641056", {timeout: 10000});
   });

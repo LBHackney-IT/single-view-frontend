@@ -77,15 +77,16 @@ declare global {
 const visitAs = (
   url: string,
   role: AuthRoles,
-  options?: Partial<Cypress.VisitOptions>
+  options?: Partial<Cypress.VisitOptions>,
+  jigsawEnabled: boolean = false
 ) => {
-  cy.clearCookies();  
+  cy.clearCookies();
   cy.setCookie(
     'hackneyToken',
     makeToken({
       groups: roleConfigurations[role],
     })
-    
+
   );
   cy.getCookie('hackneyToken').should(
     'have.property',
@@ -94,6 +95,15 @@ const visitAs = (
       groups: roleConfigurations[role],
     })
   );
+
+  if (jigsawEnabled) {
+    cy.setCookie('jigsawToken', 'testValue');
+    cy.getCookie('jigsawToken').should(
+      'have.property',
+      'value',
+      'testValue'
+    );
+  };
 
   cy.visit(url, options);
 };
