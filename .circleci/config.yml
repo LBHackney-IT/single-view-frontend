@@ -98,7 +98,7 @@ jobs:
             - ./**/**/node_modules
       - persist_to_workspace:
           root: *workspace_root
-          paths: ./project/apps/<<parameters.app>>/node_modules
+          paths: [./project/apps/<<parameters.app>>/node_modules]
   lint-and-test:
     executor: node-executor
     steps:
@@ -252,9 +252,9 @@ jobs:
     executor: node-executor
     steps:
       - checkout
-      - run:
-          name: Install
-          command: yarn install
+      # - run:
+      #     name: Install
+      #     command: yarn install
       - run:
           name: Install apps
           command: yarn install-ci
