@@ -82,7 +82,7 @@ const App = (): JSX.Element => {
           </nav>
         </div>
       </div>
-      <PhaseBanner tag="alpha" variant="green">
+      <PhaseBanner tag="pilot" variant="green">
         <span>
           This is a new service - your{" "}
           <a href={feedbackLink} target="_blank">
