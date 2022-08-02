@@ -38,7 +38,7 @@ export const Cases = (props: Props): JSX.Element => {
       <ErrorSummary
         id="singleViewNotesError"
         title="Error"
-        description="Unable to load cases"
+        description="Unable to load cases. If you have access to Jigsaw please log in with the link above."
       />
     );
   }

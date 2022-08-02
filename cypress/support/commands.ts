@@ -77,25 +77,25 @@ declare global {
 const visitAs = (
   url: string,
   role: AuthRoles,
-  options?: Partial<Cypress.VisitOptions>
-) => {
-  cy.clearCookies();  
-  cy.setCookie(
-    'hackneyToken',
-    makeToken({
-      groups: roleConfigurations[role],
-    })
-    
-  );
-  cy.getCookie('hackneyToken').should(
-    'have.property',
-    'value',
-    makeToken({
-      groups: roleConfigurations[role],
-    })
-  );
+  options?: Partial<Cypress.VisitOptions>,
+  ) => {
+    cy.clearCookies();
+    cy.setCookie(
+      'hackneyToken',
+      makeToken({
+        groups: roleConfigurations[role],
+      })
 
-  cy.visit(url, options);
-};
+    );
+    cy.getCookie('hackneyToken').should(
+      'have.property',
+      'value',
+      makeToken({
+        groups: roleConfigurations[role],
+      })
+    );
+
+    cy.visit(url, options);
+  };
 
 Cypress.Commands.add('visitAs', visitAs);

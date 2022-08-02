@@ -9,8 +9,11 @@ interface Props {
 }
 
 export const CaseSummary: React.FC<Props> = (props) => {
+  const additionalFactors = props.jigsawCaseResponse?.additionalFactors;
+  const healthAndWellBeing = props.jigsawCaseResponse?.healthAndWellBeing;
+
   return (
-    <>
+    <dl className="govuk-summary-list lbh-summary-list">
       <h3>Case Summary</h3>
       <DescriptionListItem title="Case Id" testId="caseId">
         {props.jigsawCaseResponse?.currentCase.id}
@@ -27,7 +30,7 @@ export const CaseSummary: React.FC<Props> = (props) => {
       <DescriptionListItem title="V2 Legacy Case?" testId="isV2Legacy">
         {props.jigsawCaseResponse?.currentCase.isV2LegacyCase.toString()}
       </DescriptionListItem>
-      <h4>Case Overview</h4>
+      <h3>Case Overview</h3>
       <DescriptionListItem
         title="Flowchart Position"
         testId="currentFlowChartPosition"
@@ -43,7 +46,8 @@ export const CaseSummary: React.FC<Props> = (props) => {
       >
         {props.jigsawCaseResponse?.caseOverview.houseHoldComposition}
       </DescriptionListItem>
-      <h4>Placement Details</h4>
+
+      <h3>Placement Details</h3>
       {props.jigsawCaseResponse?.placementInformation.map(
         (placement: Placement) => {
           return (
@@ -83,6 +87,40 @@ export const CaseSummary: React.FC<Props> = (props) => {
           );
         }
       )}
-    </>
+
+      {additionalFactors &&
+        additionalFactors.map((additionalFactor, index) => {
+          return [
+            <h3>{additionalFactor.legend}</h3>,
+            additionalFactor.info.map((factorInfo, factorIndex) => {
+              return (
+                <DescriptionListItem
+                  title={factorInfo.question}
+                  testId={"AdditionalFactor " + factorIndex}
+                >
+                  {factorInfo.answer}
+                </DescriptionListItem>
+              );
+            }),
+          ];
+        })}
+
+      {healthAndWellBeing &&
+        healthAndWellBeing.map((wellBeingFactor, index) => {
+          return [
+            <h3>{wellBeingFactor.legend}</h3>,
+            wellBeingFactor.info.map((factorInfo, factorIndex) => {
+              return (
+                <DescriptionListItem
+                  title={factorInfo.question}
+                  testId={"WellBeingFactor " + factorIndex}
+                >
+                  {factorInfo.answer}
+                </DescriptionListItem>
+              );
+            }),
+          ];
+        })}
+    </dl>
   );
 };
