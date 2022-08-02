@@ -41,7 +41,7 @@ export const Input: React.FC<Props> = (props) => {
         id={props.id}
         name={props.name}
         type={props.type}
-        aria-describedby={`${props.id}-hint ${props.id}-error`}
+        aria-describedby={props.name}
         onChange={props.onChange}
       />
     </div>

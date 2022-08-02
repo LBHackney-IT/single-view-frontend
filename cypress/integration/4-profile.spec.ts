@@ -57,33 +57,33 @@ describe('Profile', () => {
     });
 
     it('displays place of birth', ()=>{
-      cy.get('[data-testid="placeOfBirth"]').should('have.text', "", {timeout: 10000});
+      cy.get('[data-testid="placeOfBirth"]').should('have.text', "Not known", {timeout: 10000});
     });
 
     it('place of birth is greyed out', () => {
-      cy.get('[data-testid="placeOfBirth"]').parent().parent().children("dt").children("h5").should('have.class', 'sv-null-field', {timeout: 10000});
+      cy.get('[data-testid="placeOfBirth"]').should('have.class', 'sv-null-field', {timeout: 10000});
     })
 
     it('displays date of death', ()=>{
-      cy.get('[data-testid="dateOfDeath"]').should('have.text', "", {timeout: 10000});
+      cy.get('[data-testid="dateOfDeath"]').should('have.text', "Not known", {timeout: 10000});
     });
 
     it('date of death is greyed out', () => {
-      cy.get('[data-testid="dateOfDeath"]').parent().parent().children("dt").children("h5").should('have.class', 'sv-null-field', {timeout: 10000});
+      cy.get('[data-testid="dateOfDeath"]').should('have.class', 'sv-null-field', {timeout: 10000});
     })
 
     it('displays is a minor', ()=>{
       cy.get('[data-testid="isMinor"]').should('have.text', "N", {timeout: 10000});
     });
-    
+
     it('displays pregnancy due date', () => {
       cy.get('[data-testid="pregnancyDueDate"]').should('have.text', "25/12/2022", {timeout: 10000})
     });
-    
+
     it('displays accommodation type id', () => {
       cy.get('[data-testid="accommodationTypeId"]').should('have.text', '10', {timeout: 10000});
     });
-    
+
     it('displays housing circumstance id', () => {
       cy.get('[data-testid="housingCircumstanceId"]').should('have.text', '11', {timeout: 10000});
     });
