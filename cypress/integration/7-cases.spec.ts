@@ -3,7 +3,7 @@ import { AuthRoles } from '../support/commands';
 describe('Cases', () => {
   before(() => {
     cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup);
-    cy.setCookie('jigsawToken', 'testValue');
+    cy.setCookie('jigsawToken', 'Placeholder-Jigsaw-Token');
   });
 
   beforeEach(() =>{
