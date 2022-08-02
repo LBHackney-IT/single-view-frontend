@@ -7,8 +7,8 @@ describe('Cases', () => {
   });
 
   beforeEach(() =>{
-  cy.intercept("**/getJigsawCustomer**", {fixture: 'person-profile.json'})//.as('getJigsawCustomer');
-  cy.intercept('**/getJigsawCases**', {fixture: 'person-cases.json'})//.as("getJigsawCases");
+  cy.intercept("**/getJigsawCustomer**", {fixture: 'person-profile.json'});
+  cy.intercept('**/getJigsawCases**', {fixture: 'person-cases.json'});
   })
 
   it('displays the cases tab', () => {
