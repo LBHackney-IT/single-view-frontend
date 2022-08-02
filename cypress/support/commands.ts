@@ -78,34 +78,24 @@ const visitAs = (
   url: string,
   role: AuthRoles,
   options?: Partial<Cypress.VisitOptions>,
-  jigsawEnabled: boolean = false
-) => {
-  cy.clearCookies();
-  cy.setCookie(
-    'hackneyToken',
-    makeToken({
-      groups: roleConfigurations[role],
-    })
+  ) => {
+    cy.clearCookies();
+    cy.setCookie(
+      'hackneyToken',
+      makeToken({
+        groups: roleConfigurations[role],
+      })
 
-  );
-  cy.getCookie('hackneyToken').should(
-    'have.property',
-    'value',
-    makeToken({
-      groups: roleConfigurations[role],
-    })
-  );
-
-  if (jigsawEnabled) {
-    cy.setCookie('jigsawToken', 'testValue');
-    cy.getCookie('jigsawToken').should(
+    );
+    cy.getCookie('hackneyToken').should(
       'have.property',
       'value',
-      'testValue'
+      makeToken({
+        groups: roleConfigurations[role],
+      })
     );
-  };
 
-  cy.visit(url, options);
-};
+    cy.visit(url, options);
+  };
 
 Cypress.Commands.add('visitAs', visitAs);

@@ -2,10 +2,14 @@ import { AuthRoles } from '../support/commands';
 
 describe('Cases', () => {
   before(() => {
-    cy.intercept('GET', "**/getJigsawCustomer*", {fixture: 'person-profile.json'}).as('getJigsawCustomer');
-    cy.intercept('GET', '**/getJigsawCases?id=641056', { fixture: 'person-cases.json' }).as("getJigsawCases");
-    cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup, true);
+    cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup);
+    cy.setCookie('jigsawToken', 'testValue');
   });
+
+  beforeEach(() =>{
+  cy.intercept("**/getJigsawCustomer**", {fixture: 'person-profile.json'})//.as('getJigsawCustomer');
+  cy.intercept('**/getJigsawCases**', {fixture: 'person-cases.json'})//.as("getJigsawCases");
+  })
 
   it('displays the cases tab', () => {
     cy.get('#cases', { timeout: 10000 })
