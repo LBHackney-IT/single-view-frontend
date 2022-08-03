@@ -25,8 +25,8 @@ export const SearchByResident = (props: myProps): JSX.Element => {
 
   const validateAndSetDateOfBirth = (dateOfBirth: string) => {
     const dateOfBirthYear = parseInt(dateOfBirth.split("-")[0]);
-    const dateOfBirthMonth = parseInt(dateOfBirth.split("-")[1]);
-    const dateOfBirthDay = parseInt(dateOfBirth.split("-")[2]);
+    const dateOfBirthMonth = dateOfBirth.split("-")[1];
+    const dateOfBirthDay = dateOfBirth.split("-")[2];
     const currentYear = new Date().getFullYear();
 
     setDateOfBirthError(dateOfBirthYear > currentYear);
