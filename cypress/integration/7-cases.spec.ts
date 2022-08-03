@@ -40,9 +40,9 @@ describe('Cases', () => {
     cy.get('[data-testid="placementDutyFullName"]').should('have.text', "Section 188 – Interim duty to accommodate in case of apparent priority need", {timeout: 10000});
   });
   it('displays the additional factors', ()=>{
-    cy.get('[data-testid="AdditionalFactor 0"]').should('have.text', "Yes")
+    cy.get('[data-testid="AdditionalFactor-0"]').should('have.text', "Yes")
   });
   it('displays the health and wellbeing information', ()=>{
-    cy.get('[data-testid="WellBeingFactor 1"]').should('have.text', "wheelchair/depression")
+    cy.get('[data-testid="WellBeingFactor-1"]').should('contain', "wheelchair/depression")
   });
 });

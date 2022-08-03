@@ -96,7 +96,7 @@ export const CaseSummary: React.FC<Props> = (props) => {
               return (
                 <DescriptionListItem
                   title={factorInfo.question}
-                  testId={"AdditionalFactor " + factorIndex}
+                  testId={"AdditionalFactor-" + factorIndex}
                 >
                   {factorInfo.answer}
                 </DescriptionListItem>
@@ -113,7 +113,7 @@ export const CaseSummary: React.FC<Props> = (props) => {
               return (
                 <DescriptionListItem
                   title={factorInfo.question}
-                  testId={"WellBeingFactor " + factorIndex}
+                  testId={"WellBeingFactor-" + factorIndex}
                 >
                   {factorInfo.answer}
                 </DescriptionListItem>
