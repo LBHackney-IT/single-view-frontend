@@ -1,6 +1,7 @@
 import { cautionaryAlert } from "./CautionaryAlertInterfaces";
 import { councilTaxAccount, knownAddress, contactDetail } from ".";
 import { housingBenefitsAccount } from "./housingBenefitsRecordInterfaces";
+import { EqualityData } from "./equalityInformationInterfaces";
 
 export interface customerProfile {
   preferredTitle: string | null;
@@ -29,4 +30,5 @@ export interface customerProfile {
   isAMinor: boolean;
   councilTaxAccount: councilTaxAccount | null;
   housingBenefitsAccount: housingBenefitsAccount | null;
+  equalityInformation: EqualityData | null;
 }

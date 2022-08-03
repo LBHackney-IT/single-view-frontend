@@ -112,6 +112,20 @@ describe('Profile', () => {
       cy.get('[data-testid="Jigsaw"]').should('have.text', "1234", {timeout: 10000});
       cy.get('[data-testid="Academy-CouncilTax"]').should('have.text', "34596507", {timeout: 10000});
     });
+    
+    it('displays equality information', () => {
+      cy.get('[data-testid="equalityInformationGender"]').should('have.text', 'm', {timeout: 10000});
+      cy.get('[data-testid="genderDifferentAtBirth"]').should('have.text', 'yes', {timeout: 10000});
+      cy.get('[data-testid="ethnicity"]').should('have.text', 'blackOrBlackBritish', {timeout: 10000});
+      cy.get('[data-testid="religionOrBelief"]').should('have.text', 'atheistOrNoReligiousBelief', {timeout: 10000});
+      cy.get('[data-testid="married"]').should('have.text', 'yes', {timeout: 10000});
+      cy.get('[data-testid="civilPartnership"]').should('have.text', 'no', {timeout: 10000});
+      cy.get('[data-testid="pregnancyOrMaternity"]').children().should('have.length', 1, {timeout: 10000});
+      cy.get('[data-testid="equalityInformationNiNo"]').should('have.text', 'AB102030', {timeout: 10000});
+      cy.get('[data-testid="disabled"]').should('have.text', 'yes', {timeout: 10000});
+      cy.get('[data-testid="communicationRequirements"]').children().should('have.length', 3, {timeout: 10000});
+      cy.get('[data-testid="communicationRequirements"]').children().first().should('have.text', 'Communication requirement-1', {timeout: 10000});
+    });
 
   });
 

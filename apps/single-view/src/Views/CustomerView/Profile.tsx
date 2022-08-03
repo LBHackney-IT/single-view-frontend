@@ -10,6 +10,7 @@ import { formatDate } from "@mfe/common/lib/utils";
 import { Alert } from "../../Components/Alert";
 import { CouncilTaxInformation } from "../../Components/CouncilTaxInformation";
 import { HousingBenefitsInformation } from "../../Components/HousingBenefitsInformation";
+import { EqualityInformation } from "../../Components/EqualityInformation";
 
 interface Props {
   profile?: customerProfile;
@@ -204,6 +205,7 @@ export const Profile = (props: Props) => {
         <HousingBenefitsInformation
           housingBenefitsAccount={person.housingBenefitsAccount}
         />
+        <EqualityInformation equalityData={person.equalityInformation} />
       </dl>
     </>
   );
