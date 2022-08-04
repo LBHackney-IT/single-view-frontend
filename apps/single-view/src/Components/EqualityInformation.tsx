@@ -81,12 +81,6 @@ export const EqualityInformation: React.FC<Props> = (props) => {
           }
         )}
       </DescriptionListItem>
-      <DescriptionListItem
-        title={"National Insurance Number"}
-        testId={"equalityInformationNiNo"}
-      >
-        {props.equalityData?.nationalInsuranceNumber}
-      </DescriptionListItem>
       <DescriptionListItem title={"Disabled"} testId={"disabled"}>
         {props.equalityData?.disabled}
       </DescriptionListItem>

@@ -121,7 +121,6 @@ describe('Profile', () => {
       cy.get('[data-testid="married"]').should('have.text', 'yes', {timeout: 10000});
       cy.get('[data-testid="civilPartnership"]').should('have.text', 'no', {timeout: 10000});
       cy.get('[data-testid="pregnancyOrMaternity"]').children().should('have.length', 1, {timeout: 10000});
-      cy.get('[data-testid="equalityInformationNiNo"]').should('have.text', 'AB102030', {timeout: 10000});
       cy.get('[data-testid="disabled"]').should('have.text', 'yes', {timeout: 10000});
       cy.get('[data-testid="communicationRequirements"]').children().should('have.length', 3, {timeout: 10000});
       cy.get('[data-testid="communicationRequirements"]').children().first().should('have.text', 'Communication requirement-1', {timeout: 10000});
