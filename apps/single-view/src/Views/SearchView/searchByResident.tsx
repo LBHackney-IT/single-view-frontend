@@ -1,23 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import { SearchResident } from "../../Gateways/SearchResident";
-import { housingSearchPerson, housingSearchResults } from "../../Interfaces";
+import { housingSearchResults } from "../../Interfaces";
 import { getCookie } from "../../Utils/getCookie";
 import { Input } from "../../Components";
 
 interface myProps {
   setResultsFunction: (searchResults: housingSearchResults) => void;
+  firstName: string | null;
+  lastName: string | null;
+  addressLine1: string | null;
+  postCode: string | null;
+  dateOfBirth: string | null;
 }
 
 export const SearchByResident = (props: myProps): JSX.Element => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [addressLine1, setAddressLine1] = useState("");
-  const [postCode, setPostcode] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [firstName, setFirstName] = useState(props.firstName || "");
+  const [lastName, setLastName] = useState(props.lastName || "");
+  const [addressLine1, setAddressLine1] = useState(props.addressLine1 || "");
+  const [postCode, setPostcode] = useState(props.postCode || "");
+  const [dateOfBirth, setDateOfBirth] = useState(props.dateOfBirth || "");
   const [dateOfBirthError, setDateOfBirthError] = useState(false);
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
   const [searching, setIsSearching] = useState<boolean>(false);
+
+  const history = useHistory();
 
   const joinAddresses = (): string => {
     return [addressLine1, postCode].filter((term) => term !== "").join(" ");
@@ -25,26 +34,47 @@ export const SearchByResident = (props: myProps): JSX.Element => {
 
   const validateAndSetDateOfBirth = (dateOfBirth: string) => {
     const dateOfBirthYear = parseInt(dateOfBirth.split("-")[0]);
-    const dateOfBirthMonth = dateOfBirth.split("-")[1];
-    const dateOfBirthDay = dateOfBirth.split("-")[2];
     const currentYear = new Date().getFullYear();
 
     setDateOfBirthError(dateOfBirthYear > currentYear);
 
     if (!dateOfBirthError) {
-      setDateOfBirth(
-        `${dateOfBirthDay}-${dateOfBirthMonth}-${dateOfBirthYear}`
-      );
+      setDateOfBirth(dateOfBirth);
     }
   };
 
+  useEffect(() => {
+    if (firstName && lastName) {
+      handleSearch().then((r) => {
+        const section = document.querySelector("#results");
+        section?.scrollIntoView({ behavior: "smooth", block: "start" });
+        setIsSearching(false);
+      });
+      setIsSearching(true);
+    }
+  }, [
+    props.firstName,
+    props.lastName,
+    props.addressLine1,
+    props.postCode,
+    props.dateOfBirth,
+  ]);
+
   const handleSearch = async () => {
+    function getDateOfBirth() {
+      if (dateOfBirth) {
+        const dateOfBirthAr = dateOfBirth.split("-");
+        return `${dateOfBirthAr[2]}-${dateOfBirthAr[1]}-${dateOfBirthAr[0]}`;
+      }
+      return null;
+    }
+
     try {
       let searchResults = await SearchResident({
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         address: joinAddresses(),
-        dateOfBirth: dateOfBirth,
+        dateOfBirth: getDateOfBirth(),
         jigsawToken: getCookie("jigsawToken"),
       });
       props.setResultsFunction(searchResults);
@@ -69,10 +99,21 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                 setLastNameError(true);
               }
               if (firstName && lastName) {
-                handleSearch();
                 setIsSearching(true);
                 setFirstNameError(false);
                 setLastNameError(false);
+
+                let path = `/search?firstName=${firstName.trim()}&lastName=${lastName.trim()}`;
+                if (addressLine1) {
+                  path += `&addressLine1=${addressLine1.trim()}`;
+                }
+                if (postCode) {
+                  path += `&postCode=${postCode.trim()}`;
+                }
+                if (dateOfBirth) {
+                  path += `&dateOfBirth=${dateOfBirth}`;
+                }
+                history.push(path);
               }
             }}
           >
@@ -81,6 +122,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               errorMsg="First name is mandatory"
               id="firstName"
               name="firstName"
+              value={props.firstName || ""}
               type="text"
               error={firstNameError}
               onChange={(e) => setFirstName(e.target.value)}
@@ -91,12 +133,14 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               id="lastName"
               name="lastName"
               type="text"
+              value={props.lastName || ""}
               error={lastNameError}
               onChange={(e) => setLastName(e.target.value)}
             />
             <Input
               label="First line of address"
               id="addressLine1"
+              value={props.addressLine1 || ""}
               name="addressLine1"
               type="text"
               onChange={(e) => setAddressLine1(e.target.value)}
@@ -105,6 +149,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               label="Postcode"
               id="postcode"
               name="postcode"
+              value={props.postCode || ""}
               type="text"
               onChange={(e) => setPostcode(e.target.value)}
             />
@@ -115,6 +160,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               name="dateOfBirth"
               type="date"
               error={dateOfBirthError}
+              value={props.dateOfBirth || ""}
               onChange={(e) => validateAndSetDateOfBirth(e.target.value)}
             />
             {searching ? (
