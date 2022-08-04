@@ -67,7 +67,39 @@
                 "description": "Description",
                 "reason": "Reason"
             }
-        ]
+        ],
+        "equalityInformation": {
+            "gender": {
+                "genderValue": "m",
+                "genderValueIfOther": null,
+                "genderDifferentToBirthSex": "yes"
+            },
+            "ethnicity": {
+                "ethnicGroupValue": "blackOrBlackBritish",
+                "ethnicGroupValueIfOther": null
+            },
+            "religionOrBelief": {
+                "religionOrBeliefValue": "atheistOrNoReligiousBelief",
+                "religionOrBeliefValueIfOther": null
+            },
+            "marriageOrCivilPartnership": {
+                "married": "yes",
+                "civilPartnership": "no"
+            },
+            "pregnancyOrMaternity": [
+                {
+                    "pregnancyDate": "01/01/2022",
+                    "pregnancyValidUntil": "01/09/2022"
+                }
+            ],
+            "nationalInsuranceNumber": "AB102030",
+            "disabled": "yes",
+            "communicationRequirements": [
+                "Communication requirement-1",
+                "Communication requirement-2",
+                "Communication requirement-3"
+            ]
+        }
     },
     "systemIds": [
         {
