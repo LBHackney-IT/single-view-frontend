@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
   Redirect,
+  useLocation,
 } from "react-router-dom";
 import { CustomerView, SearchView, JigsawLoginView } from "./Views";
 
@@ -25,6 +26,14 @@ const App = (): JSX.Element => {
     return dismissed || jigsawTokenSet;
   };
 
+  function useQuery() {
+    const { search } = useLocation();
+
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+
+  let query = useQuery();
+
   return (
     <>
       <Router>
@@ -35,7 +44,17 @@ const App = (): JSX.Element => {
             />
           </Route>
           <Route path="/search">
-            {hasInteractedWithJigsaw() ? <SearchView /> : <JigsawLoginView />}
+            {hasInteractedWithJigsaw() ? (
+              <SearchView
+                firstName={query.get("firstName")}
+                lastName={query.get("lastName")}
+                dateOfBirth={query.get("dateOfBirth")}
+                addressLine1={query.get("addressLine1")}
+                postCode={query.get("postCode")}
+              />
+            ) : (
+              <JigsawLoginView />
+            )}
           </Route>
           <Route path="/jigsawLogin">
             <JigsawLoginView />

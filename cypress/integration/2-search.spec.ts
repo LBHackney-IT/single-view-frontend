@@ -26,7 +26,7 @@ describe('search', () => {
     cy.contains('First name is mandatory');
     cy.contains('Last name is mandatory');
   });
-  
+
   it('displays the error message when date of birth is in future', () => {
     cy.get('#dateOfBirth').type('2050-12-01');
 
@@ -36,12 +36,19 @@ describe('search', () => {
   });
 
   it('displays search results with first name and last name', () => {
+    cy.setCookie('jigsawToken', 'testValue')
+
     cy.get('#firstName').type('Luna');
     cy.get('#lastName').type('Kitty');
 
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
 
     cy.get('.govuk-button').first().should('have.text', 'Search').click();
+
+    cy.location().should((location) => {
+      expect(location.pathname).to.eq('/search');
+      expect(location.search).to.eq('?firstName=Luna&lastName=Kitty&dateOfBirth=2050-12-01');
+    });
 
     cy.get('#searchResults', { timeout: 10000 })
       .should('be.visible')
@@ -53,6 +60,5 @@ describe('search', () => {
     cy.get('.sv-result').first()
       .should('have.text', 'Olivia Kitty, Date of Birth: 01/10/1951PersonAPI id: 6dd46a011 Thornbury Close, N16 8UX ');
   });
- 
 
 })

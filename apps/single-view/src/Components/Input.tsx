@@ -4,6 +4,7 @@ interface Props {
   label: string;
   hint?: string;
   errorMsg?: string;
+  value?: string;
   id: string;
   name: string;
   type: string;
@@ -40,6 +41,7 @@ export const Input: React.FC<Props> = (props) => {
         }`}
         id={props.id}
         name={props.name}
+        defaultValue={props.value}
         type={props.type}
         aria-describedby={props.name}
         onChange={props.onChange}
