@@ -24,6 +24,7 @@ export const EqualityInformation: React.FC<Props> = (props) => {
   return (
     <>
       <h3>Equality Information</h3>
+
       <DescriptionListItem
         title={"Gender"}
         testId={"equalityInformationGender"}
