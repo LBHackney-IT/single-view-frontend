@@ -107,34 +107,38 @@ export const SearchResults = (props: myProps): JSX.Element => {
         </div>
         <hr />
         <div id="matchedResults">
-          {matchedResults && matchedResults.length > 0 && [
-            <h4 className="lbh-heading-h4">
-              The following results were matched on name and date of birth, if
-              provided:
-            </h4>,
-            <SearchResultsGroup
-              results={matchedResults}
-              selectMatch={selectMatch}
-            />
-          ]}
+          {matchedResults &&
+            matchedResults.length > 0 && [
+              <h4 className="lbh-heading-h4">
+                The following results were matched on name and date of birth, if
+                provided:
+              </h4>,
+              <SearchResultsGroup
+                results={matchedResults}
+                selectMatch={selectMatch}
+              />,
+            ]}
         </div>
         <div id="searchResults">
-        {results && results.length > 0 && [
-          <h4 className="lbh-heading-h4 govuk-!-margin-top-7">
-            The following results were partial matches:
-          </h4>,
-          <SearchResultsGroup results={results} selectMatch={selectMatch} />
-        ]}
+          {results &&
+            results.length > 0 && [
+              <h4 className="lbh-heading-h4 govuk-!-margin-top-7">
+                The following results were partial matches:
+              </h4>,
+              <SearchResultsGroup
+                results={results}
+                selectMatch={selectMatch}
+              />,
+            ]}
         </div>
         {numberOfResults > 0 && (
-        <Pagination
-          total={props.otherResults.length}
-          onPageChange={onPageChange}
-          pageSize={props.maxSearchResults}
-        />
+          <Pagination
+            total={props.otherResults.length}
+            onPageChange={onPageChange}
+            pageSize={props.maxSearchResults}
+          />
         )}
       </div>
     </div>
   );
-  
 };
