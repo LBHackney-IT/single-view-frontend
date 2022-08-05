@@ -56,7 +56,7 @@ export const Cases = (props: Props): JSX.Element => {
       <CaseSummary jigsawCaseResponse={cases} />
     ) : (
       <div className="govuk-inset-text lbh-inset-text" data-testid="notFound">
-        There were no active cases found.
+        There were no active homelessness cases found for this customer.
       </div>
     );
   }
