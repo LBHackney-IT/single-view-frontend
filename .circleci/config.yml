@@ -759,12 +759,6 @@ workflows:
           filters:
             branches:
               only: main
-      - e2e:
-          requires:
-            - permit-production-terraform-release
-          filters:
-            branches:
-              only: main
       - install-dependencies-app:
           name: install-dependencies-app-single-view
           app: "single-view"
