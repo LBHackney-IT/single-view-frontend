@@ -10,6 +10,8 @@ const {
   welcome,
   signIn,
   signOut,
+  loginJigsaw,
+  jigsawLoginLink,
   branding: { hackney, manageMyHome },
 } = locale;
 
@@ -71,6 +73,11 @@ const App = (): JSX.Element => {
                   <p>
                     {welcome} <b>{auth.name}</b>
                   </p>
+                  {(document.cookie.indexOf("jigsawToken") == -1) &&
+                  <Link as="button" className="lbh-signout">
+                    <a href={jigsawLoginLink}>{loginJigsaw}</a>
+                  </Link>
+                  }
                   <Link as="button" onClick={() => logout()} className="lbh-signout">
                     {signOut}
                   </Link>

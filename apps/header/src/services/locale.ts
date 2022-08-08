@@ -2,6 +2,8 @@ const locale = {
   welcome: "Welcome",
   signOut: "Sign out",
   signIn: "Sign in",
+  loginJigsaw: "Log in to Jigsaw",
+  jigsawLoginLink: "/jigsawLogin",
   branding: {
     hackney: "Hackney",
     manageMyHome: "Single View 2.0",

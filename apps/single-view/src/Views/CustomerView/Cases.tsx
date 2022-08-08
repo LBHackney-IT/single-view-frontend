@@ -38,7 +38,12 @@ export const Cases = (props: Props): JSX.Element => {
       <ErrorSummary
         id="singleViewNotesError"
         title="Error"
-        description="Unable to load cases. If you have access to Jigsaw please log in with the link above."
+        description="Unable to load cases. If you have access to Jigsaw please log in."
+        children={
+          <a href="/jigsawLogin" target="_blank">
+            Log in to Jigsaw
+          </a>
+        }
       />
     );
   }
