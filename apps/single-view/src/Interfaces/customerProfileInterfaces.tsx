@@ -17,7 +17,7 @@ export interface customerProfile {
   accommodationTypeId: string | null;
   housingCircumstanceId: string | null;
   isSettled: boolean | null;
-  supportWorker: string | null;
+  supportWorker: supportWorker | null;
   gender: string | null;
   dateofDeath: string | null;
   placeOfBirth: string;
@@ -31,4 +31,14 @@ export interface customerProfile {
   councilTaxAccount: councilTaxAccount | null;
   housingBenefitsAccount: housingBenefitsAccount | null;
   equalityInformation: EqualityData | null;
+}
+
+export interface supportWorker {
+  firstName: string | null;
+  lastName: string | null;
+  fullName: string | null;
+  jobTitle: string | null;
+  agency: string | null;
+  phoneNumber: string | null;
+  emailAddress: string | null;
 }

@@ -177,7 +177,8 @@ export const Profile = (props: Props) => {
           {person.isSettled ? "Y" : "N"}
         </DescriptionListItem>
         <DescriptionListItem title={"Support worker"} testId={"supportWorker"}>
-          {person.supportWorker}
+          {person.supportWorker?.fullName} {person.supportWorker?.phoneNumber}{" "}
+          {person.supportWorker?.emailAddress}
         </DescriptionListItem>
         <DescriptionListItem title={"Gender"} testId={"gender"}>
           {person.gender}
