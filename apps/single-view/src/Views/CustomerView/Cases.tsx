@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const Cases = (props: Props): JSX.Element => {
-  const [cases, setCases] = useState<jigsawCasesResponse>();
+  const [cases, setCases] = useState<jigsawCasesResponse | null>(null);
   const [getCasesError, setGetCasesError] = useState<boolean>(false);
 
   const loadCases = async (customerId: string): Promise<void> => {
@@ -22,8 +22,9 @@ export const Cases = (props: Props): JSX.Element => {
       );
       setCases(cases);
     } catch (e: any) {
-      setGetCasesError(true);
-      console.log(`Error is ${e.message}`);
+      if (e.response.status != 404) {
+        setGetCasesError(true);
+      }
     }
   };
 
