@@ -55,7 +55,15 @@
         "accommodationTypeId": 10,
         "housingCircumstanceId": 11,
         "isSettled": false,
-        "supportWorker": "James Brown",
+        "supportWorker":{
+          "firstName": "James",
+          "lastName": "Brown",
+          "fullName": "James Brown",
+          "jobTitle": "Social Worker",
+          "agency": "LBH",
+          "phoneNumber": "02083568440",
+          "emailAddress": "james.brown@hackney.gov.uk"
+        },
         "gender": "Female",
         "cautionaryAlerts": [
             {

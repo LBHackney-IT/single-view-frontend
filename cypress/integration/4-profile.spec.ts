@@ -93,7 +93,7 @@ describe('Profile', () => {
     });
 
     it('displays support worker', () => {
-      cy.get('[data-testid="supportWorker"]').should('have.text', 'James Brown', {timeout: 10000});
+      cy.get('[data-testid="supportWorker"]').should('have.text', 'James Brown 02083568440 james.brown@hackney.gov.uk', {timeout: 10000});
     });
 
     it('displays gender', () => {
@@ -112,7 +112,7 @@ describe('Profile', () => {
       cy.get('[data-testid="Jigsaw"]').should('have.text', "1234", {timeout: 10000});
       cy.get('[data-testid="Academy-CouncilTax"]').should('have.text', "34596507", {timeout: 10000});
     });
-    
+
     it('displays equality information', () => {
       cy.get('[data-testid="equalityInformationGender"]').should('have.text', 'm', {timeout: 10000});
       cy.get('[data-testid="genderDifferentAtBirth"]').should('have.text', 'yes', {timeout: 10000});
