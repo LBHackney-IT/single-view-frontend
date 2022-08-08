@@ -13,7 +13,6 @@ import {
 import { NotFound } from "../../Components";
 import { SystemId } from "../../Interfaces/systemIdInterface";
 import { Cases } from "./Cases";
-import id from "date-fns/esm/locale/id/index.js";
 
 export const CustomerView = () => {
   const { dataSource, id } = useParams<UrlParams>();
