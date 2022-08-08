@@ -13,7 +13,7 @@ const {
   branding: { hackney, manageMyHome },
 } = locale;
 
-const { manageMyHomeUnderDev, feedbackLink } = locale.betaBanner;
+const { manageMyHomeUnderDev, feedbackLink, supportLink, pilotGroupLink } = locale.betaBanner;
 const { headerNavigation } = locale.a11y;
 
 const App = (): JSX.Element => {
@@ -82,13 +82,21 @@ const App = (): JSX.Element => {
           </nav>
         </div>
       </div>
+      {/* TODO: Remove/replace the chat with us option when the pilot is over. */}
       <PhaseBanner tag="pilot" variant="green">
         <span>
-          This is a new service - your{" "}
+          This is a new service -&nbsp;
+          <a href={supportLink} target="_blank">
+          request support
+          </a>
+          , &nbsp;
           <a href={feedbackLink} target="_blank">
-            feedback
-          </a>{" "}
-          will help us to improve it.
+          provide feedback
+          </a>
+          , or&nbsp;
+          <a href={pilotGroupLink} target="_blank">
+          chat with us
+          </a>
         </span>
       </PhaseBanner>
     </>
