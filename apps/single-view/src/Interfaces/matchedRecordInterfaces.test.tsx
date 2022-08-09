@@ -8,7 +8,7 @@ describe("mapRecordsToMatchFunction", () => {
   it("accepts search results and returns a merged record", () => {
     const result = mapRecordsToMatchedRecord(mockSearchResults);
 
-    expect(result).toEqual(expectedMatchedRecord);
+    expect(result.matchedRecord).toEqual(expectedMatchedRecord);
   });
 });
 

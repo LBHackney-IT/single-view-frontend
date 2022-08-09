@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { housingSearchPerson } from "../../Interfaces";
+import {
+  housingSearchPerson,
+  mapRecordsToMatchedRecord,
+} from "../../Interfaces";
 import { Pagination } from "../../Components";
 import { mergeRecords } from "../../Gateways/mergeRecords";
 import { ErrorSummary } from "@mfe/common/lib/components";
@@ -31,14 +34,14 @@ export const SearchResults = (props: myProps): JSX.Element => {
   const [selectedRecords, setSelectedRecords] = useState<housingSearchPerson[]>(
     []
   );
-  const [mergeError, setMergeError] = useState<boolean>(false);
+  const [mergeError, setMergeError] = useState<string | null>(null);
 
   useEffect(() => {
-    setMergeError(false);
+    setMergeError(null);
     setResults(sliceIntoChunks(props.otherResults, props.maxSearchResults)[0]);
     setSelectedRecords([]);
     setMatchedResults(props.matchedResults);
-  }, [props.otherResults, props.matchedResults]);
+  }, [props.otherResults, props.matchedResults, props.maxSearchResults]);
 
   const onPageChange = (currentPage: number, isNext: boolean) => {
     if (isNext) {
@@ -63,12 +66,18 @@ export const SearchResults = (props: myProps): JSX.Element => {
   };
 
   const mergeSelectedRecords = async (records: housingSearchPerson[]) => {
+    const mappedMatchedRecord = mapRecordsToMatchedRecord(records);
+    if (mappedMatchedRecord.error != null) {
+      // @ts-ignore
+      return setMergeError(mappedMatchedRecord.error);
+    }
     try {
-      setMergeError(false);
-      const sv_id = await mergeRecords(records);
+      setMergeError(null);
+      // @ts-ignore
+      const sv_id = await mergeRecords(mappedMatchedRecord.matchedRecord);
       return (window.location.href = `/customers/single-view/${sv_id}`);
     } catch (e) {
-      setMergeError(true);
+      setMergeError("Unable to create merged record. Please search again.");
     }
   };
 
@@ -78,15 +87,6 @@ export const SearchResults = (props: myProps): JSX.Element => {
     numberOfResults += props.matchedResults.length;
   }
 
-  if (mergeError) {
-    return (
-      <ErrorSummary
-        id="singleViewMergeError"
-        title="Error"
-        description="Unable to create merged record. Please search again."
-      />
-    );
-  }
   return (
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-two-thirds">
@@ -105,6 +105,13 @@ export const SearchResults = (props: myProps): JSX.Element => {
             Merge {selectedRecords?.length} records
           </button>
         </div>
+        {mergeError && (
+          <ErrorSummary
+            id="singleViewMergeError"
+            title="Error"
+            description={mergeError}
+          />
+        )}
         <hr />
         <div id="matchedResults">
           {matchedResults &&

@@ -1,4 +1,4 @@
-import { Housing, housingSearchPerson, Jigsaw } from ".";
+import { housingSearchPerson } from ".";
 
 export interface matchedRecord {
   firstName: string;
@@ -8,6 +8,11 @@ export interface matchedRecord {
   dataSources: dataSource[];
 }
 
+export interface result {
+  matchedRecord: matchedRecord | null;
+  error: string | null;
+}
+
 export interface dataSource {
   dataSource: string;
   sourceId: string;
@@ -15,11 +20,17 @@ export interface dataSource {
 
 export const mapRecordsToMatchedRecord = (
   persons: housingSearchPerson[]
-): matchedRecord => {
-  let personApiResult = persons.filter(
-    (person) => person.dataSource == Housing
-  );
-  let jigsawResult = persons.filter((person) => person.dataSource == Jigsaw);
+): result => {
+  let masterRecord = persons.find((person) => person.dateOfBirth != null);
+
+  if (masterRecord == null) {
+    return {
+      error: "Please select at least one person with a date of birth",
+      matchedRecord: null,
+    };
+  }
+
+  let ninoRecord = persons.find((person) => person.niNo != null);
 
   const dataSources: dataSource[] = [];
 
@@ -31,13 +42,12 @@ export const mapRecordsToMatchedRecord = (
     dataSources.push(dataSource);
   }
 
-  const result: matchedRecord = {
-    firstName: personApiResult[0].firstName,
-    lastName: personApiResult[0].surName,
-    dateOfBirth: personApiResult[0].dateOfBirth,
-    niNumber: jigsawResult[0]?.niNo,
+  const matchedRecord: matchedRecord = {
+    firstName: masterRecord.firstName,
+    lastName: masterRecord.surName,
+    dateOfBirth: masterRecord.dateOfBirth,
+    niNumber: ninoRecord?.niNo || null,
     dataSources: dataSources,
   };
-
-  return result;
+  return { matchedRecord: matchedRecord, error: null };
 };
