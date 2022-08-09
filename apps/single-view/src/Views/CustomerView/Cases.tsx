@@ -33,17 +33,21 @@ export const Cases = (props: Props): JSX.Element => {
     }
   }, [props.customerId]);
 
+  var currentPathName = window.location.pathname;
+  var jigsawTokenMessage = [<p>You are signed in to Jigsaw - this is probably a system issue</p>]
+  if (document.cookie.indexOf("jigsawToken") == -1) { // if jigsawToken NOT set
+    jigsawTokenMessage = [
+      <p>If you have access to Jigsaw please <a href={`/jigsawLogin?redirect=${currentPathName}`}>Log in to Jigsaw</a></p>,
+    ]
+  }
+
   if (getCasesError) {
     return (
       <ErrorSummary
         id="singleViewNotesError"
         title="Error"
-        description="Unable to load cases. If you have access to Jigsaw please log in."
-        children={
-          <a href="/jigsawLogin" target="_blank">
-            Log in to Jigsaw
-          </a>
-        }
+        description="Unable to load cases."
+        children={jigsawTokenMessage}
       />
     );
   }
