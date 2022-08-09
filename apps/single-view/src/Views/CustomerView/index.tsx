@@ -55,11 +55,7 @@ export const CustomerView = () => {
   const systemIdError = (dataSource: any) => {
     const ifJigsaw =
       dataSource.systemName == Jigsaw && dataSource.error == "Unauthorised";
-    const jigsawLink = (
-      <span>
-        If you have access to Jigsaw, please login.
-      </span>
-    );
+    const jigsawLink = <span>If you have access to Jigsaw, please login.</span>;
 
     return (
       <div

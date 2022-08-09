@@ -33,10 +33,9 @@ export const JigsawLogin = () => {
           document.cookie = `jigsawToken=${token}; expires=${date.toUTCString()}`;
           document.cookie = `jigsawDismissed=false; expires=${date.toUTCString()}`;
 
-          const params = new URLSearchParams(window.location.search)
+          const params = new URLSearchParams(window.location.search);
           const redirectUrl = params.get("redirect");
-            document.location = redirectUrl !== null ? redirectUrl : '/';
-
+          document.location = redirectUrl !== null ? redirectUrl : "/";
         })
         .catch((reason) => {
           console.error(reason.message);

@@ -34,11 +34,24 @@ export const Cases = (props: Props): JSX.Element => {
   }, [props.customerId]);
 
   var currentPathName = window.location.pathname;
-  var jigsawTokenMessage = [<p>You are signed in to Jigsaw - this is probably a system issue</p>]
-  if (document.cookie.indexOf("jigsawToken") == -1) { // if jigsawToken NOT set
-    jigsawTokenMessage = [
-      <p>If you have access to Jigsaw please <a href={`/jigsawLogin?redirect=${currentPathName}`}>Log in to Jigsaw</a></p>,
-    ]
+  if (document.cookie.indexOf("jigsawToken") == -1) {
+    // if jigsawToken is NOT set
+    var jigsawTokenMessage = [
+      <p>
+        If you have access to Jigsaw please{" "}
+        <a
+          href={`/jigsawLogin?redirect=${currentPathName}`}
+          data-testid="jigsawLoginErrorSummary"
+        >
+          Log in to Jigsaw
+        </a>
+      </p>,
+    ];
+  } else {
+    // jigsawToken set but still failed
+    var jigsawTokenMessage = [
+      <p>You are signed in to Jigsaw - this is probably a system issue</p>,
+    ];
   }
 
   if (getCasesError) {

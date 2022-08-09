@@ -75,7 +75,7 @@ const App = (): JSX.Element => {
                   </p>
                   {(document.cookie.indexOf("jigsawToken") == -1) &&
                   <Link as="button" className="lbh-signout">
-                    <a href={jigsawLoginLink + "?redirect=" + window.location.pathname}>{loginJigsaw}</a>
+                    <a href={jigsawLoginLink + "?redirect=" + window.location.pathname} data-testid="jigsawloginHeader">{loginJigsaw}</a>
                   </Link>
                   }
                   <Link as="button" onClick={() => logout()} className="lbh-signout">
