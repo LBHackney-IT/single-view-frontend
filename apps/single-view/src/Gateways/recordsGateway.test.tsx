@@ -1,9 +1,10 @@
-import { mergeRecords, mergeError } from "./mergeRecords";
+import { mergeRecords, mergeError, unmergeRecords } from "./recordsGateway";
 import axios from "axios";
-import { matchedRecord, dataSource } from "../Interfaces";
+import { matchedRecord } from "../Interfaces";
 jest.mock("axios", () => {
   return {
     post: jest.fn(),
+    delete: jest.fn(),
   };
 });
 
@@ -27,6 +28,15 @@ describe("MergeRecords Gateway", () => {
         expect(e.message).toBe(mergeError.message);
       }
     });
+  });
+});
+
+describe("UnmergeRecords Gateway", () => {
+  it("should return true if the record is deleted", async () => {
+    const sv_id: string = "test-id";
+    const response = { status: 204, data: true };
+    mockAxios.delete.mockImplementationOnce(async () => response);
+    expect(await unmergeRecords(sv_id)).toEqual(true);
   });
 });
 
