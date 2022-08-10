@@ -31,7 +31,11 @@ export const JigsawLogin = () => {
           let date = new Date();
           date.setTime(date.getTime() + 10 * 60 * 60 * 1000);
           document.cookie = `jigsawToken=${token}; expires=${date.toUTCString()}`;
-          document.location = "/";
+          document.cookie = `jigsawDismissed=false; expires=${date.toUTCString()}`;
+
+          const params = new URLSearchParams(window.location.search);
+          const redirectUrl = params.get("redirect");
+          document.location = redirectUrl !== null ? redirectUrl : "/";
         })
         .catch((reason) => {
           console.error(reason.message);
@@ -64,7 +68,7 @@ export const JigsawLogin = () => {
               </h2>
             </div>
             <div className="govuk-notification-banner__content">
-              Please use your Jigsaw user name & password to login, granting you
+              Please use your Jigsaw username & password to login, granting you
               access to the data presented at Single view from Jigsaw.
               <br />
               <a

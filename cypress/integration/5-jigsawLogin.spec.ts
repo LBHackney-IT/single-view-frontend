@@ -75,3 +75,24 @@ describe('jigsaw login',  () => {
  }
   
 })
+
+describe("Prompts Jigsaw login", () => {
+  before(() => {
+    cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup);
+    cy.clearCookie('jigsawToken');
+  });
+
+  beforeEach(() => {
+    cy.intercept("**/getJigsawCustomer**", {statusCode: 401});
+    cy.intercept('**/getJigsawCases**', {statusCode: 401});
+  })
+
+  it('displays jigsaw login link in error summary', () => {
+    cy.get('[data-testid="jigsawLoginErrorSummary"]').should('have.text', 'Log in to Jigsaw');
+  });
+
+  it('displays jigsaw login link in header bar', () => {
+    cy.get('[data-testid="jigsawloginHeader"]').should('have.text', 'Log in to Jigsaw');
+  });
+
+});
