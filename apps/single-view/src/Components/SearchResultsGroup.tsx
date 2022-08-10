@@ -8,6 +8,7 @@ interface Props {
   results: housingSearchPerson[];
   selectMatch: (person: housingSearchPerson) => void;
   forceUpdate: () => void;
+  setUnmergeError: () => void;
 }
 
 export const SearchResultsGroup = (props: Props): JSX.Element => {
@@ -56,6 +57,7 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
                 <UnmergeRecordButton
                   svId={person.id}
                   forceUpdate={props.forceUpdate}
+                  setUnmergeError={props.setUnmergeError}
                 />
               )}
             </div>

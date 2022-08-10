@@ -4,6 +4,7 @@ import { unmergeRecords } from "../Gateways/recordsGateway";
 interface Props {
   svId: string;
   forceUpdate: () => void;
+  setUnmergeError: () => void;
 }
 
 export const UnmergeRecordButton: React.FC<Props> = (props) => {
