@@ -114,6 +114,8 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                   path += `&dateOfBirth=${dateOfBirth}`;
                 }
                 history.push(path);
+
+                window.document.cookie = `searchResidentPath=${path}`;
               }
             }}
           >
