@@ -3,10 +3,19 @@ import { unmergeRecords } from "../Gateways/recordsGateway";
 
 interface Props {
   svId: string;
+  forceUpdate: () => void;
 }
 
 export const UnmergeRecordButton: React.FC<Props> = (props) => {
   const [searching, setIsSearching] = useState<boolean>(false);
+  const deleteRecord = async () => {
+    setIsSearching(true);
+    var hasUnmerged = await unmergeRecords(props.svId);
+    if (hasUnmerged) {
+      props.forceUpdate();
+    }
+    setIsSearching(false);
+  };
   return searching ? (
     <div className="sv-spinner">
       <svg
@@ -30,24 +39,12 @@ export const UnmergeRecordButton: React.FC<Props> = (props) => {
   ) : (
     <button
       onClick={() => {
-        setIsSearching(true);
-        var hasUnmerged = unmergeRecords(props.svId);
-        setIsSearching(false);
+        deleteRecord();
       }}
       className="govuk-button lbh-button govuk-button--start"
     >
-      Unmerge Record
-      <svg
-        className="govuk-button__start-icon"
-        xmlns="http://www.w3.org/2000/svg"
-        width="17.5"
-        height="19"
-        viewBox="0 0 33 40"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-      </svg>
+      Unmerge
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
     </button>
   );
 };

@@ -14,7 +14,13 @@ interface myProps {
   maxSearchResults: number;
 }
 
+const useForceUpdate = () => {
+  const [value, setValue] = useState(0);
+  return () => setValue((value) => value + 1);
+};
+
 export const SearchResults = (props: myProps): JSX.Element => {
+  const forceUpdate = useForceUpdate();
   const sliceIntoChunks = (arr: any, chunkSize: number) => {
     const res = [];
     for (let i = 0; i < arr.length; i += chunkSize) {
@@ -35,6 +41,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
     []
   );
   const [mergeError, setMergeError] = useState<string | null>(null);
+  const [rerender, setRerender] = useState<boolean>(false);
 
   useEffect(() => {
     setMergeError(null);
@@ -123,6 +130,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
               <SearchResultsGroup
                 results={matchedResults}
                 selectMatch={selectMatch}
+                forceUpdate={forceUpdate}
               />,
             ]}
         </div>
@@ -135,6 +143,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
               <SearchResultsGroup
                 results={results}
                 selectMatch={selectMatch}
+                forceUpdate={forceUpdate}
               />,
             ]}
         </div>
