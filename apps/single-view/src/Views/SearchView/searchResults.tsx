@@ -4,7 +4,7 @@ import {
   mapRecordsToMatchedRecord,
 } from "../../Interfaces";
 import { Pagination } from "../../Components";
-import { mergeRecords } from "../../Gateways/mergeRecords";
+import { mergeRecords } from "../../Gateways/recordsGateway";
 import { ErrorSummary } from "@mfe/common/lib/components";
 import { SearchResultsGroup } from "../../Components/SearchResultsGroup";
 
