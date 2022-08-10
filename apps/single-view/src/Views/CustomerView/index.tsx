@@ -13,6 +13,7 @@ import {
 import { NotFound } from "../../Components";
 import { SystemId } from "../../Interfaces/systemIdInterface";
 import { Cases } from "./Cases";
+import { BackToSearch } from "../../Components/BackToSearch";
 
 export const CustomerView = () => {
   const { dataSource, id } = useParams<UrlParams>();
@@ -100,6 +101,9 @@ export const CustomerView = () => {
       )}
       <div className="govuk-tabs lbh-tabs sv-space-t" data-module="govuk-tabs">
         <h2 className="govuk-tabs__title">Contents</h2>
+
+        <BackToSearch />
+
         <ul className="govuk-tabs__list">
           <li className="govuk-tabs__list-item govuk-tabs__list-item--selected">
             <a className="govuk-tabs__tab" href="#profile">
