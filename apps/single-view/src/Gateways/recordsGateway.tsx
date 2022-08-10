@@ -27,7 +27,7 @@ export const mergeRecords = async (
 
 export const unmergeRecords = async (id: string): Promise<boolean> => {
   const response = await axios.delete(
-    `${process.env.SV_API_V1}/customers/${id}`,
+    `${process.env.SV_API_V1}/customers?id=${id}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export const unmergeRecords = async (id: string): Promise<boolean> => {
       },
     }
   );
-  if (response.status != 204) {
+  if (response.status != 200) {
     throw unMergeError;
   }
 

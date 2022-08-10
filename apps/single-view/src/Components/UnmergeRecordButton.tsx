@@ -3,7 +3,6 @@ import { unmergeRecords } from "../Gateways/recordsGateway";
 
 interface Props {
   svId: string;
-  forceUpdate: () => void;
   setUnmergeError: () => void;
 }
 
@@ -13,7 +12,7 @@ export const UnmergeRecordButton: React.FC<Props> = (props) => {
     setIsSearching(true);
     var hasUnmerged = await unmergeRecords(props.svId);
     if (hasUnmerged) {
-      props.forceUpdate();
+      window.location.reload();
     }
     setIsSearching(false);
   };

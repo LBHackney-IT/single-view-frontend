@@ -34,7 +34,7 @@ describe("MergeRecords Gateway", () => {
 describe("UnmergeRecords Gateway", () => {
   it("should return true if the record is deleted", async () => {
     const sv_id: string = "test-id";
-    const response = { status: 204, data: true };
+    const response = { status: 200, data: true };
     mockAxios.delete.mockImplementationOnce(async () => response);
     expect(await unmergeRecords(sv_id)).toEqual(true);
   });
