@@ -6,6 +6,7 @@ interface Props {
   setUnmergeError: () => void;
 }
 
+//component to unmerge
 export const UnmergeRecordButton: React.FC<Props> = (props) => {
   const [searching, setIsSearching] = useState<boolean>(false);
   const deleteRecord = async () => {
