@@ -15,24 +15,19 @@ export const authoriseJigsaw = async (
   };
   const encryptedCreds = encrypt(JSON.stringify(jigsawCredentials), key);
 
-  if (isProduction()) {
-    const response = await axios.post(
-      `${process.env.SV_API_V1}/storeCredentials`,
-      encryptedCreds,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${getToken()}`,
-        },
-      }
-    );
-
-    if (response.status != 200) {
-      throw authoriseJigsawError;
+  const response = await axios.post(
+    `${process.env.SV_API_V1}/storeCredentials`,
+    encryptedCreds,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${getToken()}`,
+      },
     }
+  );
 
-    return response.data;
-  } else {
-    return "Placeholder-Jigsaw-Token";
+  if (response.status != 200) {
+    throw authoriseJigsawError;
   }
+  return response.data;
 };
