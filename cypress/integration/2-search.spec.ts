@@ -58,7 +58,7 @@ describe('search', () => {
     cy.get('.lbh-heading-h4').first().should('have.text', 'The following results were matched on name and date of birth, if provided:')
 
     cy.get('.sv-result').first()
-      .should('have.text', 'Olivia Kitty, Date of Birth: 01/10/1951PersonAPI id: 6dd46a011 Thornbury Close, N16 8UX ');
+      .contains('Olivia Kitty');
   });
 
 })
