@@ -4,7 +4,7 @@ import {
   mapRecordsToMatchedRecord,
 } from "../../Interfaces";
 import { Pagination } from "../../Components";
-import { mergeRecords } from "../../Gateways/mergeRecords";
+import { mergeRecords } from "../../Gateways/recordsGateway";
 import { ErrorSummary } from "@mfe/common/lib/components";
 import { SearchResultsGroup } from "../../Components/SearchResultsGroup";
 
@@ -35,9 +35,11 @@ export const SearchResults = (props: myProps): JSX.Element => {
     []
   );
   const [mergeError, setMergeError] = useState<string | null>(null);
+  const [unMergeError, setUnmergeError] = useState<string | null>(null);
 
   useEffect(() => {
     setMergeError(null);
+    setUnmergeError(null);
     setResults(sliceIntoChunks(props.otherResults, props.maxSearchResults)[0]);
     setSelectedRecords([]);
     setMatchedResults(props.matchedResults);
@@ -49,6 +51,10 @@ export const SearchResults = (props: myProps): JSX.Element => {
     } else {
       setResults(splitResults[currentPage - 2]);
     }
+  };
+
+  const displayUnmergeError = () => {
+    setUnmergeError("Error unmerging selected record. Please try again.");
   };
 
   const selectMatch = (person: housingSearchPerson) => {
@@ -112,6 +118,13 @@ export const SearchResults = (props: myProps): JSX.Element => {
             description={mergeError}
           />
         )}
+        {unMergeError && (
+          <ErrorSummary
+            id="singleViewMergeError"
+            title="Error"
+            description={unMergeError}
+          />
+        )}
         <hr />
         <div id="matchedResults">
           {matchedResults &&
@@ -123,6 +136,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
               <SearchResultsGroup
                 results={matchedResults}
                 selectMatch={selectMatch}
+                setUnmergeError={displayUnmergeError}
               />,
             ]}
         </div>
@@ -135,6 +149,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
               <SearchResultsGroup
                 results={results}
                 selectMatch={selectMatch}
+                setUnmergeError={displayUnmergeError}
               />,
             ]}
         </div>

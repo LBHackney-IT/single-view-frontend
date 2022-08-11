@@ -1,11 +1,13 @@
 import React from "react";
 import { formatDate } from "@mfe/common/lib/utils";
-import { housingSearchPerson } from "../Interfaces";
+import { housingSearchPerson, SingleView } from "../Interfaces";
 import { humanize } from "../Utils";
+import { UnmergeRecordButton } from "./UnmergeRecordButton";
 
 interface Props {
   results: housingSearchPerson[];
   selectMatch: (person: housingSearchPerson) => void;
+  setUnmergeError: () => void;
 }
 
 export const SearchResultsGroup = (props: Props): JSX.Element => {
@@ -83,6 +85,12 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
                   </strong>
                 </div>
               </div>
+              {person.dataSource == SingleView && (
+                <UnmergeRecordButton
+                  svId={person.id}
+                  setUnmergeError={props.setUnmergeError}
+                />
+              )}
             </div>
           </>
         );

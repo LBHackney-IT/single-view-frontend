@@ -42,7 +42,10 @@ export const HousingBenefitsInformation: React.FC<Props> = (props) => {
           }
         )}
       </DescriptionListItem>
-      <DescriptionListItem title="Benefits" testId="benefits">
+      <DescriptionListItem
+        title="Income Received By Applicant"
+        testId="benefits"
+      >
         {props.housingBenefitsAccount?.benefits?.map((benefit, index) => {
           return (
             <p className="lbh-body-s" key={index}>
