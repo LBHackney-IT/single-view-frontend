@@ -3,7 +3,7 @@
 
 export interface Note {
   id: string;
-  jigsawCaseReferenceId: string | null;
+  jigsawCaseReferenceId?: string | null;
   title: string | null;
   description: string;
   targetType: string;
