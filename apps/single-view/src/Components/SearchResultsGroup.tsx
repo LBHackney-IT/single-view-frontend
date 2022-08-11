@@ -77,6 +77,7 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
                     ? "NI Number: " + person.niNo
                     : "(NI Number Not Set)"}
                   <br /> */}
+                  <br />
                   <strong className="lbh-tag lbh-tag--grey">
                     {humanize(person.dataSource)}
                   </strong>
