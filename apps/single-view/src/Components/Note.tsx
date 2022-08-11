@@ -25,7 +25,7 @@ export const Note = (props: Props) => {
           <p className="lbh-body-s">{props.note.dataSource}</p>
           {props.note.jigsawCaseReferenceId && (
             <p className="lbh-body-s">
-              Case reference is {props.note.jigsawCaseReferenceId}
+              Case reference: {props.note.jigsawCaseReferenceId}
             </p>
           )}
         </div>
