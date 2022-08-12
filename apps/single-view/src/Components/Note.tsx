@@ -23,6 +23,11 @@ export const Note = (props: Props) => {
         <div style={{ marginRight: "1em" }}>
           <h5 className="lbh-heading-h5">{formatDate(props.note.createdAt)}</h5>
           <p className="lbh-body-s">{props.note.dataSource}</p>
+          {props.note.jigsawCaseReferenceId && (
+            <p className="lbh-body-s">
+              Case reference: {props.note.jigsawCaseReferenceId}
+            </p>
+          )}
         </div>
         {props.note.categorisation.category && (
           <p className="lbh-body-s">
