@@ -11,6 +11,7 @@ const {
   signIn,
   signOut,
   loginJigsaw,
+  logoutJigsaw,
   jigsawLoginLink,
   branding: { hackney, manageMyHome },
 } = locale;
@@ -73,11 +74,17 @@ const App = (): JSX.Element => {
                   <p>
                     {welcome} <b>{auth.name}</b>
                   </p>
-                  {(document.cookie.indexOf("jigsawToken") == -1) &&
+                  {(document.cookie.indexOf("jigsawToken") == -1) ? (
                   <RouterLink to={jigsawLoginLink + "?redirect=" + window.location.pathname} data-testid="jigsawloginHeader">
                     {loginJigsaw}
                   </RouterLink>
-                  }
+                   ) : 
+                  <Link as="button" onClick={() => {
+                    document.cookie = "jigsawToken" +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                    window.location.href = window.location.pathname;
+                  }} className="lbh-signout">
+                    {logoutJigsaw}
+                  </Link>}
                   <Link as="button" onClick={() => logout()} className="lbh-signout">
                     {signOut}
                   </Link>
