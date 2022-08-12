@@ -33,7 +33,7 @@ export const JigsawLogin = () => {
           let date = new Date();
           date.setTime(date.getTime() + 10 * 60 * 60 * 1000);
 
-          Cookies.set("jigsawToken", `${token}`, {path: "/", expires: date})
+          Cookies.set("jigsawToken", `${token}`, { path: "/", expires: date });
 
           const params = new URLSearchParams(window.location.search);
           const redirectUrl = params.get("redirect");
