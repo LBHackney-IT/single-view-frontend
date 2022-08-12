@@ -42,7 +42,7 @@ export const UnmergeRecordButton: React.FC<Props> = (props) => {
       onClick={() => {
         deleteRecord();
       }}
-      className="govuk-button lbh-button govuk-button--start"
+      className="govuk-button lbh-button govuk-button--start sv-unmerge-button"
     >
       Unmerge
       <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />

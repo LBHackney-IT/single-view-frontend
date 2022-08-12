@@ -71,7 +71,7 @@ $lbh-asset-path: "../node_modules/lbh-frontend/dist/assets";
 }
 
 .contact-detail {
-  text-transform: capitalize
+  text-transform: capitalize;
 }
 
 .lbh-tag {
@@ -81,4 +81,8 @@ $lbh-asset-path: "../node_modules/lbh-frontend/dist/assets";
   padding-right: 5px;
   padding-top: inherit;
   padding-bottom: inherit;
+}
+
+.sv-unmerge-button {
+  margin-bottom: auto !important;
 }
