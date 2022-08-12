@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { authoriseJigsaw } from "../Gateways/Jigsaw";
 import { Input } from "./index";
 
+import Cookies from "js-cookie";
+
 export const JigsawLogin = () => {
   const [username, setUsername] = useState<string>();
   const [password, setPassword] = useState<string>();
@@ -30,8 +32,8 @@ export const JigsawLogin = () => {
         .then((token) => {
           let date = new Date();
           date.setTime(date.getTime() + 10 * 60 * 60 * 1000);
-          document.cookie = `jigsawToken=${token}; expires=${date.toUTCString()}`;
-          document.cookie = `jigsawDismissed=false; expires=${date.toUTCString()}`;
+
+          Cookies.set("jigsawToken", `${token}`, { path: "/", expires: date });
 
           const params = new URLSearchParams(window.location.search);
           const redirectUrl = params.get("redirect");

@@ -3,6 +3,7 @@ const locale = {
   signOut: "Sign out",
   signIn: "Sign in",
   loginJigsaw: "Log in to Jigsaw",
+  logoutJigsaw: "Log out of Jigsaw",
   jigsawLoginLink: "/jigsawLogin",
   branding: {
     hackney: "Hackney",

@@ -6,11 +6,14 @@ import { Link, PhaseBanner } from "@mfe/common/lib/components";
 
 import { locale } from "./services";
 
+import Cookies from "js-cookie";
+
 const {
   welcome,
   signIn,
   signOut,
   loginJigsaw,
+  logoutJigsaw,
   jigsawLoginLink,
   branding: { hackney, manageMyHome },
 } = locale;
@@ -73,11 +76,20 @@ const App = (): JSX.Element => {
                   <p>
                     {welcome} <b>{auth.name}</b>
                   </p>
-                  {(document.cookie.indexOf("jigsawToken") == -1) &&
-                  <RouterLink to={jigsawLoginLink + "?redirect=" + window.location.pathname} data-testid="jigsawloginHeader">
+                  {/* Jigsaw Login & Logout */}
+                  {(document.cookie.indexOf("jigsawToken") == -1) ? (
+                  <RouterLink to={jigsawLoginLink + "?redirect=" + window.location.pathname} data-testid="jigsawLoginHeader">
                     {loginJigsaw}
                   </RouterLink>
-                  }
+                   ) : 
+                  <Link as="button" onClick={() => {
+                    // Removes token cookie by making it expire in the past & Refreshes page to take effect
+                    Cookies.remove("jigsawToken");
+                    window.location.reload();
+                  }} className="lbh-signout" data-testid="jigsawLogoutHeader">
+                    {logoutJigsaw}
+                  </Link>}
+
                   <Link as="button" onClick={() => logout()} className="lbh-signout">
                     {signOut}
                   </Link>
