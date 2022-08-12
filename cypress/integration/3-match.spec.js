@@ -20,13 +20,13 @@ describe('matching', () => {
     cy.get('.lbh-heading-h3').should('have.text', '14 results found')
 
     cy.get('.sv-result').first()
-      .should('have.text', 'Olivia Kitty, Date of Birth: 01/10/1951PersonAPI id: 6dd46a011 Thornbury Close, N16 8UX ');
+      .contains('Olivia Kitty');
   });
 
   it('does not display merge option for single view records', () => {
     cy.get(".sv-checkboxes").eq(0).should('exist');
     cy.get(".sv-checkboxes").eq(1).should('exist');
-    cy.get('#searchResults > :nth-child(4) > .govuk-checkboxes').should('not.exist');
+    cy.get('#searchResults > :nth-child(4) > .govuk-checkboxes').should('not.be.visible');
   });
 
  it('allows user to match results', () => {

@@ -3,7 +3,7 @@ export const humanize = (str: string = ""): string => {
     .replace(/^[\s_]+|[\s_]+$/g, "")
     .replace(/[_\s]+/g, " ")
     .replace(/\-/g, " ")
-    .replace(/^[a-z]/, function (m) {
-      return m.toUpperCase();
+    .replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1);
     });
 };
