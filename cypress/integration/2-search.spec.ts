@@ -59,6 +59,9 @@ describe('search', () => {
 
     cy.get('.sv-result').first()
       .contains('Olivia Kitty');
+
+    cy.get('.sv-result').first()
+        .contains('(NI Number Not Set)');
   });
 
 })

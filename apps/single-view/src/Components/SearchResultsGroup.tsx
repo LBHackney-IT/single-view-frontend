@@ -11,6 +11,9 @@ interface Props {
 }
 
 export const SearchResultsGroup = (props: Props): JSX.Element => {
+  const isNullOrEmpty = (data: string | null): boolean =>
+    data == null || data == "";
+
   return (
     <>
       {props.results.map((person: housingSearchPerson, index: number) => {
@@ -69,16 +72,15 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
                 <div className="lbh-body-s govuk-!-margin-top-1">
                   {humanize(person.dataSource)} ID: {person.id}
                   <br />
+                  {isNullOrEmpty(person.niNumber)
+                    ? "(NI Number Not Set)"
+                    : `NI Number: ${person.niNumber}`}{" "}
+                  <br />
                   {person.knownAddresses?.length > 0
                     ? person.knownAddresses.map((address) => {
                         return address.fullAddress + " ";
                       })
                     : "(Address Not Set)"}
-                  {/* <br />
-                  {person.niNo != null
-                    ? "NI Number: " + person.niNo
-                    : "(NI Number Not Set)"}
-                  <br /> */}
                   <br />
                   <strong className="lbh-tag lbh-tag--grey">
                     {humanize(person.dataSource)}
