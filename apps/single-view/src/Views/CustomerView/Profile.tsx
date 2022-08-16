@@ -116,7 +116,7 @@ export const Profile = (props: Props) => {
             })}
         </DescriptionListItem>
 
-        <DescriptionListItem title="Tenures" testId="tenures">
+        <DescriptionListItem title="Address History" testId="tenures">
           {person.knownAddresses?.map((address, index) => {
             return (
               <p className="lbh-body-s" key={index}>
