@@ -13,7 +13,7 @@ describe('search', () => {
   });
 
   it('displays the form', () => {
-    cy.get('form').contains('* First name');
+    cy.get('form').contains('* First name or initial');
     cy.get('form').contains('* Last name');
     cy.get('form').contains('First line of address');
     cy.get('form').contains('Postcode');
