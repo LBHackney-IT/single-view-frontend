@@ -23,7 +23,7 @@ export const CustomerView = () => {
   const [dataSourceError, setDataSourceError] =
     useState<Array<SystemId> | null>();
   const [systemIds, setSystemIds] = useState<Array<SystemId>>();
-  const nullOrEmpty = (item: string): boolean => item == null || item == "";
+  const isNullOrEmpty = (item: string): boolean => item == null || item == "";
 
   const loadPerson = async (): Promise<customerResponse | null> => {
     try {
@@ -117,7 +117,8 @@ export const CustomerView = () => {
           </li>
           <li className="govuk-tabs__list-item govuk-tabs__list-item--selected">
             <a className="govuk-tabs__tab" href="#cases">
-              Active Homelessness Case
+              Active Homelessness Case{" "}
+              {isNullOrEmpty(jigsawId) ? "" : `(${jigsawId})`}
             </a>
           </li>
         </ul>
@@ -132,7 +133,7 @@ export const CustomerView = () => {
           />
         </section>
         <section className="govuk-tabs__panel" id="cases">
-          {nullOrEmpty(jigsawId) ? (
+          {isNullOrEmpty(jigsawId) ? (
             <p
               className="govuk-inset-text lbh-inset-text"
               data-testid="homelessnessCasesNotFound"
