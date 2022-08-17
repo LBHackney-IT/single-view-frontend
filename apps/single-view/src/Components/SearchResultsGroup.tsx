@@ -1,8 +1,11 @@
 import React from "react";
 import { formatDate } from "@mfe/common/lib/utils";
-import { housingSearchPerson, SingleView } from "../Interfaces";
-import { humanize } from "../Utils";
+import { dataSource, housingSearchPerson, SingleView } from "../Interfaces";
 import { UnmergeRecordButton } from "./UnmergeRecordButton";
+import { isMergedRecord } from "../Utils/isMergedRecord";
+import { housingSearchPersonToUrl } from "../Utils/housingSearchPersonToUrl";
+import { housingSearchPersonDataSource } from "../Utils/housingSearchPersonDataSource";
+import { humanize } from "../Utils/humanize"
 
 interface Props {
   results: housingSearchPerson[];
@@ -17,8 +20,11 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
         return (
           <>
             <div className="lbh-body sv-result-wrapper" key={index}>
-              {person.dataSource != "single-view" ? (
-                <div className="govuk-checkboxes lbh-checkboxes">
+              {isMergedRecord(person) ? (
+                // This is a merged record (hidden checkbox)
+                <div 
+                className="govuk-checkboxes lbh-checkboxes"
+                style={{ visibility: "hidden" }}> 
                   <div className="govuk-checkboxes_item">
                     <input
                       className="govuk-checkboxes_input sv-checkboxes"
@@ -30,13 +36,11 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
                       checked={person.isSelected}
                       onChange={() => props.selectMatch(person)}
                     />
-                  </div>
                 </div>
-              ) : (
-                <div
-                  className="govuk-checkboxes lbh-checkboxes"
-                  style={{ visibility: "hidden" }}
-                >
+                </div>
+                ) : (  
+                // This is an unmerged record (shown checkbox)
+                <div className="govuk-checkboxes lbh-checkboxes">
                   <div className="govuk-checkboxes_item">
                     <input
                       className="govuk-checkboxes_input sv-checkboxes"
@@ -52,14 +56,14 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
                 </div>
               )}
               <div className="sv-result">
-                {person.dataSource == "single-view" ? (
-                  <strong className="lbh-tag lbh-tag--green">Merged</strong>
+                {isMergedRecord(person) ? (
+                  <strong data-testid={"dataSources" + index} className="lbh-tag lbh-tag--green">Merged ({person.dataSources.length})</strong>
                 ) : (
                   <strong className="lbh-tag lbh-tag--grey">Unmerged</strong>
                 )}
                 &nbsp;
                 <a
-                  href={`/customers/${person.dataSource}/${person.id}`}
+                  href={housingSearchPersonToUrl(person)}
                   className="lbh-link lbh-link--no-visited-state"
                 >
                   {person.firstName} {person.surName}
@@ -67,25 +71,31 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
                     ", Date of Birth: " + formatDate(person.dateOfBirth)}
                 </a>
                 <div className="lbh-body-s govuk-!-margin-top-1">
-                  {humanize(person.dataSource)} ID: {person.id}
+                  {housingSearchPersonDataSource(person)} ID: {person.id}
                   <br />
                   {person.knownAddresses?.length > 0
                     ? person.knownAddresses.map((address) => {
                         return address.fullAddress + " ";
                       })
                     : "(Address Not Set)"}
-                  {/* <br />
-                  {person.niNo != null
-                    ? "NI Number: " + person.niNo
-                    : "(NI Number Not Set)"}
-                  <br /> */}
                   <br />
-                  <strong className="lbh-tag lbh-tag--grey">
-                    {humanize(person.dataSource)}
-                  </strong>
+                  <span>
+                  { 
+                  Array.from(
+                    new Set(person.dataSources.map((item: string) => item)) // Gets unique data source strings
+                    ).map((dataSource: string, index: number) => {
+                        return [
+                          <strong className="lbh-tag lbh-tag--grey" key={index+1}>
+                            {humanize(dataSource)}
+                          </strong>,
+                          <>{"    "}</>
+                        ]
+                      })
+                  }
+                  </span>
                 </div>
               </div>
-              {person.dataSource == SingleView && (
+              {isMergedRecord(person) && (
                 <UnmergeRecordButton
                   svId={person.id}
                   setUnmergeError={props.setUnmergeError}
