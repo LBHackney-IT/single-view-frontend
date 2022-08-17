@@ -29,7 +29,7 @@ export const Cases = (props: Props): JSX.Element => {
   };
 
   useEffect(() => {
-    if (props.customerId) {
+    if (props.customerId && props.customerId !== "jigsaw id not found") {
       loadCases(props.customerId);
     }
   }, [props.customerId]);
@@ -66,11 +66,31 @@ export const Cases = (props: Props): JSX.Element => {
     );
   }
 
-  if (typeof cases == "undefined") {
+  if (getCasesError) {
+    return (
+      <ErrorSummary
+        id="singleViewNotesError"
+        title="Error"
+        description="Unable to load cases."
+        children={jigsawTokenMessage}
+      />
+    );
+  }
+
+  if (props.customerId == "") {
     return (
       <Center>
         <Spinner />
       </Center>
+    );
+  } else if (props.customerId == "jigsaw id not found") {
+    return (
+      <p
+        className="govuk-inset-text lbh-inset-text"
+        data-testid="homelessnessCasesNotFound"
+      >
+        There were no active homelessness cases found for this customer.
+      </p>
     );
   }
 
@@ -78,9 +98,9 @@ export const Cases = (props: Props): JSX.Element => {
     return cases != null ? (
       <CaseSummary jigsawCaseResponse={cases} />
     ) : (
-      <div className="govuk-inset-text lbh-inset-text" data-testid="notFound">
-        There were no active homelessness cases found for this customer.
-      </div>
+      <Center>
+        <Spinner />
+      </Center>
     );
   }
 };
