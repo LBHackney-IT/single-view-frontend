@@ -1,13 +1,13 @@
 import { housingSearchPerson } from "../Interfaces";
 import { isMergedRecord } from "./isMergedRecord";
-import { humanize } from "../Utils";
+import { humanize } from ".";
 
-export const housingSearchPersonDataSource = (person: housingSearchPerson): string => {
+export const searchPersonDataSource = (person: housingSearchPerson): string => {
   if (isMergedRecord(person)) {
-    var dataSource:string = "single-view"
+    var dataSource: string = "single-view";
   } else {
     // Should be only one item in list
-    var dataSource:string = person.dataSources[0]
+    var dataSource: string = person.dataSources[0];
   }
   return humanize(dataSource);
 };
