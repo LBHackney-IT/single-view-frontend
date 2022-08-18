@@ -1,6 +1,6 @@
 import React from "react";
 import { formatDate } from "@mfe/common/lib/utils";
-import { dataSource, housingSearchPerson, SingleView } from "../Interfaces";
+import { housingSearchPerson } from "../Interfaces";
 import { UnmergeRecordButton } from "./UnmergeRecordButton";
 import { isMergedRecord } from "../Utils/isMergedRecord";
 import { searchPersonToUrl } from "../Utils/searchPersonToUrl";
