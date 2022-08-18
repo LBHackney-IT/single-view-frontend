@@ -67,7 +67,7 @@ export const CustomerView = () => {
           !
         </span>
         <strong className="govuk-warning-text__text">
-          <span className="govuk-warning-text__assistive">Warning</span>
+          <span className="govuk-warning-text__assistive" data-testid="jigsawInformationNotDisplayedBanner">Warning</span>
           Some information from {dataSource.systemName} may not be displayed.{" "}
           {ifJigsaw ? jigsawLink : ` Error: ${dataSource.error}`}
         </strong>

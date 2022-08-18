@@ -26,14 +26,14 @@ describe('matching', () => {
   it('does not display merge option for single view records', () => {
     cy.get(".sv-checkboxes").eq(0).should('exist');
     cy.get(".sv-checkboxes").eq(1).should('exist');
-    cy.get('#searchResults > :nth-child(4) > .govuk-checkboxes').should('not.be.visible');
+    cy.get('#matchedResults > div:nth-child(2) > div.govuk-checkboxes.lbh-checkboxes > div').should('not.be.visible');
   });
 
  it('allows user to match results', () => {
     cy.get('#match-button').should('be.disabled');
 
-     cy.get(".sv-checkboxes").eq(0).click();
      cy.get(".sv-checkboxes").eq(1).click();
+     cy.get(".sv-checkboxes").eq(3).click();
      cy.get('#match-button').should('have.text', 'Merge 2 records');
 
      cy.intercept('POST', '**/customers**', {
