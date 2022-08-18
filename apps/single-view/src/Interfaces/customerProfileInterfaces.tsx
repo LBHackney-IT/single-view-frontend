@@ -14,8 +14,8 @@ export interface customerProfile {
   preferredSurname: string | null;
   dateOfBirth: string;
   pregnancyDueDate: string | null;
-  accommodationTypeId: string | null;
-  housingCircumstanceId: string | null;
+  accommodationType: string | null;
+  housingCircumstance: string | null;
   isSettled: boolean | null;
   supportWorker: supportWorker | null;
   gender: string | null;

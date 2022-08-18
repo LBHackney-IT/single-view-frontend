@@ -52,8 +52,8 @@
         "dateOfDeath": null,
         "isAMinor": false,
         "pregnancyDueDate": "2022-12-25T00:00:00",
-        "accommodationTypeId": 10,
-        "housingCircumstanceId": 11,
+        "accommodationType": "N/A",
+        "housingCircumstance": "Temporary accommodation",
         "isSettled": false,
         "supportWorker":{
           "firstName": "James",
