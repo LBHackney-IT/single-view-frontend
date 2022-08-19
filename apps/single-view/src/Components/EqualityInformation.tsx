@@ -64,14 +64,14 @@ export const EqualityInformation: React.FC<Props> = (props) => {
               <div key={index}>
                 <span
                   className="govuk-!-font-weight-bold"
-                  data-testId={"pregnancyValidUntil"}
+                  data-testid={"pregnancyValidUntil"}
                 >
                   Pregnancy Date:{" "}
                 </span>
                 {pregnancyOrMaternity.pregnancyDate} <br />
                 <span
                   className="govuk-!-font-weight-bold"
-                  data-testId={"pregnancyValidUntil"}
+                  data-testid={"pregnancyValidUntil"}
                 >
                   Pregnancy Valid Until:{" "}
                 </span>

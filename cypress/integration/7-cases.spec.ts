@@ -3,8 +3,8 @@ import { AuthRoles } from '../support/commands';
 describe("Displays cases", () => {
 
   before(() => {
-    cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup);
     cy.setCookie('jigsawToken', 'Placeholder-Jigsaw-Token');
+    cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup);
   });
 
   beforeEach(() => {

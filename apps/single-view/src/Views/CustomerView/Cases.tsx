@@ -33,7 +33,6 @@ export const Cases = (props: Props): JSX.Element => {
       loadCases(props.customerId);
     }
   }, [props.customerId]);
-
   var currentPathName = window.location.pathname;
   if (document.cookie.indexOf("jigsawToken") == -1) {
     // if jigsawToken is NOT set

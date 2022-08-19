@@ -1,5 +1,5 @@
-export const Jigsaw = "Jigsaw";
-export const Housing = "PersonAPI";
-export const AcademyCT = "Academy-CouncilTax";
-export const Benefits = "Academy-benefits";
+export const Jigsaw = "jigsaw";
+export const Housing = "personapi";
+export const AcademyCT = "academy-counciltax";
+export const Benefits = "academy-benefits";
 export const SingleView = "single-view";

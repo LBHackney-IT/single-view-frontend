@@ -3,7 +3,7 @@ import { AuthRoles } from '../support/commands';
 describe('search', () => {
   before(() => {
     cy.visitAs('/search', AuthRoles.UnrestrictedGroup);
-    cy.setCookie('jigsawToken', 'testValue')
+    cy.setCookie('jigsawToken', 'testValue');
   })
 
   it('displays the heading', () => {
@@ -62,6 +62,22 @@ describe('search', () => {
 
     cy.get('.sv-result').first()
         .contains('(NI Number Not Set)');
+  });
+
+  it('displays merged records with multiple data sources', () => {
+    cy.get('#matchedResults > div:nth-child(2) > div.sv-result > strong') // Gets second result from each SearchResultsGroup
+      .should('have.text', 'Merged (5)') 
+    
+    cy.get('#matchedResults > div:nth-child(2) > div.sv-result > div > span')
+      .children().should('have.length', 3)
+  });
+
+  it('displays unmerged records with single data sources', () => {
+    cy.get('#matchedResults > div:nth-child(3) > div.sv-result > strong') // Gets second result from each SearchResultsGroup
+      .should('have.text', 'Unmerged') 
+    
+    cy.get('#matchedResults > div:nth-child(3) > div.sv-result > div > span')
+      .children().should('have.length', 1)
   });
 
 })
