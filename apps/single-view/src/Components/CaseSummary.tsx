@@ -83,11 +83,12 @@ export const CaseSummary: React.FC<Props> = (props) => {
                 </th>
               </tr>
             </thead>
-            {props.jigsawCaseResponse?.caseOverview.householdComposition.map(
-              (member: HouseHoldComposition) => {
-                return <HouseHoldMember member={member} />;
-              }
-            )}
+            {props.jigsawCaseResponse?.caseOverview.householdComposition &&
+              props.jigsawCaseResponse?.caseOverview.householdComposition.map(
+                (member: HouseHoldComposition) => {
+                  return <HouseHoldMember member={member} />;
+                }
+              )}
           </table>
         </div>
       </>
