@@ -66,17 +66,6 @@ export const Cases = (props: Props): JSX.Element => {
     );
   }
 
-  if (getCasesError) {
-    return (
-      <ErrorSummary
-        id="singleViewNotesError"
-        title="Error"
-        description="Unable to load cases."
-        children={jigsawTokenMessage}
-      />
-    );
-  }
-
   if (props.customerId == "") {
     return (
       <Center>

@@ -1,8 +1,13 @@
 import React from "react";
-import { jigsawCasesResponse, Placement } from "../Interfaces";
+import {
+  jigsawCasesResponse,
+  Placement,
+  HouseHoldComposition,
+} from "../Interfaces";
 import { formatDate } from "../Utils";
 import { jigsawAddressToString } from "../Utils/jigsawCaseAddressToString";
 import { DescriptionListItem } from "./DescriptionListItem";
+import { HouseHoldMember } from "./HouseholdMember";
 
 interface Props {
   jigsawCaseResponse: jigsawCasesResponse | null;
@@ -44,7 +49,11 @@ export const CaseSummary: React.FC<Props> = (props) => {
         title="Household Composition"
         testId="householdComposition"
       >
-        {props.jigsawCaseResponse?.caseOverview.houseHoldComposition}
+        {props.jigsawCaseResponse?.caseOverview.householdComposition.map(
+          (member: HouseHoldComposition) => {
+            return <HouseHoldMember member={member} />;
+          }
+        )}
       </DescriptionListItem>
 
       <h3>Placement Details</h3>

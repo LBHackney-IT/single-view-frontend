@@ -19,10 +19,10 @@ export interface CaseOverview {
   id: string;
   currentFlowchartPosition: string;
   currentDecision: string;
-  houseHoldComposition: Array<houseHoldComposition>;
+  householdComposition: Array<HouseHoldComposition>;
 }
 
-export interface houseHoldComposition {
+export interface HouseHoldComposition {
   name: string;
   dateOfBirth: string | null;
   gender: string | null;
