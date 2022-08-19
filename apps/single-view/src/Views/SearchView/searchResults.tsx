@@ -37,12 +37,19 @@ export const SearchResults = (props: myProps): JSX.Element => {
   const [mergeError, setMergeError] = useState<string | null>(null);
   const [unMergeError, setUnmergeError] = useState<string | null>(null);
 
+  const mergedRecords = props.matchedResults?.filter(
+    (matchedResult) => matchedResult.dataSource == "single-view"
+  );
+  const matchedResultsWithoutMergedRecords = props.matchedResults?.filter(
+    (matchedResult) => matchedResult.dataSource !== "single-view"
+  );
+
   useEffect(() => {
     setMergeError(null);
     setUnmergeError(null);
     setResults(sliceIntoChunks(props.otherResults, props.maxSearchResults)[0]);
     setSelectedRecords([]);
-    setMatchedResults(props.matchedResults);
+    setMatchedResults(matchedResultsWithoutMergedRecords);
   }, [props.otherResults, props.matchedResults, props.maxSearchResults]);
 
   const onPageChange = (currentPage: number, isNext: boolean) => {
@@ -126,6 +133,21 @@ export const SearchResults = (props: myProps): JSX.Element => {
           />
         )}
         <hr />
+
+        <div id="mergedRecords">
+          {mergedRecords &&
+            mergedRecords.length > 0 && [
+              <h4 className="lbh-heading-h4">
+                The following results were merged and saved in single view:
+              </h4>,
+              <SearchResultsGroup
+                results={mergedRecords}
+                selectMatch={selectMatch}
+                setUnmergeError={displayUnmergeError}
+              />,
+            ]}
+        </div>
+
         <div id="matchedResults">
           {matchedResults &&
             matchedResults.length > 0 && [
