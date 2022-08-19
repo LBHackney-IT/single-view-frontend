@@ -80,12 +80,12 @@ describe('Profile', () => {
       cy.get('[data-testid="pregnancyDueDate"]').should('have.text', "25/12/2022", {timeout: 10000})
     });
 
-    it('displays accommodation type id', () => {
-      cy.get('[data-testid="accommodationTypeId"]').should('have.text', '10', {timeout: 10000});
+    it('displays accommodation type', () => {
+      cy.get('[data-testid="accommodationType"]').should('have.text', 'N/A', {timeout: 10000});
     });
 
-    it('displays housing circumstance id', () => {
-      cy.get('[data-testid="housingCircumstanceId"]').should('have.text', '11', {timeout: 10000});
+    it('displays housing circumstance', () => {
+      cy.get('[data-testid="housingCircumstance"]').should('have.text', 'Temporary accommodation', {timeout: 10000});
     });
 
     it('displays is settled', () => {

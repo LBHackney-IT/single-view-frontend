@@ -23,7 +23,7 @@ export const CustomerView = () => {
   const [dataSourceError, setDataSourceError] =
     useState<Array<SystemId> | null>();
   const [systemIds, setSystemIds] = useState<Array<SystemId>>();
-  const nullOrEmpty = (item: string): boolean => item == null || item == "";
+  const isNullOrEmpty = (item: string): boolean => item == null || item == "";
 
   dataSource = dataSource.toLowerCase(); // Makes url parameter case insensitive
 
@@ -39,7 +39,9 @@ export const CustomerView = () => {
         var jigsawId = person?.systemIds.find(
           (id: SystemId) => id.systemName == Jigsaw
         );
-        if (jigsawId) setJigsawId(jigsawId.id);
+        jigsawId
+          ? setJigsawId(jigsawId.id)
+          : setJigsawId("jigsaw id not found");
       }
 
       var mmhId = person?.systemIds?.find(
@@ -126,7 +128,10 @@ export const CustomerView = () => {
           </li>
           <li className="govuk-tabs__list-item govuk-tabs__list-item--selected">
             <a className="govuk-tabs__tab" href="#cases">
-              Active Homelessness Case
+              Active Homelessness Case{" "}
+              {isNullOrEmpty(jigsawId) || jigsawId == "jigsaw id not found"
+                ? ""
+                : `(${jigsawId})`}
             </a>
           </li>
         </ul>
@@ -141,16 +146,7 @@ export const CustomerView = () => {
           />
         </section>
         <section className="govuk-tabs__panel" id="cases">
-          {nullOrEmpty(jigsawId) ? (
-            <p
-              className="govuk-inset-text lbh-inset-text"
-              data-testid="homelessnessCasesNotFound"
-            >
-              There were no active homelessness cases found for this customer.
-            </p>
-          ) : (
-            <Cases customerId={jigsawId} />
-          )}
+          <Cases customerId={jigsawId} />
         </section>
       </div>
     </>

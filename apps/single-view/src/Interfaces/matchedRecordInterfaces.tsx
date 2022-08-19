@@ -31,7 +31,7 @@ export const mapRecordsToMatchedRecord = (
     };
   }
 
-  let ninoRecord = persons.find((person) => person.niNo != null);
+  let ninoRecord = persons.find((person) => person.niNumber != null);
 
   const dataSources: dataSource[] = [];
 
@@ -47,7 +47,7 @@ export const mapRecordsToMatchedRecord = (
     firstName: masterRecord.firstName,
     lastName: masterRecord.surName,
     dateOfBirth: masterRecord.dateOfBirth,
-    niNumber: ninoRecord?.niNo || null,
+    niNumber: ninoRecord?.niNumber || null,
     dataSources: dataSources,
   };
   return { matchedRecord: matchedRecord, error: null };

@@ -13,7 +13,7 @@ describe('search', () => {
   });
 
   it('displays the form', () => {
-    cy.get('form').contains('* First name');
+    cy.get('form').contains('* First name or initial');
     cy.get('form').contains('* Last name');
     cy.get('form').contains('First line of address');
     cy.get('form').contains('Postcode');
@@ -53,12 +53,15 @@ describe('search', () => {
     cy.get('#searchResults', { timeout: 10000 })
       .should('be.visible')
 
-    cy.get('.lbh-heading-h3').should('have.text', '14 results found')
+    cy.get('.lbh-heading-h3').should('have.text', '15 results found')
 
-    cy.get('.lbh-heading-h4').first().should('have.text', 'The following results were matched on name and date of birth, if provided:')
+    cy.get('.lbh-heading-h4').first().should('have.text', 'The following results were merged and saved in single view:')
 
     cy.get('.sv-result').first()
-      .contains('Olivia Kitty');
+      .contains('Leo Kitty');
+
+    cy.get('.sv-result').eq(1)
+        .contains('(NI Number Not Set)');
   });
 
   it('displays merged records with multiple data sources', () => {

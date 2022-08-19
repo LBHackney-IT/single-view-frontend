@@ -10,7 +10,7 @@ interface Props {
 export const HousingBenefitsInformation: React.FC<Props> = (props) => {
   return (
     <>
-      <h3>Housing Benefits</h3>
+      <h3>Housing Benefit</h3>
       <DescriptionListItem title="Claim ID" testId="claimId">
         {props.housingBenefitsAccount?.claimId}
       </DescriptionListItem>

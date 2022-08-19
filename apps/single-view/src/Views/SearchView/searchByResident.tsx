@@ -120,7 +120,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
             }}
           >
             <Input
-              label="* First name"
+              label="* First name or initial"
               errorMsg="First name is mandatory"
               id="firstName"
               name="firstName"

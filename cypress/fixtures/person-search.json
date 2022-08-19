@@ -52,6 +52,32 @@
                         "currentAddress": true
                     }
                 ]
+            },
+            {
+                "id": "a1e2a970",
+                "title": "Mr",
+                "firstName": "Leo",
+                "middleName": null,
+                "surName": "Kitty",
+                "dataSource": "single-view",
+                "preferredFirstname": "Leo",
+                "preferredSurname": "Kitty",
+                "totalBalance": 0.0,
+                "dateOfBirth": "1970-02-18",
+                "personTypes": [
+                    "Tenant"
+                ],
+                "isPersonCautionaryAlert": false,
+                "isTenureCautionaryAlert": false,
+                "knownAddresses": [
+                    {
+                        "id": "d43caa5b",
+                        "startDate": "2004-12-13",
+                        "endDate": null,
+                        "fullAddress": "10 Kingston Road, KT1 2EE",
+                        "currentAddress": true
+                    }
+                ]
             }
         ],
         "ungroupedResults": [
