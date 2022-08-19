@@ -84,7 +84,12 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
                 )}
                 <div className="sv-result">
                   {mergedRecord ? (
-                    <strong className="lbh-tag lbh-tag--green">Merged</strong>
+                    <strong
+                      data-testid={"mergeCounter-" + index}
+                      className="lbh-tag lbh-tag--green"
+                    >
+                      Merged ({person.dataSources.length})
+                    </strong>
                   ) : (
                     <strong className="lbh-tag lbh-tag--grey">Unmerged</strong>
                   )}
