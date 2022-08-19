@@ -9,14 +9,15 @@ import {
 } from "../Interfaces";
 import { getToken } from "../Utils/getHackneyToken";
 import { getCookie } from "../Utils/getCookie";
+import singleSpaReact from "single-spa-react";
 
 export const getPerson = async (
   dataSource: string,
   id: string
 ): Promise<customerResponse | null> => {
+  dataSource = dataSource.toLowerCase();
   try {
     let response;
-
     switch (dataSource) {
       case Housing:
         response = await axios.get(

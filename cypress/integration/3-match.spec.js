@@ -34,7 +34,6 @@ describe('matching', () => {
 
      cy.get(".sv-checkboxes").eq(1).click();
      cy.get(".sv-checkboxes").eq(3).click();
-     cy.get(".sv-checkboxes").eq(3).click();
      cy.get('#match-button').should('have.text', 'Merge 2 records');
 
      cy.intercept('POST', '**/customers**', {
