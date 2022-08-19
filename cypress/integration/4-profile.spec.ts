@@ -13,8 +13,8 @@ describe('Profile', () => {
     });
 
     it('displays jigsaw login error', ()=>{
-      cy.get('.govuk-warning-text__text > :nth-child(1)').should('have.text', "Warning", {timeout: 10000});
-      cy.get('.govuk-warning-text__text > :nth-child(2)').should('be.visible');
+      cy.get('[data-testid="jigsawInformationNotDisplayedBanner"]')
+        .should('have.text', "Warning", {timeout: 10000});
     });
 
     it('displays cautionary alert warning title', ()=>{

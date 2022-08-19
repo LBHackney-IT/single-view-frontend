@@ -7,6 +7,7 @@ import { Pagination } from "../../Components";
 import { mergeRecords } from "../../Gateways/recordsGateway";
 import { ErrorSummary } from "@mfe/common/lib/components";
 import { SearchResultsGroup } from "../../Components/SearchResultsGroup";
+import { isMergedRecord } from "../../Utils/isMergedRecord";
 
 interface myProps {
   matchedResults: housingSearchPerson[] | undefined;
@@ -37,11 +38,11 @@ export const SearchResults = (props: myProps): JSX.Element => {
   const [mergeError, setMergeError] = useState<string | null>(null);
   const [unMergeError, setUnmergeError] = useState<string | null>(null);
 
-  const mergedRecords = props.matchedResults?.filter(
-    (matchedResult) => matchedResult.dataSource == "single-view"
+  const mergedRecords = props.matchedResults?.filter((matchedResult) =>
+    isMergedRecord(matchedResult)
   );
   const matchedResultsWithoutMergedRecords = props.matchedResults?.filter(
-    (matchedResult) => matchedResult.dataSource !== "single-view"
+    (matchedResult) => !isMergedRecord(matchedResult)
   );
 
   useEffect(() => {

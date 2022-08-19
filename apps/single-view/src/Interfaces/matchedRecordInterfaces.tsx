@@ -1,4 +1,5 @@
 import { housingSearchPerson } from ".";
+import { searchPersonDataSource } from "../Utils/searchPersonDataSource";
 
 export interface matchedRecord {
   firstName: string;
@@ -36,7 +37,7 @@ export const mapRecordsToMatchedRecord = (
 
   for (let person of persons) {
     let dataSource: dataSource = {
-      dataSource: person.dataSource,
+      dataSource: searchPersonDataSource(person),
       sourceId: person.id,
     };
     dataSources.push(dataSource);

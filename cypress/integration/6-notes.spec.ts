@@ -5,7 +5,7 @@ describe('Notes', () => {
     before(() => {
       cy.intercept('GET', '**/getPersonApiCustomer*', { fixture: 'person-profile.json' }).as('getPerson');
       cy.intercept('GET', '**/notes*', { fixture: 'customer-notes.json' }).as('getNotes');
-      cy.visitAs('/customers/PersonAPI/6d7ed1a4#notes', AuthRoles.UnrestrictedGroup);
+      cy.visitAs('/customers/personapi/6d7ed1a4#notes', AuthRoles.UnrestrictedGroup);
       cy.setCookie('jigsawToken', 'testValue')
     });
 

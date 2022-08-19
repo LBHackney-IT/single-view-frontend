@@ -7,7 +7,7 @@
                 "firstName": "Olivia",
                 "middleName": null,
                 "surName": "Kitty",
-                "dataSource": "PersonAPI",
+                "dataSources": ["PersonAPI", "PersonAPI", "PersonAPI", "Academy-benefits", "Academy-CouncilTax"],
                 "preferredFirstname": "Olivia",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -33,7 +33,7 @@
                 "firstName": "Olivia",
                 "middleName": null,
                 "surName": "Kitty",
-                "dataSource": "PersonAPI",
+                "dataSources": ["PersonAPI"],
                 "preferredFirstname": "Olivia",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -52,32 +52,6 @@
                         "currentAddress": true
                     }
                 ]
-            },
-            {
-                "id": "a1e2a970",
-                "title": "Mr",
-                "firstName": "Leo",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSource": "single-view",
-                "preferredFirstname": "Leo",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "1970-02-18",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "d43caa5b",
-                        "startDate": "2004-12-13",
-                        "endDate": null,
-                        "fullAddress": "10 Kingston Road, KT1 2EE",
-                        "currentAddress": true
-                    }
-                ]
             }
         ],
         "ungroupedResults": [
@@ -89,7 +63,7 @@
                 "surName": "Kitty",
                 "preferredFirstname": "Luna",
                 "preferredSurname": "Kitty",
-                "dataSource": "jigsaw",
+                "dataSources": ["PersonAPI", "PersonAPI", "jigsaw"],
                 "dateOfBirth": "1977-10-06",
                 "personTypes": [
                     "Tenant"
@@ -115,7 +89,7 @@
                 "preferredFirstname": "Luna",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
-                "dataSource": "PersonAPI",
+                "dataSources": ["PersonAPI"],
                 "dateOfBirth": "2021-01-07",
                 "personTypes": [
                     "Tenant"
@@ -141,7 +115,7 @@
                 "preferredFirstname": "Eric",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
-                "dataSource": "single-view",
+                "dataSources": ["jigsaw"],
                 "dateOfBirth": "1929-08-10",
                 "personTypes": [
                     "Tenant"
@@ -156,7 +130,7 @@
                 "firstName": "Tracey",
                 "middleName": null,
                 "surName": "Kitty",
-                "dataSource": "PersonAPI",
+                "dataSources": ["PersonAPI"],
                 "preferredFirstname": "Tracey",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -182,7 +156,7 @@
                 "firstName": "Andrea",
                 "middleName": null,
                 "surName": "Kitty",
-                "dataSource": "PersonAPI",
+                "dataSources": ["PersonAPI"],
                 "preferredFirstname": "Andrea",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -208,7 +182,7 @@
                 "firstName": "Oliver",
                 "middleName": null,
                 "surName": "Kitty",
-                "dataSource": "PersonAPI",
+                "dataSources": ["PersonAPI"],
                 "preferredFirstname": "Oliver",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -234,7 +208,7 @@
                 "firstName": "Kathryn",
                 "middleName": null,
                 "surName": "Kitty",
-                "dataSource": "PersonAPI",
+                "dataSources": ["PersonAPI"],
                 "preferredFirstname": "Kathryn",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -260,6 +234,7 @@
                 "firstName": "Gary",
                 "middleName": null,
                 "surName": "Kitty",
+                "dataSources": ["PersonAPI", "jigsaw", "academy-benefits"],
                 "preferredFirstname": "Gary",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -285,7 +260,7 @@
                 "firstName": "Beth",
                 "middleName": null,
                 "surName": "Kitty",
-                "dataSource": "PersonAPI",
+                "dataSources": ["PersonAPI"],
                 "preferredFirstname": "Beth",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -311,7 +286,7 @@
                 "firstName": "Megan",
                 "middleName": null,
                 "surName": "Kitty",
-                "dataSource": "PersonAPI",
+                "dataSources": ["PersonAPI"],
                 "preferredFirstname": "Megan",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -337,7 +312,7 @@
                 "firstName": "Olivia",
                 "middleName": null,
                 "surName": "Kitty",
-                "dataSource": "PersonAPI",
+                "dataSources": ["PersonAPI"],
                 "preferredFirstname": "Olivia",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,
@@ -363,7 +338,7 @@
                 "firstName": "Sean",
                 "middleName": null,
                 "surName": "Kitty",
-                "dataSource": "PersonAPI",
+                "dataSources": ["PersonAPI"],
                 "preferredFirstname": "Sean",
                 "preferredSurname": "Kitty",
                 "totalBalance": 0.0,

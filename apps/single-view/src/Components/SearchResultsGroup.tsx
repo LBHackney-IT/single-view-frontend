@@ -1,8 +1,11 @@
 import React from "react";
 import { formatDate } from "@mfe/common/lib/utils";
-import { housingSearchPerson, SingleView } from "../Interfaces";
-import { humanize } from "../Utils";
+import { housingSearchPerson } from "../Interfaces";
 import { UnmergeRecordButton } from "./UnmergeRecordButton";
+import { isMergedRecord } from "../Utils/isMergedRecord";
+import { searchPersonToUrl } from "../Utils/searchPersonToUrl";
+import { searchPersonDataSource } from "../Utils/searchPersonDataSource";
+import { humanize } from "../Utils/humanize";
 
 interface Props {
   results: housingSearchPerson[];
@@ -17,11 +20,11 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
   return (
     <>
       {props.results.map((person: housingSearchPerson, index: number) => {
-        const mergedRecord = person.dataSource == SingleView;
+        const mergedRecord = isMergedRecord(person);
 
         const dataSourceId = (
           <span>
-            {humanize(person.dataSource)} ID: {person.id} <br />
+            {searchPersonDataSource(person)} ID: {person.id} <br />
           </span>
         );
 
@@ -81,13 +84,18 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
                 )}
                 <div className="sv-result">
                   {mergedRecord ? (
-                    <strong className="lbh-tag lbh-tag--green">Merged</strong>
+                    <strong
+                      data-testid={"mergeCounter-" + index}
+                      className="lbh-tag lbh-tag--green"
+                    >
+                      Merged ({person.dataSources.length})
+                    </strong>
                   ) : (
                     <strong className="lbh-tag lbh-tag--grey">Unmerged</strong>
                   )}
                   &nbsp;
                   <a
-                    href={`/customers/${person.dataSource}/${person.id}`}
+                    href={searchPersonToUrl(person)}
                     className="lbh-link lbh-link--no-visited-state"
                   >
                     {person.firstName} {person.surName}
@@ -100,9 +108,21 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
                       ? niNumberForMergedRecords
                       : niNumberForUnmergedRecords}
                     {!mergedRecord && address}
-                    <strong className="lbh-tag lbh-tag--grey">
-                      {humanize(person.dataSource)}
-                    </strong>
+                    <span>
+                      {Array.from(
+                        new Set(person.dataSources.map((item: string) => item)) // Gets unique data source strings
+                      ).map((dataSource: string, index: number) => {
+                        return [
+                          <strong
+                            className="lbh-tag lbh-tag--grey"
+                            key={index + 1}
+                          >
+                            {humanize(dataSource)}
+                          </strong>,
+                          <>{"    "}</>,
+                        ];
+                      })}
+                    </span>
                   </div>
                 </div>
               </div>
