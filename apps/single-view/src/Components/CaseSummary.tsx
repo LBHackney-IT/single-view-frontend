@@ -49,11 +49,32 @@ export const CaseSummary: React.FC<Props> = (props) => {
         title="Household Composition"
         testId="householdComposition"
       >
-        {props.jigsawCaseResponse?.caseOverview.householdComposition.map(
-          (member: HouseHoldComposition) => {
-            return <HouseHoldMember member={member} />;
-          }
-        )}
+        <table className="govuk-table">
+          <thead className="govuk-table__head">
+            <tr className="govuk-table__row">
+              <th scope="col" className="govuk-table__header">
+                Name
+              </th>
+              <th scope="col" className="govuk-table__header">
+                Date of Birth
+              </th>
+              <th scope="col" className="govuk-table__header">
+                Gender
+              </th>
+              <th scope="col" className="govuk-table__header">
+                NI Number
+              </th>
+              <th scope="col" className="govuk-table__header">
+                NHS Number
+              </th>
+            </tr>
+          </thead>
+          {props.jigsawCaseResponse?.caseOverview.householdComposition.map(
+            (member: HouseHoldComposition) => {
+              return <HouseHoldMember member={member} />;
+            }
+          )}
+        </table>
       </DescriptionListItem>
 
       <h3>Placement Details</h3>
