@@ -86,3 +86,11 @@ $lbh-asset-path: "../node_modules/lbh-frontend/dist/assets";
 .sv-unmerge-button {
   margin-bottom: auto !important;
 }
+
+.sv-table {
+  min-width: max-content;
+}
+.sv-table-heading {
+  font-weight: 600;
+  font-size: 19px;
+}
