@@ -85,5 +85,5 @@ export const Cases = (props: Props): JSX.Element => {
         <Spinner />
       </Center>
     );
-  }  
+  }
 };
