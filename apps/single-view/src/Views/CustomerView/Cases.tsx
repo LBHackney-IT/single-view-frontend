@@ -79,11 +79,11 @@ export const Cases = (props: Props): JSX.Element => {
     );
   }
 
-  if (props.customerId == "") {
-    return (
-      <Center>
-        <Spinner />
-      </Center>
-    );
-  }
+  return cases != null ? (
+    <CaseSummary jigsawCaseResponse={cases} />
+  ) : (
+    <Center>
+      <Spinner />
+    </Center>
+  );
 };
