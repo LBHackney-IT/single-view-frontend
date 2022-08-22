@@ -16,7 +16,7 @@ import { Cases } from "./Cases";
 import { BackToSearch } from "../../Components/BackToSearch";
 
 export const CustomerView = () => {
-  const { dataSource, id } = useParams<UrlParams>();
+  var { dataSource, id } = useParams<UrlParams>();
   const [person, setPerson] = useState<customerProfile | null>();
   const [mmhUrl, setMhUrl] = useState<string>("");
   const [jigsawId, setJigsawId] = useState<string>("");
@@ -25,12 +25,14 @@ export const CustomerView = () => {
   const [systemIds, setSystemIds] = useState<Array<SystemId>>();
   const isNullOrEmpty = (item: string): boolean => item == null || item == "";
 
+  dataSource = dataSource.toLowerCase(); // Makes url parameter case insensitive
+
   const loadPerson = async (): Promise<customerResponse | null> => {
     try {
       let person = await getPerson(dataSource, id);
       setPerson(person?.customer);
       setSystemIds(person?.systemIds);
-      setDataSourceError(person?.systemIds?.filter((id: SystemId) => id.error));
+      setDataSourceError(person?.systemIds.filter((id: SystemId) => id.error));
       if (dataSource == Jigsaw) {
         setJigsawId(id);
       } else {
@@ -69,7 +71,12 @@ export const CustomerView = () => {
           !
         </span>
         <strong className="govuk-warning-text__text">
-          <span className="govuk-warning-text__assistive">Warning</span>
+          <span
+            className="govuk-warning-text__assistive"
+            data-testid="jigsawInformationNotDisplayedBanner"
+          >
+            Warning
+          </span>
           Some information from {dataSource.systemName} may not be displayed.{" "}
           {ifJigsaw ? jigsawLink : ` Error: ${dataSource.error}`}
         </strong>
@@ -85,6 +92,8 @@ export const CustomerView = () => {
     <NotFound />
   ) : (
     <>
+      {/* {console.log("==========================================================")}
+    {console.log(dataSourceError, dataSource) /* undefined, Jigsaw */}
       {dataSourceError && (
         <div style={{ marginTop: "-45px" }}>
           {dataSourceError.map((dataSource) => {

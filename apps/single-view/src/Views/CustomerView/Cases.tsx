@@ -12,6 +12,7 @@ interface Props {
 export const Cases = (props: Props): JSX.Element => {
   const [cases, setCases] = useState<jigsawCasesResponse | null>(null);
   const [getCasesError, setGetCasesError] = useState<boolean>(false);
+  const [casesNotFoundError, setCasesNotFoundError] = useState<boolean>(false);
 
   const loadCases = async (customerId: string): Promise<void> => {
     setGetCasesError(false);
@@ -22,7 +23,9 @@ export const Cases = (props: Props): JSX.Element => {
       );
       setCases(cases);
     } catch (e: any) {
-      if (e.response.status != 404) {
+      if (e.response.status == 404) {
+        setCasesNotFoundError(true);
+      } else {
         setGetCasesError(true);
       }
     }
@@ -33,7 +36,6 @@ export const Cases = (props: Props): JSX.Element => {
       loadCases(props.customerId);
     }
   }, [props.customerId]);
-
   var currentPathName = window.location.pathname;
   if (document.cookie.indexOf("jigsawToken") == -1) {
     // if jigsawToken is NOT set
@@ -66,13 +68,7 @@ export const Cases = (props: Props): JSX.Element => {
     );
   }
 
-  if (props.customerId == "") {
-    return (
-      <Center>
-        <Spinner />
-      </Center>
-    );
-  } else if (props.customerId == "jigsaw id not found") {
+  if (casesNotFoundError || props.customerId == "jigsaw id not found") {
     return (
       <p
         className="govuk-inset-text lbh-inset-text"
@@ -83,13 +79,11 @@ export const Cases = (props: Props): JSX.Element => {
     );
   }
 
-  {
-    return cases != null ? (
-      <CaseSummary jigsawCaseResponse={cases} />
-    ) : (
+  if (props.customerId == "") {
+    return (
       <Center>
         <Spinner />
       </Center>
     );
-  }
+  }  
 };
