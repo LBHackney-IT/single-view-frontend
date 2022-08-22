@@ -162,16 +162,16 @@ export const Profile = (props: Props) => {
             formatDateOfBirth(person.pregnancyDueDate)}
         </DescriptionListItem>
         <DescriptionListItem
-          title={"Accommodation type Id"}
-          testId={"accommodationTypeId"}
+          title={"Accommodation Type"}
+          testId={"accommodationType"}
         >
-          {person.accommodationTypeId}
+          {person.accommodationType}
         </DescriptionListItem>
         <DescriptionListItem
-          title={"Housing circumstance Id"}
-          testId={"housingCircumstanceId"}
+          title={"Housing Circumstance"}
+          testId={"housingCircumstance"}
         >
-          {person.housingCircumstanceId}
+          {person.housingCircumstance}
         </DescriptionListItem>
         <DescriptionListItem title={"Settled"} testId={"isSettled"}>
           {person.isSettled ? "Y" : "N"}

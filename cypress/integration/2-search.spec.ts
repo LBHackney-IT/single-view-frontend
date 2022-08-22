@@ -55,29 +55,29 @@ describe('search', () => {
 
     cy.get('.lbh-heading-h3').should('have.text', '14 results found')
 
-    cy.get('.lbh-heading-h4').first().should('have.text', 'The following results were matched on name and date of birth, if provided:')
+    cy.get('.lbh-heading-h4').first().should('have.text', 'The following results were merged and saved in single view:')
 
     cy.get('.sv-result').first()
       .contains('Olivia Kitty');
 
-    cy.get('.sv-result').first()
+    cy.get('.sv-result').eq(1)
         .contains('(NI Number Not Set)');
   });
 
   it('displays merged records with multiple data sources', () => {
-    cy.get('#matchedResults > div:nth-child(2) > div.sv-result > strong') // Gets second result from each SearchResultsGroup
+    cy.get('#mergedRecords > .lbh-body > .sv-result-sub-wrapper > .sv-result > [data-testid="mergeCounter-0"]') // Gets counter on first result
       .should('have.text', 'Merged (5)') 
     
-    cy.get('#matchedResults > div:nth-child(2) > div.sv-result > div > span')
+    cy.get('#mergedRecords > .lbh-body > .sv-result-sub-wrapper > .sv-result > div > span')
       .children().should('have.length', 3)
   });
 
   it('displays unmerged records with single data sources', () => {
-    cy.get('#matchedResults > div:nth-child(3) > div.sv-result > strong') // Gets second result from each SearchResultsGroup
+    cy.get('#matchedResults > .lbh-body > .sv-result-sub-wrapper > .sv-result > :nth-child(1)') // Gets second result from each SearchResultsGroup
       .should('have.text', 'Unmerged') 
     
-    cy.get('#matchedResults > div:nth-child(3) > div.sv-result > div > span')
-      .children().should('have.length', 1)
+    cy.get('#matchedResults > .lbh-body > .sv-result-sub-wrapper > .sv-result > .lbh-body-s > :nth-child(4)')
+      .children().should('have.text', 'PersonAPI')
   });
 
 })
