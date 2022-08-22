@@ -23,6 +23,14 @@ export interface knownAddress {
   startDate: string;
   endDate: string | null;
   dataSourceName: string;
+  householdMembers: householdMember[] | null;
+}
+
+export interface householdMember {
+  id: string;
+  fullName: string;
+  isResponsible: boolean;
+  dateOfBirth: string;
 }
 
 export interface contactDetail {

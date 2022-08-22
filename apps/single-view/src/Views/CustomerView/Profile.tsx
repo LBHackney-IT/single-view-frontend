@@ -37,6 +37,10 @@ export const Profile = (props: Props) => {
     );
   }
 
+  const manageArrearsLink = ()=> {
+    return null;
+  }
+
   return (
     <>
       {person.cautionaryAlerts &&
@@ -137,6 +141,33 @@ export const Profile = (props: Props) => {
                 <span data-testid="tenureDataSource">
                   <span className="govuk-!-font-weight-bold">Data Source:</span>{" "}
                   {address.dataSourceName}
+                </span>
+                <span data-testid="tenureDetails">
+                  <details
+                    className="govuk-details lbh-details"
+                    data-module="govuk-details"
+                  >
+                    <summary className="govuk-details__summary sv-details">
+                      <span className="govuk-details__summary-text">
+                        Household Members
+                      </span>
+                    </summary>
+                    <div className="govuk-details__text sv-details">
+                      <ul>
+                        {address.householdMembers?.map((member, i) => {
+                          return (
+                            <li>
+                              {member.fullName} (
+                              {formatDateOfBirth(member.dateOfBirth)})
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  </details>
+                </span>
+                <span data-testid="manageArrearsLink">
+                  {manageArrearsLink() || ""}
                 </span>
               </p>
             );
