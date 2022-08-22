@@ -1,8 +1,13 @@
 import React from "react";
-import { jigsawCasesResponse, Placement } from "../Interfaces";
+import {
+  jigsawCasesResponse,
+  Placement,
+  HouseHoldComposition,
+} from "../Interfaces";
 import { formatDate } from "../Utils";
 import { jigsawAddressToString } from "../Utils/jigsawCaseAddressToString";
 import { DescriptionListItem } from "./DescriptionListItem";
+import { HouseHoldMember } from "./HouseholdMember";
 
 interface Props {
   jigsawCaseResponse: jigsawCasesResponse | null;
@@ -40,13 +45,53 @@ export const CaseSummary: React.FC<Props> = (props) => {
       <DescriptionListItem title="Current Decision" testId="currentDecision">
         {props.jigsawCaseResponse?.caseOverview.currentDecision}
       </DescriptionListItem>
-      <DescriptionListItem
-        title="Household Composition"
-        testId="householdComposition"
-      >
-        {props.jigsawCaseResponse?.caseOverview.houseHoldComposition}
-      </DescriptionListItem>
-
+      <>
+        <h3>Household Composition</h3>
+        <div className="govuk-summary-list__row">
+          <table className="govuk-table govuk-!-width-full sv-table">
+            <thead className="govuk-table__head">
+              <tr className="govuk-table__row">
+                <th
+                  scope="col"
+                  className="govuk-table__header sv-table-heading"
+                >
+                  Name
+                </th>
+                <th
+                  scope="col"
+                  className="govuk-table__header sv-table-heading"
+                >
+                  Date of Birth
+                </th>
+                <th
+                  scope="col"
+                  className="govuk-table__header sv-table-heading"
+                >
+                  Gender
+                </th>
+                <th
+                  scope="col"
+                  className="govuk-table__header sv-table-heading"
+                >
+                  NI Number
+                </th>
+                <th
+                  scope="col"
+                  className="govuk-table__header sv-table-heading"
+                >
+                  NHS Number
+                </th>
+              </tr>
+            </thead>
+            {props.jigsawCaseResponse?.caseOverview.householdComposition &&
+              props.jigsawCaseResponse?.caseOverview.householdComposition.map(
+                (member: HouseHoldComposition) => {
+                  return <HouseHoldMember member={member} />;
+                }
+              )}
+          </table>
+        </div>
+      </>
       <h3>Placement Details</h3>
       {props.jigsawCaseResponse?.placementInformation.map(
         (placement: Placement) => {

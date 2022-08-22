@@ -86,14 +86,4 @@ export const Cases = (props: Props): JSX.Element => {
       </Center>
     );
   }
-
-  {
-    return cases != null ? (
-      <CaseSummary jigsawCaseResponse={cases} />
-    ) : (
-      <Center>
-        <Spinner />
-      </Center>
-    );
-  }
 };

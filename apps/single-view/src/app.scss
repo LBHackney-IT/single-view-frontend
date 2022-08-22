@@ -93,3 +93,11 @@ $lbh-asset-path: "../node_modules/lbh-frontend/dist/assets";
   margin-top: 0 !important;
   margin-bottom: auto !important;
 }
+
+.sv-table {
+  min-width: max-content;
+}
+.sv-table-heading {
+  font-weight: 600;
+  font-size: 19px;
+}
