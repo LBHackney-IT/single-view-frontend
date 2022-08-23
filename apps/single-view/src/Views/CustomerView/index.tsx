@@ -45,7 +45,7 @@ export const CustomerView = () => {
       }
 
       var mmhId = person?.systemIds?.find(
-        (id: SystemId) => id.systemName == Housing
+        (id: SystemId) => id.systemName.toLowerCase() == Housing
       );
       if (mmhId) {
         setMhUrl(`${process.env.MMH_URL}/person/${mmhId.id}`);

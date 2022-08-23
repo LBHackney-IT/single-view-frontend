@@ -23,6 +23,20 @@ export interface knownAddress {
   startDate: string;
   endDate: string | null;
   dataSourceName: string;
+  householdMembers: householdMember[] | null;
+  legacyReferences: legacyReference[] | null;
+}
+
+export interface legacyReference {
+  name: string | null;
+  value: string | null;
+}
+
+export interface householdMember {
+  id: string;
+  fullName: string;
+  isResponsible: boolean;
+  dateOfBirth: string;
 }
 
 export interface contactDetail {
