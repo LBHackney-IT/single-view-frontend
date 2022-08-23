@@ -20,7 +20,10 @@ export const HousingBenefitsInformation: React.FC<Props> = (props) => {
       <DescriptionListItem title="Person Reference" testId="personReference">
         {props.housingBenefitsAccount?.personReference}
       </DescriptionListItem>
-      <DescriptionListItem title="Household Members" testId="householdMembers">
+      <DescriptionListItem
+        title="Household Composition"
+        testId="householdMembers"
+      >
         {props.housingBenefitsAccount?.householdMembers?.map(
           (householdMember, index) => {
             return (
