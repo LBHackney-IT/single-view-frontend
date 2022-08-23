@@ -37,7 +37,7 @@ export const CustomerView = () => {
         setJigsawId(id);
       } else {
         var jigsawId = person?.systemIds.find(
-          (id: SystemId) => id.systemName == Jigsaw
+          (id: SystemId) => id.systemName.toLowerCase() == Jigsaw
         );
         jigsawId
           ? setJigsawId(jigsawId.id)
@@ -92,8 +92,6 @@ export const CustomerView = () => {
     <NotFound />
   ) : (
     <>
-      {/* {console.log("==========================================================")}
-    {console.log(dataSourceError, dataSource) /* undefined, Jigsaw */}
       {dataSourceError && (
         <div style={{ marginTop: "-45px" }}>
           {dataSourceError.map((dataSource) => {
