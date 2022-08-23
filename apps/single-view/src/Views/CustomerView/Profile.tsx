@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
-import { customerProfile, SystemId } from "../../Interfaces";
+import { customerProfile, SystemId, legacyReference } from "../../Interfaces";
 import {
   formatCautionaryAlertsDate,
   formatDateOfBirth,
@@ -37,9 +37,24 @@ export const Profile = (props: Props) => {
     );
   }
 
-  const manageArrearsLink = ()=> {
-    return null;
-  }
+  const manageArrearsLink = (legacyReferences: legacyReference[] | null) => {
+    if (legacyReferences == null) {
+      return null;
+    }
+    var legacyReference = legacyReferences.find((r) => r.name === "uh_tag_ref");
+
+    return legacyReference == null || legacyReference.value == null ? null : (
+      <a
+        href={`${process.env.MA_URL}/tenancies/${encodeURIComponent(
+          legacyReference.value
+        )}`}
+        target="_blank"
+        className="govuk-link lbh-link lbh-link--no-visited-state"
+      >
+        View on manage arrears ({legacyReference.value})
+      </a>
+    );
+  };
 
   return (
     <>
@@ -167,7 +182,7 @@ export const Profile = (props: Props) => {
                   </details>
                 </span>
                 <span data-testid="manageArrearsLink">
-                  {manageArrearsLink() || ""}
+                  {manageArrearsLink(address.legacyReferences) || ""}
                 </span>
               </p>
             );
