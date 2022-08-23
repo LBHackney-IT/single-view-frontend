@@ -36,6 +36,7 @@ module.exports = (webpackConfigEnv, argv) => {
         SV_API_V1: process.env.SV_API_V1 || dotenv.SV_API_V1,
         MMH_URL: process.env.MMH_URL || dotenv.MMH_URL,
         MA_URL: process.env.MA_URL || dotenv.MA_URL,
+        JIGSAW_URL: process.env.JIGSAW_URL || dotenv.JIGSAW_URL,
         RSA_PUBLIC_KEY: process.env.RSA_PUBLIC_KEY || dotenv.RSA_PUBLIC_KEY,
       }),
       new ImportMapWebpackPlugin({

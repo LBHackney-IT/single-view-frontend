@@ -1,6 +1,6 @@
 import { AuthRoles } from '../support/commands';
 
-describe('Profile', () => {
+describe('Back to search', () => {
     describe('Basic Information', () => {
         before(() => {
             cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');

@@ -19,6 +19,7 @@ export const CustomerView = () => {
   var { dataSource, id } = useParams<UrlParams>();
   const [person, setPerson] = useState<customerProfile | null>();
   const [mmhUrl, setMhUrl] = useState<string>("");
+  const [jigsawUrl, setJigsawUrl] = useState<string>("");
   const [jigsawId, setJigsawId] = useState<string>("");
   const [dataSourceError, setDataSourceError] =
     useState<Array<SystemId> | null>();
@@ -35,13 +36,19 @@ export const CustomerView = () => {
       setDataSourceError(person?.systemIds.filter((id: SystemId) => id.error));
       if (dataSource == Jigsaw) {
         setJigsawId(id);
+        setJigsawUrl(`${process.env.JIGSAW_URL}/customers/customer/${id}`);
       } else {
         var jigsawId = person?.systemIds.find(
           (id: SystemId) => id.systemName.toLowerCase() == Jigsaw
         );
-        jigsawId
-          ? setJigsawId(jigsawId.id)
-          : setJigsawId("jigsaw id not found");
+        if (jigsawId) {
+          setJigsawId(jigsawId.id);
+          setJigsawUrl(
+            `${process.env.JIGSAW_URL}/customers/customer/${jigsawId?.id}`
+          );
+        } else {
+          setJigsawId("jigsaw id not found");
+        }
       }
 
       var mmhId = person?.systemIds?.find(
@@ -101,13 +108,24 @@ export const CustomerView = () => {
       )}
       {mmhUrl && (
         <a
-          className="govuk-link lbh-link lbh-link--no-visited-state align-right"
+          className="govuk-link lbh-link lbh-link--no-visited-state align-right govuk-!-margin-left-2"
           href={mmhUrl}
           target="_blank"
         >
           View on MMH
         </a>
       )}
+
+      {jigsawUrl && (
+        <a
+          className="govuk-link lbh-link lbh-link--no-visited-state align-right govuk-!-margin-left-2"
+          href={jigsawUrl}
+          target="_blank"
+        >
+          View on Jigsaw
+        </a>
+      )}
+
       <div className="govuk-tabs lbh-tabs sv-space-t" data-module="govuk-tabs">
         <h2 className="govuk-tabs__title">Contents</h2>
 
