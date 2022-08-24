@@ -47,7 +47,7 @@ export const HousingBenefitsInformation: React.FC<Props> = (props) => {
         title="Weekly Housing Benefit Amount And Payee"
         testId="whba"
       >
-        {`£${props.housingBenefitsAccount?.housingBenefitDetails.weeklyHousingBenefitAmount} : ${props.housingBenefitsAccount?.housingBenefitDetails.housingBenefitPayee}`}
+        {`£${props.housingBenefitsAccount?.weeklyHousingBenefitDetails.weeklyHousingBenefit} : ${props.housingBenefitsAccount?.weeklyHousingBenefitDetails.housingBenefitPayee}`}
       </DescriptionListItem>
       <DescriptionListItem
         title="Income Received By Applicant"
