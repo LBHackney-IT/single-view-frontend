@@ -37,7 +37,7 @@ export const mapRecordsToMatchedRecord = (
 
   for (let person of persons) {
     let dataSource: dataSource = {
-      dataSource: searchPersonDataSource(person),
+      dataSource: searchPersonDataSource(person).replace(/\s+/g, "-"),
       sourceId: person.id,
     };
     dataSources.push(dataSource);
