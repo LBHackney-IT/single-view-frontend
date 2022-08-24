@@ -4,6 +4,7 @@ export interface housingBenefitsAccount {
   personReference: string;
   householdMembers: householdMember[] | null;
   benefits: benefit[] | null;
+  weeklyHousingBenefitAmount: number | null;
 }
 
 export interface householdMember {

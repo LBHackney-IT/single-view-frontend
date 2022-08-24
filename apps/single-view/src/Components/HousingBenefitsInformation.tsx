@@ -2,6 +2,7 @@ import React from "react";
 import { DescriptionListItem } from "./DescriptionListItem";
 import { housingBenefitsAccount } from "../Interfaces/housingBenefitsRecordInterfaces";
 import { formatCurrency, formatDateOfBirth } from "../Utils";
+import { HouseHoldMember } from "./HouseholdMember";
 
 interface Props {
   housingBenefitsAccount: housingBenefitsAccount | null;
@@ -44,6 +45,9 @@ export const HousingBenefitsInformation: React.FC<Props> = (props) => {
             );
           }
         )}
+      </DescriptionListItem>
+      <DescriptionListItem title="Weekly Housing Benefit Amount" testId="whba">
+        {`£${props.housingBenefitsAccount?.weeklyHousingBenefitAmount}`}
       </DescriptionListItem>
       <DescriptionListItem
         title="Income Received By Applicant"
