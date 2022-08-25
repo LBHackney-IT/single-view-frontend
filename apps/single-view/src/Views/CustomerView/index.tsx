@@ -129,7 +129,18 @@ export const CustomerView = () => {
       <div className="govuk-tabs lbh-tabs sv-space-t" data-module="govuk-tabs">
         <h2 className="govuk-tabs__title">Contents</h2>
 
-        <BackToSearch />
+        <div className="govuk-!-margin-bottom-5">
+          <BackToSearch />
+          <a
+            href="/"
+            id="new-search"
+            className={
+              "govuk-link lbh-link lbh-link--no-visited-state govuk-!-margin-left-2"
+            }
+          >
+            New search
+          </a>
+        </div>
 
         <ul className="govuk-tabs__list">
           <li className="govuk-tabs__list-item govuk-tabs__list-item--selected">
