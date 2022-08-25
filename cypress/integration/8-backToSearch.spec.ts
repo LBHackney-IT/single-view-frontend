@@ -22,5 +22,21 @@ describe('Back to search', () => {
             cy.get('#firstName').should('have.value', 'Luna');
             cy.get('#lastName').should('have.value', 'Kitty');
         });
+
+        it('displays the new search button', () => {
+            cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup);
+            cy.setCookie('jigsawToken', 'testValue')
+
+            cy.get('#new-search', { timeout: 10000 }).should('be.visible');
+
+            cy.get('#new-search').first().click({ force: true });
+
+            cy.location().should((location) => {
+                expect(location.pathname).to.eq('/');
+            });
+
+            cy.get('#firstName').should('have.value', '');
+            cy.get('#lastName').should('have.value', '');
+        });
     });
 })
