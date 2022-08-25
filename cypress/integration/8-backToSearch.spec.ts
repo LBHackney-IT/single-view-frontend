@@ -1,6 +1,6 @@
 import { AuthRoles } from '../support/commands';
 
-describe('Back to search', () => {
+describe('Search links', () => {
     describe('Basic Information', () => {
         before(() => {
             cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
@@ -9,7 +9,7 @@ describe('Back to search', () => {
             cy.setCookie('searchResidentPath', '/search?firstName=Luna&lastName=Kitty');
         })
 
-        it('displays the Back to search button', () => {
+        it('displays the Back to search results button and loads search page with pre-populated fields', () => {
             cy.get('#back-to-search', { timeout: 10000 }).should('be.visible');
 
             cy.get('#back-to-search').first().click({ force: true });
@@ -23,7 +23,7 @@ describe('Back to search', () => {
             cy.get('#lastName').should('have.value', 'Kitty');
         });
 
-        it('displays the new search button', () => {
+        it('displays the new search button and loads search page with empty fields', () => {
             cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup);
             cy.setCookie('jigsawToken', 'testValue')
 
