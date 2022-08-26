@@ -118,10 +118,10 @@ export const HousingBenefitsInformation: React.FC<Props> = (props) => {
               }
             </span>
             <br />
-            <span className="govuk-!-font-weight-bold"> Claim Id:</span>
+            <span className="govuk-!-font-weight-bold"> Claim Id: </span>
             {props.housingBenefitsAccount.housingBenefitLandlordDetails.claimId}
             <br />
-            <span className="govuk-!-font-weight-bold"> Creditor Id:</span>
+            <span className="govuk-!-font-weight-bold">Creditor Id: </span>
             {
               props.housingBenefitsAccount.housingBenefitLandlordDetails
                 .creditorId
