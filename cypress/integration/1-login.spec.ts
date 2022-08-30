@@ -23,7 +23,8 @@ describe('login', () => {
 
   describe('when logged in with wrong group', () => {
     before(() => {
-      cy.visitAs('/', AuthRoles.RestrictedGroup );
+      var jigsawLoggedIn = false;
+      cy.visitAs('/', AuthRoles.RestrictedGroup, jigsawLoggedIn);
     })
 
     it('displays appropriate head link', () => {
@@ -42,7 +43,8 @@ describe('login', () => {
 
   describe('when logged in with appropriate group', () => {
     before(() => {
-      cy.visitAs('/', AuthRoles.UnrestrictedGroup);
+      var jigsawLoggedIn = false;
+      cy.visitAs('/', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
     })
 
     it('displays appropriate head link', () => {
