@@ -96,6 +96,19 @@ export const HousingBenefitsInformation: React.FC<Props> = (props) => {
           : ""}
       </DescriptionListItem>
 
+      <DescriptionListItem
+        title="Last Payment Details"
+        testId="lastPaymentDetails"
+      >
+        <span className="govuk-!-font-weight-bold"> Date: </span>
+        {formatDateOfBirth(
+          props.housingBenefitsAccount?.paymentDetails?.postingDate
+        )}
+        <br />
+        <span className="govuk-!-font-weight-bold">Amount: </span>
+        {`£ ${props.housingBenefitsAccount?.paymentDetails?.paymentAmount}`}
+      </DescriptionListItem>
+
       {props.housingBenefitsAccount?.housingBenefitLandlordDetails && (
         <DescriptionListItem
           title="Housing Benefit Landlord Details"

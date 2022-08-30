@@ -6,11 +6,17 @@ export interface housingBenefitsAccount {
   benefits: benefit[] | null;
   weeklyHousingBenefitDetails: WeeklyHousingBenefitDetails;
   housingBenefitLandlordDetails: HousingBenefitLandlordDetails | null;
+  paymentDetails: PaymentDetails | null;
 }
 
 export interface WeeklyHousingBenefitDetails {
   weeklyHousingBenefit: number | null;
   housingBenefitPayee: string | null;
+}
+
+export interface PaymentDetails {
+  postingDate: string;
+  paymentAmount: number;
 }
 
 export interface householdMember {
