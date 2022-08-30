@@ -51,6 +51,12 @@ $lbh-asset-path: "../node_modules/lbh-frontend/dist/assets";
 .sv-result-wrapper {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+}
+
+.sv-result-sub-wrapper {
+  display: flex;
+  flex-direction: row;
 }
 
 .sv-result {
@@ -83,6 +89,26 @@ $lbh-asset-path: "../node_modules/lbh-frontend/dist/assets";
   padding-bottom: inherit;
 }
 
+.sv-buttons-wrapper{
+  display: flex;
+  flex-direction: row;
+  margin-top: 0 !important;
+}
+
 .sv-unmerge-button {
+  margin-top: 0 !important;
   margin-bottom: auto !important;
+  border-radius: 4px
+}
+
+.sv-table {
+  min-width: max-content;
+}
+.sv-table-heading {
+  font-weight: 600;
+  font-size: 19px;
+}
+
+.sv-details {
+  font-size: 16px !important;
 }

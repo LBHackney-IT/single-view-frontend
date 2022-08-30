@@ -2,15 +2,57 @@ import React from "react";
 import { DescriptionListItem } from "./DescriptionListItem";
 import { housingBenefitsAccount } from "../Interfaces/housingBenefitsRecordInterfaces";
 import { formatCurrency, formatDateOfBirth } from "../Utils";
+import { HouseHoldMember } from "./HouseholdMember";
 
 interface Props {
   housingBenefitsAccount: housingBenefitsAccount | null;
 }
 
 export const HousingBenefitsInformation: React.FC<Props> = (props) => {
+  let landlordAddressLine1 =
+    props.housingBenefitsAccount?.housingBenefitLandlordDetails?.addr1 !==
+    "" ? (
+      <span>
+        {props.housingBenefitsAccount?.housingBenefitLandlordDetails?.addr1?.trim()}
+        ,
+      </span>
+    ) : (
+      <span />
+    );
+  let landlordAddressLine2 =
+    props.housingBenefitsAccount?.housingBenefitLandlordDetails?.addr2 !==
+    "" ? (
+      <span>
+        {props.housingBenefitsAccount?.housingBenefitLandlordDetails?.addr2?.trim()}
+        ,
+      </span>
+    ) : (
+      <span />
+    );
+  let landlordAddressLine3 =
+    props.housingBenefitsAccount?.housingBenefitLandlordDetails?.addr3 !==
+    "" ? (
+      <span>
+        {props.housingBenefitsAccount?.housingBenefitLandlordDetails?.addr3?.trim()}
+        ,
+      </span>
+    ) : (
+      <span />
+    );
+  let landlordAddressLine4 =
+    props.housingBenefitsAccount?.housingBenefitLandlordDetails?.addr4 !==
+    "" ? (
+      <span>
+        {props.housingBenefitsAccount?.housingBenefitLandlordDetails?.addr4?.trim()}
+        ,
+      </span>
+    ) : (
+      <span />
+    );
+
   return (
     <>
-      <h3>Housing Benefits</h3>
+      <h3>Housing Benefit</h3>
       <DescriptionListItem title="Claim ID" testId="claimId">
         {props.housingBenefitsAccount?.claimId}
       </DescriptionListItem>
@@ -20,7 +62,10 @@ export const HousingBenefitsInformation: React.FC<Props> = (props) => {
       <DescriptionListItem title="Person Reference" testId="personReference">
         {props.housingBenefitsAccount?.personReference}
       </DescriptionListItem>
-      <DescriptionListItem title="Household Members" testId="householdMembers">
+      <DescriptionListItem
+        title="Household Composition"
+        testId="householdMembers"
+      >
         {props.housingBenefitsAccount?.householdMembers?.map(
           (householdMember, index) => {
             return (
@@ -42,6 +87,49 @@ export const HousingBenefitsInformation: React.FC<Props> = (props) => {
           }
         )}
       </DescriptionListItem>
+      <DescriptionListItem
+        title="Weekly Housing Benefit Amount And Payee"
+        testId="whba"
+      >
+        {props.housingBenefitsAccount?.weeklyHousingBenefitDetails
+          ? `£${props.housingBenefitsAccount?.weeklyHousingBenefitDetails.weeklyHousingBenefit} : ${props.housingBenefitsAccount?.weeklyHousingBenefitDetails.housingBenefitPayee}`
+          : ""}
+      </DescriptionListItem>
+
+      {props.housingBenefitsAccount?.housingBenefitLandlordDetails && (
+        <DescriptionListItem
+          title="Housing Benefit Landlord Details"
+          testId="housingBenefitLandlordDetails"
+        >
+          <div>
+            <span
+              className="govuk-!-font-weight-bold"
+              data-testid={"landLordName"}
+            >
+              {props.housingBenefitsAccount.housingBenefitLandlordDetails.name}
+            </span>
+            <br />
+            <span data-testid={"landlordAddress"}>
+              {landlordAddressLine1} {landlordAddressLine2}{" "}
+              {landlordAddressLine3} {landlordAddressLine4}{" "}
+              {
+                props.housingBenefitsAccount.housingBenefitLandlordDetails
+                  .postcode
+              }
+            </span>
+            <br />
+            <span className="govuk-!-font-weight-bold"> Claim Id: </span>
+            {props.housingBenefitsAccount.housingBenefitLandlordDetails.claimId}
+            <br />
+            <span className="govuk-!-font-weight-bold">Creditor Id: </span>
+            {
+              props.housingBenefitsAccount.housingBenefitLandlordDetails
+                .creditorId
+            }
+          </div>
+        </DescriptionListItem>
+      )}
+
       <DescriptionListItem
         title="Income Received By Applicant"
         testId="benefits"

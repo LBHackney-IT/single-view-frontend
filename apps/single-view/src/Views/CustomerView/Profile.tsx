@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
-import { customerProfile, SystemId } from "../../Interfaces";
+import { customerProfile, SystemId, legacyReference } from "../../Interfaces";
 import {
   formatCautionaryAlertsDate,
   formatDateOfBirth,
@@ -36,6 +36,25 @@ export const Profile = (props: Props) => {
       </Center>
     );
   }
+
+  const manageArrearsLink = (legacyReferences: legacyReference[] | null) => {
+    if (legacyReferences == null) {
+      return null;
+    }
+    var legacyReference = legacyReferences.find((r) => r.name === "uh_tag_ref");
+
+    return legacyReference == null || legacyReference.value == null ? null : (
+      <a
+        href={`${process.env.MA_URL}/tenancies/${encodeURIComponent(
+          legacyReference.value
+        )}`}
+        target="_blank"
+        className="govuk-link lbh-link lbh-link--no-visited-state"
+      >
+        View on manage arrears ({legacyReference.value})
+      </a>
+    );
+  };
 
   return (
     <>
@@ -116,7 +135,7 @@ export const Profile = (props: Props) => {
             })}
         </DescriptionListItem>
 
-        <DescriptionListItem title="Tenures" testId="tenures">
+        <DescriptionListItem title="Address History" testId="tenures">
           {person.knownAddresses?.map((address, index) => {
             return (
               <p className="lbh-body-s" key={index}>
@@ -137,6 +156,33 @@ export const Profile = (props: Props) => {
                 <span data-testid="tenureDataSource">
                   <span className="govuk-!-font-weight-bold">Data Source:</span>{" "}
                   {address.dataSourceName}
+                </span>
+                <span data-testid="tenureDetails">
+                  <details
+                    className="govuk-details lbh-details"
+                    data-module="govuk-details"
+                  >
+                    <summary className="govuk-details__summary sv-details">
+                      <span className="govuk-details__summary-text">
+                        Household Members
+                      </span>
+                    </summary>
+                    <div className="govuk-details__text sv-details">
+                      <ul>
+                        {address.householdMembers?.map((member, i) => {
+                          return (
+                            <li>
+                              {member.fullName} (
+                              {formatDateOfBirth(member.dateOfBirth)})
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  </details>
+                </span>
+                <span data-testid="manageArrearsLink">
+                  {manageArrearsLink(address.legacyReferences) || ""}
                 </span>
               </p>
             );
@@ -162,16 +208,16 @@ export const Profile = (props: Props) => {
             formatDateOfBirth(person.pregnancyDueDate)}
         </DescriptionListItem>
         <DescriptionListItem
-          title={"Accommodation type Id"}
-          testId={"accommodationTypeId"}
+          title={"Accommodation Type"}
+          testId={"accommodationType"}
         >
-          {person.accommodationTypeId}
+          {person.accommodationType}
         </DescriptionListItem>
         <DescriptionListItem
-          title={"Housing circumstance Id"}
-          testId={"housingCircumstanceId"}
+          title={"Housing Circumstance"}
+          testId={"housingCircumstance"}
         >
-          {person.housingCircumstanceId}
+          {person.housingCircumstance}
         </DescriptionListItem>
         <DescriptionListItem title={"Settled"} testId={"isSettled"}>
           {person.isSettled ? "Y" : "N"}

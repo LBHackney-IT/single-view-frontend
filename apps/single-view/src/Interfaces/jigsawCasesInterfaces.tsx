@@ -19,7 +19,15 @@ export interface CaseOverview {
   id: string;
   currentFlowchartPosition: string;
   currentDecision: string;
-  houseHoldComposition: string;
+  householdComposition: Array<HouseHoldComposition>;
+}
+
+export interface HouseHoldComposition {
+  name: string;
+  dateOfBirth: string | null;
+  gender: string | null;
+  niNumber: string | null;
+  nhsNumber: string | null;
 }
 
 export interface Placement {

@@ -1,6 +1,6 @@
 import { AuthRoles } from '../support/commands';
 
-describe('Profile', () => {
+describe('Search links', () => {
     describe('Basic Information', () => {
         before(() => {
             cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
@@ -10,7 +10,7 @@ describe('Profile', () => {
             cy.setCookie('searchResidentPath', '/search?firstName=Luna&lastName=Kitty');
         })
 
-        it('displays the Back to search button', () => {
+        it('displays the Back to search results button and loads search page with pre-populated fields', () => {
             cy.get('#back-to-search', { timeout: 10000 }).should('be.visible');
 
             cy.get('#back-to-search').first().click({ force: true });
@@ -22,6 +22,22 @@ describe('Profile', () => {
 
             cy.get('#firstName').should('have.value', 'Luna');
             cy.get('#lastName').should('have.value', 'Kitty');
+        });
+
+        it('displays the new search button and loads search page with empty fields', () => {
+            cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup);
+            cy.setCookie('jigsawToken', 'testValue')
+
+            cy.get('#new-search', { timeout: 10000 }).should('be.visible');
+
+            cy.get('#new-search').first().click({ force: true });
+
+            cy.location().should((location) => {
+                expect(location.pathname).to.eq('/');
+            });
+
+            cy.get('#firstName').should('have.value', '');
+            cy.get('#lastName').should('have.value', '');
         });
     });
 })

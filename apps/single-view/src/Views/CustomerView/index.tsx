@@ -19,11 +19,12 @@ export const CustomerView = () => {
   var { dataSource, id } = useParams<UrlParams>();
   const [person, setPerson] = useState<customerProfile | null>();
   const [mmhUrl, setMhUrl] = useState<string>("");
+  const [jigsawUrl, setJigsawUrl] = useState<string>("");
   const [jigsawId, setJigsawId] = useState<string>("");
   const [dataSourceError, setDataSourceError] =
     useState<Array<SystemId> | null>();
   const [systemIds, setSystemIds] = useState<Array<SystemId>>();
-  const nullOrEmpty = (item: string): boolean => item == null || item == "";
+  const isNullOrEmpty = (item: string): boolean => item == null || item == "";
 
   dataSource = dataSource.toLowerCase(); // Makes url parameter case insensitive
 
@@ -35,15 +36,23 @@ export const CustomerView = () => {
       setDataSourceError(person?.systemIds.filter((id: SystemId) => id.error));
       if (dataSource == Jigsaw) {
         setJigsawId(id);
+        setJigsawUrl(`${process.env.JIGSAW_URL}/customers/customer/${id}`);
       } else {
         var jigsawId = person?.systemIds.find(
-          (id: SystemId) => id.systemName == Jigsaw
+          (id: SystemId) => id.systemName.toLowerCase() == Jigsaw
         );
-        if (jigsawId) setJigsawId(jigsawId.id);
+        if (jigsawId) {
+          setJigsawId(jigsawId.id);
+          setJigsawUrl(
+            `${process.env.JIGSAW_URL}/customers/customer/${jigsawId?.id}`
+          );
+        } else {
+          setJigsawId("jigsaw id not found");
+        }
       }
 
       var mmhId = person?.systemIds?.find(
-        (id: SystemId) => id.systemName == Housing
+        (id: SystemId) => id.systemName.toLowerCase() == Housing
       );
       if (mmhId) {
         setMhUrl(`${process.env.MMH_URL}/person/${mmhId.id}`);
@@ -90,8 +99,6 @@ export const CustomerView = () => {
     <NotFound />
   ) : (
     <>
-      {/* {console.log("==========================================================")}
-    {console.log(dataSourceError, dataSource) /* undefined, Jigsaw */}
       {dataSourceError && (
         <div style={{ marginTop: "-45px" }}>
           {dataSourceError.map((dataSource) => {
@@ -101,17 +108,39 @@ export const CustomerView = () => {
       )}
       {mmhUrl && (
         <a
-          className="govuk-link lbh-link lbh-link--no-visited-state align-right"
+          className="govuk-link lbh-link lbh-link--no-visited-state align-right govuk-!-margin-left-2"
           href={mmhUrl}
           target="_blank"
         >
           View on MMH
         </a>
       )}
+
+      {jigsawUrl && (
+        <a
+          className="govuk-link lbh-link lbh-link--no-visited-state align-right govuk-!-margin-left-2"
+          href={jigsawUrl}
+          target="_blank"
+        >
+          View on Jigsaw
+        </a>
+      )}
+
       <div className="govuk-tabs lbh-tabs sv-space-t" data-module="govuk-tabs">
         <h2 className="govuk-tabs__title">Contents</h2>
 
-        <BackToSearch />
+        <div className="govuk-!-margin-bottom-5">
+          <BackToSearch />
+          <a
+            href="/"
+            id="new-search"
+            className={
+              "govuk-link lbh-link lbh-link--no-visited-state govuk-!-margin-left-2"
+            }
+          >
+            New search
+          </a>
+        </div>
 
         <ul className="govuk-tabs__list">
           <li className="govuk-tabs__list-item govuk-tabs__list-item--selected">
@@ -126,7 +155,10 @@ export const CustomerView = () => {
           </li>
           <li className="govuk-tabs__list-item govuk-tabs__list-item--selected">
             <a className="govuk-tabs__tab" href="#cases">
-              Active Homelessness Case
+              Active Homelessness Case{" "}
+              {isNullOrEmpty(jigsawId) || jigsawId == "jigsaw id not found"
+                ? ""
+                : `(${jigsawId})`}
             </a>
           </li>
         </ul>
@@ -141,16 +173,7 @@ export const CustomerView = () => {
           />
         </section>
         <section className="govuk-tabs__panel" id="cases">
-          {nullOrEmpty(jigsawId) ? (
-            <p
-              className="govuk-inset-text lbh-inset-text"
-              data-testid="homelessnessCasesNotFound"
-            >
-              There were no active homelessness cases found for this customer.
-            </p>
-          ) : (
-            <Cases customerId={jigsawId} />
-          )}
+          <Cases customerId={jigsawId} />
         </section>
       </div>
     </>

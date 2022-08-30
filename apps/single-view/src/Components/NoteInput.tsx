@@ -61,7 +61,7 @@ export const NoteInput = (props: Props): JSX.Element => {
   };
 
   const subCategories = [
-    { id: "housingBenefits", value: "Housing Benefits" },
+    { id: "housingBenefits", value: "Housing Benefit" },
     { id: "councilTax", value: "Council Tax" },
     { id: "housingNeeds", value: "Housing Needs" },
     { id: "rentIncome", value: "Rent & Income" },

@@ -12,6 +12,7 @@ interface Props {
 export const Cases = (props: Props): JSX.Element => {
   const [cases, setCases] = useState<jigsawCasesResponse | null>(null);
   const [getCasesError, setGetCasesError] = useState<boolean>(false);
+  const [casesNotFoundError, setCasesNotFoundError] = useState<boolean>(false);
 
   const loadCases = async (customerId: string): Promise<void> => {
     setGetCasesError(false);
@@ -22,14 +23,16 @@ export const Cases = (props: Props): JSX.Element => {
       );
       setCases(cases);
     } catch (e: any) {
-      if (e.response.status != 404) {
+      if (e.response.status == 404) {
+        setCasesNotFoundError(true);
+      } else {
         setGetCasesError(true);
       }
     }
   };
 
   useEffect(() => {
-    if (props.customerId) {
+    if (props.customerId && props.customerId !== "jigsaw id not found") {
       loadCases(props.customerId);
     }
   }, [props.customerId]);
@@ -65,21 +68,22 @@ export const Cases = (props: Props): JSX.Element => {
     );
   }
 
-  if (typeof cases == "undefined") {
+  if (casesNotFoundError || props.customerId == "jigsaw id not found") {
     return (
-      <Center>
-        <Spinner />
-      </Center>
+      <p
+        className="govuk-inset-text lbh-inset-text"
+        data-testid="homelessnessCasesNotFound"
+      >
+        There were no active homelessness cases found for this customer.
+      </p>
     );
   }
 
-  {
-    return cases != null ? (
-      <CaseSummary jigsawCaseResponse={cases} />
-    ) : (
-      <div className="govuk-inset-text lbh-inset-text" data-testid="notFound">
-        There were no active homelessness cases found for this customer.
-      </div>
-    );
-  }
+  return cases != null ? (
+    <CaseSummary jigsawCaseResponse={cases} />
+  ) : (
+    <Center>
+      <Spinner />
+    </Center>
+  );
 };

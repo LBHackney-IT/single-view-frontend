@@ -81,12 +81,12 @@ describe('Profile', () => {
       cy.get('[data-testid="pregnancyDueDate"]').should('have.text', "25/12/2022", {timeout: 10000})
     });
 
-    it('displays accommodation type id', () => {
-      cy.get('[data-testid="accommodationTypeId"]').should('have.text', '10', {timeout: 10000});
+    it('displays accommodation type', () => {
+      cy.get('[data-testid="accommodationType"]').should('have.text', 'N/A', {timeout: 10000});
     });
 
-    it('displays housing circumstance id', () => {
-      cy.get('[data-testid="housingCircumstanceId"]').should('have.text', '11', {timeout: 10000});
+    it('displays housing circumstance', () => {
+      cy.get('[data-testid="housingCircumstance"]').should('have.text', 'Temporary accommodation', {timeout: 10000});
     });
 
     it('displays is settled', () => {
@@ -125,6 +125,11 @@ describe('Profile', () => {
       cy.get('[data-testid="disabled"]').should('have.text', 'yes', {timeout: 10000});
       cy.get('[data-testid="communicationRequirements"]').children().should('have.length', 3, {timeout: 10000});
       cy.get('[data-testid="communicationRequirements"]').children().first().should('have.text', 'Communication requirement-1', {timeout: 10000});
+    });
+    
+    it('displays housing benefits landlord details', () => {
+      cy.get('[data-testid="landLordName"]').should('have.text', 'ABC FAKE HOUSING TRUST', {timeout: 10000})
+      cy.get('[data-testid="landlordAddress"]').should('have.text', '111 UPPER ABC RD, LONDON,   E5 9SA', {timeout: 10000})
     });
 
   });

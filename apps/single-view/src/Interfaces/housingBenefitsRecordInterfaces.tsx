@@ -4,6 +4,13 @@ export interface housingBenefitsAccount {
   personReference: string;
   householdMembers: householdMember[] | null;
   benefits: benefit[] | null;
+  weeklyHousingBenefitDetails: WeeklyHousingBenefitDetails;
+  housingBenefitLandlordDetails: HousingBenefitLandlordDetails | null;
+}
+
+export interface WeeklyHousingBenefitDetails {
+  weeklyHousingBenefit: number | null;
+  housingBenefitPayee: string | null;
 }
 
 export interface householdMember {
@@ -18,4 +25,15 @@ export interface benefit {
   description: string;
   period: string;
   frequency: number;
+}
+
+export interface HousingBenefitLandlordDetails {
+  claimId: string;
+  name: string;
+  addr1: string;
+  addr2: string;
+  addr3: string;
+  addr4: string;
+  postcode: string;
+  creditorId: string;
 }

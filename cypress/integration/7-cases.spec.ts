@@ -14,6 +14,10 @@ describe("Displays cases", () => {
     cy.get('#cases', { timeout: 10000 })
       .should('be.visible')
   });
+  
+  it('displays the cases tab with jigsaw id when available', () => {
+    cy.get('#tab_cases').should('have.text', "Active Homelessness Case (641056)", {timeout: 10000});
+  });
 
   it('displays the case ID', () => {
     cy.get('[data-testid="caseId"]').should('have.text', "641056", {timeout: 10000});

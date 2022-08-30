@@ -120,7 +120,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
             }}
           >
             <Input
-              label="* First name"
+              label="* First name or initial"
               errorMsg="First name is mandatory"
               id="firstName"
               name="firstName"
@@ -172,16 +172,10 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                   stroke="#00703c"
                   width="50"
                   height="50"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <g fill="none" fill-rule="evenodd">
                     <g transform="translate(3 3)" stroke-width="5">
-                      <circle
-                        stroke-strokeOpacity=".5"
-                        cx="18"
-                        cy="18"
-                        r="18"
-                      />
+                      <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
                       <path
                         d="M36 18c0-9.94-8.06-18-18-18"
                         transform="rotate(112.708 18 18)"
