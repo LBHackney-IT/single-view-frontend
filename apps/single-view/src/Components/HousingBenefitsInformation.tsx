@@ -106,7 +106,7 @@ export const HousingBenefitsInformation: React.FC<Props> = (props) => {
         )}
         <br />
         <span className="govuk-!-font-weight-bold">Amount: </span>
-        {`£ ${props.housingBenefitsAccount?.paymentDetails?.paymentAmount}`}
+        {`£${props.housingBenefitsAccount?.paymentDetails?.paymentAmount}`}
       </DescriptionListItem>
 
       {props.housingBenefitsAccount?.housingBenefitLandlordDetails && (
