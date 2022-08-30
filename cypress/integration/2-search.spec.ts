@@ -63,6 +63,21 @@ describe('search', () => {
     cy.get('.sv-result').eq(1)
         .contains('(NI Number Not Set)');
   });
+  
+  it('displays merge, confirm and cancel buttons for merged records', () => {
+    cy.setCookie('jigsawToken', 'testValue')
+
+    cy.get('#firstName').type('Luna');
+    cy.get('#lastName').type('Kitty');
+
+    cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
+
+    cy.get('.govuk-button').first().should('have.text', 'Search').click();
+
+    cy.get('[data-testid="unmerge"]').first().click();
+    cy.get('[data-testid="confirm"]').first().should('have.text', "Confirm");
+    cy.get('[data-testid="cancel"]').should('have.text', 'Cancel')
+  });
 
   it('displays merged records with multiple data sources', () => {
     cy.get('#mergedRecords > .lbh-body > .sv-result-sub-wrapper > .sv-result > [data-testid="mergeCounter-0"]') // Gets counter on first result

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { formatDate } from "@mfe/common/lib/utils";
 import { housingSearchPerson } from "../Interfaces";
 import { UnmergeRecordButton } from "./UnmergeRecordButton";
@@ -14,6 +14,8 @@ interface Props {
 }
 
 export const SearchResultsGroup = (props: Props): JSX.Element => {
+  const [unmergeRecordPersonId, setUnmergeRecordPersonId] = useState<string>();
+
   const isNullOrEmpty = (data: string | null): boolean =>
     data == null || data == "";
 
@@ -21,6 +23,8 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
     <>
       {props.results.map((person: housingSearchPerson, index: number) => {
         const mergedRecord = isMergedRecord(person);
+        let recordWithUnmergeRecordPersonId: boolean =
+          person.id == unmergeRecordPersonId;
 
         const dataSourceId = (
           <span>
@@ -127,10 +131,23 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
                 </div>
               </div>
 
-              {mergedRecord && (
+              {mergedRecord && !recordWithUnmergeRecordPersonId && (
+                <button
+                  onClick={() => {
+                    setUnmergeRecordPersonId(person.id);
+                  }}
+                  className="govuk-button govuk-button--warning sv-unmerge-button"
+                  data-testid="unmerge"
+                >
+                  Unmerge
+                </button>
+              )}
+
+              {mergedRecord && recordWithUnmergeRecordPersonId && (
                 <UnmergeRecordButton
                   svId={person.id}
                   setUnmergeError={props.setUnmergeError}
+                  unmergeRecordPersonId={setUnmergeRecordPersonId}
                 />
               )}
             </div>

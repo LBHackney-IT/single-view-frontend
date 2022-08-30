@@ -4,6 +4,7 @@ import { unmergeRecords } from "../Gateways/recordsGateway";
 interface Props {
   svId: string;
   setUnmergeError: () => void;
+  unmergeRecordPersonId: (id: string) => void;
 }
 
 //component to unmerge
@@ -38,14 +39,25 @@ export const UnmergeRecordButton: React.FC<Props> = (props) => {
       </svg>
     </div>
   ) : (
-    <button
-      onClick={() => {
-        deleteRecord();
-      }}
-      className="govuk-button lbh-button govuk-button--start sv-unmerge-button"
-    >
-      Unmerge
-      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-    </button>
+    <div className="sv-buttons-wrapper">
+      <button
+        onClick={() => {
+          deleteRecord();
+        }}
+        className="govuk-button govuk-button--warning sv-unmerge-button"
+        data-testid="confirm"
+      >
+        Confirm
+      </button>
+      <button
+        onClick={() => {
+          props.unmergeRecordPersonId("");
+        }}
+        className="govuk-button sv-unmerge-button govuk-!-margin-left-2"
+        data-testid="cancel"
+      >
+        Cancel
+      </button>
+    </div>
   );
 };
