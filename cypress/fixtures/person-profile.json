@@ -107,6 +107,47 @@
                 "Communication requirement-2",
                 "Communication requirement-3"
             ]
+        },
+        "housingBenefitsAccount": {
+            "claimId": 1231231,
+            "checkDigit": "5",
+            "personReference": "1",
+            "householdMembers": [
+                {
+                    "title": "MISS",
+                    "firstName": "Jane",
+                    "lastName": "Doe",
+                    "dateOfBirth": "2000-06-02T00:00:00Z"
+                }
+            ],
+            "benefits": [
+                {
+                    "amount": 50.60,
+                    "description": "Capital",
+                    "period": "Annually",
+                    "frequency": 0
+                },
+                {
+                    "amount": 150.15,
+                    "description": "New State Pension",
+                    "period": "Weekly",
+                    "frequency": 1
+                }
+            ],
+            "weeklyHousingBenefitDetails": {
+                "housingBenefitPayee": "HB direct to landlord",
+                "weeklyHousingBenefit": 150.58
+            },
+            "housingBenefitLandlordDetails": {
+                "claimId": 1231231,
+                "name": "ABC FAKE HOUSING TRUST",
+                "addr1": "111 UPPER ABC RD ",
+                "addr2": " LONDON",
+                "addr3": "",
+                "addr4": "",
+                "postcode": "E5 9SA",
+                "creditorId": 1111
+            }
         }
     },
     "systemIds": [
@@ -121,6 +162,11 @@
         },
         {
             "systemName": "Academy-CouncilTax",
+            "id": "34596507",
+            "error": ""
+        },
+        {
+            "systemName": "Academy-Benefits",
             "id": "34596507",
             "error": ""
         }

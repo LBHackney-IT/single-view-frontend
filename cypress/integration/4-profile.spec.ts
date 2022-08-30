@@ -125,6 +125,11 @@ describe('Profile', () => {
       cy.get('[data-testid="communicationRequirements"]').children().should('have.length', 3, {timeout: 10000});
       cy.get('[data-testid="communicationRequirements"]').children().first().should('have.text', 'Communication requirement-1', {timeout: 10000});
     });
+    
+    it('displays housing benefits landlord details', () => {
+      cy.get('[data-testid="landLordName"]').should('have.text', 'ABC FAKE HOUSING TRUST', {timeout: 10000})
+      cy.get('[data-testid="landlordAddress"]').should('have.text', '111 UPPER ABC RD, LONDON,   E5 9SA', {timeout: 10000})
+    });
 
   });
 
