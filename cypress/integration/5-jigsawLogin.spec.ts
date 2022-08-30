@@ -5,7 +5,8 @@ describe('Jigsaw Login & Logout',  () => {
   describe('Performs Jigsaw login',  () => {
     
     before(() => {
-      cy.visitAs('/', AuthRoles.UnrestrictedGroup);
+      var jigsawLoggedIn = false;
+      cy.visitAs('/', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
     })
 
     it('displays the heading', () => {
@@ -45,12 +46,13 @@ describe('Jigsaw Login & Logout',  () => {
     })
   if (Cypress.env('APP_ENV') == 'production') {
       it('displays displays error when creds are wrong', ()=> {
-      cy.visitAs('/jigsawLogin', AuthRoles.UnrestrictedGroup);
+        var jigsawLoggedIn = false;
+        cy.visitAs('/jigsawLogin', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
 
-      cy.get('#username').type('Luna');
-      cy.get('#password').type('pa$$w0rd');
+        cy.get('#username').type('Luna');
+        cy.get('#password').type('pa$$w0rd');
 
-      cy.intercept('POST', '**/storeCredentials', {
+        cy.intercept('POST', '**/storeCredentials', {
         statusCode: 401,
       }).as('submitWrongCreds'); 
 
@@ -80,8 +82,8 @@ describe('Jigsaw Login & Logout',  () => {
 
   describe("Prompts Jigsaw login", () => {
     before(() => {
-      cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup);
-      cy.clearCookie('jigsawToken');
+      var jigsawLoggedIn = false;
+      cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
     });
 
     beforeEach(() => {
@@ -101,8 +103,8 @@ describe('Jigsaw Login & Logout',  () => {
 
   describe("Performs Jigsaw logout", () =>{
     before(() => {
-      cy.visitAs('/search', AuthRoles.UnrestrictedGroup);
-      cy.setCookie('jigsawToken', 'testValue')
+      var jigsawLoggedIn = true;
+      cy.visitAs('/search', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
     });
 
     it('performs jigsaw logout', () => {

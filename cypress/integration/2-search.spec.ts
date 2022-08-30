@@ -2,8 +2,8 @@ import { AuthRoles } from '../support/commands';
 
 describe('search', () => {
   before(() => {
-    cy.visitAs('/search', AuthRoles.UnrestrictedGroup);
-    cy.setCookie('jigsawToken', 'testValue');
+    var jigsawLoggedIn = true;
+    cy.visitAs('/search', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
   })
 
   it('displays the heading', () => {

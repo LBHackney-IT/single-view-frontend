@@ -2,17 +2,13 @@ import { AuthRoles } from '../support/commands';
 
 describe('matching', () => {
   before(() => {
-    cy.visitAs('/search?firstName=Luna&lastName=Kitty', AuthRoles.UnrestrictedGroup);
-    cy.setCookie('jigsawToken', 'testValue')
+    var jigsawLoggedIn = true;
+    cy.visitAs('/search?firstName=Luna&lastName=Kitty', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
   });
-
+  
   it('displays search results', () => {
-    // cy.get('#firstName').type('Luna');
-    // cy.get('#lastName').type('Kitty');
 
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
-
-    // cy.get('.govuk-button').should('have.text', 'Search').click();
 
     cy.get('#searchResults', { timeout: 10000 })
       .should('be.visible')

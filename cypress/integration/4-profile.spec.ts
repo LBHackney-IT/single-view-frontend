@@ -4,7 +4,8 @@ describe('Profile', () => {
   describe('Basic Information', () => {
     before(() => {
       cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
-      cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup);
+      var jigsawLoggedIn = false;
+      cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
     })
 
     it('displays the profile tab', () => {
