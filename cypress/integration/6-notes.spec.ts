@@ -3,7 +3,7 @@ import { AuthRoles } from '../support/commands';
 describe('Notes', () => {
   describe("Displays notes", () => {
 
-    beforeEach(() => {
+    before(() => {
       var jigsawLoggedIn = false;
       cy.visitAs('/customers/personapi/6d7ed1a4#notes', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
       
