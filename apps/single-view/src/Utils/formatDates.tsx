@@ -1,4 +1,4 @@
-export const formatDateOfBirth = (dob: string): string => {
+export const formatDateOfBirth = (dob: string | null | undefined): string => {
   if (!dob) return "undefined";
   let [date, time] = dob.split("T");
   let [year, month, day] = date.split("-");
@@ -16,7 +16,8 @@ export const formatCautionaryAlertsDate = (date: string | null): string => {
   return `${day} ${month} ${year}`;
 };
 
-export const formatDate = (dateString: string): string => {
+export const formatDate = (dateString: string | undefined): string => {
+  if (!dateString) return "undefined";
   let d = new Date(dateString);
 
   const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
