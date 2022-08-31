@@ -74,6 +74,7 @@ declare global {
  *    })
  *
  */
+
 function visitAs (
   url: string, 
   role: AuthRoles,
@@ -89,17 +90,7 @@ function visitAs (
     );
     if (jigsawLoggedIn) {
       cy.setCookie('jigsawToken', 'testValue')
-    } else {
-      cy.clearCookie('jigsawToken')
     }
-    cy.getCookie('hackneyToken').should(
-      'have.property',
-      'value',
-      makeToken({
-        groups: roleConfigurations[role],
-      })
-    );
-
     cy.visit(url, options);
   };
 
