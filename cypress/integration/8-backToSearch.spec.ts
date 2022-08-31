@@ -1,14 +1,10 @@
 import { AuthRoles } from '../support/commands';
 
 // TODO: Put this in a helpers/utils file
-export const setCookie = (
-    window,
-    name,
-    value
-  ) => {
+function setCookie (window,name,value) {
     const assignment = `${name}=${value}`;
     window.document.cookie = assignment;
-  };
+};
 
 describe('Search links', () => {
     describe('Basic Information', () => {
