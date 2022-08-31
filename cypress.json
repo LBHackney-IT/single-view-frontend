@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://local.hackney.gov.uk:9000",
+  "baseUrl": "http://localhost:9000",
   "env": {
     "AUTH_ALLOWED_GROUPS": "cypress-users"
   },  
