@@ -90,12 +90,12 @@ const App = (): JSX.Element => {
                     {logoutJigsaw}
                   </Link>}
 
-                  <Link as="button" onClick={() => logout()} className="lbh-signout">
+                  <Link as="button" onClick={() => logout()} className="lbh-signout" data-testid="sign-out-link">
                     {signOut}
                   </Link>
                 </>
               ) : (
-                <RouterLink to="/login">{signIn}</RouterLink>
+                <RouterLink to="/login" data-testid="sign-in-link">{signIn}</RouterLink>
               )}
             </div>
           </nav>

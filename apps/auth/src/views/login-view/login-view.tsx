@@ -28,7 +28,7 @@ export const LoginView = () => {
           </p>
         </ErrorSummary>
       )}
-      <Button onClick={() => login()} variant="chevron">
+      <Button onClick={() => login()} variant="chevron" data-testid="hackney-login-button">
         {locale.signInUsingHackney}
       </Button>
       <Text>
