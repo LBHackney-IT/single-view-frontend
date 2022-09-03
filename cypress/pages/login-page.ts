@@ -7,6 +7,7 @@ class LoginPage extends BasePage {
     }
 
     elements = {
+        ...this.baseElements,
         getHackneyLoginButton: () => cy.get('[data-testid="hackney-login-button"]'),
         getServiceName: () => cy.get('.lbh-header__service-name'),
         getHeadLink: () => cy.get('.lbh-header__links'),

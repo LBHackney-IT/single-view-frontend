@@ -7,6 +7,11 @@ export class BasePage {
 		this.pageUrl = pageUrl;
 	}
 
+	baseElements = {
+		getJigsawLoginLinkHeader: () => cy.get('[data-testid="jigsawLoginHeader"]'),
+		getJigsawLogoutLinkHeader: () => cy.get('[data-testid="jigsawLogoutHeader"]')
+	}
+
 	visit(role?: AuthRoles, jigsawLoggedIn?: boolean) {
 		if (role == null) {
 			cy.clearCookies()
