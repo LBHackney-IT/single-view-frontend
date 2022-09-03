@@ -1,13 +1,13 @@
-import { BasePage } from "./base-page"
+import { BasePersonPage } from "../base/base-person-page"
 
-class ProfilePage extends BasePage {
+class ProfilePage extends BasePersonPage {
 
 	constructor(pageUrl: string = "/customers/single-view/6d7ed1a4") {
 		super(pageUrl = pageUrl)
 	}
 
 	elements = {
-		...this.baseElements,
+		...this.basePersonElements,
 		getProfileTab: () => cy.get('#profile'),
 		getJigsawLoginErrorBanner: () => cy.get('[data-testid="jigsawInformationNotDisplayedBanner"]'),
 		getCautionaryAlertWarningTitle: () => cy.get('[data-testid="cautionaryAlert-alertCode"]'),

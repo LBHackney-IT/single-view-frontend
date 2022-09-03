@@ -1,11 +1,11 @@
-import { AuthRoles } from '../support/commands';
+import { AuthRoles, JigsawStatuses } from '../support/commands';
 import { searchPage } from '../pages/search-page';
 
 describe('matching', () => {
   before(() => {
     var jigsawLoggedIn = true;
     searchPage.pageUrl = "/search?firstName=Luna&lastName=Kitty"
-    searchPage.visit(AuthRoles.UnrestrictedGroup, jigsawLoggedIn)
+    searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' })
   });

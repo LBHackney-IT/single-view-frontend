@@ -1,11 +1,10 @@
-import { AuthRoles } from '../support/commands';
-import { profilePage } from '../pages/profile-page';
+import { AuthRoles, JigsawStatuses } from '../support/commands';
+import { profilePage } from '../pages/profile/profile-page';
 
 describe('Profile', () => {
 	describe('Basic Information', () => {
 		before(() => {
-			var jigsawLoggedIn = false;
-			profilePage.visit(AuthRoles.UnrestrictedGroup, jigsawLoggedIn)
+			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
 
 			cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
 		});

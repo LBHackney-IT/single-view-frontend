@@ -1,15 +1,13 @@
-import { AuthRoles } from '../support/commands';
+import { AuthRoles, JigsawStatuses } from '../support/commands';
 import { jigsawLoginPage } from '../pages/jigsawLogin-page'
-import { casesPage } from '../pages/cases-page'
-import { trim } from 'cypress/types/lodash';
+import { casesPage } from '../pages/profile/cases-page'
 
 describe('Jigsaw Login & Logout', () => {
 
   describe('Performs Jigsaw login', () => {
 
     before(() => {
-      var jigsawLoggedIn = false;
-      jigsawLoginPage.visit(AuthRoles.UnrestrictedGroup, jigsawLoggedIn)
+      jigsawLoginPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.None)
     });
 
     it('displays the heading', () => {
@@ -49,8 +47,7 @@ describe('Jigsaw Login & Logout', () => {
     // TODO: Revisit, not sure how to approach this with POM
     if (Cypress.env('APP_ENV') == 'production') {
       it('displays displays error when creds are wrong', () => {
-        var jigsawLoggedIn = false;
-        cy.visitAs('/jigsawLogin', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
+        cy.visitAs('/jigsawLogin', AuthRoles.UnrestrictedGroup, JigsawStatuses.None);
 
         cy.get('#username').type('Luna');
         cy.get('#password').type('pa$$w0rd');
@@ -86,27 +83,27 @@ describe('Jigsaw Login & Logout', () => {
   describe("Prompts Jigsaw login", () => {
     before(() => {
 
-      var jigsawLoggedIn = false;
-      casesPage.visit(AuthRoles.UnrestrictedGroup, jigsawLoggedIn)
+      casesPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
 
       cy.intercept("**/getJigsawCustomer**", { statusCode: 401 });
       cy.intercept('**/getJigsawCases**', { statusCode: 401 });
     })
 
     it('displays jigsaw login link in error summary', () => {
-      casesPage.elements.loginErrorSummary().should('have.text', 'Log in to Jigsaw');
+      casesPage.elements.getLoginErrorSummary()
+        .should('have.text', 'Log in to Jigsaw');
     });
 
     it('displays jigsaw login link in header bar', () => {
-      casesPage.elements.getJigsawLoginLinkHeader().should('have.text', 'Log in to Jigsaw');
+      casesPage.elements.getJigsawLoginLinkHeader()
+        .should('have.text', 'Log in to Jigsaw');
     });
 
   });
 
-  describe("Performs Jigsaw logout", () =>{
+  describe("Performs Jigsaw logout", () => {
     before(() => {
-      var jigsawLoggedIn = true;
-      jigsawLoginPage.visit(AuthRoles.UnrestrictedGroup, jigsawLoggedIn)
+      jigsawLoginPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
     });
 
     it('performs jigsaw logout', () => {

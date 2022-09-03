@@ -1,10 +1,9 @@
-import { AuthRoles } from '../support/commands';
+import { AuthRoles, JigsawStatuses } from '../support/commands';
 import { searchPage } from '../pages/search-page';
 
 describe('search', () => {
   before(() => {
-    var jigsawLoggedIn = true;
-    searchPage.visit(AuthRoles.UnrestrictedGroup, jigsawLoggedIn)
+    searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
   })
 
   it('displays the heading', () => {
@@ -35,8 +34,7 @@ describe('search', () => {
   });
 
   it('displays search results with first name and last name', () => {
-    var jigsawLoggedIn = true;
-    searchPage.visit(AuthRoles.UnrestrictedGroup, jigsawLoggedIn)
+    searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
 
@@ -65,8 +63,7 @@ describe('search', () => {
   });
   
   it('displays merge, confirm and cancel buttons for merged records', () => {
-    var jigsawLoggedIn = true;
-    searchPage.visit(AuthRoles.UnrestrictedGroup, jigsawLoggedIn)
+    searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
     searchPage.search('Luna', 'Kitty');

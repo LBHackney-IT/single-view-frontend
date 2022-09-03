@@ -1,4 +1,4 @@
-import { AuthRoles } from "../support/commands";
+import { AuthRoles, JigsawStatuses } from "../../support/commands";
 
 export class BasePage {
 	pageUrl: string;
@@ -12,12 +12,12 @@ export class BasePage {
 		getJigsawLogoutLinkHeader: () => cy.get('[data-testid="jigsawLogoutHeader"]')
 	}
 
-	visit(role?: AuthRoles, jigsawLoggedIn?: boolean) {
+	visit(role?: AuthRoles, jigsawLoggedIn?: JigsawStatuses, options?: Partial<Cypress.VisitOptions>) {
 		if (role == null) {
 			cy.clearCookies()
 			cy.visit(this.pageUrl)
 		} else {
-			cy.visitAs(this.pageUrl, role, jigsawLoggedIn)
+			cy.visitAs(this.pageUrl, role, jigsawLoggedIn, options)
 		}
 	}
 }
