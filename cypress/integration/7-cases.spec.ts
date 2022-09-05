@@ -1,11 +1,10 @@
-import { AuthRoles } from '../support/commands';
+import { AuthRoles, JigsawStatuses } from '../support/commands';
 import { casesPage } from '../pages/profile/cases-page';
 
 describe("Displays cases", () => {
 
   before(() => {
-    var jigsawLoggedIn = true;
-    casesPage.visit(AuthRoles.UnrestrictedGroup, jigsawLoggedIn)
+    casesPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
     cy.intercept('**/getJigsawCustomer**', { fixture: 'person-profile.json' });
     cy.intercept('**/getJigsawCases**', { fixture: 'person-cases.json' });

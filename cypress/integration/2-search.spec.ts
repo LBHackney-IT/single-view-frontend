@@ -14,11 +14,11 @@ describe('search', () => {
 
   it('displays the form', () => {
     searchPage.elements.getGetSearchPageForm()
-    .should('contain', '* First name or initial')
-    .and('contain', '* Last name')
-    .and('contain', 'First line of address')
-    .and('contain', 'Postcode')
-    .and('contain', 'Date of birth');
+      .should('contain', '* First name or initial')
+      .and('contain', '* Last name')
+      .and('contain', 'First line of address')
+      .and('contain', 'Postcode')
+      .and('contain', 'Date of birth');
   });
 
   it('displays the error messages', () => {
@@ -46,22 +46,22 @@ describe('search', () => {
     });
 
     searchPage.elements.getSearchResults()
-    .should('be.visible')
+      .should('be.visible')
 
     searchPage.elements.getResultsCounter()
-    .should('have.text', '14 results found')
+      .should('have.text', '14 results found')
 
     searchPage.elements.getResultsDescriptor()
-    .should('have.text', 'The following results were merged and saved in single view:')
+      .should('have.text', 'The following results were merged and saved in single view:')
 
     searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0)
-    .contains('Olivia Kitty');
+      .contains('Olivia Kitty');
 
     searchPage.elements.getResultByIndex(searchPage.resultTypes.Matched, 0)
-    .contains('(NI Number Not Set)');
+      .contains('(NI Number Not Set)');
 
   });
-  
+
   it('displays merge, confirm and cancel buttons for merged records', () => {
     searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
@@ -75,17 +75,17 @@ describe('search', () => {
 
   it('displays merged records with multiple data sources', () => {
     searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0).find('[data-testid="mergeCounter-0"]') // Gets counter on first result
-      .should('have.text', 'Merged (5)') 
-    
+      .should('have.text', 'Merged (5)')
+
     searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0).find('div > span')
       .children().should('have.length', 3)
   });
 
   it('displays unmerged records with single data sources', () => {
     searchPage.elements.getResultByIndex(searchPage.resultTypes.Search, 1)
-      .contains('Unmerged') 
-    
-      searchPage.elements.getResultByIndex(searchPage.resultTypes.Search, 1)
+      .contains('Unmerged')
+
+    searchPage.elements.getResultByIndex(searchPage.resultTypes.Search, 1)
       .contains('PersonAPI')
   });
 

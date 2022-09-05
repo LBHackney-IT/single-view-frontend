@@ -7,7 +7,7 @@ describe('Search links', () => {
     const searchResidentPath = 'firstName=Luna&lastName=Kitty';
     before(() => {
       profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn, {
-        onBeforeLoad: (window) => {window.document.cookie = "searchResidentPath=" + `/search?${searchResidentPath}`}
+        onBeforeLoad: (window) => { window.document.cookie = "searchResidentPath=" + `/search?${searchResidentPath}` }
       });
 
       cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
@@ -15,7 +15,7 @@ describe('Search links', () => {
 
     it('displays the Back to search results button and loads search page with pre-populated fields', () => {
       profilePage.elements.backToSearch()
-      .should('be.visible');
+        .should('be.visible');
 
       profilePage.elements.backToSearch().click()
 
@@ -25,9 +25,9 @@ describe('Search links', () => {
       });
 
       searchPage.elements.getFirstNameField()
-      .should('have.value', 'Luna');
+        .should('have.value', 'Luna');
       searchPage.elements.getLastNameField()
-      .should('have.value', 'Kitty');
+        .should('have.value', 'Kitty');
     });
 
     it('displays the new search button and loads search page with empty fields', () => {
