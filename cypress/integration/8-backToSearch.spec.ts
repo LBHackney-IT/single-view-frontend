@@ -1,12 +1,20 @@
 import { AuthRoles } from '../support/commands';
 
+// TODO: Put this in a helpers/utils file
+function setCookie (window,name,value) {
+    const assignment = `${name}=${value}`;
+    window.document.cookie = assignment;
+};
+
 describe('Search links', () => {
     describe('Basic Information', () => {
         before(() => {
-            cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
-            cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup);
-            cy.setCookie('jigsawToken', 'testValue')
-            cy.setCookie('searchResidentPath', '/search?firstName=Luna&lastName=Kitty');
+
+            var jigsawLoggedIn = true;
+            cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup, jigsawLoggedIn, {
+                onBeforeLoad: (window) => setCookie(window, 'searchResidentPath', '/search?firstName=Luna&lastName=Kitty')
+            });
+            cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');           
         })
 
         it('displays the Back to search results button and loads search page with pre-populated fields', () => {
@@ -24,8 +32,8 @@ describe('Search links', () => {
         });
 
         it('displays the new search button and loads search page with empty fields', () => {
-            cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup);
-            cy.setCookie('jigsawToken', 'testValue')
+            var jigsawLoggedIn = true;
+            cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
 
             cy.get('#new-search', { timeout: 10000 }).should('be.visible');
 

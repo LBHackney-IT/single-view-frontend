@@ -3,9 +3,11 @@ import { AuthRoles } from '../support/commands';
 describe('Profile', () => {
   describe('Basic Information', () => {
     before(() => {
+      var jigsawLoggedIn = false;
+      cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
+
       cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
-      cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup);
-    })
+    });
 
     it('displays the profile tab', () => {
       cy.get('#profile', { timeout: 10000 })

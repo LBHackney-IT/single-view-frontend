@@ -3,18 +3,11 @@ import { AuthRoles } from '../support/commands';
 describe("Displays cases", () => {
 
   before(() => {
-    cy.setCookie('jigsawToken', 'Placeholder-Jigsaw-Token');
-    cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup);
-  });
-
-  beforeEach(() => {
-    cy.intercept("**/getJigsawCustomer**", {fixture: 'person-profile.json'});
+    var jigsawLoggedIn = true;
+    cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
+    
+    cy.intercept('**/getJigsawCustomer**', {fixture: 'person-profile.json'});
     cy.intercept('**/getJigsawCases**', {fixture: 'person-cases.json'});
-    });
-
-  it('displays the cases tab', () => {
-    cy.get('#cases', { timeout: 10000 })
-      .should('be.visible')
   });
   
   it('displays the cases tab with jigsaw id when available', () => {

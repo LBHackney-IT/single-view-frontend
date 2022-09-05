@@ -2,10 +2,10 @@ import { AuthRoles } from '../support/commands';
 
 describe('matching', () => {
   before(() => {
-    cy.visitAs('/search?firstName=Luna&lastName=Kitty', AuthRoles.UnrestrictedGroup);
-    cy.setCookie('jigsawToken', 'testValue')
+    var jigsawLoggedIn = true;
+    cy.visitAs('/search?firstName=Luna&lastName=Kitty', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
   });
-
+  
   it('displays search results', () => {
 
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
