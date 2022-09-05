@@ -1,38 +1,23 @@
-import { AuthRoles } from '../support/commands';
+import { AuthRoles, JigsawStatuses } from '../support/commands';
+import { searchPage } from '../pages/search-page';
 
 describe('matching', () => {
   before(() => {
     var jigsawLoggedIn = true;
-    cy.visitAs('/search?firstName=Luna&lastName=Kitty', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
-  });
-  
-  it('displays search results', () => {
+    searchPage.pageUrl = "/search?firstName=Luna&lastName=Kitty"
+    searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
-    cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
-
-    cy.get('#searchResults', { timeout: 10000 })
-      .should('be.visible')
-
-    cy.get('.lbh-heading-h3').should('have.text', '14 results found')
-
-    cy.get('#matchedResults > .lbh-body > .sv-result-sub-wrapper').contains('Olivia Kitty');
+    cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' })
   });
 
  it('allows user to match results', () => {
-    cy.get('#match-button').should('be.disabled');
+    searchPage.elements.getMatchButton()
+    .should('be.disabled');
 
-     cy.get(".sv-checkboxes").eq(1).click();
-     cy.get(".sv-checkboxes").eq(3).click();
-     cy.get('#match-button').should('have.text', 'Merge 2 records');
+    const checkboxIndexes = [1, 3]
+    searchPage.matchResults(checkboxIndexes)
 
-     cy.intercept('POST', '**/customers**', {
-         statusCode: 200,
-         body: 'cypress-sv-id'
-     }).as('mergeRecords')
-
-     cy.get('#match-button').click();
-
-     cy.location('pathname').should('eq', '/customers/single-view/cypress-sv-id');
+    cy.location('pathname').should('eq', '/customers/single-view/cypress-sv-id');
  });
 
 })

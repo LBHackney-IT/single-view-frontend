@@ -1,98 +1,92 @@
-import { AuthRoles } from '../support/commands';
+import { AuthRoles, JigsawStatuses } from '../support/commands';
+import { searchPage } from '../pages/search-page';
 
 describe('search', () => {
   before(() => {
-    var jigsawLoggedIn = true;
-    cy.visitAs('/search', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
+    searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
   })
 
   it('displays the heading', () => {
-    cy.get('.lbh-heading-h1', { timeout: 10000 })
+    searchPage.elements.getSearchPageHeading()
       .should('be.visible')
       .should('have.text', 'Search resident information')
   });
 
   it('displays the form', () => {
-    cy.get('form').contains('* First name or initial');
-    cy.get('form').contains('* Last name');
-    cy.get('form').contains('First line of address');
-    cy.get('form').contains('Postcode');
-    cy.get('form').contains('Date of birth');
+    searchPage.elements.getGetSearchPageForm()
+    .should('contain', '* First name or initial')
+    .and('contain', '* Last name')
+    .and('contain', 'First line of address')
+    .and('contain', 'Postcode')
+    .and('contain', 'Date of birth');
   });
 
   it('displays the error messages', () => {
-    cy.get('.govuk-button', { timeout: 10000 }).click();
+    searchPage.search(null, null, null)
 
     cy.contains('First name is mandatory');
     cy.contains('Last name is mandatory');
   });
 
   it('displays the error message when date of birth is in future', () => {
-    cy.get('#dateOfBirth').type('2050-12-01');
-
-    cy.get('.govuk-button', { timeout: 1000 }).click();
-
+    searchPage.search(null, null, '2050-12-01')
     cy.contains('Date of birth cannot be in future');
   });
 
   it('displays search results with first name and last name', () => {
-    cy.setCookie('jigsawToken', 'testValue')
-
-    cy.get('#firstName').type('Luna');
-    cy.get('#lastName').type('Kitty');
+    searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
 
-    cy.get('.govuk-button').first().should('have.text', 'Search').click();
+    searchPage.search('Luna', 'Kitty', '2050-12-01')
 
     cy.location().should((location) => {
       expect(location.pathname).to.eq('/search');
       expect(location.search).to.eq('?firstName=Luna&lastName=Kitty&dateOfBirth=2050-12-01');
     });
 
-    cy.get('#searchResults', { timeout: 10000 })
-      .should('be.visible')
+    searchPage.elements.getSearchResults()
+    .should('be.visible')
 
-    cy.get('.lbh-heading-h3').should('have.text', '14 results found')
+    searchPage.elements.getResultsCounter()
+    .should('have.text', '14 results found')
 
-    cy.get('.lbh-heading-h4').first().should('have.text', 'The following results were merged and saved in single view:')
+    searchPage.elements.getResultsDescriptor()
+    .should('have.text', 'The following results were merged and saved in single view:')
 
-    cy.get('.sv-result').first()
-      .contains('Olivia Kitty');
+    searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0)
+    .contains('Olivia Kitty');
 
-    cy.get('.sv-result').eq(1)
-        .contains('(NI Number Not Set)');
+    searchPage.elements.getResultByIndex(searchPage.resultTypes.Matched, 0)
+    .contains('(NI Number Not Set)');
+
   });
   
   it('displays merge, confirm and cancel buttons for merged records', () => {
-    cy.setCookie('jigsawToken', 'testValue')
-
-    cy.get('#firstName').type('Luna');
-    cy.get('#lastName').type('Kitty');
+    searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
+    searchPage.search('Luna', 'Kitty');
 
-    cy.get('.govuk-button').first().should('have.text', 'Search').click();
-
-    cy.get('[data-testid="unmerge"]').first().click();
-    cy.get('[data-testid="confirm"]').first().should('have.text', "Confirm");
-    cy.get('[data-testid="cancel"]').should('have.text', 'Cancel')
+    searchPage.elements.getUnmergeButtonFirst().click();
+    searchPage.elements.getConfirmUnmergeButton().should('have.text', "Confirm");
+    searchPage.elements.getCancelUnmergeButton().should('have.text', 'Cancel')
   });
 
   it('displays merged records with multiple data sources', () => {
-    cy.get('#mergedRecords > .lbh-body > .sv-result-sub-wrapper > .sv-result > [data-testid="mergeCounter-0"]') // Gets counter on first result
+    searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0).find('[data-testid="mergeCounter-0"]') // Gets counter on first result
       .should('have.text', 'Merged (5)') 
     
-    cy.get('#mergedRecords > .lbh-body > .sv-result-sub-wrapper > .sv-result > div > span')
+    searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0).find('div > span')
       .children().should('have.length', 3)
   });
 
   it('displays unmerged records with single data sources', () => {
-    cy.get('#matchedResults > .lbh-body > .sv-result-sub-wrapper > .sv-result > :nth-child(1)') // Gets second result from each SearchResultsGroup
-      .should('have.text', 'Unmerged') 
+    searchPage.elements.getResultByIndex(searchPage.resultTypes.Search, 1)
+      .contains('Unmerged') 
     
-    cy.get('#matchedResults > .lbh-body > .sv-result-sub-wrapper > .sv-result > .lbh-body-s > :nth-child(4)')
-      .children().should('have.text', 'PersonAPI')
+      searchPage.elements.getResultByIndex(searchPage.resultTypes.Search, 1)
+      .contains('PersonAPI')
   });
 
 })

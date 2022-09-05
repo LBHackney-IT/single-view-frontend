@@ -1,138 +1,187 @@
-import { AuthRoles } from '../support/commands';
+import { AuthRoles, JigsawStatuses } from '../support/commands';
+import { profilePage } from '../pages/profile/profile-page';
 
 describe('Profile', () => {
-  describe('Basic Information', () => {
-    before(() => {
-      var jigsawLoggedIn = false;
-      cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
+	describe('Basic Information', () => {
+		before(() => {
+			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
 
-      cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
-    });
+			cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
+		});
 
-    it('displays the profile tab', () => {
-      cy.get('#profile', { timeout: 10000 })
-        .should('be.visible')
-    });
+		it('displays the profile tab', () => {
+			profilePage.elements.getProfileTab()
+				.should('be.visible')
+		});
 
-    it('displays jigsaw login error', ()=>{
-      cy.get('[data-testid="jigsawInformationNotDisplayedBanner"]')
-        .should('have.text', "Warning", {timeout: 10000});
-    });
+		it('displays jigsaw login error', () => {
+			profilePage.elements.getJigsawLoginErrorBanner()
+				.should('have.text', "Warning");
+		});
 
-    it('displays cautionary alert warning title', ()=>{
-      cy.get('[data-testid="cautionaryAlert-alertCode"]').should('have.text', "Warning: Risk to adults", {timeout: 10000});
-    });
+		it('displays cautionary alert warning title', () => {
+			profilePage.elements.getCautionaryAlertWarningTitle()
+				.should('have.text', "Warning: Risk to adults");
+		});
 
-    it('displays cautionary alert warning message', () => {
-      cy.get('[data-testid="cautionaryAlert-alertMessage"]').should('have.text', "Added 01 Mar 2018 by Luna Purry. Last reviewed 01 Feb 2020.");
-    });
+		it('displays cautionary alert warning message', () => {
+			profilePage.elements.getCautionaryAlertWarningMessage()
+				.should('have.text', "Added 01 Mar 2018 by Luna Purry. Last reviewed 01 Feb 2020.");
+		});
 
-    it('displays name', ()=>{
-      cy.get('[data-testid="name"]').should('have.text', "Miss Luna Kitty", {timeout: 10000});
-    });
+		it('displays name', () => {
+			profilePage.elements.getName()
+				.should('have.text', "Miss Luna Kitty");
+		});
 
-    it('displays preferred name', ()=>{
-      cy.get('[data-testid="preferredName"]').should('have.text', "Miss Luna Purrple", {timeout: 10000});
-    });
+		it('displays preferred name', () => {
+			profilePage.elements.getPreferredName()
+				.should('have.text', "Miss Luna Purrple");
+		});
 
+		it('displays date of birth', () => {
+			profilePage.elements.getDateOfBirth()
+				.should('have.text', "01/02/1980");
+		});
 
-    it('displays date of birth', ()=>{
-      cy.get('[data-testid="dateOfBirth"]').should('have.text', "01/02/1980", {timeout: 10000});
-    });
+		it('displays contact details', () => {
+			const contactDetail = profilePage.elements.getContactDetail()
+			contactDetail.getContactType()
+				.should('have.text', "phone (mobile)");
+			contactDetail.getDescription()
+				.should('have.text', " - Personal phone:");
+			contactDetail.getValue()
+				.should('have.text', "(07700) 900 557");
+			contactDetail.getDataSource()
+				.should('have.text', "Data Source: PersonAPI");
+		});
 
-    it('displays contact details', ()=>{
-      cy.get('[data-testid="contactDetailsContactType"]').should('have.text', "phone (mobile)", {timeout: 10000});
-      cy.get('[data-testid="contactDetailsDescription"]').should('have.text', " - Personal phone:", {timeout: 10000});
-      cy.get('[data-testid="contactDetailsValue"]').should('have.text', "(07700) 900 557", {timeout: 10000});
-      cy.get('[data-testid="contactDetailsDataSource"]').should('have.text', "Data Source: PersonAPI", {timeout: 10000});
-    });
+		it('displays tenure', () => {
+			const tenure = profilePage.elements.getTenure()
+			tenure.getFullAddress()
+				.should('have.text', "123 Cute Street, M3 0W");
+			tenure.getStartDate()
+				.should('have.text', "Start date: 10/06/1996");
+			tenure.getEndDate()
+				.should('have.text', "End date: 22/07/1999");
+			tenure.getDataSource()
+				.should('have.text', "Data Source: PersonAPI");
+		});
 
-    it('displays tenures', ()=>{
-      cy.get('[data-testid="tenureFullAddress"]').should('have.text', "123 Cute Street, M3 0W", {timeout: 10000});
-      cy.get('[data-testid="tenureStartDate"]').should('have.text', "Start date: 10/06/1996", {timeout: 10000});
-      cy.get('[data-testid="tenureEndDate"]').should('have.text', "End date: 22/07/1999", {timeout: 10000});
-      cy.get('[data-testid="tenureDataSource"]').should('have.text', "Data Source: PersonAPI", {timeout: 10000});
-    });
+		it('displays types', () => {
+			profilePage.elements.getTypes()
+				.should('have.text', "HouseholdMember");
+		});
 
-    it('displays types', ()=>{
-      cy.get('[data-testid="types"]').should('have.text', "HouseholdMember", {timeout: 10000});
-    });
+		it('displays place of birth', () => {
+			profilePage.elements.getPlaceOfBirth()
+				.should('have.text', "Not known");
+		});
 
-    it('displays place of birth', ()=>{
-      cy.get('[data-testid="placeOfBirth"]').should('have.text', "Not known", {timeout: 10000});
-    });
+		it('place of birth is greyed out', () => {
+			profilePage.elements.getPlaceOfBirth()
+				.should('have.class', 'sv-null-field');
+		})
 
-    it('place of birth is greyed out', () => {
-      cy.get('[data-testid="placeOfBirth"]').should('have.class', 'sv-null-field', {timeout: 10000});
-    })
+		it('displays date of death', () => {
+			profilePage.elements.getDateOfDeath()
+				.should('have.text', "Not known");
+		});
 
-    it('displays date of death', ()=>{
-      cy.get('[data-testid="dateOfDeath"]').should('have.text', "Not known", {timeout: 10000});
-    });
+		it('date of death is greyed out', () => {
+			profilePage.elements.getDateOfDeath()
+				.should('have.class', 'sv-null-field');
+		})
 
-    it('date of death is greyed out', () => {
-      cy.get('[data-testid="dateOfDeath"]').should('have.class', 'sv-null-field', {timeout: 10000});
-    })
+		it('displays is a minor', () => {
+			profilePage.elements.getIsMinor()
+				.should('have.text', "N");
+		});
 
-    it('displays is a minor', ()=>{
-      cy.get('[data-testid="isMinor"]').should('have.text', "N", {timeout: 10000});
-    });
+		it('displays pregnancy due date', () => {
+			profilePage.elements.getPregnancyDueDate()
+				.should('have.text', "25/12/2022")
+		});
 
-    it('displays pregnancy due date', () => {
-      cy.get('[data-testid="pregnancyDueDate"]').should('have.text', "25/12/2022", {timeout: 10000})
-    });
+		it('displays accommodation type', () => {
+			profilePage.elements.getAccommodationType()
+				.should('have.text', 'N/A');
+		});
 
-    it('displays accommodation type', () => {
-      cy.get('[data-testid="accommodationType"]').should('have.text', 'N/A', {timeout: 10000});
-    });
+		it('displays housing circumstance', () => {
+			profilePage.elements.getHousingCircumstance()
+				.should('have.text', 'Temporary accommodation');
+		});
 
-    it('displays housing circumstance', () => {
-      cy.get('[data-testid="housingCircumstance"]').should('have.text', 'Temporary accommodation', {timeout: 10000});
-    });
+		it('displays is settled', () => {
+			profilePage.elements.getIsSettled()
+				.should('have.text', 'N');
+		});
 
-    it('displays is settled', () => {
-      cy.get('[data-testid="isSettled"]').should('have.text', 'N', {timeout: 10000});
-    });
+		it('displays support worker', () => {
+			profilePage.elements.getSupportWorker()
+				.should('have.text', 'James Brown 02083568440 james.brown@hackney.gov.uk');
+		});
 
-    it('displays support worker', () => {
-      cy.get('[data-testid="supportWorker"]').should('have.text', 'James Brown 02083568440 james.brown@hackney.gov.uk', {timeout: 10000});
-    });
+		it('displays gender', () => {
+			profilePage.elements.getGender()
+				.should('have.text', 'Female');
+		});
 
-    it('displays gender', () => {
-      cy.get('[data-testid="gender"]').should('have.text', 'Female', {timeout: 10000});
-    });
+		it('displays System id\'s', () => {
+			const systemIds = profilePage.elements.getSystemIds()
+			systemIds.getPersonApiId()
+				.should('have.text', "e749f036-3183-49cb-8504-59b76c1a8f88");
+			systemIds.getJigsawId()
+				.should('have.text', "1234");
+			systemIds.getAcademyCtaxId()
+				.should('have.text', "34596507");
+		});
 
-    it('displays Council Tax Information', () => {
-      cy.get('[data-testid="accountRef"]').should('have.text', "34596507", {timeout: 10000});
-      cy.get('[data-testid="accountBalance"]').should('have.text', "15465", {timeout: 10000});
-      cy.get('[data-testid="paymentMethod"]').should('have.text', "Direct Debit", {timeout: 10000});
-      cy.get('[data-testid="propertyAddress"]').should('have.text', "123 Fake Street Springfield USA  SW19 1AA", {timeout: 10000});
-    });
+		it('displays Council Tax Information', () => {
+			const ctaxInfo = profilePage.elements.getCtaxInfo()
+			ctaxInfo.getAccountRef()
+				.should('have.text', "34596507");
+			ctaxInfo.getAccountBalance()
+				.should('have.text', "15465");
+			ctaxInfo.getPaymentMethod()
+				.should('have.text', "Direct Debit");
+			ctaxInfo.getPropertyAddress()
+				.should('have.text', "123 Fake Street Springfield USA  SW19 1AA");
+		});
 
-    it('displays System id\'s', () => {
-      cy.get('[data-testid="PersonApi"]').should('have.text', "e749f036-3183-49cb-8504-59b76c1a8f88", {timeout: 10000});
-      cy.get('[data-testid="Jigsaw"]').should('have.text', "1234", {timeout: 10000});
-      cy.get('[data-testid="Academy-CouncilTax"]').should('have.text', "34596507", {timeout: 10000});
-    });
+		it('displays equality information', () => {
+			const equalityInformation = profilePage.elements.getEqualityInformation()
+			equalityInformation.getGender()
+				.should('have.text', 'm');
+			equalityInformation.getGenderDifferentAtBirth()
+				.should('have.text', 'yes');
+			equalityInformation.getEthnicity()
+				.should('have.text', 'blackOrBlackBritish');
+			equalityInformation.getReligionOrBelief()
+				.should('have.text', 'atheistOrNoReligiousBelief');
+			equalityInformation.getMarried()
+				.should('have.text', 'yes');
+			equalityInformation.getCivilPartnership()
+				.should('have.text', 'no');
+			equalityInformation.getPregnancyOrMaternity()
+				.should('have.length', 1);
+			equalityInformation.getDisabled()
+				.should('have.text', 'yes');
+			equalityInformation.getCommunicationRequirements().children()
+				.should('have.length', 3);
+			equalityInformation.getCommunicationRequirements().children().first()
+				.should('have.text', 'Communication requirement-1');
+		});
 
-    it('displays equality information', () => {
-      cy.get('[data-testid="equalityInformationGender"]').should('have.text', 'm', {timeout: 10000});
-      cy.get('[data-testid="genderDifferentAtBirth"]').should('have.text', 'yes', {timeout: 10000});
-      cy.get('[data-testid="ethnicity"]').should('have.text', 'blackOrBlackBritish', {timeout: 10000});
-      cy.get('[data-testid="religionOrBelief"]').should('have.text', 'atheistOrNoReligiousBelief', {timeout: 10000});
-      cy.get('[data-testid="married"]').should('have.text', 'yes', {timeout: 10000});
-      cy.get('[data-testid="civilPartnership"]').should('have.text', 'no', {timeout: 10000});
-      cy.get('[data-testid="pregnancyOrMaternity"]').children().should('have.length', 1, {timeout: 10000});
-      cy.get('[data-testid="disabled"]').should('have.text', 'yes', {timeout: 10000});
-      cy.get('[data-testid="communicationRequirements"]').children().should('have.length', 3, {timeout: 10000});
-      cy.get('[data-testid="communicationRequirements"]').children().first().should('have.text', 'Communication requirement-1', {timeout: 10000});
-    });
-    
-    it('displays housing benefits landlord details', () => {
-      cy.get('[data-testid="landLordName"]').should('have.text', 'ABC FAKE HOUSING TRUST', {timeout: 10000})
-      cy.get('[data-testid="landlordAddress"]').should('have.text', '111 UPPER ABC RD, LONDON,   E5 9SA', {timeout: 10000})
-    });
+		it('displays housing benefits landlord details', () => {
+			const landlordDetails = profilePage.elements.getLandlordDetails()
+			landlordDetails.getLandLordName()
+				.should('have.text', 'ABC FAKE HOUSING TRUST')
+			landlordDetails.getLandlordAddress()
+				.should('have.text', '111 UPPER ABC RD, LONDON,   E5 9SA')
+		});
 
-  });
+	});
 
 })

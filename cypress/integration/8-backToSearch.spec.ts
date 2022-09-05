@@ -1,50 +1,48 @@
-import { AuthRoles } from '../support/commands';
-
-// TODO: Put this in a helpers/utils file
-function setCookie (window,name,value) {
-    const assignment = `${name}=${value}`;
-    window.document.cookie = assignment;
-};
+import { AuthRoles, JigsawStatuses } from '../support/commands';
+import { profilePage } from '../pages/profile/profile-page';
+import { searchPage } from '../pages/search-page';
 
 describe('Search links', () => {
-    describe('Basic Information', () => {
-        before(() => {
+  describe('Basic Information', () => {
+    const searchResidentPath = 'firstName=Luna&lastName=Kitty';
+    before(() => {
+      profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn, {
+        onBeforeLoad: (window) => {window.document.cookie = "searchResidentPath=" + `/search?${searchResidentPath}`}
+      });
 
-            var jigsawLoggedIn = true;
-            cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup, jigsawLoggedIn, {
-                onBeforeLoad: (window) => setCookie(window, 'searchResidentPath', '/search?firstName=Luna&lastName=Kitty')
-            });
-            cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');           
-        })
+      cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
+    })
 
-        it('displays the Back to search results button and loads search page with pre-populated fields', () => {
-            cy.get('#back-to-search', { timeout: 10000 }).should('be.visible');
+    it('displays the Back to search results button and loads search page with pre-populated fields', () => {
+      profilePage.elements.backToSearch()
+      .should('be.visible');
 
-            cy.get('#back-to-search').first().click({ force: true });
-            
-            cy.location().should((location) => {
-                expect(location.pathname).to.eq('/search');
-                expect(location.search).to.eq('?firstName=Luna&lastName=Kitty');
-            });
+      profilePage.elements.backToSearch().click()
 
-            cy.get('#firstName').should('have.value', 'Luna');
-            cy.get('#lastName').should('have.value', 'Kitty');
-        });
+      cy.location().should((location) => {
+        expect(location.pathname).to.eq('/search');
+        expect(location.search).to.eq('?' + searchResidentPath);
+      });
 
-        it('displays the new search button and loads search page with empty fields', () => {
-            var jigsawLoggedIn = true;
-            cy.visitAs('/customers/single-view/6d7ed1a4', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
-
-            cy.get('#new-search', { timeout: 10000 }).should('be.visible');
-
-            cy.get('#new-search').first().click({ force: true });
-
-            cy.location().should((location) => {
-                expect(location.pathname).to.eq('/');
-            });
-
-            cy.get('#firstName').should('have.value', '');
-            cy.get('#lastName').should('have.value', '');
-        });
+      searchPage.elements.getFirstNameField()
+      .should('have.value', 'Luna');
+      searchPage.elements.getLastNameField()
+      .should('have.value', 'Kitty');
     });
+
+    it('displays the new search button and loads search page with empty fields', () => {
+      profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
+
+      cy.get('#new-search', { timeout: 10000 }).should('be.visible');
+
+      cy.get('#new-search').first().click({ force: true });
+
+      cy.location().should((location) => {
+        expect(location.pathname).to.eq('/');
+      });
+
+      cy.get('#firstName').should('have.value', '');
+      cy.get('#lastName').should('have.value', '');
+    });
+  });
 })

@@ -1,57 +1,69 @@
 import { AuthRoles } from '../support/commands';
+import { casesPage } from '../pages/profile/cases-page';
 
 describe("Displays cases", () => {
 
   before(() => {
     var jigsawLoggedIn = true;
-    cy.visitAs('/customers/Jigsaw/641056#cases', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
-    
-    cy.intercept('**/getJigsawCustomer**', {fixture: 'person-profile.json'});
-    cy.intercept('**/getJigsawCases**', {fixture: 'person-cases.json'});
+    casesPage.visit(AuthRoles.UnrestrictedGroup, jigsawLoggedIn)
+
+    cy.intercept('**/getJigsawCustomer**', { fixture: 'person-profile.json' });
+    cy.intercept('**/getJigsawCases**', { fixture: 'person-cases.json' });
   });
-  
+
   it('displays the cases tab with jigsaw id when available', () => {
-    cy.get('#tab_cases').should('have.text', "Active Homelessness Case (641056)", {timeout: 10000});
+    casesPage.elements.getCasesTab()
+      .should('have.text', "Active Homelessness Case (641056)", { timeout: 10000 });
   });
 
   it('displays the case ID', () => {
-    cy.get('[data-testid="caseId"]').should('have.text', "641056", {timeout: 10000});
+    casesPage.elements.getCaseId()
+      .should('have.text', "641056", { timeout: 10000 });
   });
 
   it('displays the case Status', () => {
-    cy.get('[data-testid="statusName"]').should('have.text', "Relief", {timeout: 10000});
+    casesPage.elements.getCaseStatus()
+      .should('have.text', "Relief", { timeout: 10000 });
   });
 
-    it('displays the case date of approach', () => {
-    cy.get('[data-testid="dateOfApproach"]').should('have.text', "05/05/2022 1:00", {timeout: 10000});
+  it('displays the case date of approach', () => {
+    casesPage.elements.getDateOfApproach()
+      .should('have.text', "05/05/2022 1:00", { timeout: 10000 });
   });
 
   it('displays the Assigned Agent', () => {
-    cy.get('[data-testid="assignedTo"]').should('have.text', "Agent Carter", {timeout: 10000});
+    casesPage.elements.getAssignedAgent()
+      .should('have.text', "Agent Carter", { timeout: 10000 });
   });
 
   it('displays the Flowchart Position', () => {
-    cy.get('[data-testid="currentFlowChartPosition"]').should('have.text', "Relief", {timeout: 10000});
+    casesPage.elements.getFlowchartPosition()
+      .should('have.text', "Relief", { timeout: 10000 });
   });
 
   it('displays the current decision', () => {
-    cy.get('[data-testid="currentDecision"]').should('have.text', "56 days relief duty - help to secure accommodation s.189B", {timeout: 10000});
+    casesPage.elements.getCurrentDecision()
+      .should('have.text', "56 days relief duty - help to secure accommodation s.189B", { timeout: 10000 });
   });
 
   it('displays the placement address', () => {
-    cy.get('[data-testid="fullAddress"]').should('have.text', "  435 Loxford Lane Loxford Lane Ilford SW1 1AA ", {timeout: 10000});
+    casesPage.elements.getPlacementAddress()
+      .should('have.text', "  435 Loxford Lane Loxford Lane Ilford SW1 1AA ", { timeout: 10000 });
   });
 
   it('displays the placement detail full name', () => {
-    cy.get('[data-testid="placementDutyFullName"]').should('have.text', "Section 188 – Interim duty to accommodate in case of apparent priority need", {timeout: 10000});
+    casesPage.elements.getPlacementDutyFullName()
+      .should('have.text', "Section 188 – Interim duty to accommodate in case of apparent priority need", { timeout: 10000 });
   });
 
   it('displays the additional factors', () => {
-    cy.get('[data-testid="AdditionalFactor-0"]').should('have.text', "Yes")
+    casesPage.elements.getAdditionalFactorByIndex(0)
+      .should('have.text', "Yes")
   });
 
   it('displays the health and wellbeing information', () => {
-    cy.get('[data-testid="WellBeingFactor-1"]').should('contain', "wheelchair/depression")
+    casesPage.elements.getWellbeingFactorByIndex(1)
+      .should('contain', "wheelchair/depression")
   });
-  
+
 });

@@ -45,6 +45,12 @@ export enum AuthRoles {
   RestrictedGroup = 'RestrictedGroup',
 }
 
+export enum JigsawStatuses {
+  LoggedIn,
+  Dismissed,
+  None
+}
+
 const roleConfigurations: Record<AuthRoles, Array<string>> = {
   UnrestrictedGroup: [Cypress.env('AUTH_ALLOWED_GROUPS')],
   // UnrestrictedGroup: [Cypress.env('AUTH_ALLOWED_GROUPS')],
@@ -78,7 +84,7 @@ declare global {
 function visitAs (
   url: string, 
   role: AuthRoles,
-  jigsawLoggedIn: boolean,
+  jigsawStatus: JigsawStatuses,
   options?: Partial<Cypress.VisitOptions>
   ) {
     cy.clearCookies();
@@ -88,8 +94,11 @@ function visitAs (
         groups: roleConfigurations[role],
       })
     );
-    if (jigsawLoggedIn) {
-      cy.setCookie('jigsawToken', 'testValue')
+    switch (jigsawStatus) {
+      case (JigsawStatuses.LoggedIn):
+        cy.setCookie('jigsawToken', 'testValue')
+      case (JigsawStatuses.Dismissed):
+        cy.setCookie('jigsawDismissed', 'true')
     }
     cy.visit(url, options);
   };
