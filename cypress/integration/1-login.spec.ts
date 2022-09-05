@@ -1,6 +1,7 @@
 import { loginPage } from "../pages/login-page";
+import { searchPage } from "../pages/search-page";
 
-import { AuthRoles } from '../support/commands';
+import { AuthRoles, JigsawStatuses } from '../support/commands';
 
 describe('login', () => {
 	describe('when not logged in', () => {
@@ -25,8 +26,7 @@ describe('login', () => {
 
 	describe('when logged in with wrong group', () => {
 		before(() => {
-			var jigsawLoggedIn = false;
-			cy.visitAs('/', AuthRoles.RestrictedGroup, jigsawLoggedIn);
+			searchPage.visit(AuthRoles.RestrictedGroup, JigsawStatuses.None)
 		})
 
 		it('displays appropriate head link', () => {
@@ -45,8 +45,7 @@ describe('login', () => {
 
 	describe('when logged in with appropriate group', () => {
 		before(() => {
-			var jigsawLoggedIn = false;
-			cy.visitAs('/', AuthRoles.UnrestrictedGroup, jigsawLoggedIn);
+			loginPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.None)
 		})
 
 		it('displays appropriate head link', () => {
@@ -62,7 +61,6 @@ describe('login', () => {
 		});
 
 		describe('when jigsaw login is dismissed', () => {
-
 			it('appropriately redirected to search', () => {
 
 				cy.get('[data-testid="dismiss-jigsaw-login"]').should('have.text', "I don’t have access to Jigsaw.").click();
