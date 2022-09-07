@@ -15,6 +15,16 @@ import { SystemId } from "../../Interfaces/systemIdInterface";
 import { Cases } from "./Cases";
 import { BackToSearch } from "../../Components/BackToSearch";
 
+function linkSharedPlans(person: customerProfile) {
+  if (person.sharedPlans) {
+    for (var sharedPlan in person.sharedPlans) {
+      // Return component linking shared plan
+    }
+  } else {
+    // Return link to create a shared plan
+  }
+}
+
 export const CustomerView = () => {
   var { dataSource, id } = useParams<UrlParams>();
   const [person, setPerson] = useState<customerProfile | null>();
@@ -106,6 +116,7 @@ export const CustomerView = () => {
           })}
         </div>
       )}
+      {person?.sharedPlans && linkSharedPlans(person)}
       {mmhUrl && (
         <a
           className="govuk-link lbh-link lbh-link--no-visited-state align-right govuk-!-margin-left-2"
