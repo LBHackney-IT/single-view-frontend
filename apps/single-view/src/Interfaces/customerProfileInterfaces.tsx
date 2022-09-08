@@ -2,7 +2,6 @@ import { cautionaryAlert } from "./CautionaryAlertInterfaces";
 import { councilTaxAccount, knownAddress, contactDetail } from ".";
 import { housingBenefitsAccount } from "./housingBenefitsRecordInterfaces";
 import { EqualityData } from "./equalityInformationInterfaces";
-import { SharedPlan } from "./sharedPlanInterfaces";
 
 export interface customerProfile {
   preferredTitle: string | null;
@@ -32,7 +31,7 @@ export interface customerProfile {
   councilTaxAccount: councilTaxAccount | null;
   housingBenefitsAccount: housingBenefitsAccount | null;
   equalityInformation: EqualityData | null;
-  sharedPlans: SharedPlan[] | null;
+  sharedPlans: sharedPlan[];
 }
 
 export interface supportWorker {
@@ -43,4 +42,10 @@ export interface supportWorker {
   agency: string | null;
   phoneNumber: string | null;
   emailAddress: string | null;
+}
+
+export interface sharedPlan {
+  id: string;
+  dateOfLastAction: string | null;
+  actionCount: number;
 }

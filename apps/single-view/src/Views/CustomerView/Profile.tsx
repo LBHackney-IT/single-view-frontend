@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
-import { customerProfile, SystemId, legacyReference } from "../../Interfaces";
+import {
+  customerProfile,
+  SystemId,
+  legacyReference,
+  sharedPlan,
+} from "../../Interfaces";
 import {
   formatCautionaryAlertsDate,
   formatDateOfBirth,
@@ -11,6 +16,57 @@ import { Alert } from "../../Components/Alert";
 import { CouncilTaxInformation } from "../../Components/CouncilTaxInformation";
 import { HousingBenefitsInformation } from "../../Components/HousingBenefitsInformation";
 import { EqualityInformation } from "../../Components/EqualityInformation";
+
+function linkSharedPlans(person: customerProfile) {
+  var egPlan: sharedPlan = {
+    id: "test",
+    dateOfLastAction: "asdfa",
+    actionCount: 1,
+  };
+
+  // person.sharedPlans = []
+  person.sharedPlans = [egPlan, egPlan];
+
+  if (person.sharedPlans.length >= 1) {
+    // Return component linking shared plans
+
+    return (
+      <>
+        {person.sharedPlans.map((sharedPlan, index) => {
+          console.log(sharedPlan.id);
+          return (
+            <p>
+              <a
+                className="govuk-link lbh-link lbh-link--no-visited-state"
+                href={
+                  "https://sharedplan.hackney.gov.uk/plans/" + sharedPlan.id
+                }
+                target="_blank"
+              >
+                View Plan {person.sharedPlans.length > 1 && index}
+              </a>
+              <br />
+              <strong>Actions:</strong> {sharedPlan.actionCount},{" "}
+              <strong>Last Edited:</strong> {sharedPlan.dateOfLastAction}
+            </p>
+          );
+        })}
+      </>
+    );
+  }
+  // else {
+  //   // Return link to create a shared plan
+  //   return (
+  //   <button
+  //     className="govuk-link lbh-link lbh-link--no-visited-state align-right govuk-!-margin-left-2"
+  //     onClick={e => {
+  //       console.log("hello")
+  //     }}
+  //   >
+  //     Create Shared Plan
+  //   </button>)
+  // }
+}
 
 interface Props {
   profile?: customerProfile;
@@ -78,6 +134,17 @@ export const Profile = (props: Props) => {
       <dl className="govuk-summary-list lbh-summary-list">
         <DescriptionListItem title="Name" testId="name">
           {person.title} {person.firstName} {person.surname}
+        </DescriptionListItem>
+
+        <DescriptionListItem
+          title={
+            person.sharedPlans && person.sharedPlans.length > 1
+              ? "Shared Plans"
+              : "Shared Plan"
+          }
+          testId="sharedPlans"
+        >
+          {linkSharedPlans(person)}
         </DescriptionListItem>
 
         {/* Display preferred title+name only if it doesn't match the default title+name */}
