@@ -5,6 +5,7 @@ import { Notes } from "./Notes";
 import { getPerson } from "../../Gateways";
 import {
   customerProfile,
+  sharedPlan,
   UrlParams,
   customerResponse,
   Jigsaw,
@@ -14,6 +15,13 @@ import { NotFound } from "../../Components";
 import { SystemId } from "../../Interfaces/systemIdInterface";
 import { Cases } from "./Cases";
 import { BackToSearch } from "../../Components/BackToSearch";
+
+// function openAllSharedPlans(sharedPlans:sharedPlan[]) {
+//   const SHARED_PLAN_BASE_URL = "https://sharedplan.hackney.gov.uk/"
+//   for (var sharedPlan in sharedPlans) {
+//     window.open(`${SHARED_PLAN_BASE_URL}/plans/${sharedPlan}`)
+//   }
+// }
 
 export const CustomerView = () => {
   var { dataSource, id } = useParams<UrlParams>();

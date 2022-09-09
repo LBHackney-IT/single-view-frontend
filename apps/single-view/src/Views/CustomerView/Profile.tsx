@@ -11,6 +11,7 @@ import { Alert } from "../../Components/Alert";
 import { CouncilTaxInformation } from "../../Components/CouncilTaxInformation";
 import { HousingBenefitsInformation } from "../../Components/HousingBenefitsInformation";
 import { EqualityInformation } from "../../Components/EqualityInformation";
+import { displaySharedPlans } from "../../Components/SharedPlans";
 
 interface Props {
   profile?: customerProfile;
@@ -51,7 +52,8 @@ export const Profile = (props: Props) => {
         target="_blank"
         className="govuk-link lbh-link lbh-link--no-visited-state"
       >
-        View on manage arrears ({legacyReference.value})
+        View on manage arrears ({legacyReference.value})<br />
+        <br />
       </a>
     );
   };
@@ -102,6 +104,19 @@ export const Profile = (props: Props) => {
           </DescriptionListItem>
         )}
 
+        <DescriptionListItem
+          title={
+            person.sharedPlans && person.sharedPlans.length > 1
+              ? "Shared Plans"
+              : "Shared Plan"
+          }
+          testId="sharedPlans"
+        >
+          {systemIds &&
+            systemIds.length > 1 &&
+            displaySharedPlans(person, systemIds)}
+        </DescriptionListItem>
+
         <DescriptionListItem title="Contact Details" testId="contactDetails">
           {person.allContactDetails &&
             person.allContactDetails.map((contactDetail, index) => {
@@ -138,7 +153,7 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Address History" testId="tenures">
           {person.knownAddresses?.map((address, index) => {
             return (
-              <p className="lbh-body-s" key={index}>
+              <span className="lbh-body-s" key={index}>
                 <span data-testid="tenureFullAddress">
                   {address.fullAddress}
                 </span>
@@ -184,7 +199,7 @@ export const Profile = (props: Props) => {
                 <span data-testid="manageArrearsLink">
                   {manageArrearsLink(address.legacyReferences) || ""}
                 </span>
-              </p>
+              </span>
             );
           })}
         </DescriptionListItem>

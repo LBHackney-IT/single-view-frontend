@@ -8,7 +8,8 @@ export class BasePersonPage extends BasePage {
 
   basePersonElements = {
     ...this.baseElements,
-    backToSearch: () => cy.get('#back-to-search')
+    getBackToSearchButton: () => cy.get('#back-to-search'),
+    getNewSearchButton: () => cy.get('#new-search')
   }
 
 }

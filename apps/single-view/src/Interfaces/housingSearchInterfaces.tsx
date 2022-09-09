@@ -41,7 +41,7 @@ export interface householdMember {
 
 export interface contactDetail {
   addressExtended: object | null;
-  contactType: number;
+  contactType: string;
   dataSourceName: string;
   description: string | null;
   isActive: boolean;
