@@ -16,16 +16,31 @@ import { Alert } from "../../Components/Alert";
 import { CouncilTaxInformation } from "../../Components/CouncilTaxInformation";
 import { HousingBenefitsInformation } from "../../Components/HousingBenefitsInformation";
 import { EqualityInformation } from "../../Components/EqualityInformation";
+import { createSharedPlan } from "../../Gateways/sharedPlanGateway";
+
+const createSharedPlanForPerson = async (person: customerProfile) => {
+  try {
+    const sharedPlanId = await createSharedPlan(person);
+    window.open(
+      "https://sharedplan.hackney.gov.uk/plans/" + sharedPlanId,
+      "_blank"
+    );
+  } catch (e) {
+    //setMergeError("Unable to create merged record. Please search again.");
+  }
+};
 
 function linkSharedPlans(person: customerProfile) {
-  var egPlan: sharedPlan = {
-    id: "test",
-    dateOfLastAction: "asdfa",
-    actionCount: 1,
-  };
+  // // TODO Replace dummy data
+  // var egPlan: sharedPlan = {
+  //   id: "-hYkM2"
+  // };
+  // var egPlan2: sharedPlan = {
+  //   id: "XWDA5N"
+  // };
 
-  // person.sharedPlans = []
-  person.sharedPlans = [egPlan, egPlan];
+  // // Will be set before this
+  // person.sharedPlans = []// [egPlan, egPlan2];
 
   if (person.sharedPlans.length >= 1) {
     // Return component linking shared plans
@@ -45,27 +60,26 @@ function linkSharedPlans(person: customerProfile) {
               >
                 View Plan {person.sharedPlans.length > 1 && index}
               </a>
-              <br />
-              <strong>Actions:</strong> {sharedPlan.actionCount},{" "}
-              <strong>Last Edited:</strong> {sharedPlan.dateOfLastAction}
             </p>
           );
         })}
       </>
     );
+  } else {
+    // Return link to create a shared plan
+    return [
+      <strong>NO PLAN FOUND - </strong>,
+      <button
+        className="govuk-link lbh-link lbh-link--no-visited-state"
+        onClick={(e) => {
+          console.log("Creation button clicked!");
+          createSharedPlanForPerson(person);
+        }}
+      >
+        Create Shared Plan
+      </button>,
+    ];
   }
-  // else {
-  //   // Return link to create a shared plan
-  //   return (
-  //   <button
-  //     className="govuk-link lbh-link lbh-link--no-visited-state align-right govuk-!-margin-left-2"
-  //     onClick={e => {
-  //       console.log("hello")
-  //     }}
-  //   >
-  //     Create Shared Plan
-  //   </button>)
-  // }
 }
 
 interface Props {
@@ -136,17 +150,6 @@ export const Profile = (props: Props) => {
           {person.title} {person.firstName} {person.surname}
         </DescriptionListItem>
 
-        <DescriptionListItem
-          title={
-            person.sharedPlans && person.sharedPlans.length > 1
-              ? "Shared Plans"
-              : "Shared Plan"
-          }
-          testId="sharedPlans"
-        >
-          {linkSharedPlans(person)}
-        </DescriptionListItem>
-
         {/* Display preferred title+name only if it doesn't match the default title+name */}
         {((person.preferredTitle && person.preferredTitle != person.title) ||
           (person.preferredFirstName &&
@@ -168,6 +171,17 @@ export const Profile = (props: Props) => {
             {formatDateOfBirth(person.dateOfBirth)}
           </DescriptionListItem>
         )}
+
+        <DescriptionListItem
+          title={
+            person.sharedPlans && person.sharedPlans.length > 1
+              ? "Shared Plans"
+              : "Shared Plan"
+          }
+          testId="sharedPlans"
+        >
+          {systemIds && systemIds.length > 1 && linkSharedPlans(person)}
+        </DescriptionListItem>
 
         <DescriptionListItem title="Contact Details" testId="contactDetails">
           {person.allContactDetails &&

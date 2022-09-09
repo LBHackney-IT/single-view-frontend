@@ -17,6 +17,8 @@ class ProfilePage extends BasePersonPage {
 		getPreferredName: () => cy.get('[data-testid="preferredName"]'),
 		getDateOfBirth: () => cy.get('[data-testid="dateOfBirth"]'),
 
+		getSharedPlans: () => cy.get('[data-testid="sharedPlans"]'),
+
 		getContactDetail: function() {
 			return {
 				getContactType: () => cy.get('[data-testid="contactDetailsContactType"]'),

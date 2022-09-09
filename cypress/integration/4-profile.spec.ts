@@ -44,6 +44,11 @@ describe('Profile', () => {
 				.should('have.text', "01/02/1980");
 		});
 
+		it('displays shared plans', () => {
+			profilePage.elements.getSharedPlans()
+				.should('be.visible');
+		});
+
 		it('displays contact details', () => {
 			const contactDetail = profilePage.elements.getContactDetail()
 			contactDetail.getContactType()

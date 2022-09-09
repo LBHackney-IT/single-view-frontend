@@ -46,6 +46,4 @@ export interface supportWorker {
 
 export interface sharedPlan {
   id: string;
-  dateOfLastAction: string | null;
-  actionCount: number;
 }
