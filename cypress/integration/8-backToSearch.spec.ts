@@ -1,6 +1,7 @@
 import { AuthRoles, JigsawStatuses } from '../support/commands';
 import { profilePage } from '../pages/profile/profile-page';
 import { searchPage } from '../pages/search-page';
+import { xorBy } from 'cypress/types/lodash';
 
 describe('Search links', () => {
   describe('Basic Information', () => {
@@ -14,15 +15,7 @@ describe('Search links', () => {
     })
 
     it('displays the Back to search results button and loads search page with pre-populated fields', () => {
-      profilePage.elements.backToSearch()
-        .should('be.visible');
-
-      profilePage.elements.backToSearch().click()
-
-      cy.location().should((location) => {
-        expect(location.pathname).to.eq('/search');
-        expect(location.search).to.eq('?' + searchResidentPath);
-      });
+      profilePage.elements.getBackToSearchButton().click()
 
       searchPage.elements.getFirstNameField()
         .should('have.value', 'Luna');
@@ -33,16 +26,13 @@ describe('Search links', () => {
     it('displays the new search button and loads search page with empty fields', () => {
       profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
-      cy.get('#new-search', { timeout: 10000 }).should('be.visible');
+      profilePage.elements.getNewSearchButton().first().click();
 
-      cy.get('#new-search').first().click({ force: true });
-
-      cy.location().should((location) => {
-        expect(location.pathname).to.eq('/');
-      });
-
-      cy.get('#firstName').should('have.value', '');
-      cy.get('#lastName').should('have.value', '');
+      searchPage.elements.getFirstNameField()
+        .should('have.value', '');
+      searchPage.elements.getLastNameField()
+        .should('have.value', '');
     });
+
   });
 })

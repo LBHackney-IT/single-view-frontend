@@ -1,17 +1,31 @@
 import axios from "axios";
-import { customerProfile } from "../Interfaces";
+import { customerProfile, SystemId } from "../Interfaces";
 import { getToken } from "../Utils";
 
-export const createSharedPlanError = new Error("Error creating shared plan");
+const createSharedPlanError = new Error("Error creating shared plan");
 
 export async function createSharedPlan(
-  person: customerProfile
+  person: customerProfile,
+  systemIds: Array<SystemId>
 ): Promise<string | Error> {
-  console.log("POSTING...");
   const response = await axios.post(
-    `${process.env.SV_API_V1}/shared-plan`,
-    // `${process.env.SV_API_V1}/customers`,
-    person,
+    `${process.env.SV_API_V1}/sharedPlan`,
+    {
+      firstName: person.firstName,
+      lastName: person.surname,
+      systemIds: systemIds.map((systemId) => systemId.id),
+      numbers: person.allContactDetails
+        ? person.allContactDetails.filter(
+            (contactDetail) => contactDetail.contactType == "Phone"
+          )
+        : null,
+      emails: person.allContactDetails
+        ? person.allContactDetails.filter(
+            (contactDetail) => contactDetail.contactType == "Email"
+          )
+        : null,
+      hasPhp: null,
+    },
     {
       headers: {
         "Content-Type": "application/json",
@@ -19,13 +33,7 @@ export async function createSharedPlan(
       },
     }
   );
-  // const response = {
-  //   "status": 200,
-  //   "data": "test"
-  // }
-  console.log("POST response: " + response.status);
   if (response.status != 201) {
-    console.log("ERROR!");
     throw createSharedPlanError;
   }
   return response.data;

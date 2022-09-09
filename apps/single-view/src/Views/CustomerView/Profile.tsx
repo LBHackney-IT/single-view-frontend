@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
-import {
-  customerProfile,
-  SystemId,
-  legacyReference,
-  sharedPlan,
-} from "../../Interfaces";
+import { customerProfile, SystemId, legacyReference } from "../../Interfaces";
 import {
   formatCautionaryAlertsDate,
   formatDateOfBirth,
@@ -16,71 +11,7 @@ import { Alert } from "../../Components/Alert";
 import { CouncilTaxInformation } from "../../Components/CouncilTaxInformation";
 import { HousingBenefitsInformation } from "../../Components/HousingBenefitsInformation";
 import { EqualityInformation } from "../../Components/EqualityInformation";
-import { createSharedPlan } from "../../Gateways/sharedPlanGateway";
-
-const createSharedPlanForPerson = async (person: customerProfile) => {
-  try {
-    const sharedPlanId = await createSharedPlan(person);
-    window.open(
-      "https://sharedplan.hackney.gov.uk/plans/" + sharedPlanId,
-      "_blank"
-    );
-  } catch (e) {
-    //setMergeError("Unable to create merged record. Please search again.");
-  }
-};
-
-function linkSharedPlans(person: customerProfile) {
-  // // TODO Replace dummy data
-  // var egPlan: sharedPlan = {
-  //   id: "-hYkM2"
-  // };
-  // var egPlan2: sharedPlan = {
-  //   id: "XWDA5N"
-  // };
-
-  // // Will be set before this
-  // person.sharedPlans = []// [egPlan, egPlan2];
-
-  if (person.sharedPlans.length >= 1) {
-    // Return component linking shared plans
-
-    return (
-      <>
-        {person.sharedPlans.map((sharedPlan, index) => {
-          console.log(sharedPlan.id);
-          return (
-            <p>
-              <a
-                className="govuk-link lbh-link lbh-link--no-visited-state"
-                href={
-                  "https://sharedplan.hackney.gov.uk/plans/" + sharedPlan.id
-                }
-                target="_blank"
-              >
-                View Plan {person.sharedPlans.length > 1 && index}
-              </a>
-            </p>
-          );
-        })}
-      </>
-    );
-  } else {
-    // Return link to create a shared plan
-    return [
-      <strong>NO PLAN FOUND - </strong>,
-      <button
-        className="govuk-link lbh-link lbh-link--no-visited-state"
-        onClick={(e) => {
-          console.log("Creation button clicked!");
-          createSharedPlanForPerson(person);
-        }}
-      >
-        Create Shared Plan
-      </button>,
-    ];
-  }
-}
+import { displaySharedPlans } from "../../Components/SharedPlans";
 
 interface Props {
   profile?: customerProfile;
@@ -121,7 +52,8 @@ export const Profile = (props: Props) => {
         target="_blank"
         className="govuk-link lbh-link lbh-link--no-visited-state"
       >
-        View on manage arrears ({legacyReference.value})
+        View on manage arrears ({legacyReference.value})<br />
+        <br />
       </a>
     );
   };
@@ -180,7 +112,9 @@ export const Profile = (props: Props) => {
           }
           testId="sharedPlans"
         >
-          {systemIds && systemIds.length > 1 && linkSharedPlans(person)}
+          {systemIds &&
+            systemIds.length > 1 &&
+            displaySharedPlans(person, systemIds)}
         </DescriptionListItem>
 
         <DescriptionListItem title="Contact Details" testId="contactDetails">
@@ -219,7 +153,7 @@ export const Profile = (props: Props) => {
         <DescriptionListItem title="Address History" testId="tenures">
           {person.knownAddresses?.map((address, index) => {
             return (
-              <p className="lbh-body-s" key={index}>
+              <span className="lbh-body-s" key={index}>
                 <span data-testid="tenureFullAddress">
                   {address.fullAddress}
                 </span>
@@ -265,7 +199,7 @@ export const Profile = (props: Props) => {
                 <span data-testid="manageArrearsLink">
                   {manageArrearsLink(address.legacyReferences) || ""}
                 </span>
-              </p>
+              </span>
             );
           })}
         </DescriptionListItem>
