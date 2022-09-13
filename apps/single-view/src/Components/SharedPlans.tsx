@@ -6,22 +6,20 @@ export function displaySharedPlans(
   person: customerProfile,
   systemIds: Array<SystemId>
 ) {
-  if (person.sharedPlans && person.sharedPlans.length >= 1) {
+  if (person.sharedPlan.planIds && person.sharedPlan.planIds.length >= 1) {
     // Return component linking shared plans
     return (
       <>
-        {person.sharedPlans.map((sharedPlan, index) => {
-          console.log(sharedPlan.id);
+        {person.sharedPlan.planIds.map((planId, index) => {
+          console.log(planId);
           return (
             <p>
               <a
                 className="govuk-link lbh-link lbh-link--no-visited-state"
-                href={
-                  "https://sharedplan.hackney.gov.uk/plans/" + sharedPlan.id
-                }
+                href={process.env.SHARED_PLAN_URL + "/plans/" + planId}
                 target="_blank"
               >
-                View Plan {person.sharedPlans.length > 1 && index}
+                View Plan {person.sharedPlan.planIds.length > 1 && index + 1}
               </a>
             </p>
           );

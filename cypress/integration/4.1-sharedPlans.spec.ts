@@ -7,7 +7,8 @@ describe('Shared Plans', () => {
 			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
 
 			cy.fixture('person-profile.json').then(personFixture => {
-				personFixture.sharedPlans = [];
+				personFixture.sharedPlan = {};
+				personFixture.sharedPlan.planIds = [];
 				cy.intercept('GET', '**/customers*', personFixture);
 			})
 
@@ -25,7 +26,8 @@ describe('Shared Plans', () => {
 			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
 
 			cy.fixture('person-profile.json').then(personFixture => {
-				personFixture.sharedPlans = ["plan1", "plan2"];
+				personFixture.sharedPlan = {};
+				personFixture.sharedPlan.planIds = ["plan1", "plan2"];
 				cy.intercept('GET', '**/customers*', personFixture);
 			})
 		})
@@ -38,14 +40,4 @@ describe('Shared Plans', () => {
 
 	});
 
-});
-describe('Plans Found', () => {
-	before(() => {
-		profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
-
-		cy.fixture('person-profile.json').then(personFixture => {
-			personFixture.sharedPlans = ["plan1", "plan2"];
-			cy.intercept('GET', '**/customers*', personFixture);
-		})
-	})
 });
