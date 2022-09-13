@@ -10,7 +10,9 @@
         "firstName": "Luna",
         "middleName": "Purry",
         "surname": "Kitty",
-        "sharedPlans": [],
+        "sharedPlan": {
+            "planIds": []
+        },
         "personTypes": [
         "HouseholdMember"
         ],

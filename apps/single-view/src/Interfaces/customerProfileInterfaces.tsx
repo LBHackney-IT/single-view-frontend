@@ -31,7 +31,7 @@ export interface customerProfile {
   councilTaxAccount: councilTaxAccount | null;
   housingBenefitsAccount: housingBenefitsAccount | null;
   equalityInformation: EqualityData | null;
-  sharedPlans: sharedPlan[];
+  sharedPlan: sharedPlan;
 }
 
 export interface supportWorker {
@@ -45,5 +45,5 @@ export interface supportWorker {
 }
 
 export interface sharedPlan {
-  id: string;
+  planIds: Array<string>;
 }

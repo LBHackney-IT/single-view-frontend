@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DescriptionListItem } from "../../Components";
 import { customerProfile, SystemId, legacyReference } from "../../Interfaces";
-import {
-  formatCautionaryAlertsDate,
-  formatDateOfBirth,
-} from "../../Utils/formatDates";
+import { formatCautionaryAlertsDate, formatDateOfBirth } from "../../Utils";
 import { Center, Spinner } from "@mfe/common/lib/components";
 import { formatDate } from "@mfe/common/lib/utils";
 import { Alert } from "../../Components/Alert";
@@ -106,9 +103,9 @@ export const Profile = (props: Props) => {
 
         <DescriptionListItem
           title={
-            person.sharedPlans && person.sharedPlans.length > 1
-              ? "Shared Plans"
-              : "Shared Plan"
+            person.sharedPlan.planIds && person.sharedPlan.planIds.length <= 1
+              ? "Shared Plan"
+              : "Shared Plans"
           }
           testId="sharedPlans"
         >
@@ -184,7 +181,7 @@ export const Profile = (props: Props) => {
                     </summary>
                     <div className="govuk-details__text sv-details">
                       <ul>
-                        {address.householdMembers?.map((member, i) => {
+                        {address.householdMembers?.map((member, _) => {
                           return (
                             <li>
                               {member.fullName} (
