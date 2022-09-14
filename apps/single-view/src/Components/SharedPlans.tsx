@@ -11,7 +11,6 @@ export function displaySharedPlans(
     return (
       <>
         {person.sharedPlan.planIds.map((planId, index) => {
-          console.log(planId);
           return (
             <p>
               <a
@@ -33,7 +32,6 @@ export function displaySharedPlans(
       <button
         className="govuk-link lbh-link lbh-link--no-visited-state"
         onClick={() => {
-          console.log("Creation button clicked!");
           createSharedPlanForPerson(person, systemIds);
         }}
       >
@@ -43,17 +41,16 @@ export function displaySharedPlans(
   }
 }
 
-const createSharedPlanForPerson = async (
+async function createSharedPlanForPerson(
   person: customerProfile,
   systemIds: Array<SystemId>
-) => {
+): Promise<void> {
   try {
-    const sharedPlanId = await createSharedPlan(person, systemIds);
-    window.open(
-      "https://sharedplan.hackney.gov.uk/plans/" + sharedPlanId,
-      "_blank"
-    );
+    let sharedPlanUri = await createSharedPlan(person, systemIds);
+    if (typeof sharedPlanUri === "string") {
+      window.open(sharedPlanUri, "_blank");
+    }
   } catch (e) {
     Error("Unable to create shared plan.");
   }
-};
+}
