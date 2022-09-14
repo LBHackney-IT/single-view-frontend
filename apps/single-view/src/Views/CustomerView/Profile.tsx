@@ -103,7 +103,9 @@ export const Profile = (props: Props) => {
 
         <DescriptionListItem
           title={
-            person.sharedPlan.planIds && person.sharedPlan.planIds.length <= 1
+            person.sharedPlan &&
+            person.sharedPlan.planIds &&
+            person.sharedPlan.planIds.length <= 1
               ? "Shared Plan"
               : "Shared Plans"
           }
