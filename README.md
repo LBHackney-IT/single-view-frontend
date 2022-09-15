@@ -78,6 +78,14 @@ NB the FE is currently pointing at the Staging API
 
 Run `yarn start` and in a separate terminal run `yarn cypress:open`
 
+## Setting environment variables
+
+If a new variable needs to be introduced ensure that you store it in AWS param store using this naming convention `/single-view/{env}/{env-name}`,
+Also the variable needs to be declared in the following files:
+- [apps/single-view/.env.sample](https://github.com/LBHackney-IT/single-view-frontend/blob/main/apps/single-view/.env.sample)
+- [.circleci/config.yaml](https://github.com/LBHackney-IT/single-view-frontend/blob/main/.circleci/config.yml#L233)
+- [apps/single-view/webpack.config.js](https://github.com/LBHackney-IT/single-view-frontend/blob/main/apps/single-view/webpack.config.js#L35)
+
 ## Committing to GitHub
 ### Linting
 By default, Husky will run a lint check before each commit and prevent the commit if this fails.
