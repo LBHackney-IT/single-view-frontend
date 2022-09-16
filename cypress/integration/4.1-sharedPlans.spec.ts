@@ -9,17 +9,12 @@ describe('Shared Plans', () => {
 				personFixture.sharedPlan.planIds = [];
 				cy.intercept('GET', '**/customers*', personFixture);
 			})
+			cy.intercept("**/api/v1/sharedPlan", {fixture: "shared-plan-creation.json"}).as("PostCreateSharedPlan")
 			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
-		});
-
-		it('prompts to create a plan', () => {
-			profilePage.elements.getSharedPlans()
-				.should('have.text', "NO PLAN FOUND - Create Shared Plan");
 		});
 
 		// TODO: Test that correct link in href
 		it('creates proper request for shared plan', () => {
-			cy.intercept("**/api/v1/sharedPlan", {fixture: "shared-plan-creation.json"}).as("PostCreateSharedPlan")
 			profilePage.elements.getCreateSharedPlanButton().click()
 			cy.wait("@PostCreateSharedPlan", {requestTimeout: 10000}).should((obj) => {
 				const requestBody = obj.request.body;
@@ -38,6 +33,11 @@ describe('Shared Plans', () => {
 				expect(requestBody.emails.length).to.eq(0);
 				expect(requestBody.hasPhp).to.eq(false);
 			})
+		});
+
+		it('prompts to create a plan', () => {
+			profilePage.elements.getSharedPlans()
+				.should('have.text', "NO PLAN FOUND - Create Shared Plan");
 		});
 	});
 });
