@@ -4,16 +4,12 @@ import {profilePage} from '../pages/profile/profile-page';
 describe('Shared Plans', () => {
 	describe('No Plans Found', () => {
 		before(() => {
-			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
-
-			cy.intercept('**/getJigsawCustomer**', {fixture: 'person-profile.json'});
-			cy.intercept('**/getJigsawCases**', {fixture: 'person-cases.json'});
-
 			cy.fixture('person-profile.json').then(personFixture => {
 				personFixture.sharedPlan = {};
 				personFixture.sharedPlan.planIds = [];
 				cy.intercept('GET', '**/customers*', personFixture);
 			})
+			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
 		});
 
 		it('prompts to create a plan', () => {
@@ -22,7 +18,7 @@ describe('Shared Plans', () => {
 		});
 
 		// TODO: Test that correct link in href
-		it('creates proper request for shared plan', () => {
+		it.only('creates proper request for shared plan', () => {
 			cy.intercept("**/api/v1/sharedPlan", {fixture: "shared-plan-creation.json"}).as("PostCreateSharedPlan")
 			profilePage.elements.getCreateSharedPlanButton().click()
 			cy.wait("@PostCreateSharedPlan").should((obj) => {
@@ -48,13 +44,12 @@ describe('Shared Plans', () => {
 
 describe('Plans Found', () => {
 	before(() => {
-		profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
-
 		cy.fixture('person-profile.json').then(personFixture => {
 			personFixture.sharedPlan = {};
 			personFixture.sharedPlan.planIds = ["plan1", "plan2"];
 			cy.intercept('GET', '**/customers*', personFixture);
 		})
+		profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
 	})
 
 	it('displays shared plans', () => {
