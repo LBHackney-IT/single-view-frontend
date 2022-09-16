@@ -10,6 +10,14 @@ export function displaySharedPlans(
     // Return component linking shared plans
     return (
       <>
+        <button
+          className="govuk-link lbh-link lbh-link--no-visited-state"
+          onClick={() => {
+            createSharedPlanForPerson(person, systemIds);
+          }}
+        >
+          Create Shared Plan
+        </button>
         {person.sharedPlan.planIds.map((planId, index) => {
           return (
             <p>

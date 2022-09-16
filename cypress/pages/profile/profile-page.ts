@@ -18,6 +18,7 @@ class ProfilePage extends BasePersonPage {
 		getDateOfBirth: () => cy.get('[data-testid="dateOfBirth"]'),
 
 		getSharedPlans: () => cy.get('[data-testid="sharedPlans"]'),
+		getCreateSharedPlanButton: () => cy.get('[data-testid="sharedPlans"] > .govuk-link'),
 
 		getContactDetail: function() {
 			return {
