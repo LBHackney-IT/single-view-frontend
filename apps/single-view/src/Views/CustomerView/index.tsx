@@ -5,7 +5,7 @@ import { Notes } from "./Notes";
 import { getPerson } from "../../Gateways";
 import {
   customerProfile,
-  sharedPlan,
+  customerSharedPlan,
   UrlParams,
   customerResponse,
   Jigsaw,

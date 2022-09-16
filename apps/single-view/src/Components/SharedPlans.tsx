@@ -1,23 +1,16 @@
 import React from "react";
 import { createSharedPlan } from "../Gateways/sharedPlanGateway";
-import { customerProfile, SystemId } from "../Interfaces";
+import { customerProfile, customerSharedPlan, SystemId } from "../Interfaces";
+import { CreatedSharedPlan } from "../Interfaces/sharedPlanInterfaces";
 
 export function displaySharedPlans(
   person: customerProfile,
   systemIds: Array<SystemId>
 ) {
-  if (person.sharedPlan.planIds && person.sharedPlan.planIds.length >= 1) {
+  if (person.sharedPlan.planIds.length >= 1) {
     // Return component linking shared plans
     return (
       <>
-        <button
-          className="govuk-link lbh-link lbh-link--no-visited-state"
-          onClick={() => {
-            createSharedPlanForPerson(person, systemIds);
-          }}
-        >
-          Create Shared Plan
-        </button>
         {person.sharedPlan.planIds.map((planId, index) => {
           return (
             <p>
@@ -54,10 +47,12 @@ async function createSharedPlanForPerson(
   systemIds: Array<SystemId>
 ): Promise<void> {
   try {
-    let sharedPlanUri = await createSharedPlan(person, systemIds);
-    if (typeof sharedPlanUri === "string") {
-      window.open(sharedPlanUri, "_blank");
-    }
+    let sharedPlan: CreatedSharedPlan = await createSharedPlan(
+      person,
+      systemIds
+    );
+    window.open(sharedPlan.sharedPlanUrl, "_blank");
+    window.location.reload();
   } catch (e) {
     Error("Unable to create shared plan.");
   }

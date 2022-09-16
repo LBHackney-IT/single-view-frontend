@@ -68,12 +68,12 @@ const sharedPlanMockResponseData = {
   id: "test-id",
   firstName: "Luna",
   lastName: "Cat",
-  Url: "https://sharedplan.com/test-id",
+  url: "https://sharedplan.com/test-id",
 };
 
 describe("shared plan gateway", () => {
   it("should return correct data", async () => {
-    const mockResponse = { status: 200, data: sharedPlanMockResponseData };
+    const mockResponse = { status: 201, data: sharedPlanMockResponseData };
     mockAxios.post.mockImplementationOnce(async () => mockResponse);
     expect(await createSharedPlan(personFixture, systemIdsFixture)).toEqual(
       sharedPlanMockResponseData
@@ -81,7 +81,7 @@ describe("shared plan gateway", () => {
   });
 
   it("should ", async () => {
-    const mockResponse = { status: 200, data: sharedPlanMockResponseData };
+    const mockResponse = { status: 201, data: sharedPlanMockResponseData };
     mockAxios.post.mockImplementationOnce(async () => mockResponse);
     expect(await createSharedPlan(personFixture, systemIdsFixture)).toEqual(
       sharedPlanMockResponseData

@@ -1,12 +1,13 @@
 import axios from "axios";
-import { customerProfile, SystemId } from "../Interfaces";
+import { customerProfile, customerSharedPlan, SystemId } from "../Interfaces";
+import { CreatedSharedPlan } from "../Interfaces/sharedPlanInterfaces";
 
 const createSharedPlanError = new Error("Error creating shared plan");
 
 export async function createSharedPlan(
   person: customerProfile,
   systemIds: Array<SystemId>
-): Promise<string | Error> {
+): Promise<CreatedSharedPlan> {
   const response = await axios.post(
     `${process.env.SV_API_V1}/sharedPlan`,
     {
@@ -31,7 +32,8 @@ export async function createSharedPlan(
       },
     }
   );
-  if (response.status != 200) {
+
+  if (response.status != 201) {
     throw createSharedPlanError;
   }
   return response.data;
