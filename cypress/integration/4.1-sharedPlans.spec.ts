@@ -21,7 +21,7 @@ describe('Shared Plans', () => {
 		it('creates proper request for shared plan', () => {
 			cy.intercept("**/api/v1/sharedPlan", {fixture: "shared-plan-creation.json"}).as("PostCreateSharedPlan")
 			profilePage.elements.getCreateSharedPlanButton().click()
-			cy.wait("@PostCreateSharedPlan").should((obj) => {
+			cy.wait("@PostCreateSharedPlan", {requestTimeout: 10000}).should((obj) => {
 				const requestBody = obj.request.body;
 				let expectedSystemIds = [
 					"e749f036-3183-49cb-8504-59b76c1a8f88",
