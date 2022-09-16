@@ -4,13 +4,16 @@ import {profilePage} from '../pages/profile/profile-page';
 describe('Shared Plans', () => {
 	describe('No Plans Found', () => {
 		beforeEach(() => {
+			cy.setCookie('jigsawToken', 'testValue')
 			cy.fixture('person-profile.json').then(personFixture => {
 				personFixture.sharedPlan = {};
 				personFixture.sharedPlan.planIds = [];
 				cy.intercept('GET', '**/customers*', personFixture);
 			})
+			cy.intercept('**/getJigsawCustomer**', { fixture: 'person-profile.json' });
+			cy.intercept('**/getJigsawCases**', { fixture: 'person-cases.json' });
 			cy.intercept('POST',"**sharedPlan**", {fixture: "shared-plan-creation.json"}).as("PostCreateSharedPlan")
-			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
+			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 		});
 
 		it('prompts to create a plan', () => {
@@ -27,7 +30,7 @@ describe('Shared Plans', () => {
 					"e749f036-3183-49cb-8504-59b76c1a8f88",
 					"1234",
 					"34596507",
-					"34596507"
+					"34596508"
 				];
 				expect(requestBody.firstName).to.eq("Luna");
 				expect(requestBody.lastName).to.eq("Kitty");
