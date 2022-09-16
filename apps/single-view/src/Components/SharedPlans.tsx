@@ -1,17 +1,17 @@
 import React from "react";
 import { createSharedPlan } from "../Gateways/sharedPlanGateway";
-import { customerProfile, SystemId } from "../Interfaces";
+import { customerProfile, customerSharedPlan, SystemId } from "../Interfaces";
+import { CreatedSharedPlan } from "../Interfaces/sharedPlanInterfaces";
 
 export function displaySharedPlans(
   person: customerProfile,
   systemIds: Array<SystemId>
 ) {
-  if (person.sharedPlan.planIds && person.sharedPlan.planIds.length >= 1) {
+  if (person.sharedPlan.planIds.length >= 1) {
     // Return component linking shared plans
     return (
       <>
         {person.sharedPlan.planIds.map((planId, index) => {
-          console.log(planId);
           return (
             <p>
               <a
@@ -33,7 +33,6 @@ export function displaySharedPlans(
       <button
         className="govuk-link lbh-link lbh-link--no-visited-state"
         onClick={() => {
-          console.log("Creation button clicked!");
           createSharedPlanForPerson(person, systemIds);
         }}
       >
@@ -43,17 +42,18 @@ export function displaySharedPlans(
   }
 }
 
-const createSharedPlanForPerson = async (
+async function createSharedPlanForPerson(
   person: customerProfile,
   systemIds: Array<SystemId>
-) => {
+): Promise<void> {
   try {
-    const sharedPlanId = await createSharedPlan(person, systemIds);
-    window.open(
-      "https://sharedplan.hackney.gov.uk/plans/" + sharedPlanId,
-      "_blank"
+    let sharedPlan: CreatedSharedPlan = await createSharedPlan(
+      person,
+      systemIds
     );
+    window.open(sharedPlan.sharedPlanUrl, "_blank");
+    window.location.reload();
   } catch (e) {
     Error("Unable to create shared plan.");
   }
-};
+}

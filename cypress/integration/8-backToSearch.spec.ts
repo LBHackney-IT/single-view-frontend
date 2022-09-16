@@ -1,7 +1,6 @@
 import { AuthRoles, JigsawStatuses } from '../support/commands';
 import { profilePage } from '../pages/profile/profile-page';
 import { searchPage } from '../pages/search-page';
-import { xorBy } from 'cypress/types/lodash';
 
 describe('Search links', () => {
   describe('Basic Information', () => {
@@ -16,7 +15,6 @@ describe('Search links', () => {
 
     it('displays the Back to search results button and loads search page with pre-populated fields', () => {
       profilePage.elements.getBackToSearchButton().click()
-
       searchPage.elements.getFirstNameField()
         .should('have.value', 'Luna');
       searchPage.elements.getLastNameField()

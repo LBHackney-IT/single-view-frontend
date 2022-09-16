@@ -100,20 +100,20 @@ export const Profile = (props: Props) => {
             {formatDateOfBirth(person.dateOfBirth)}
           </DescriptionListItem>
         )}
-
-        <DescriptionListItem
-          title={
-            person.sharedPlan.planIds && person.sharedPlan.planIds.length <= 1
-              ? "Shared Plan"
-              : "Shared Plans"
-          }
-          testId="sharedPlans"
-        >
-          {systemIds &&
-            systemIds.length > 1 &&
-            displaySharedPlans(person, systemIds)}
-        </DescriptionListItem>
-
+        {person.sharedPlan && (
+          <DescriptionListItem
+            title={
+              person.sharedPlan.planIds && person.sharedPlan.planIds.length <= 1
+                ? "Shared Plan"
+                : "Shared Plans"
+            }
+            testId="sharedPlans"
+          >
+            {systemIds &&
+              systemIds.length > 1 &&
+              displaySharedPlans(person, systemIds)}
+          </DescriptionListItem>
+        )}
         <DescriptionListItem title="Contact Details" testId="contactDetails">
           {person.allContactDetails &&
             person.allContactDetails.map((contactDetail, index) => {
