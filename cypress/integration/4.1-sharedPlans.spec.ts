@@ -9,7 +9,7 @@ describe('Shared Plans', () => {
 				personFixture.sharedPlan.planIds = [];
 				cy.intercept('GET', '**/customers*', personFixture);
 			})
-			cy.intercept('POST',"**/api/v1/sharedPlan", {fixture: "shared-plan-creation.json"}).as("PostCreateSharedPlan")
+			cy.intercept('POST',"**sharedPlan**", {fixture: "shared-plan-creation.json"}).as("PostCreateSharedPlan")
 			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
 		});
 
