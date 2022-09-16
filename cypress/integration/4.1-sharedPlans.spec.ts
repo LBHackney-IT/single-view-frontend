@@ -3,14 +3,19 @@ import {profilePage} from '../pages/profile/profile-page';
 
 describe('Shared Plans', () => {
 	describe('No Plans Found', () => {
-		before(() => {
+		beforeEach(() => {
 			cy.fixture('person-profile.json').then(personFixture => {
 				personFixture.sharedPlan = {};
 				personFixture.sharedPlan.planIds = [];
 				cy.intercept('GET', '**/customers*', personFixture);
 			})
-			cy.intercept("**/api/v1/sharedPlan", {fixture: "shared-plan-creation.json"}).as("PostCreateSharedPlan")
+			cy.intercept('POST',"**/api/v1/sharedPlan", {fixture: "shared-plan-creation.json"}).as("PostCreateSharedPlan")
 			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
+		});
+
+		it('prompts to create a plan', () => {
+			profilePage.elements.getSharedPlans()
+				.should('have.text', "NO PLAN FOUND - Create Shared Plan");
 		});
 
 		// TODO: Test that correct link in href
@@ -33,11 +38,6 @@ describe('Shared Plans', () => {
 				expect(requestBody.emails.length).to.eq(0);
 				expect(requestBody.hasPhp).to.eq(false);
 			})
-		});
-
-		it('prompts to create a plan', () => {
-			profilePage.elements.getSharedPlans()
-				.should('have.text', "NO PLAN FOUND - Create Shared Plan");
 		});
 	});
 });
