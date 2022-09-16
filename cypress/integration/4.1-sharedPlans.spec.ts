@@ -18,7 +18,7 @@ describe('Shared Plans', () => {
 		});
 
 		// TODO: Test that correct link in href
-		it.only('creates proper request for shared plan', () => {
+		it('creates proper request for shared plan', () => {
 			cy.intercept("**/api/v1/sharedPlan", {fixture: "shared-plan-creation.json"}).as("PostCreateSharedPlan")
 			profilePage.elements.getCreateSharedPlanButton().click()
 			cy.wait("@PostCreateSharedPlan").should((obj) => {
