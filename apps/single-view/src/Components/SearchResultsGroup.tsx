@@ -6,6 +6,7 @@ import { isMergedRecord } from "../Utils/isMergedRecord";
 import { searchPersonToUrl } from "../Utils/searchPersonToUrl";
 import { searchPersonDataSource } from "../Utils/searchPersonDataSource";
 import { humanize } from "../Utils/humanize";
+import { isNullOrEmpty } from "../Utils/isNullOrEmpty";
 
 interface Props {
   results: housingSearchPerson[];
@@ -15,9 +16,6 @@ interface Props {
 
 export const SearchResultsGroup = (props: Props): JSX.Element => {
   const [unmergeRecordPersonId, setUnmergeRecordPersonId] = useState<string>();
-
-  const isNullOrEmpty = (data: string | null): boolean =>
-    data == null || data == "";
 
   return (
     <>
