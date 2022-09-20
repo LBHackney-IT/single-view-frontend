@@ -8,7 +8,6 @@ export async function createSharedPlan(
   person: customerProfile,
   systemIds: Array<SystemId>
 ): Promise<CreatedSharedPlan> {
-  // debugger;
   const requestData = {
     firstName: person.firstName,
     lastName: person.surname,
