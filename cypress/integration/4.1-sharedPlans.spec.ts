@@ -37,7 +37,7 @@ describe('Shared Plans', () => {
 				requestBody.systemIds.forEach((systemId, index) => {
 					expect(systemId).to.eq(expectedSystemIds[index])
 				});
-				expect(requestBody.numbers.length).to.eq(0);
+				expect(requestBody.numbers.length).to.eq(1);
 				expect(requestBody.emails.length).to.eq(0);
 				expect(requestBody.hasPhp).to.eq(false);
 			})
