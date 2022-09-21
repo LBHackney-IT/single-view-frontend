@@ -4,10 +4,10 @@ import { casesPage } from '../pages/profile/cases-page';
 describe("Displays cases", () => {
 
   before(() => {
-    casesPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
-
     cy.intercept('**/getJigsawCustomer**', { fixture: 'person-profile.json' });
     cy.intercept('**/getJigsawCases**', { fixture: 'person-cases.json' });
+
+    casesPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
   });
 
   it('displays the cases tab with jigsaw id when available', () => {

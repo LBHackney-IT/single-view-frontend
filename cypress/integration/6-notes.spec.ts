@@ -5,10 +5,11 @@ describe('Notes', () => {
   describe("Displays notes", () => {
 
     before(() => {
-      notesPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.None);
-
-      cy.intercept('GET', '**/getPersonApiCustomer*', { fixture: 'person-profile.json' }).as('getPerson');
+      cy.intercept('**/getJigsawCases**', { fixture: 'person-cases.json' });
+      cy.intercept('GET', '**/getPersonApiCustomer**', { fixture: 'person-profile.json' });
       cy.intercept('GET', '**/notes*', { fixture: 'customer-notes.json' }).as('getNotes');
+
+      notesPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn);
     });
 
     it('displays the notes tab and a snapshot', () => {

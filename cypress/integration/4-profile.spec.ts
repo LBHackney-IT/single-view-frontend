@@ -4,9 +4,8 @@ import { profilePage } from '../pages/profile/profile-page';
 describe('Profile', () => {
 	describe('Basic Information', () => {
 		before(() => {
-			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
-
 			cy.intercept('GET', '**/customers*', { fixture: 'person-profile.json' }).as('getPerson');
+			profilePage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
 		});
 
 		it('displays the profile tab', () => {

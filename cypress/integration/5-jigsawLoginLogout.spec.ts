@@ -82,11 +82,11 @@ describe('Jigsaw Login & Logout', () => {
 
   describe("Prompts Jigsaw login", () => {
     before(() => {
+      cy.intercept("**/getJigsawCustomer**", { statusCode: 401 });
+      cy.intercept('**/getJigsawCases**', { statusCode: 401 });
 
       casesPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.Dismissed)
 
-      cy.intercept("**/getJigsawCustomer**", { statusCode: 401 });
-      cy.intercept('**/getJigsawCases**', { statusCode: 401 });
     })
 
     it('displays jigsaw login link in error summary', () => {
