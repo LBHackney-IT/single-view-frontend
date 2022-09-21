@@ -9,6 +9,7 @@ import { CouncilTaxInformation } from "../../Components/CouncilTaxInformation";
 import { HousingBenefitsInformation } from "../../Components/HousingBenefitsInformation";
 import { EqualityInformation } from "../../Components/EqualityInformation";
 import { displaySharedPlans } from "../../Components/SharedPlans";
+import { isNullOrEmpty } from "../../Utils/isNullOrEmpty";
 
 interface Props {
   profile?: customerProfile;
@@ -124,7 +125,10 @@ export const Profile = (props: Props) => {
                       data-testid="contactDetailsContactType"
                       className="govuk-!-font-weight-bold"
                     >
-                      {contactDetail.contactType} ({contactDetail.subType})
+                      {contactDetail.contactType && contactDetail.contactType}
+                      {contactDetail.contactType &&
+                        !isNullOrEmpty(contactDetail.subType) &&
+                        ` (${contactDetail.subType})`}
                     </span>
                     <span data-testid="contactDetailsDescription">
                       {contactDetail.description &&
