@@ -34,9 +34,8 @@ describe('search', () => {
   });
 
   it('displays search results with first name and last name', () => {
-    searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
-
     cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
+    searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
     searchPage.search('Luna', 'Kitty', '2050-12-01')
 

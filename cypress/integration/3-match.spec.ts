@@ -3,10 +3,9 @@ import { searchPage } from '../pages/search-page';
 
 describe('matching', () => {
   before(() => {
+    cy.intercept('GET', '**api/**/search?**', { fixture: 'person-search.json' })
     searchPage.pageUrl = "/search?firstName=Luna&lastName=Kitty"
     searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
-
-    cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' })
   });
 
   it('allows user to match results', () => {
