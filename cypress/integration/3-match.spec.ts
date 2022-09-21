@@ -2,20 +2,20 @@ import { AuthRoles, JigsawStatuses } from '../support/commands';
 import { searchPage } from '../pages/search-page';
 
 describe('matching', () => {
-  before(() => {
-    cy.intercept('GET', '**api/**/search?**', { fixture: 'person-search.json' })
-    searchPage.pageUrl = "/search?firstName=Luna&lastName=Kitty"
-    searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
-  });
+	before(() => {
+		cy.intercept('GET', '**api/**/search?**', { fixture: 'person-search.json' })
+		searchPage.pageUrl = "/search?firstName=Luna&lastName=Kitty"
+		searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
+	});
 
-  it('allows user to match results', () => {
-    searchPage.elements.getMatchButton()
-      .should('be.disabled');
+	it('allows user to match results', () => {
+		searchPage.elements.getMatchButton()
+			.should('be.disabled');
 
-    const checkboxIndexes = [1, 3]
-    searchPage.matchResults(checkboxIndexes)
+		const checkboxIndexes = [1, 3]
+		searchPage.matchResults(checkboxIndexes)
 
-    cy.location('pathname').should('eq', '/customers/single-view/cypress-sv-id');
-  });
+		cy.location('pathname').should('eq', '/customers/single-view/cypress-sv-id');
+	});
 
 })
