@@ -271,7 +271,8 @@ jobs:
           name: Set single-view params
           command: |
             cd apps/single-view
-            cp .env.sample .env
+            touch .env
+            echo "DISPLAY_SHARED_PLAN=true" >> .env
       - run:
           name: Run E2E
           command: yarn e2e
