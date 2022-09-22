@@ -103,7 +103,7 @@ export const Profile = (props: Props) => {
             {formatDateOfBirth(person.dateOfBirth)}
           </DescriptionListItem>
         )}
-        {displaySharedPlan == "false" && person.sharedPlan && (
+        {displaySharedPlan == "true" && person.sharedPlan && (
           <DescriptionListItem
             title={
               person.sharedPlan.planIds && person.sharedPlan.planIds.length <= 1
