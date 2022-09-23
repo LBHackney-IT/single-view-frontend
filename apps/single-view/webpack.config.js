@@ -39,6 +39,7 @@ module.exports = (webpackConfigEnv, argv) => {
         JIGSAW_URL: process.env.JIGSAW_URL || dotenv.JIGSAW_URL,
         RSA_PUBLIC_KEY: process.env.RSA_PUBLIC_KEY || dotenv.RSA_PUBLIC_KEY,
         SHARED_PLAN_URL: process.env.SHARED_PLAN_URL || dotenv.SHARED_PLAN_URL,
+        DISPLAY_SHARED_PLAN: process.env.DISPLAY_SHARED_PLAN || dotenv.DISPLAY_SHARED_PLAN
       }),
       new ImportMapWebpackPlugin({
         namespace: "@mfe",

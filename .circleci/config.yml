@@ -242,7 +242,7 @@ jobs:
             export JIGSAW_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/jigsaw-url --query Parameter.Value --output text)
             export RSA_PUBLIC_KEY=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/rsa_public_key --query Parameter.Value --output text)
             export SHARED_PLAN_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/shared_plan_url --query Parameter.Value --output text)
-
+            export DISPLAY_SHARED_PLAN=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/display_shared_plan --query Parameter.Value --output text)
             yarn build
       - run:
           name: Deploy to S3 single view

@@ -36,6 +36,8 @@ export const Profile = (props: Props) => {
     );
   }
 
+  const displaySharedPlan = process.env.DISPLAY_SHARED_PLAN;
+
   const manageArrearsLink = (legacyReferences: legacyReference[] | null) => {
     if (legacyReferences == null) {
       return null;
@@ -101,7 +103,7 @@ export const Profile = (props: Props) => {
             {formatDateOfBirth(person.dateOfBirth)}
           </DescriptionListItem>
         )}
-        {person.sharedPlan && (
+        {displaySharedPlan == "true" && person.sharedPlan && (
           <DescriptionListItem
             title={
               person.sharedPlan.planIds && person.sharedPlan.planIds.length <= 1
