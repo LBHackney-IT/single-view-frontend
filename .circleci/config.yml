@@ -267,7 +267,6 @@ jobs:
             cd apps/common
             touch .env
             echo "AUTH_ALLOWED_GROUPS=cypress-users" >> .env
-            echo "DISPLAY_SHARED_PLAN=true" >> .env
       - run:
           name: Set single-view params
           command: |

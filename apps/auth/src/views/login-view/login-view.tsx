@@ -1,6 +1,6 @@
 import React from "react";
 
-import { $auth, isAuthorised, login } from "@mfe/common/lib/auth";
+import { $auth, isAuthorised } from "@mfe/common/lib/auth";
 import {
   Button,
   ErrorSummary,
@@ -12,6 +12,16 @@ import {
 
 import { REQUEST_ACCESS_LINK } from "../../constants";
 import { locale } from "../../services";
+
+const config = {
+    authDomain: process.env.AUTH_DOMAIN || "https://auth.hackney.gov.uk",
+}
+
+function login(redirectUrl = `${window.location.origin}/search`) {
+    window.location.href = `${config.authDomain}/auth?redirect_uri=${encodeURIComponent(
+      redirectUrl,
+    )}`;
+}
 
 export const LoginView = () => {
   const auth = $auth.getValue();
