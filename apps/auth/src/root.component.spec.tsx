@@ -1,9 +1,8 @@
 import React from "react";
 
 import { render } from "@hackney/mtfh-test-utils";
-import { screen, waitFor } from "@testing-library/react";
-
 import { $auth, isAuthorised } from "@mfe/common/lib/auth";
+import { screen, waitFor } from "@testing-library/react";
 
 import Root from "./root.component";
 import { locale } from "./services";
