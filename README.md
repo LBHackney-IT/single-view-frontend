@@ -54,6 +54,9 @@ From the root directory in the terminal, run:
 
 This may take some time to run the first time.
 
+You will also need the concurrently package:
+`yarn install concurrently`
+
 ### Add environment variables:
 Create a `.env` file in the `apps/single-view` directory
 
