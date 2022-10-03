@@ -64,7 +64,7 @@ export const logout = (): void => {
   Cookies.remove(config.authToken, {
     domain: config.cookieDomain,
   });
-  window.location.reload();
+  window.location.assign("/");
 };
 
 export const login = (redirectUrl = `${window.location.origin}/search`): void => {

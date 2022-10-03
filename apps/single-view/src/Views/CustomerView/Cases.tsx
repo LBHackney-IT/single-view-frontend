@@ -2,7 +2,7 @@ import { Center, ErrorSummary, Spinner } from "@mfe/common/lib/components";
 import React, { useEffect, useState } from "react";
 import { getCasesByCustomerId } from "../../Gateways/JigsawCases";
 import { getCookie } from "../../Utils";
-import { jigsawCasesResponse, UrlParams } from "../../Interfaces";
+import { jigsawCasesResponse } from "../../Interfaces";
 import { CaseSummary } from "../../Components/CaseSummary";
 
 interface Props {
@@ -36,10 +36,11 @@ export const Cases = (props: Props): JSX.Element => {
       loadCases(props.customerId);
     }
   }, [props.customerId]);
-  var currentPathName = window.location.pathname;
+  const currentPathName = window.location.pathname;
+  let jigsawTokenMessage;
   if (document.cookie.indexOf("jigsawToken") == -1) {
     // if jigsawToken is NOT set
-    var jigsawTokenMessage = [
+    jigsawTokenMessage = [
       <p>
         If you have access to Jigsaw please{" "}
         <a
@@ -52,7 +53,7 @@ export const Cases = (props: Props): JSX.Element => {
     ];
   } else {
     // jigsawToken set but still failed
-    var jigsawTokenMessage = [
+    jigsawTokenMessage = [
       <p>You are signed in to Jigsaw - this is probably a system issue</p>,
     ];
   }
