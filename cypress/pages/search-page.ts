@@ -9,7 +9,7 @@ enum ResultTypes {
 class SearchPage extends BasePage {
 
 	constructor(pageUrl: string = "/search") {
-		super(pageUrl = pageUrl)
+		super(pageUrl)
 	}
 
 	resultTypes = ResultTypes

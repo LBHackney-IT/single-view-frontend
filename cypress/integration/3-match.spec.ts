@@ -3,7 +3,7 @@ import { searchPage } from '../pages/search-page';
 
 describe('matching', () => {
 	before(() => {
-		cy.intercept('GET', '**api/**/search?**', { fixture: 'person-search.json' })
+		cy.intercept('GET', '**/api/**/search?**', { fixture: 'person-search.json' })
 		searchPage.pageUrl = "/search?firstName=Luna&lastName=Kitty"
 		searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 	});

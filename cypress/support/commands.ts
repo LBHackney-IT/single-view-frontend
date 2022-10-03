@@ -71,6 +71,7 @@ declare global {
  *
  * @param {string} url The URL to visit. If relative uses `baseUrl`
  * @param {AuthRoles} role The user role to act as for this request
+ * @param jigsawStatus
  * @param {VisitOptions} [options] Pass in an options object to change the default behavior of the underlying `cy.visit()` call
  * @example
  *    cy.visitAs('http://localhost:3000', AuthRoles.ChildrensGroup)
@@ -97,10 +98,12 @@ function visitAs (
     switch (jigsawStatus) {
       case (JigsawStatuses.LoggedIn):
         cy.setCookie('jigsawToken', 'testValue')
+        break;
       case (JigsawStatuses.Dismissed):
         cy.setCookie('jigsawDismissed', 'true')
+        break;
     }
     cy.visit(url, options);
-  };
+  }
 
 Cypress.Commands.add('visitAs', visitAs);
