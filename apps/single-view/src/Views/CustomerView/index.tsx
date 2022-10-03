@@ -111,7 +111,7 @@ export const CustomerView = () => {
 
   useEffect(() => {
     loadPerson();
-  }, [loadPerson]);
+  }, []);
 
   return person === null ? (
     <NotFound />
