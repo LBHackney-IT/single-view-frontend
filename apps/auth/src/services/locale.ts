@@ -6,6 +6,7 @@ const locale = {
   loginWithHackneyAccount: "Please log in with your Hackney email account.",
   managerSupport: "Speak to your manager if you have issues signing in.",
   requestAccess: "Request access",
+  authDomain: "https://auth.hackney.gov.uk"
 };
 
 export default locale;

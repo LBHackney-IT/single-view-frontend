@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Note, NoteInput } from "../../Components";
+import { Note } from "../../Components";
 import { createNote, getNotes } from "../../Gateways";
 import { UrlParams, Note as NoteInterface, SystemId } from "../../Interfaces";
-import { getCookie } from "../../Utils/getCookie";
-import {
-  Center,
-  Link,
-  Spinner,
-  ErrorSummary,
-} from "@mfe/common/lib/components";
+import { getCookie } from "../../Utils";
+import { Center, Spinner, ErrorSummary } from "@mfe/common/lib/components";
 import { ListSnapshot } from "../../Components/ListSnapshot";
 
 interface Props {

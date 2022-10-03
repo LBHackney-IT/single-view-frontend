@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SearchByResident } from "./searchByResident";
 import { SearchResults } from "./searchResults";
 import { housingSearchPerson, housingSearchResults } from "../../Interfaces";
+import { locale } from "../../Config/locale";
 
 interface Props {
   firstName: string | null;
@@ -12,6 +13,8 @@ interface Props {
 }
 
 export const SearchView = (props: Props): JSX.Element => {
+  document.title = locale.pageTitles.search;
+
   const [matchedResults, setMatchedResults] = useState<housingSearchPerson[]>();
   const [results, setResults] = useState<housingSearchPerson[]>();
 
