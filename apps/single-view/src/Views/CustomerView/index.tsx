@@ -5,23 +5,32 @@ import { Notes } from "./Notes";
 import { getPerson } from "../../Gateways";
 import {
   customerProfile,
-  customerSharedPlan,
   UrlParams,
+  SystemId,
   customerResponse,
   Jigsaw,
   Housing,
 } from "../../Interfaces";
 import { NotFound } from "../../Components";
-import { SystemId } from "../../Interfaces/systemIdInterface";
 import { Cases } from "./Cases";
 import { BackToSearch } from "../../Components/BackToSearch";
+import { locale } from "../../Config/locale";
 
-// function openAllSharedPlans(sharedPlans:sharedPlan[]) {
-//   const SHARED_PLAN_BASE_URL = "https://sharedplan.hackney.gov.uk/"
-//   for (var sharedPlan in sharedPlans) {
-//     window.open(`${SHARED_PLAN_BASE_URL}/plans/${sharedPlan}`)
-//   }
-// }
+function setTitleByTab() {
+  const personPageTitles = locale.pageTitles.personProfile;
+  switch (window.location.hash) {
+    case "":
+    case "#profile":
+      document.title = personPageTitles.profile;
+      break;
+    case "#notes":
+      document.title = personPageTitles.notes;
+      break;
+    case "#cases":
+      document.title = personPageTitles.cases;
+      break;
+  }
+}
 
 export const CustomerView = () => {
   var { dataSource, id } = useParams<UrlParams>();
@@ -36,6 +45,7 @@ export const CustomerView = () => {
 
   dataSource = dataSource.toLowerCase(); // Makes url parameter case insensitive
 
+  setTitleByTab();
   const loadPerson = async (): Promise<customerResponse | null> => {
     try {
       let person = await getPerson(dataSource, id);
@@ -101,7 +111,7 @@ export const CustomerView = () => {
 
   useEffect(() => {
     loadPerson();
-  }, []);
+  }, [loadPerson]);
 
   return person === null ? (
     <NotFound />
