@@ -34,7 +34,7 @@ https://github.com/nvm-sh/nvm
 To allow the Google authentication to work locally, you need to alias local.hackney.gov.uk to 127.0.0.1 in your local hosts file. This allows the Google authentication token to be accepted as you're on a subdomain of hackney.gov.uk.
 
 
-Open your hosts file, which on **Linux** and **MacOS** can be done by running:
+Open your hosts file, which on **Linux** and **macOS** can be done by running:
 
 `sudo open /etc/hosts`
 
@@ -50,7 +50,7 @@ In the hosts file, add the line:
 
 From the root directory in the terminal, run:
 
-`yarn install-apps`
+`yarn install-all`
 
 This may take some time to run the first time.
 
@@ -75,7 +75,7 @@ Run the application with `yarn start`
 
 Load `http://local.hackney.gov.uk:9000` in your browser
 
-NB the FE is currently pointing at the Staging API
+You can change which API you're pointing to from the `.env` file in `apps/single-view`
 
 ## Running Cypress tests
 
