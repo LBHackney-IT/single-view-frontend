@@ -1,69 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Single View - Hackney Council</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Single View - Hackney Council</title>
 
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4PKCNV7HK"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4PKCNV7HK"></script>
 
-    <script>      
-        window.dataLayer = window.dataLayer || [];
-        function
-          gtag() {
-          dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-R4PKCNV7HK')              
-    </script>  
-    
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-237577320-1"></script>
-        
-      <script>
+    <script>
         if (document.location.hostname === "single-view.hackney.gov.uk") {
             // Only add GA if running in production
             window.dataLayer = window.dataLayer || [];
-            function
-            gtag() {
+
+            function gtag() {
                 dataLayer.push(arguments);
             }
+
+            gtag('js', new Date());
+            gtag('config', 'G-R4PKCNV7HK')
+        }
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-237577320-1"></script>
+
+    <script>
+        if (document.location.hostname === "single-view.hackney.gov.uk") {
+            // Only add GA if running in production
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
             gtag('js', new Date());
             gtag('config', 'UA-237577320-1');
         }
-      </script>  
+    </script>
 
-  <!--
-    Remove this if you only support browsers that support async/await.
-    This is needed by babel to share largeish helper code for compiling async/await in older
-    browsers. More information at https://github.com/single-spa/create-single-spa/issues/112
-  -->
-  <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
+    <!--
+      Remove this if you only support browsers that support async/await.
+      This is needed by babel to share largeish helper code for compiling async/await in older
+      browsers. More information at https://github.com/single-spa/create-single-spa/issues/112
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
 
-  <!--
-    This CSP allows any SSL-enabled host and for arbitrary eval(), but you should limit these directives further to increase your app's security.
-    Learn more about CSP policies at https://content-security-policy.com/#directive
-  -->
-  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';"> -->
-  <meta name="importmap-type" content="systemjs-importmap" />
-  <!-- If you wish to turn off import-map-overrides for specific environments (prod), uncomment the line below -->
-  <!-- More info at https://github.com/joeldenning/import-map-overrides/blob/master/docs/configuration.md#domain-list -->
-  <!-- <meta name="import-map-overrides-domains" content="denylist:prod.example.com" /> -->
+    <!--
+      This CSP allows any SSL-enabled host and for arbitrary eval(), but you should limit these directives further to increase your app's security.
+      Learn more about CSP policies at https://content-security-policy.com/#directive
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';"> -->
+    <meta name="importmap-type" content="systemjs-importmap"/>
+    <!-- If you wish to turn off import-map-overrides for specific environments (prod), uncomment the line below -->
+    <!-- More info at https://github.com/joeldenning/import-map-overrides/blob/master/docs/configuration.md#domain-list -->
+    <!-- <meta name="import-map-overrides-domains" content="denylist:prod.example.com" /> -->
 
-  <!-- Shared dependencies go into this import map. Your shared dependencies must be of one of the following formats:
+    <!-- Shared dependencies go into this import map. Your shared dependencies must be of one of the following formats:
 
-    1. System.register (preferred when possible) - https://github.com/systemjs/systemjs/blob/master/docs/system-register.md
-    2. UMD - https://github.com/umdjs/umd
-    3. Global variable
+      1. System.register (preferred when possible) - https://github.com/systemjs/systemjs/blob/master/docs/system-register.md
+      2. UMD - https://github.com/umdjs/umd
+      3. Global variable
 
-    More information about shared dependencies can be found at https://single-spa.js.org/docs/recommended-setup#sharing-with-import-maps.
-  -->
+      More information about shared dependencies can be found at https://single-spa.js.org/docs/recommended-setup#sharing-with-import-maps.
+    -->
 
-  <link rel="stylesheet" href="/<%= htmlWebpackPlugin.files.css[0] %>">
+    <link rel="stylesheet" href="/<%= htmlWebpackPlugin.files.css[0] %>">
 
-  <script type="systemjs-importmap">
+    <script type="systemjs-importmap">
     {
       "imports": {
         "@mfe/root-config": "/<%= htmlWebpackPlugin.files.js[0] %>",
@@ -72,107 +77,116 @@
         "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
     }
     }
-  </script>
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
 
-  <!-- Add your organization's prod import map URL to this script's src  -->
-  <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
-  <script type="systemjs-importmap">
+    </script>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
+
+    <!-- Add your organization's prod import map URL to this script's src  -->
+    <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
+    <script type="systemjs-importmap">
     {
       "imports": {
+
         <% if (isLocal) { %>
           "single-spa": "https://cdnjs.cloudflare.com/ajax/libs/single-spa/5.9.0/umd/single-spa.dev.js",
           "react": "https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.development.js",
           "react-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js",
           "react-router-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.js"
+
         <% } else { %>
           "single-spa": "https://cdnjs.cloudflare.com/ajax/libs/single-spa/5.9.0/umd/single-spa.min.js",
           "react": "https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.production.min.js",
           "react-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.production.min.js",
           "react-router-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js"
+
         <% } %>
-      }
-    }
-  </script>
 
-  <!-- Add your organization's prod import map URL to this script's src  -->
-  <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
+              }
+            }
 
-  <script type="systemjs-importmap" src="<%= COMMON_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
-  <script type="systemjs-importmap" src="<%= AUTH_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
-  <script type="systemjs-importmap" src="<%= HEADER_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
-  <script type="systemjs-importmap" src="<%= SINGLE_VIEW_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
-  <script type="systemjs-importmap" src="<%= APP_ENV %>/import-map.json"
-    crossorigin="use-credentials"></script>
-  
+    </script>
 
-  <!--
-    If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
-    Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
-  -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/zone.js@0.11.3/dist/zone.min.js"></script> -->
+    <!-- Add your organization's prod import map URL to this script's src  -->
+    <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
 
-  <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
-  <% if (isLocal) { %>
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
-  <% } else { %>
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
-  <% } %>
+    <script type="systemjs-importmap" src="<%= COMMON_APP_URL %>/import-map.json"
+            crossorigin="use-credentials"></script>
+    <script type="systemjs-importmap" src="<%= AUTH_APP_URL %>/import-map.json" crossorigin="use-credentials"></script>
+    <script type="systemjs-importmap" src="<%= HEADER_APP_URL %>/import-map.json"
+            crossorigin="use-credentials"></script>
+    <script type="systemjs-importmap" src="<%= SINGLE_VIEW_APP_URL %>/import-map.json"
+            crossorigin="use-credentials"></script>
+    <script type="systemjs-importmap" src="<%= APP_ENV %>/import-map.json"
+            crossorigin="use-credentials"></script>
 
-  <template id="single-spa-layout-authorised">
-    <main class="govuk-main-wrapper" id="main-content">
-        <div class="container-max-width">
+
+    <!--
+      If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
+      Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
+    -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/zone.js@0.11.3/dist/zone.min.js"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
+    <% if (isLocal) { %>
+        <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
+    <% } else { %>
+        <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+    <% } %>
+
+    <template id="single-spa-layout-authorised">
+        <main class="govuk-main-wrapper" id="main-content">
+            <div class="container-max-width">
                 <route default>
                     <application name="@mfe/single-view" loader="spinner"></application>
                 </route>
             </div>
         </main>
-</template>
+    </template>
 
-<template id="single-spa-layout-public">
-    <main class="govuk-main-wrapper" id="main-content">
-        <div class="container-max-width">
-        <route default>
-            <application name="@mfe/auth" loader="spinner"></application>
-        </route>
+    <template id="single-spa-layout-public">
+        <main class="govuk-main-wrapper" id="main-content">
+            <div class="container-max-width">
+                <route default>
+                    <application name="@mfe/auth" loader="spinner"></application>
+                </route>
             </div>
         </main>
-</template>
+    </template>
 
 
-  <template id="single-spa-layout-header">
-    <a
-    href="#content"
-    class="govuk-skip-link lbh-skip-link">
-        Skip to main content
-    </a>
-    <header>
-        <application name="@mfe/header" loader="header"></application>
-    </header>
-</template>
-<template id="single-spa-layout-footer">
-    <footer class="mtfh-footer">
-        <div class="mtfh-footer__section --primary">
-            <ul class="mtfh-footer__menu">
-                <!-- <li class="mtfh-footer__menu-item"><a class="lbh-link" href="https://forms.gle/5kUGcRYFwwaZWrGs8" target="_blank" rel="noopener">Report an issue</a></li>
-                <li class="mtfh-footer__menu-item"><a class="lbh-link" href="https://forms.gle/yM7zCKYZcuVzSXkC6" target="_blank" rel="noopener">Make a suggestion</a></li>
-                <li class="mtfh-footer__menu-item"><a class="lbh-link" href="https://drive.google.com/file/d/19VOGIul60kxv79VuSu9CEZfnJR-HB0hY/view?usp=sharing" target="_blank" rel="noopener">Accessibility statement</a></li> -->
-            </ul>
-        </div>
-        <div class="mtfh-footer__section"></div>
-    </footer>
-</template>
+    <template id="single-spa-layout-header">
+        <a
+                href="#content"
+                class="govuk-skip-link lbh-skip-link">
+            Skip to main content
+        </a>
+        <header>
+            <application name="@mfe/header" loader="header"></application>
+        </header>
+    </template>
+    <template id="single-spa-layout-footer">
+        <footer class="mtfh-footer">
+            <div class="mtfh-footer__section --primary">
+                <ul class="mtfh-footer__menu">
+                    <!-- <li class="mtfh-footer__menu-item"><a class="lbh-link" href="https://forms.gle/5kUGcRYFwwaZWrGs8" target="_blank" rel="noopener">Report an issue</a></li>
+                    <li class="mtfh-footer__menu-item"><a class="lbh-link" href="https://forms.gle/yM7zCKYZcuVzSXkC6" target="_blank" rel="noopener">Make a suggestion</a></li>
+                    <li class="mtfh-footer__menu-item"><a class="lbh-link" href="https://drive.google.com/file/d/19VOGIul60kxv79VuSu9CEZfnJR-HB0hY/view?usp=sharing" target="_blank" rel="noopener">Accessibility statement</a></li> -->
+                </ul>
+            </div>
+            <div class="mtfh-footer__section"></div>
+        </footer>
+    </template>
 
 </head>
 <body class="govuk-template__body js-enabled">
-    <noscript>
+<noscript>
     You need to enable JavaScript to run this app.
-  </noscript>
-  <script>
+</noscript>
+<script>
     System.import('@mfe/root-config');
-  </script>
-  <!-- <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full> -->
+</script>
+<!-- <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full> -->
 </body>
 </html>
