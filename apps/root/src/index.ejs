@@ -6,12 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Single View - Hackney Council</title>
 
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4PKCNV7HK"></script>
+    <script>
+        const isLive = (document.location.hostname === "single-view.hackney.gov.uk")
+        if (isLive) {
+            console.log("Google Analytics is active");
+        }
+    </script>
 
     <script>
-        if (document.location.hostname === "single-view.hackney.gov.uk") {
+        if (isLive) {
             // Only add GA if running in production
+            document.write(`
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4PKCNV7HK">
+            `)
+
             window.dataLayer = window.dataLayer || [];
 
             function gtag() {
@@ -24,11 +32,13 @@
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-237577320-1"></script>
-
     <script>
-        if (document.location.hostname === "single-view.hackney.gov.uk") {
+        if (isLive) {
             // Only add GA if running in production
+            document.write(`
+                <script async src="https://www.googletagmanager.com/gtag/js?id=UA-237577320-1">
+            `)
+
             window.dataLayer = window.dataLayer || [];
 
             function gtag() {
@@ -78,6 +88,7 @@
     }
     }
 
+
     </script>
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
 
@@ -87,11 +98,13 @@
     {
       "imports": {
 
+
         <% if (isLocal) { %>
           "single-spa": "https://cdnjs.cloudflare.com/ajax/libs/single-spa/5.9.0/umd/single-spa.dev.js",
           "react": "https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.development.js",
           "react-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js",
           "react-router-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.js"
+
 
         <% } else { %>
           "single-spa": "https://cdnjs.cloudflare.com/ajax/libs/single-spa/5.9.0/umd/single-spa.min.js",
@@ -99,10 +112,13 @@
           "react-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.production.min.js",
           "react-router-dom": "https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js"
 
+
         <% } %>
 
-              }
-            }
+
+                      }
+                    }
+
 
     </script>
 
