@@ -97,7 +97,48 @@ These failures can often be resolved automatically by opening a terminal, `cd`-i
 
 After each commit, [CircleCI](https://app.circleci.com/pipelines/github/LBHackney-IT/single-view-frontend) will run the cypress tests and lint checks.
 
+## Editing the Docker image for Cypress
+Edit the Dockerfile in `.circleci/images` as needed
+
+Run commands from the single-view-frontend directory:
+
+### Build the image:
+
+`docker build .circleci/images/`
+
+Note the image ID output at the end.
+
+### Tag (name) the image:
+
+`docker tag {{image_id}} adamhack3/single-view-frontend-test`
+
+The tag for referencing and pushing to DockerHub. Substitute the image ID from the build step.
+
+### Run the image:
+
+`docker run -dit single-view-frontend-test`
+
+This will generate a container from the image and run it.
+
+It will return a container ID.
+
+### Connect to the container ID for testing:
+
+`docker exec -it {{container_id}} /bin/bash`
+
+This will allow you to access the container through your terminal and run commands to test it.
+
+You can verify the cypress tests run here with `yarn e2e`
+
+Exit with **ctrl+d** or **cmd+d**.
+
+### Push new image to DockerHub
+
+`docker push adamhack3/single-view-frontend-test`
+
+
 ## Resources
 
 [Hackney Design System](https://design-system.hackney.gov.uk/developing/installing-from-npm/)
+
 [Single SPA Framework](https://single-spa.js.org/docs/getting-started-overview)
