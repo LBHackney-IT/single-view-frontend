@@ -12,6 +12,7 @@ export interface housingSearchPerson {
   niNumber: string | null;
   IsPersonCautionaryAlerted: boolean;
   IsTenureCautionaryAlerted: boolean;
+  isMergedSingleViewRecord: boolean;
   knownAddresses: knownAddress[];
   isSelected: boolean;
 }

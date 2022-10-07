@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { formatDate } from "@mfe/common/lib/utils";
 import { housingSearchPerson } from "../Interfaces";
 import { UnmergeRecordButton } from "./UnmergeRecordButton";
-import { isMergedRecord } from "../Utils/isMergedRecord";
 import { searchPersonToUrl } from "../Utils/searchPersonToUrl";
 import { searchPersonDataSource } from "../Utils/searchPersonDataSource";
-import { humanize } from "../Utils/humanize";
+import { humanize } from "../Utils";
 import { isNullOrEmpty } from "../Utils/isNullOrEmpty";
 
 interface Props {
@@ -20,7 +19,7 @@ export const SearchResultsGroup = (props: Props): JSX.Element => {
   return (
     <>
       {props.results.map((person: housingSearchPerson, index: number) => {
-        const mergedRecord = isMergedRecord(person);
+        const mergedRecord = person.isMergedSingleViewRecord;
         let recordWithUnmergeRecordPersonId: boolean =
           person.id == unmergeRecordPersonId;
 

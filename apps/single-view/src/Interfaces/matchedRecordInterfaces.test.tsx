@@ -27,6 +27,7 @@ const mockSearchResults: housingSearchPerson[] = [
     dateOfBirth: "2020-11-15",
     IsPersonCautionaryAlerted: false,
     IsTenureCautionaryAlerted: false,
+    isMergedSingleViewRecord: false,
     isSelected: true,
     knownAddresses: [
       {
@@ -55,6 +56,7 @@ const mockSearchResults: housingSearchPerson[] = [
     dateOfBirth: "2020-11-15",
     IsPersonCautionaryAlerted: false,
     IsTenureCautionaryAlerted: false,
+    isMergedSingleViewRecord: false,
     isSelected: true,
     knownAddresses: [
       {
