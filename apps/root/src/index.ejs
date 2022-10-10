@@ -31,26 +31,26 @@
         }
     </script>
 
-    <script>
-        if (isLive) {
-            // Only add GA if running in production
-            (
-                function (window, document, string, l, i) {
-                    window[l] = window[l] || [];
-                    window[l].push(
-                        {
-                            'gtm.start':
-                                new Date().getTime(), event: 'gtm.js'
-                        });
-                    let f = document.getElementsByTagName(string)[0],
-                        j = document.createElement(string), dl = l != 'dataLayer' ? '&l=' + l : '';
-                    j.async = true;
-                    j.src =
-                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                    f.parentNode.insertBefore(j, f);
-                })(window, document, 'script', 'dataLayer', 'GTM-TF4BXWJ');
-        }
-    </script>
+<!--    <script>-->
+<!--        if (isLive) {-->
+<!--            // Only add GA if running in production-->
+<!--            (-->
+<!--                function (window, document, string, l, i) {-->
+<!--                    window[l] = window[l] || [];-->
+<!--                    window[l].push(-->
+<!--                        {-->
+<!--                            'gtm.start':-->
+<!--                                new Date().getTime(), event: 'gtm.js'-->
+<!--                        });-->
+<!--                    let f = document.getElementsByTagName(string)[0],-->
+<!--                        j = document.createElement(string), dl = l != 'dataLayer' ? '&l=' + l : '';-->
+<!--                    j.async = true;-->
+<!--                    j.src =-->
+<!--                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;-->
+<!--                    f.parentNode.insertBefore(j, f);-->
+<!--                })(window, document, 'script', 'dataLayer', 'GTM-TF4BXWJ');-->
+<!--        }-->
+<!--    </script>-->
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script>
@@ -221,10 +221,10 @@
 <noscript>
     You need to enable JavaScript to run this app.
 </noscript>
-<noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF4BXWJ"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
+<!--<noscript>-->
+<!--    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF4BXWJ"-->
+<!--            height="0" width="0" style="display:none;visibility:hidden"></iframe>-->
+<!--</noscript>-->
 <script>
     System.import('@mfe/root-config');
 </script>
