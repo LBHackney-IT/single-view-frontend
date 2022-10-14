@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Profile } from "./Profile";
 import { Notes } from "./Notes";
@@ -36,6 +36,9 @@ export const CustomerView = () => {
   useLayoutEffect(() => {
     setTitleByTab();
   });
+  useEffect(() => {
+    loadPerson();
+  }, []);
   let { dataSource, id } = useParams<UrlParams>();
   const [person, setPerson] = useState<customerProfile | null>();
   const [mmhUrl, setMhUrl] = useState<string>("");
@@ -109,10 +112,6 @@ export const CustomerView = () => {
       </div>
     );
   };
-
-  //useEffect(() => {
-  loadPerson();
-  //}, []);
 
   return person === null ? (
     <NotFound />
