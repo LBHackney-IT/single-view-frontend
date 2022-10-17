@@ -70,8 +70,8 @@ export const JigsawLogin = () => {
               </h2>
             </div>
             <div className="govuk-notification-banner__content">
-              Please use your Jigsaw username & password to login, granting you
-              access to the data presented at Single view from Jigsaw.
+              Please use your Jigsaw username & password to log in, granting you
+              access to the data presented in Single view from Jigsaw.
               <br />
               <a
                 href="/search"

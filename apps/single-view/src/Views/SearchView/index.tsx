@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { SearchByResident } from "./searchByResident";
 import { SearchResults } from "./searchResults";
 import { housingSearchPerson, housingSearchResults } from "../../Interfaces";
@@ -13,7 +13,9 @@ interface Props {
 }
 
 export const SearchView = (props: Props): JSX.Element => {
-  document.title = locale.pageTitles.search;
+  useLayoutEffect(() => {
+    document.title = locale.pageTitles.search;
+  });
 
   const [matchedResults, setMatchedResults] = useState<housingSearchPerson[]>();
   const [results, setResults] = useState<housingSearchPerson[]>();
