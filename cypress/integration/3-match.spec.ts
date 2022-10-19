@@ -3,12 +3,12 @@ import { searchPage } from '../pages/search-page';
 
 describe('matching', () => {
 	before(() => {
-		searchPage.pageUrl = "/search?firstName=Luna&lastName=Kitty"
+		searchPage.pageUrl = "/search"
 		searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
-		searchPage.search("Luna", "Kitty")
 	});
 
 	it('allows user to match results', () => {
+		searchPage.search("Luna", "Kitty")
 		cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
 		searchPage.elements.getMatchButton()
 			.should('be.disabled');
