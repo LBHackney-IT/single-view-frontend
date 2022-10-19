@@ -139,6 +139,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
           </button>
           <button
             id="match-button"
+            data-testid={"match-button"}
             disabled={selectedRecords?.length <= 1}
             className={
               selectedRecords?.length <= 1
