@@ -21,7 +21,8 @@ class SearchPage extends BasePage {
 		getFirstNameField: () => cy.get('#firstName'),
 		getLastNameField: () => cy.get('#lastName'),
 		getDateOfBirthField: () => cy.get('#dateOfBirth'),
-		getSearchButton: () => cy.get('.govuk-button'),
+		getSearchButton: () => cy.get('[data-testid=searchButton]'),
+		getClearSearchButton: () => cy.get('[data-testid=clearSearchButton]'),
 
 		getResultsCounter: () => cy.get('.sv-group > .lbh-heading-h3'),
 		getResultsDescriptor: () => cy.get('#mergedRecords > .lbh-heading-h4'),

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { SearchResident } from "../../Gateways/SearchResident";
+import { SearchResident } from "../../Gateways";
 import { housingSearchResults } from "../../Interfaces";
-import { getCookie } from "../../Utils/getCookie";
+import { getCookie } from "../../Utils";
 import { Input } from "../../Components";
 
 interface myProps {
@@ -42,23 +42,16 @@ export const SearchByResident = (props: myProps): JSX.Element => {
       setDateOfBirth(dateOfBirth);
     }
   };
-
-  useEffect(() => {
+  function searchForPerson() {
     if (firstName && lastName) {
       handleSearch().then((r) => {
         const section = document.querySelector("#results");
-        section?.scrollIntoView({ behavior: "smooth", block: "start" });
+        section?.scrollIntoView();
         setIsSearching(false);
       });
       setIsSearching(true);
     }
-  }, [
-    props.firstName,
-    props.lastName,
-    props.addressLine1,
-    props.postCode,
-    props.dateOfBirth,
-  ]);
+  }
 
   const handleSearch = async () => {
     function getDateOfBirth() {
@@ -85,10 +78,14 @@ export const SearchByResident = (props: myProps): JSX.Element => {
     }
   };
 
+  // props.firstName && handleSearch();
+  // let results = document.querySelector("#results");
+  // results && results.scrollIntoView();
+
   return (
     <>
       <div className="govuk-grid-row">
-        <div className="govuk-grid-column-one-third">
+        <div className="govuk-grid-column-one-half">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -114,7 +111,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                   path += `&dateOfBirth=${dateOfBirth}`;
                 }
                 history.push(path);
-
+                searchForPerson();
                 window.document.cookie = `searchResidentPath=${path}`;
               }
             }}
@@ -185,7 +182,10 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                 </svg>
               </div>
             ) : (
-              <button className="govuk-button lbh-button govuk-button--start">
+              <button
+                data-testid={"searchButton"}
+                className="govuk-button lbh-button govuk-button--start"
+              >
                 Search
                 <svg
                   className="govuk-button__start-icon"

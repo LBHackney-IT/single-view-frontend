@@ -5,6 +5,7 @@ describe('matching', () => {
 	before(() => {
 		searchPage.pageUrl = "/search?firstName=Luna&lastName=Kitty"
 		searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
+		searchPage.search("Luna", "Kitty")
 	});
 
 	it('allows user to match results', () => {

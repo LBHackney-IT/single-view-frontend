@@ -76,7 +76,7 @@ describe('search', () => {
 		searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0).find('[data-testid="mergeCounter-0"]') // Gets counter on first result
 			.should('have.text', 'Merged (5)')
 
-		searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0).find('div > span')
+		searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0).find('div > span') // Gets labels with system origins
 			.children().should('have.length', 3)
 	});
 
@@ -86,6 +86,12 @@ describe('search', () => {
 
 		searchPage.elements.getResultByIndex(searchPage.resultTypes.Search, 1)
 			.contains('PersonAPI')
+	});
+
+	it('clears search fields', () => {
+		searchPage.elements.getClearSearchButton().click()
+		searchPage.elements.getFirstNameField().should('be.empty')
+		searchPage.elements.getLastNameField().should('be.empty')
 	});
 
 })

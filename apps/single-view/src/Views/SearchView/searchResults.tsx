@@ -100,11 +100,43 @@ export const SearchResults = (props: myProps): JSX.Element => {
     numberOfResults += props.matchedResults.length;
   }
 
+  function clearSearchFields() {
+    // window.history.pushState({}, document.title, "/search");
+    const fieldIds = [
+      "firstName",
+      "lastName",
+      "addressLine1",
+      "postCode",
+      "dateOfBirth",
+    ];
+    for (let i = 0; i < fieldIds.length; i++) {
+      let field = document.getElementById(fieldIds[i]) as HTMLInputElement;
+      if (field) {
+        field.value = "";
+      }
+    }
+    const header = document.getElementById(
+      "single-spa-application:@mfe/header"
+    );
+    header && header.scrollIntoView();
+  }
+
   return (
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-two-thirds">
         <div className="sv-group">
           <h2 className="lbh-heading-h3 govuk-!-margin-top-7">{`${numberOfResults} results found`}</h2>
+          <button
+            id={"clearSearchButton"}
+            data-testid={"clearSearchButton"}
+            style={{ marginRight: 30 }}
+            className="govuk-button lbh-button"
+            onClick={() => {
+              clearSearchFields();
+            }}
+          >
+            Clear Search
+          </button>
           <button
             id="match-button"
             disabled={selectedRecords?.length <= 1}
