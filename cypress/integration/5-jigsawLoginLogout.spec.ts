@@ -13,7 +13,7 @@ describe('Jigsaw Login & Logout', () => {
     it('displays the heading', () => {
       jigsawLoginPage.elements.getLoginPageHeading()
         .should('be.visible')
-        .should('have.text', 'Login to your Jigsaw account')
+        .contains('Jigsaw')
     });
 
     it('displays dismiss link', () => {

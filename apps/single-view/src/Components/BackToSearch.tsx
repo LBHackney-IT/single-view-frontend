@@ -2,7 +2,7 @@ import React from "react";
 import { getCookie } from "../Utils";
 
 export const BackToSearch = () => {
-  const path = getCookie("searchResidentPath");
+  const path = getCookie("searchResidentPath") || "/search";
   return (
     <>
       <a

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Profile } from "./Profile";
 import { Notes } from "./Notes";
@@ -33,7 +33,13 @@ function setTitleByTab() {
 }
 
 export const CustomerView = () => {
-  var { dataSource, id } = useParams<UrlParams>();
+  useLayoutEffect(() => {
+    setTitleByTab();
+  });
+  useEffect(() => {
+    loadPerson();
+  }, []);
+  let { dataSource, id } = useParams<UrlParams>();
   const [person, setPerson] = useState<customerProfile | null>();
   const [mmhUrl, setMhUrl] = useState<string>("");
   const [jigsawUrl, setJigsawUrl] = useState<string>("");
@@ -44,8 +50,6 @@ export const CustomerView = () => {
   const isNullOrEmpty = (item: string): boolean => item == null || item == "";
 
   dataSource = dataSource.toLowerCase(); // Makes url parameter case insensitive
-
-  setTitleByTab();
   const loadPerson = async (): Promise<customerResponse | null> => {
     try {
       let person = await getPerson(dataSource, id);
@@ -103,15 +107,11 @@ export const CustomerView = () => {
             Warning
           </span>
           Some information from {dataSource.systemName} may not be displayed.{" "}
-          {ifJigsaw ? jigsawLink : ` Error: ${dataSource.error}`}
+          {ifJigsaw ? jigsawLink : ` Reason: ${dataSource.error}`}
         </strong>
       </div>
     );
   };
-
-  useEffect(() => {
-    loadPerson();
-  }, []);
 
   return person === null ? (
     <NotFound />

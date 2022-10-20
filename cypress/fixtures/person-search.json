@@ -1,364 +1,414 @@
 {
-    "searchResponse": {
-        "groupedResults": [                
-            {
-                "id": "6dd46a01",
-                "title": "Mrs",
-                "firstName": "Olivia",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSources": ["PersonAPI", "PersonAPI", "PersonAPI", "Academy-benefits", "Academy-CouncilTax"],
-                "preferredFirstname": "Olivia",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "1951-10-01",
-                "personTypes": [
-                    "HouseholdMember"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "4cce0edc",
-                        "startDate": "2014-03-17",
-                        "endDate": "2020-04-19",
-                        "fullAddress": "1 Thornbury Close, N16 8UX",
-                        "currentAddress": false
-                    }
-                ]
-            },
-            {
-                "id": "a1e2a970",
-                "title": "Mr",
-                "firstName": "Olivia",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSources": ["PersonAPI"],
-                "preferredFirstname": "Olivia",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "1949-02-18",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "d43caa5a",
-                        "startDate": "2004-12-13",
-                        "endDate": null,
-                        "fullAddress": "9 Sheldon House  Wick Road, E9 5AD",
-                        "currentAddress": true
-                    }
-                ]
-            }
+  "searchResponse": {
+    "groupedResults": [
+      {
+        "id": "6dd46a01",
+        "title": "Mrs",
+        "firstName": "Olivia",
+        "middleName": null,
+        "surName": "Kitty",
+        "dataSources": [
+          "PersonAPI",
+          "PersonAPI",
+          "PersonAPI",
+          "Academy-benefits",
+          "Academy-CouncilTax"
         ],
-        "ungroupedResults": [
-            {
-                "id": "57ea3d58",
-                "title": "Ms",
-                "firstName": "Luna",
-                "middleName": null,
-                "surName": "Kitty",
-                "preferredFirstname": "Luna",
-                "preferredSurname": "Kitty",
-                "dataSources": ["PersonAPI", "PersonAPI", "jigsaw"],
-                "dateOfBirth": "1977-10-06",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "4cd7f0f0",
-                        "startDate": "2017-01-19",
-                        "endDate": "2017-04-12",
-                        "fullAddress": "ROOM 608 143 Northumberland Park, N17 0TR ",
-                        "currentAddress": false
-                    }
-                ]
-            },
-            {
-                "id": "6d7ed1a4",
-                "title": "Other",
-                "firstName": "Luna",
-                "middleName": null,
-                "surName": "Kitty",
-                "preferredFirstname": "Luna",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dataSources": ["PersonAPI"],
-                "dateOfBirth": "2021-01-07",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "7d569db2",
-                        "startDate": "2005-11-14",
-                        "endDate": "2010-03-28",
-                        "fullAddress": "123 Cute Street, M3 0W ",
-                        "currentAddress": false
-                    }
-                ]
-            },
-            {
-                "id": "99a2e3f8",
-                "title": "Mrs",
-                "firstName": "Eric",
-                "middleName": null,
-                "surName": "Kitty",
-                "preferredFirstname": "Eric",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dataSources": ["jigsaw"],
-                "dateOfBirth": "1929-08-10",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": []
-            },
-            {
-                "id": "eaa645d5-518f-22c6-7a63-44f788002033",
-                "title": "Reverend",
-                "firstName": "Tracey",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSources": ["PersonAPI"],
-                "preferredFirstname": "Tracey",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "1998-02-21",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "5433bad4",
-                        "startDate": "2017-03-06",
-                        "endDate": null,
-                        "fullAddress": "231 Fellows Court  Weymouth Terrace, E2 8LJ",
-                        "currentAddress": true
-                    }
-                ]
-            },
-            {
-                "id": "a95dc86a",
-                "title": "Reverend",
-                "firstName": "Andrea",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSources": ["PersonAPI"],
-                "preferredFirstname": "Andrea",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "2002-01-23",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "d3e435a6",
-                        "startDate": "2002-04-15",
-                        "endDate": null,
-                        "fullAddress": "4 Croston Street, E8 4PQ",
-                        "currentAddress": true
-                    }
-                ]
-            },
-            {
-                "id": "87419dae",
-                "title": "Miss",
-                "firstName": "Oliver",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSources": ["PersonAPI"],
-                "preferredFirstname": "Oliver",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "1922-05-02",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "767aef93",
-                        "startDate": "1984-06-25",
-                        "endDate": "2000-12-03",
-                        "fullAddress": "74 Sylvester House  Sylvester Road, E8 1ET",
-                        "currentAddress": false
-                    }
-                ]
-            },
-            {
-                "id": "e78c4692",
-                "title": "Other",
-                "firstName": "Kathryn",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSources": ["PersonAPI"],
-                "preferredFirstname": "Kathryn",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "1943-03-03",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "24c6fc44",
-                        "startDate": "1989-03-13",
-                        "endDate": null,
-                        "fullAddress": "305 Nisbet House  Homerton High Street, E9 6AR",
-                        "currentAddress": true
-                    }
-                ]
-            },
-            {
-                "id": "72a2d90a",
-                "title": "Master",
-                "firstName": "Gary",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSources": ["PersonAPI", "jigsaw", "academy-benefits"],
-                "preferredFirstname": "Gary",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "1952-07-09",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "5c6fc128",
-                        "startDate": "1998-11-23",
-                        "endDate": "2006-05-21",
-                        "fullAddress": "124 Conch Street, BK4 7BM",
-                        "currentAddress": false
-                    }
-                ]
-            },
-            {
-                "id": "94f8ff03a",
-                "title": "Dr",
-                "firstName": "Beth",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSources": ["PersonAPI"],
-                "preferredFirstname": "Beth",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "1937-06-29",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "bc5a9b5b",
-                        "startDate": "2000-05-01",
-                        "endDate": null,
-                        "fullAddress": "16 Orient Way, E5 0DJ",
-                        "currentAddress": true
-                    }
-                ]
-            },
-            {
-                "id": "79d6932a",
-                "title": "Rabbi",
-                "firstName": "Megan",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSources": ["PersonAPI"],
-                "preferredFirstname": "Megan",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "1934-06-29",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "73b60d8e",
-                        "startDate": "2017-01-23",
-                        "endDate": null,
-                        "fullAddress": "20 Sherard House  Frampton Park Road, E9 7PE",
-                        "currentAddress": true
-                    }
-                ]
-            },
-            {
-                "id": "6dd46a01",
-                "title": "Mrs",
-                "firstName": "Olivia",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSources": ["PersonAPI"],
-                "preferredFirstname": "Olivia",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "1951-10-01",
-                "personTypes": [
-                    "HouseholdMember"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "4cce0edc",
-                        "startDate": "2014-03-17",
-                        "endDate": "2020-04-19",
-                        "fullAddress": "1 Thornbury Close, N16 8UX",
-                        "currentAddress": false
-                    }
-                ]
-            },
-            {
-                "id": "a1e2a970",
-                "title": "Mr",
-                "firstName": "Sean",
-                "middleName": null,
-                "surName": "Kitty",
-                "dataSources": ["PersonAPI"],
-                "preferredFirstname": "Sean",
-                "preferredSurname": "Kitty",
-                "totalBalance": 0.0,
-                "dateOfBirth": "1949-02-18",
-                "personTypes": [
-                    "Tenant"
-                ],
-                "isPersonCautionaryAlert": false,
-                "isTenureCautionaryAlert": false,
-                "knownAddresses": [
-                    {
-                        "id": "d43caa5a",
-                        "startDate": "2004-12-13",
-                        "endDate": null,
-                        "fullAddress": "9 Sheldon House  Wick Road, E9 5AD",
-                        "currentAddress": true
-                    }
-                ]
-            }
+        "preferredFirstname": "Olivia",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dateOfBirth": "1951-10-01",
+        "personTypes": [
+          "HouseholdMember"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "isMergedSingleViewRecord": true,
+        "knownAddresses": [
+          {
+            "id": "4cce0edc",
+            "startDate": "2014-03-17",
+            "endDate": "2020-04-19",
+            "fullAddress": "1 Thornbury Close, N16 8UX",
+            "currentAddress": false
+          }
         ]
-    },
-    "total": 1222
+      },
+      {
+        "id": "a1e2a970",
+        "title": "Mr",
+        "firstName": "Olivia",
+        "middleName": null,
+        "surName": "Kitty",
+        "dataSources": [
+          "PersonAPI"
+        ],
+        "preferredFirstname": "Olivia",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dateOfBirth": "1949-02-18",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "knownAddresses": [
+          {
+            "id": "d43caa5a",
+            "startDate": "2004-12-13",
+            "endDate": null,
+            "fullAddress": "9 Sheldon House  Wick Road, E9 5AD",
+            "currentAddress": true
+          }
+        ],
+        "isMergedSingleViewRecord": false
+      }
+    ],
+    "ungroupedResults": [
+      {
+        "id": "57ea3d58",
+        "title": "Ms",
+        "firstName": "Luna",
+        "middleName": null,
+        "surName": "Kitty",
+        "preferredFirstname": "Luna",
+        "preferredSurname": "Kitty",
+        "dataSources": [
+          "PersonAPI",
+          "PersonAPI",
+          "jigsaw"
+        ],
+        "dateOfBirth": "1977-10-06",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "isMergedSingleViewRecord": true,
+        "knownAddresses": [
+          {
+            "id": "4cd7f0f0",
+            "startDate": "2017-01-19",
+            "endDate": "2017-04-12",
+            "fullAddress": "ROOM 608 143 Northumberland Park, N17 0TR ",
+            "currentAddress": false
+          }
+        ]
+      },
+      {
+        "id": "6d7ed1a4",
+        "title": "Other",
+        "firstName": "Luna",
+        "middleName": null,
+        "surName": "Kitty",
+        "preferredFirstname": "Luna",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dataSources": [
+          "PersonAPI"
+        ],
+        "dateOfBirth": "2021-01-07",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "knownAddresses": [
+          {
+            "id": "7d569db2",
+            "startDate": "2005-11-14",
+            "endDate": "2010-03-28",
+            "fullAddress": "123 Cute Street, M3 0W ",
+            "currentAddress": false
+          }
+        ],
+        "isMergedSingleViewRecord": false
+      },
+      {
+        "id": "99a2e3f8",
+        "title": "Mrs",
+        "firstName": "Eric",
+        "middleName": null,
+        "surName": "Kitty",
+        "preferredFirstname": "Eric",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dataSources": [
+          "jigsaw"
+        ],
+        "dateOfBirth": "1929-08-10",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "knownAddresses": [],
+        "isMergedSingleViewRecord": false
+      },
+      {
+        "id": "eaa645d5-518f-22c6-7a63-44f788002033",
+        "title": "Reverend",
+        "firstName": "Tracey",
+        "middleName": null,
+        "surName": "Kitty",
+        "dataSources": [
+          "PersonAPI"
+        ],
+        "preferredFirstname": "Tracey",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dateOfBirth": "1998-02-21",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "knownAddresses": [
+          {
+            "id": "5433bad4",
+            "startDate": "2017-03-06",
+            "endDate": null,
+            "fullAddress": "231 Fellows Court  Weymouth Terrace, E2 8LJ",
+            "currentAddress": true
+          }
+        ],
+        "isMergedSingleViewRecord": false
+      },
+      {
+        "id": "a95dc86a",
+        "title": "Reverend",
+        "firstName": "Andrea",
+        "middleName": null,
+        "surName": "Kitty",
+        "dataSources": [
+          "PersonAPI"
+        ],
+        "preferredFirstname": "Andrea",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dateOfBirth": "2002-01-23",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "knownAddresses": [
+          {
+            "id": "d3e435a6",
+            "startDate": "2002-04-15",
+            "endDate": null,
+            "fullAddress": "4 Croston Street, E8 4PQ",
+            "currentAddress": true
+          }
+        ],
+        "isMergedSingleViewRecord": false
+      },
+      {
+        "id": "87419dae",
+        "title": "Miss",
+        "firstName": "Oliver",
+        "middleName": null,
+        "surName": "Kitty",
+        "dataSources": [
+          "PersonAPI"
+        ],
+        "preferredFirstname": "Oliver",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dateOfBirth": "1922-05-02",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "knownAddresses": [
+          {
+            "id": "767aef93",
+            "startDate": "1984-06-25",
+            "endDate": "2000-12-03",
+            "fullAddress": "74 Sylvester House  Sylvester Road, E8 1ET",
+            "currentAddress": false
+          }
+        ],
+        "isMergedSingleViewRecord": false
+      },
+      {
+        "id": "e78c4692",
+        "title": "Other",
+        "firstName": "Kathryn",
+        "middleName": null,
+        "surName": "Kitty",
+        "dataSources": [
+          "PersonAPI"
+        ],
+        "preferredFirstname": "Kathryn",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dateOfBirth": "1943-03-03",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "knownAddresses": [
+          {
+            "id": "24c6fc44",
+            "startDate": "1989-03-13",
+            "endDate": null,
+            "fullAddress": "305 Nisbet House  Homerton High Street, E9 6AR",
+            "currentAddress": true
+          }
+        ],
+        "isMergedSingleViewRecord": false
+      },
+      {
+        "id": "72a2d90a",
+        "title": "Master",
+        "firstName": "Gary",
+        "middleName": null,
+        "surName": "Kitty",
+        "dataSources": [
+          "PersonAPI",
+          "jigsaw",
+          "academy-benefits"
+        ],
+        "preferredFirstname": "Gary",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dateOfBirth": "1952-07-09",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "isMergedSingleViewRecord": true,
+        "knownAddresses": [
+          {
+            "id": "5c6fc128",
+            "startDate": "1998-11-23",
+            "endDate": "2006-05-21",
+            "fullAddress": "124 Conch Street, BK4 7BM",
+            "currentAddress": false
+          }
+        ]
+      },
+      {
+        "id": "94f8ff03a",
+        "title": "Dr",
+        "firstName": "Beth",
+        "middleName": null,
+        "surName": "Kitty",
+        "dataSources": [
+          "PersonAPI"
+        ],
+        "preferredFirstname": "Beth",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dateOfBirth": "1937-06-29",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "knownAddresses": [
+          {
+            "id": "bc5a9b5b",
+            "startDate": "2000-05-01",
+            "endDate": null,
+            "fullAddress": "16 Orient Way, E5 0DJ",
+            "currentAddress": true
+          }
+        ],
+        "isMergedSingleViewRecord": false
+      },
+      {
+        "id": "79d6932a",
+        "title": "Rabbi",
+        "firstName": "Megan",
+        "middleName": null,
+        "surName": "Kitty",
+        "dataSources": [
+          "PersonAPI"
+        ],
+        "preferredFirstname": "Megan",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dateOfBirth": "1934-06-29",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "knownAddresses": [
+          {
+            "id": "73b60d8e",
+            "startDate": "2017-01-23",
+            "endDate": null,
+            "fullAddress": "20 Sherard House  Frampton Park Road, E9 7PE",
+            "currentAddress": true
+          }
+        ],
+        "isMergedSingleViewRecord": false
+      },
+      {
+        "id": "6dd46a01",
+        "title": "Mrs",
+        "firstName": "Olivia",
+        "middleName": null,
+        "surName": "Kitty",
+        "dataSources": [
+          "PersonAPI"
+        ],
+        "preferredFirstname": "Olivia",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dateOfBirth": "1951-10-01",
+        "personTypes": [
+          "HouseholdMember"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "knownAddresses": [
+          {
+            "id": "4cce0edc",
+            "startDate": "2014-03-17",
+            "endDate": "2020-04-19",
+            "fullAddress": "1 Thornbury Close, N16 8UX",
+            "currentAddress": false
+          }
+        ],
+        "isMergedSingleViewRecord": false
+      },
+      {
+        "id": "a1e2a970",
+        "title": "Mr",
+        "firstName": "Sean",
+        "middleName": null,
+        "surName": "Kitty",
+        "dataSources": [
+          "PersonAPI"
+        ],
+        "preferredFirstname": "Sean",
+        "preferredSurname": "Kitty",
+        "totalBalance": 0.0,
+        "dateOfBirth": "1949-02-18",
+        "personTypes": [
+          "Tenant"
+        ],
+        "isPersonCautionaryAlert": false,
+        "isTenureCautionaryAlert": false,
+        "knownAddresses": [
+          {
+            "id": "d43caa5a",
+            "startDate": "2004-12-13",
+            "endDate": null,
+            "fullAddress": "9 Sheldon House  Wick Road, E9 5AD",
+            "currentAddress": true
+          }
+        ],
+        "isMergedSingleViewRecord": false
+      }
+    ]
+  },
+  "total": 1222
 }
