@@ -10,7 +10,6 @@ import { CustomerView, SearchView, JigsawLoginView } from "./Views";
 
 import "./app.scss";
 import { NotFound } from "./Components";
-import { isProduction } from "./Utils/isProduction";
 
 const App = (): JSX.Element => {
   useEffect(() => {
@@ -53,7 +52,7 @@ const App = (): JSX.Element => {
                 postCode={query.get("postCode")}
               />
             ) : (
-              <JigsawLoginView />
+              <Redirect to="/jigsawLogin" />
             )}
           </Route>
           <Route path="/jigsawLogin">
