@@ -78,10 +78,6 @@ export const SearchByResident = (props: myProps): JSX.Element => {
     }
   };
 
-  // props.firstName && handleSearch();
-  // let results = document.querySelector("#results");
-  // results && results.scrollIntoView();
-
   return (
     <>
       <div className="govuk-grid-row">
