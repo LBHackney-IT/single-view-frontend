@@ -463,7 +463,7 @@ workflows:
           context: api-assume-role-corporate-development-context
           requires:
             - lint-and-test
-            #  - e2e
+            # - e2e
           filters:
             branches:
               only: development
@@ -625,7 +625,7 @@ workflows:
           context: api-assume-role-corporate-staging-context
           requires:
             - lint-and-test
-            #  - e2e
+            # - e2e
           filters:
             branches:
               only: main
