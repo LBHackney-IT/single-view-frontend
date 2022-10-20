@@ -42,7 +42,7 @@ class SearchPage extends BasePage {
 
 		getResultByIndex: (resultType: ResultTypes, index: number) => cy.get(`${resultType} > .lbh-body > .sv-result-sub-wrapper > .sv-result`).eq(index),
 
-		getMatchButton: () => cy.get('#match-button'),
+		getMatchButton: () => cy.get('[data-testid="match-button"]'),
 
 	}
 
