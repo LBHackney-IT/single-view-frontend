@@ -81,7 +81,10 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   return (
     <>
       <div className="govuk-grid-row">
-        <div className="govuk-grid-column-one-half">
+        <div
+          className="govuk-grid-column-one-third"
+          style={{ minWidth: "400px" }}
+        >
           <form
             onSubmit={(e) => {
               e.preventDefault();
