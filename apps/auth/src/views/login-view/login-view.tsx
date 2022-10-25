@@ -32,7 +32,7 @@ export const LoginView = () => {
           <p>
             {locale.contactToRequestPermission}{" "}
             <Link variant="link" href={REQUEST_ACCESS_LINK}>
-              {locale.requestAccess}
+              Request access
             </Link>
           </p>
         </ErrorSummary>
@@ -45,9 +45,25 @@ export const LoginView = () => {
         {locale.signInUsingHackney}
       </Button>
       <Text>
-        {locale.loginWithHackneyAccount}
+        Please log in with your Hackney email account.
+        <br /> <br />
+        If you have problems while signing in, you can try:
         <br />
-        {locale.managerSupport}
+        1) Using the Google Chrome web browser
+        <br />
+        2){" "}
+        <a
+          href="https://support.google.com/accounts/answer/32050"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Deleting all browser cookies
+        </a>{" "}
+        ( press ctrl+shift+delete ) {" - "} Set "Time range" to "All time" and have
+        "Cookies and other site data" selected
+        <br />
+        3) Signing in again after
+        <br /> If this does not work, speak with a manager to verify your access.
       </Text>
     </Layout>
   );
