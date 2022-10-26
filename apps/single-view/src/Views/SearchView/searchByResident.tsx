@@ -26,7 +26,41 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const [lastNameError, setLastNameError] = useState(false);
   const [searching, setIsSearching] = useState<boolean>(false);
 
+  const anyFieldFilled: boolean = ![
+    firstName,
+    lastName,
+    addressLine1,
+    postCode,
+    dateOfBirth,
+  ].every((value) => value === "");
+
   const history = useHistory();
+
+  function clearSearchFields() {
+    window.history.pushState({}, document.title, "/search");
+    const fieldIds = [
+      "firstName",
+      "lastName",
+      "addressLine1",
+      "postcode",
+      "dateOfBirth",
+    ];
+    for (let i = 0; i < fieldIds.length; i++) {
+      let field = document.getElementById(fieldIds[i]) as HTMLInputElement;
+      if (field) {
+        field.value = "";
+      }
+    }
+    const header = document.getElementById(
+      "single-spa-application:@mfe/header"
+    );
+    setFirstName("");
+    setLastName("");
+    setAddressLine1("");
+    setPostcode("");
+    setDateOfBirth("");
+    header && header.scrollIntoView();
+  }
 
   const joinAddresses = (): string => {
     return [addressLine1, postCode].filter((term) => term !== "").join(" ");
@@ -197,6 +231,19 @@ export const SearchByResident = (props: myProps): JSX.Element => {
               </button>
             )}
           </form>
+          {anyFieldFilled && (
+            <button
+              id={"clearSearchButton"}
+              data-testid={"clearSearchButton"}
+              style={{ marginRight: 30 }}
+              className="govuk-button lbh-button"
+              onClick={() => {
+                clearSearchFields();
+              }}
+            >
+              Clear Search
+            </button>
+          )}
         </div>
       </div>
     </>

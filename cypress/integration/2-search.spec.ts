@@ -1,5 +1,5 @@
-import { AuthRoles, JigsawStatuses } from '../support/commands';
-import { searchPage } from '../pages/search-page';
+import {AuthRoles, JigsawStatuses} from '../support/commands';
+import {searchPage} from '../pages/search-page';
 
 describe('search', () => {
 	before(() => {
@@ -89,6 +89,7 @@ describe('search', () => {
 	});
 
 	it('clears search fields', () => {
+		searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 		searchPage.elements.getClearSearchButton().click()
 		searchPage.elements.getFirstNameField().should('be.empty')
 		searchPage.elements.getLastNameField().should('be.empty')
