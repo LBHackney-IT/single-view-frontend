@@ -29,7 +29,7 @@ describe('search', () => {
 	});
 
 	it('displays the error message when date of birth is in future', () => {
-		searchPage.search(null, null, '2050-12-01')
+		searchPage.search(null, null, null, null,'2050-12-01')
 		cy.contains('Date of birth cannot be in future');
 	});
 
@@ -37,7 +37,7 @@ describe('search', () => {
 		cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
 		searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
-		searchPage.search('Luna', 'Kitty', '2050-12-01')
+		searchPage.search('Luna', 'Kitty', null, null, '2050-12-01')
 
 		cy.location().should((location) => {
 			expect(location.pathname).to.eq('/search');
@@ -89,10 +89,15 @@ describe('search', () => {
 	});
 
 	it('clears search fields', () => {
+		cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
 		searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
+		searchPage.search("Olivia", "Kitty", "asdf", "asdf", "2021-11-11")
 		searchPage.elements.getClearSearchButton().click()
-		searchPage.elements.getFirstNameField().should('be.empty')
-		searchPage.elements.getLastNameField().should('be.empty')
+		searchPage.elements.getFirstNameField().should('have.value', "")
+		searchPage.elements.getLastNameField().should('have.value', "")
+		searchPage.elements.getFirstLineAddressField().should('have.value', "")
+		searchPage.elements.getPostcodeField().should('have.value', "")
+		searchPage.elements.getDateOfBirthField().should('have.value', "")
 	});
 
 })

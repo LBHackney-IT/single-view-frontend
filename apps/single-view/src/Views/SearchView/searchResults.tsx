@@ -101,12 +101,12 @@ export const SearchResults = (props: myProps): JSX.Element => {
   }
 
   function clearSearchFields() {
-    // window.history.pushState({}, document.title, "/search");
+    window.history.pushState({}, document.title, "/search");
     const fieldIds = [
       "firstName",
       "lastName",
       "addressLine1",
-      "postCode",
+      "postcode",
       "dateOfBirth",
     ];
     for (let i = 0; i < fieldIds.length; i++) {
