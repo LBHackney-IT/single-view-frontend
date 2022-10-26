@@ -1,5 +1,5 @@
-import { AuthRoles, JigsawStatuses } from '../support/commands';
-import { searchPage } from '../pages/search-page';
+import {AuthRoles, JigsawStatuses} from '../support/commands';
+import {searchPage} from '../pages/search-page';
 
 describe('search', () => {
 	before(() => {

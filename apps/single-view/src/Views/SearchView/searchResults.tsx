@@ -127,17 +127,6 @@ export const SearchResults = (props: myProps): JSX.Element => {
         <div className="sv-group">
           <h2 className="lbh-heading-h3 govuk-!-margin-top-7">{`${numberOfResults} results found`}</h2>
           <button
-            id={"clearSearchButton"}
-            data-testid={"clearSearchButton"}
-            style={{ marginRight: 30 }}
-            className="govuk-button lbh-button"
-            onClick={() => {
-              clearSearchFields();
-            }}
-          >
-            Clear Search
-          </button>
-          <button
             id="match-button"
             data-testid={"match-button"}
             disabled={selectedRecords?.length <= 1}
