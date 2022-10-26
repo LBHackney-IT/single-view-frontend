@@ -215,38 +215,43 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                 </svg>
               </div>
             ) : (
-              <button
-                data-testid={"searchButton"}
-                className="govuk-button lbh-button govuk-button--start"
-              >
-                Search
-                <svg
-                  className="govuk-button__start-icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="17.5"
-                  height="19"
-                  viewBox="0 0 33 40"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-                </svg>
-              </button>
+              <div className="govuk-button-group">
+                {anyFieldFilled && [
+                  <button
+                    id={"clearSearchButton"}
+                    data-testid={"clearSearchButton"}
+                    className="govuk-button lbh-button--secondary"
+                    onClick={() => {
+                      clearSearchFields();
+                    }}
+                  >
+                    Clear Search
+                  </button>,
+
+                  <button
+                    data-testid={"searchButton"}
+                    className="govuk-button lbh-button govuk-button--start"
+                  >
+                    Search
+                    <svg
+                      className="govuk-button__start-icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="17.5"
+                      height="19"
+                      viewBox="0 0 33 40"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M0 0h13l20 20-20 20H0l20-20z"
+                      />
+                    </svg>
+                  </button>,
+                ]}
+              </div>
             )}
           </form>
-          {anyFieldFilled && (
-            <button
-              id={"clearSearchButton"}
-              data-testid={"clearSearchButton"}
-              style={{ marginRight: 30 }}
-              className="govuk-button lbh-button"
-              onClick={() => {
-                clearSearchFields();
-              }}
-            >
-              Clear Search
-            </button>
-          )}
         </div>
       </div>
     </>

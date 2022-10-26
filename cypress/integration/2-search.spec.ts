@@ -22,7 +22,7 @@ describe('search', () => {
 	});
 
 	it('displays the error messages', () => {
-		searchPage.search(null, null, null)
+		searchPage.search(null, null, null, "asdf", null)
 
 		cy.contains('First name is mandatory');
 		cy.contains('Last name is mandatory');
