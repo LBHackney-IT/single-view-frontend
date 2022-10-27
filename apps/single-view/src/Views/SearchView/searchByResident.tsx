@@ -36,21 +36,8 @@ export const SearchByResident = (props: myProps): JSX.Element => {
 
   const history = useHistory();
 
-  function clearSearchFields() {
+  function clearSearchData() {
     window.history.pushState({}, document.title, "/search");
-    const fieldIds = [
-      "firstName",
-      "lastName",
-      "addressLine1",
-      "postcode",
-      "dateOfBirth",
-    ];
-    for (let i = 0; i < fieldIds.length; i++) {
-      let field = document.getElementById(fieldIds[i]) as HTMLInputElement;
-      if (field) {
-        field.value = "";
-      }
-    }
     const header = document.getElementById(
       "single-spa-application:@mfe/header"
     );
@@ -120,6 +107,9 @@ export const SearchByResident = (props: myProps): JSX.Element => {
           style={{ minWidth: "400px" }}
         >
           <form
+            onReset={() => {
+              clearSearchData();
+            }}
             onSubmit={(e) => {
               e.preventDefault();
               if (!firstName) {
@@ -221,15 +211,13 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                     id={"clearSearchButton"}
                     data-testid={"clearSearchButton"}
                     className="govuk-button lbh-button--secondary"
-                    onClick={() => {
-                      clearSearchFields();
-                    }}
+                    type="reset"
                   >
                     Clear Search
                   </button>,
-
                   <button
-                    data-testid={"searchButton"}
+                    type="submit"
+                    data-testid="searchButton"
                     className="govuk-button lbh-button govuk-button--start"
                   >
                     Search
