@@ -18,10 +18,15 @@ class SearchPage extends BasePage {
 		...this.baseElements,
 		getSearchPageHeading: () => cy.get('.lbh-heading-h1'),
 		getGetSearchPageForm: () => cy.get('form'),
+
 		getFirstNameField: () => cy.get('#firstName'),
 		getLastNameField: () => cy.get('#lastName'),
+		getFirstLineAddressField: () => cy.get('#addressLine1'),
+		getPostcodeField: () => cy.get('#postcode'),
 		getDateOfBirthField: () => cy.get('#dateOfBirth'),
-		getSearchButton: () => cy.get('.govuk-button'),
+
+		getSearchButton: () => cy.get('[data-testid=searchButton]'),
+		getClearSearchButton: () => cy.get('[data-testid=clearSearchButton]'),
 
 		getResultsCounter: () => cy.get('.sv-group > .lbh-heading-h3'),
 		getResultsDescriptor: () => cy.get('#mergedRecords > .lbh-heading-h4'),
@@ -41,13 +46,15 @@ class SearchPage extends BasePage {
 
 		getResultByIndex: (resultType: ResultTypes, index: number) => cy.get(`${resultType} > .lbh-body > .sv-result-sub-wrapper > .sv-result`).eq(index),
 
-		getMatchButton: () => cy.get('#match-button'),
+		getMatchButton: () => cy.get('[data-testid="match-button"]'),
 
 	}
 
-	search(firstName: string, lastName: string, dateOfBirth?: string) {
+	search(firstName: string, lastName: string, firstLineAddress: string = "", postcode: string = "", dateOfBirth: string = "") {
 		firstName && this.elements.getFirstNameField().type(firstName);
 		lastName && this.elements.getLastNameField().type(lastName);
+		firstLineAddress && this.elements.getFirstLineAddressField().type(firstLineAddress)
+		postcode && this.elements.getPostcodeField().type(postcode)
 		dateOfBirth && this.elements.getDateOfBirthField().type(dateOfBirth);
 		this.elements.getSearchButton().click()
 	}

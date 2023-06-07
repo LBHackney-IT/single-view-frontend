@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { SearchResident } from "../../Gateways/SearchResident";
+import { SearchResident } from "../../Gateways";
 import { housingSearchResults } from "../../Interfaces";
-import { getCookie } from "../../Utils/getCookie";
+import { getCookie } from "../../Utils";
 import { Input } from "../../Components";
 
 interface myProps {
@@ -26,7 +26,28 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   const [lastNameError, setLastNameError] = useState(false);
   const [searching, setIsSearching] = useState<boolean>(false);
 
+  const anyFieldFilled: boolean = ![
+    firstName,
+    lastName,
+    addressLine1,
+    postCode,
+    dateOfBirth,
+  ].every((value) => value === "");
+
   const history = useHistory();
+
+  function clearSearchData() {
+    window.history.pushState({}, document.title, "/search");
+    const header = document.getElementById(
+      "single-spa-application:@mfe/header"
+    );
+    setFirstName("");
+    setLastName("");
+    setAddressLine1("");
+    setPostcode("");
+    setDateOfBirth("");
+    header && header.scrollIntoView();
+  }
 
   const joinAddresses = (): string => {
     return [addressLine1, postCode].filter((term) => term !== "").join(" ");
@@ -42,23 +63,16 @@ export const SearchByResident = (props: myProps): JSX.Element => {
       setDateOfBirth(dateOfBirth);
     }
   };
-
-  useEffect(() => {
+  function searchForPerson() {
     if (firstName && lastName) {
       handleSearch().then((r) => {
         const section = document.querySelector("#results");
-        section?.scrollIntoView({ behavior: "smooth", block: "start" });
+        section?.scrollIntoView();
         setIsSearching(false);
       });
       setIsSearching(true);
     }
-  }, [
-    props.firstName,
-    props.lastName,
-    props.addressLine1,
-    props.postCode,
-    props.dateOfBirth,
-  ]);
+  }
 
   const handleSearch = async () => {
     function getDateOfBirth() {
@@ -88,8 +102,14 @@ export const SearchByResident = (props: myProps): JSX.Element => {
   return (
     <>
       <div className="govuk-grid-row">
-        <div className="govuk-grid-column-one-third">
+        <div
+          className="govuk-grid-column-one-third"
+          style={{ minWidth: "400px" }}
+        >
           <form
+            onReset={() => {
+              clearSearchData();
+            }}
             onSubmit={(e) => {
               e.preventDefault();
               if (!firstName) {
@@ -114,7 +134,7 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                   path += `&dateOfBirth=${dateOfBirth}`;
                 }
                 history.push(path);
-
+                searchForPerson();
                 window.document.cookie = `searchResidentPath=${path}`;
               }
             }}
@@ -185,20 +205,39 @@ export const SearchByResident = (props: myProps): JSX.Element => {
                 </svg>
               </div>
             ) : (
-              <button className="govuk-button lbh-button govuk-button--start">
-                Search
-                <svg
-                  className="govuk-button__start-icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="17.5"
-                  height="19"
-                  viewBox="0 0 33 40"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-                </svg>
-              </button>
+              <div className="govuk-button-group">
+                {anyFieldFilled && [
+                  <button
+                    id={"clearSearchButton"}
+                    data-testid={"clearSearchButton"}
+                    className="govuk-button lbh-button--secondary"
+                    type="reset"
+                  >
+                    Clear Search
+                  </button>,
+                  <button
+                    type="submit"
+                    data-testid="searchButton"
+                    className="govuk-button lbh-button govuk-button--start"
+                  >
+                    Search
+                    <svg
+                      className="govuk-button__start-icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="17.5"
+                      height="19"
+                      viewBox="0 0 33 40"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M0 0h13l20 20-20 20H0l20-20z"
+                      />
+                    </svg>
+                  </button>,
+                ]}
+              </div>
             )}
           </form>
         </div>

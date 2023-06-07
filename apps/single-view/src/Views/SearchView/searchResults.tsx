@@ -100,6 +100,27 @@ export const SearchResults = (props: myProps): JSX.Element => {
     numberOfResults += props.matchedResults.length;
   }
 
+  function clearSearchFields() {
+    window.history.pushState({}, document.title, "/search");
+    const fieldIds = [
+      "firstName",
+      "lastName",
+      "addressLine1",
+      "postcode",
+      "dateOfBirth",
+    ];
+    for (let i = 0; i < fieldIds.length; i++) {
+      let field = document.getElementById(fieldIds[i]) as HTMLInputElement;
+      if (field) {
+        field.value = "";
+      }
+    }
+    const header = document.getElementById(
+      "single-spa-application:@mfe/header"
+    );
+    header && header.scrollIntoView();
+  }
+
   return (
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-two-thirds">
@@ -107,6 +128,7 @@ export const SearchResults = (props: myProps): JSX.Element => {
           <h2 className="lbh-heading-h3 govuk-!-margin-top-7">{`${numberOfResults} results found`}</h2>
           <button
             id="match-button"
+            data-testid={"match-button"}
             disabled={selectedRecords?.length <= 1}
             className={
               selectedRecords?.length <= 1

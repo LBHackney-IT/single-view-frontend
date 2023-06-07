@@ -1,5 +1,5 @@
-import { AuthRoles, JigsawStatuses } from '../support/commands';
-import { searchPage } from '../pages/search-page';
+import {AuthRoles, JigsawStatuses} from '../support/commands';
+import {searchPage} from '../pages/search-page';
 
 describe('search', () => {
 	before(() => {
@@ -22,14 +22,14 @@ describe('search', () => {
 	});
 
 	it('displays the error messages', () => {
-		searchPage.search(null, null, null)
+		searchPage.search(null, null, null, "asdf", null)
 
 		cy.contains('First name is mandatory');
 		cy.contains('Last name is mandatory');
 	});
 
 	it('displays the error message when date of birth is in future', () => {
-		searchPage.search(null, null, '2050-12-01')
+		searchPage.search(null, null, null, null,'2050-12-01')
 		cy.contains('Date of birth cannot be in future');
 	});
 
@@ -37,7 +37,7 @@ describe('search', () => {
 		cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
 		searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
 
-		searchPage.search('Luna', 'Kitty', '2050-12-01')
+		searchPage.search('Luna', 'Kitty', null, null, '2050-12-01')
 
 		cy.location().should((location) => {
 			expect(location.pathname).to.eq('/search');
@@ -76,7 +76,7 @@ describe('search', () => {
 		searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0).find('[data-testid="mergeCounter-0"]') // Gets counter on first result
 			.should('have.text', 'Merged (5)')
 
-		searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0).find('div > span')
+		searchPage.elements.getResultByIndex(searchPage.resultTypes.Merged, 0).find('div > span') // Gets labels with system origins
 			.children().should('have.length', 3)
 	});
 
@@ -86,6 +86,18 @@ describe('search', () => {
 
 		searchPage.elements.getResultByIndex(searchPage.resultTypes.Search, 1)
 			.contains('PersonAPI')
+	});
+
+	it('clears search fields', () => {
+		cy.intercept('GET', '**/search?**', { fixture: 'person-search.json' }).as('getPersons')
+		searchPage.visit(AuthRoles.UnrestrictedGroup, JigsawStatuses.LoggedIn)
+		searchPage.search("Olivia", "Kitty", "asdf", "asdf", "2021-11-11")
+		searchPage.elements.getClearSearchButton().click()
+		searchPage.elements.getFirstNameField().should('have.value', "")
+		searchPage.elements.getLastNameField().should('have.value', "")
+		searchPage.elements.getFirstLineAddressField().should('have.value', "")
+		searchPage.elements.getPostcodeField().should('have.value', "")
+		searchPage.elements.getDateOfBirthField().should('have.value', "")
 	});
 
 })
