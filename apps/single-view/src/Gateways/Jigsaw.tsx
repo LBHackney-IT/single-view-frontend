@@ -1,6 +1,6 @@
 import axios from "axios";
-import { getToken, encrypt, isProduction } from "../Utils";
-import { JigsawCredentials } from "../Interfaces/jigsawInterfaces";
+import { getToken, encrypt, isNotLocal } from "../Utils";
+import { JigsawCredentials } from "../Interfaces";
 
 export const authoriseJigsawError = new Error("Error authorising with Jigsaw");
 
@@ -15,7 +15,7 @@ export const authoriseJigsaw = async (
   };
   const encryptedCreds = encrypt(JSON.stringify(jigsawCredentials), key);
 
-  if (isProduction()) {
+  if (isNotLocal()) {
     const response = await axios.post(
       `${process.env.SV_API_V1}/storeCredentials`,
       encryptedCreds,
