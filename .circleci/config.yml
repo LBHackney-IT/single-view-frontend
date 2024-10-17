@@ -369,14 +369,14 @@ workflows:
               only: dr-testing
       - terraform-init-and-apply:
           app: "common"
-          environment: "disaster-recovery"
+          environment: "production"
           requires:
             - assume-role-disaster-recovery
           filters:
             branches:
               only: dr-testing
       - build-and-deploy-common:
-          stage: "disaster-recovery"
+          stage: "production"
           requires:
             - terraform-init-and-apply
           filters:
