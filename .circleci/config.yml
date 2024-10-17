@@ -289,7 +289,6 @@ jobs:
     steps:
       - assume-role-and-persist-workspace:
           aws-account: $AWS_ACCOUNT_DEVELOPMENT
-
   
   assume-role-disaster-recovery:
     executor: docker-python
@@ -332,7 +331,7 @@ workflows:
             branches:
               only: dr-testing
       - assume-role-disaster-recovery:
-          context: api-assume-role-disaster-recover-context
+          context: api-assume-role-disaster-recovery-context
           requires:
             - install-dependencies-app
           filters:
@@ -340,7 +339,7 @@ workflows:
               only: dr-testing
       - terraform-init-and-apply:
           app: "auth"
-          environment: "disaster-recovery"
+          environment: "production"
           requires:
             - assume-role-disaster-recovery
           filters:
