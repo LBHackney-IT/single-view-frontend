@@ -55,7 +55,7 @@ commands:
       - aws_assume_role/assume_role:
           account: <<parameters.aws-account>>
           profile_name: default
-          role: "LBH_Circle_CI_Deployment_Role"
+          role: "LBH_Automation_Deployment_Role"
       - persist_to_workspace:
           root: *workspace_root
           paths:
@@ -446,25 +446,15 @@ workflows:
   continuous-delivery-disaster-recovery-single-view:
     # when: << pipeline.parameters.run_disaster_recovery_workflow >>
     jobs:
-      - e2e:
-          filters:
-            branches:
-              only: dr-testing
       - install-dependencies-app:
           app: "single-view"
-          filters:
-            branches:
-              only: dr-testing
-      - lint-and-test:
-          requires:
-            - install-dependencies-app
           filters:
             branches:
               only: dr-testing
       - assume-role-disaster-recovery:
           context: api-assume-role-disaster-recovery-context
           requires:
-            - lint-and-test
+            - install-dependencies-app
             # - e2e
           filters:
             branches:
