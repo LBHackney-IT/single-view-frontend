@@ -212,7 +212,6 @@ jobs:
             export ROOT_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/root-app-url --query Parameter.Value --output text)
             export SINGLE_VIEW_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/app-url --query Parameter.Value --output text)
             export HOUSING_SEARCH_API_V1=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/housing-search-v1 --query Parameter.Value --output text)
-
             export HEADER_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/header-app-url --query Parameter.Value --output text)
             export AUTH_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/auth-app-url --query Parameter.Value --output text)
             export COMMON_APP_URL=$(aws ssm get-parameter --name /single-view/<<parameters.stage>>/common-app-url --query Parameter.Value --output text)
