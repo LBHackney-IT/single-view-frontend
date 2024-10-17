@@ -11,6 +11,11 @@ parameters:
     default: true
     type: boolean
 
+  run_disaster_recovery_workflow:
+    description: This will run by default when a code commit or merge is performed
+    default: true
+    type: boolean
+
   run_staging_workflow:
     default: true
     type: boolean
@@ -286,6 +291,13 @@ jobs:
       - assume-role-and-persist-workspace:
           aws-account: $AWS_ACCOUNT_DEVELOPMENT
 
+  
+  assume-role-disaster-recovery:
+    executor: docker-python
+    steps:
+      - assume-role-and-persist-workspace:
+          aws-account: $AWS_ACCOUNT_DISASTER_RECOVERY
+
   assume-role-staging:
     executor: docker-python
     steps:
@@ -321,474 +333,164 @@ workflows:
           requires:
             - install-dependencies-app
 
-  continuous-delivery-development-auth:
-    when: << pipeline.parameters.run_development_workflow >>
+  continuous-delivery-disaster-recovery-auth:
+    # when: << pipeline.parameters.run_disaster-recovery_workflow >>
     jobs:
       - install-dependencies-app:
           app: "auth"
           filters:
             branches:
-              only: development
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
+              only: dr-testing
+      - assume-role-disaster-recovery:
+          context: api-assume-role-disaster-recover-context
           requires:
             - install-dependencies-app
           filters:
             branches:
-              only: development
+              only: dr-testing
       - terraform-init-and-apply:
           app: "auth"
-          environment: "development"
+          environment: "disaster-recovery"
           requires:
-            - assume-role-development
+            - assume-role-disaster-recovery
           filters:
             branches:
-              only: development
+              only: disaster-recovery
       - build-and-deploy-auth:
-          stage: "development"
+          stage: "disaster-recovery"
           requires:
             - terraform-init-and-apply
           filters:
             branches:
-              only: development
-  continuous-delivery-development-common:
-    when: << pipeline.parameters.run_development_workflow >>
+              only: dr-testing
+  continuous-delivery-disaster-recovery-common:
+    # when: << pipeline.parameters.run_disaster_recovery_workflow >>
     jobs:
       - install-dependencies-app:
           app: "common"
           filters:
             branches:
-              only: development
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
+              only: dr-testing
+      - assume-role-disaster-recovery:
+          context: api-assume-role-disaster-recovery-context
           requires:
             - install-dependencies-app
           filters:
             branches:
-              only: development
+              only: dr-testing
       - terraform-init-and-apply:
           app: "common"
-          environment: "development"
+          environment: "disaster-recovery"
           requires:
-            - assume-role-development
+            - assume-role-disaster-recovery
           filters:
             branches:
-              only: development
+              only: dr-testing
       - build-and-deploy-common:
-          stage: "development"
+          stage: "disaster-recovery"
           requires:
             - terraform-init-and-apply
           filters:
             branches:
-              only: development
-  continuous-delivery-development-header:
-    when: << pipeline.parameters.run_development_workflow >>
+              only: dr-testing
+  continuous-delivery-disaster-recovery-header:
+    # when: << pipeline.parameters.run_disaster_recovery_workflow >>
     jobs:
       - install-dependencies-app:
           app: "header"
           filters:
             branches:
-              only: development
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
+              only: dr-testing
+      - assume-role-disaster-recovery:
+          context: api-assume-role-disaster-recovery-context
           requires:
             - install-dependencies-app
           filters:
             branches:
-              only: development
+              only: dr-testing
       - terraform-init-and-apply:
           app: "header"
-          environment: "development"
+          environment: "production"
           requires:
-            - assume-role-development
+            - assume-role-disaster-recovery
           filters:
             branches:
-              only: development
+              only: dr-testing
       - build-and-deploy-header:
-          stage: "development"
+          stage: "production"
           requires:
             - terraform-init-and-apply
           filters:
             branches:
-              only: development
-  continuous-delivery-development-root:
-    when: << pipeline.parameters.run_development_workflow >>
+              only: dr-testing
+  continuous-delivery-disaster-recovery-root:
+    # when: << pipeline.parameters.run_disaster_recovery_workflow >>
     jobs:
       - install-dependencies-app:
           app: "root"
           filters:
             branches:
-              only: development
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
+              only: dr-testing
+      - assume-role-disaster-recovery:
+          context: api-assume-role-disaster-recovery-context
           requires:
             - install-dependencies-app
           filters:
             branches:
-              only: development
+              only: dr-testing
       - terraform-init-and-apply:
           app: "root"
-          environment: "development"
+          environment: "production"
           requires:
-            - assume-role-development
+            - assume-role-disaster-recovery
           filters:
             branches:
-              only: development
+              only: dr-testing
       - build-and-deploy-root:
-          stage: "development"
+          stage: "production"
           requires:
             - terraform-init-and-apply
           filters:
             branches:
-              only: development
-  continuous-delivery-development-single-view:
-    when: << pipeline.parameters.run_development_workflow >>
+              only: dr-testing
+  continuous-delivery-disaster-recovery-single-view:
+    # when: << pipeline.parameters.run_disaster_recovery_workflow >>
     jobs:
       - e2e:
           filters:
             branches:
-              only: development
+              only: dr-testing
       - install-dependencies-app:
           app: "single-view"
           filters:
             branches:
-              only: development
+              only: dr-testing
       - lint-and-test:
           requires:
             - install-dependencies-app
           filters:
             branches:
-              only: development
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
+              only: dr-testing
+      - assume-role-disaster-recovery:
+          context: api-assume-role-disaster-recovery-context
           requires:
             - lint-and-test
             # - e2e
           filters:
             branches:
-              only: development
+              only: dr-testing
       - terraform-init-and-apply:
-          app: "single-view"
-          environment: "development"
-          requires:
-            - assume-role-development
-          filters:
-            branches:
-              only: development
-      - build-and-deploy-single-view:
-          stage: "development"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: development
-
-  continuous-delivery-staging-auth:
-    when: << pipeline.parameters.run_staging_workflow >>
-    jobs:
-      - install-dependencies-app:
-          app: "auth"
-          filters:
-            branches:
-              only: main
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          app: "auth"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-auth:
-          stage: "staging"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-common:
-    when: << pipeline.parameters.run_staging_workflow >>
-    jobs:
-      - install-dependencies-app:
-          app: "common"
-          filters:
-            branches:
-              only: main
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          app: "common"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-common:
-          stage: "staging"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-header:
-    when: << pipeline.parameters.run_staging_workflow >>
-    jobs:
-      - install-dependencies-app:
-          app: "header"
-          filters:
-            branches:
-              only: main
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          app: "header"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-header:
-          stage: "staging"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-root:
-    when: << pipeline.parameters.run_staging_workflow >>
-    jobs:
-      - install-dependencies-app:
-          app: "root"
-          filters:
-            branches:
-              only: main
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          app: "root"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-root:
-          stage: "staging"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-single-view:
-    when: << pipeline.parameters.run_staging_workflow >>
-    jobs:
-      - e2e:
-          filters:
-            branches:
-              only: main
-      - install-dependencies-app:
-          app: "single-view"
-          filters:
-            branches:
-              only: main
-      - lint-and-test:
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: main
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          requires:
-            - lint-and-test
-            # - e2e
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          app: "single-view"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-single-view:
-          stage: "staging"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: main
-
-  continuous-delivery-production:
-    when: << pipeline.parameters.run_production_workflow >>
-    jobs:
-      - permit-production-terraform-release:
-          type: approval
-          filters:
-            branches:
-              only: main
-      - install-dependencies-app:
-          name: install-dependencies-app-auth
-          app: "auth"
-          requires:
-            - permit-production-terraform-release
-          filters:
-            branches:
-              only: main
-      - assume-role-production:
-          context: api-assume-role-corporate-production-context
-          requires:
-            - install-dependencies-app-auth
-            - install-dependencies-app-common
-            - install-dependencies-app-header
-            - install-dependencies-app-root
-            - install-dependencies-app-single-view
-            - lint-and-test
-            # - e2e
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          name: terraform-init-and-apply-auth
-          app: "auth"
-          environment: "production"
-          requires:
-            - assume-role-production
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-auth:
-          stage: "production"
-          requires:
-            - terraform-init-and-apply-auth
-          filters:
-            branches:
-              only: main
-      - install-dependencies-app:
-          name: install-dependencies-app-common
-          app: "common"
-          requires:
-            - permit-production-terraform-release
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          name: terraform-init-and-apply-common
-          app: "common"
-          environment: "production"
-          requires:
-            - assume-role-production
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-common:
-          stage: "production"
-          requires:
-            - terraform-init-and-apply-common
-          filters:
-            branches:
-              only: main
-      - install-dependencies-app:
-          name: install-dependencies-app-header
-          app: "header"
-          requires:
-            - permit-production-terraform-release
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          name: terraform-init-and-apply-header
-          app: "header"
-          environment: "production"
-          requires:
-            - assume-role-production
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-header:
-          stage: "production"
-          requires:
-            - terraform-init-and-apply-header
-          filters:
-            branches:
-              only: main
-      - install-dependencies-app:
-          name: install-dependencies-app-root
-          app: "root"
-          requires:
-            - permit-production-terraform-release
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          name: terraform-init-and-apply-root
-          app: "root"
-          environment: "production"
-          requires:
-            - assume-role-production
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-root:
-          stage: "production"
-          requires:
-            - terraform-init-and-apply-root
-          filters:
-            branches:
-              only: main
-      - install-dependencies-app:
-          name: install-dependencies-app-single-view
-          app: "single-view"
-          requires:
-            - permit-production-terraform-release
-          filters:
-            branches:
-              only: main
-      - lint-and-test:
-          requires:
-            - install-dependencies-app-single-view
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          name: terraform-init-and-apply-single-view
           app: "single-view"
           environment: "production"
           requires:
-            - assume-role-production
+            - assume-role-disaster-recovery
           filters:
             branches:
-              only: main
+              only: dr-testing
       - build-and-deploy-single-view:
           stage: "production"
           requires:
-            - terraform-init-and-apply-single-view
+            - terraform-init-and-apply
           filters:
             branches:
-              only: main
+              only: dr-testing
