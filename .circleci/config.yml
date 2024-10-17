@@ -345,7 +345,7 @@ workflows:
             - assume-role-disaster-recovery
           filters:
             branches:
-              only: disaster-recovery
+              only: dr-testing
       - build-and-deploy-auth:
           stage: "disaster-recovery"
           requires:
