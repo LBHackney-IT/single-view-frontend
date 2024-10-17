@@ -324,15 +324,6 @@ jobs:
 
 workflows:
   version: 2
-  cypress:
-    jobs:
-      - e2e
-      - install-dependencies-app:
-          app: "single-view"
-      - lint-and-test:
-          requires:
-            - install-dependencies-app
-
   continuous-delivery-disaster-recovery-auth:
     # when: << pipeline.parameters.run_disaster-recovery_workflow >>
     jobs:
