@@ -4,14 +4,14 @@ provider "aws" {
 }
 terraform {
   backend "s3" {
-    bucket  = "terraform-state-corporate-production"
+    bucket  = "terraform-state-disaster-recovery"
     encrypt = true
     region  = "eu-west-2"
     key     = "services/single-view-header-frontend/state"
   }
 }
 resource "aws_s3_bucket" "frontend-bucket-production" {
-  bucket = "lbh-single-view-header-frontend-production.hackney.gov.uk"
+  bucket = "lbh-single-view-header-frontend-dr-testing.hackney.gov.uk"
   acl    = "private"
   versioning {
     enabled = true
