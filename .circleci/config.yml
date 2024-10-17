@@ -138,8 +138,8 @@ jobs:
           name: Deploy to S3 auth
           command: |
             cd apps/auth/
-            aws s3 sync dist s3://lbh-single-view-auth-frontend-<<parameters.stage>>.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-auth-frontend-<<parameters.stage>>.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+            aws s3 sync dist s3://lbh-single-view-auth-frontend-dr-testing.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-auth-frontend-dr-testing.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
   build-and-deploy-common:
     executor: node-executor
@@ -168,8 +168,8 @@ jobs:
           name: Deploy to S3 common
           command: |
             cd apps/common/
-            aws s3 sync dist s3://lbh-single-view-common-frontend-<<parameters.stage>>.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-common-frontend-<<parameters.stage>>.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+            aws s3 sync dist s3://lbh-single-view-common-frontend-dr-testing.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-common-frontend-dr-testing.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
   build-and-deploy-header:
     executor: node-executor
     environment:
@@ -192,8 +192,8 @@ jobs:
           name: Deploy to S3 header
           command: |
             cd apps/header/
-            aws s3 sync dist s3://lbh-single-view-header-frontend-<<parameters.stage>>.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-header-frontend-<<parameters.stage>>.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+            aws s3 sync dist s3://lbh-single-view-header-frontend-dr-testing.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-header-frontend-dr-testing.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
   build-and-deploy-root:
     executor: node-executor
     environment:
@@ -221,8 +221,8 @@ jobs:
           name: Deploy to S3 root
           command: |
             cd apps/root/
-            aws s3 sync dist s3://lbh-single-view-root-frontend-<<parameters.stage>>.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-root-frontend-<<parameters.stage>>.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+            aws s3 sync dist s3://lbh-single-view-root-frontend-dr-testing.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-root-frontend-dr-testing.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
   build-and-deploy-single-view:
     executor: node-executor
     environment:
@@ -253,8 +253,8 @@ jobs:
           name: Deploy to S3 single view
           command: |
             cd apps/single-view/
-            aws s3 sync dist s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
-            aws s3 sync dist s3://lbh-single-view-frontend-<<parameters.stage>>.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
+            aws s3 sync dist s3://lbh-single-view-frontend-dr-testing.hackney.gov.uk/ --exclude "*.json" --cache-control "public, immutable, max-age=31536000"
+            aws s3 sync dist s3://lbh-single-view-frontend-dr-testing.hackney.gov.uk/ --include "*.json" --cache-control "public, must-revalidate, max-age=0"
 
   e2e:
     executor: node-executor
