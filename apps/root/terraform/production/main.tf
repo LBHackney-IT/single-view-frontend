@@ -34,7 +34,7 @@ module "cloudfront-production" {
   cost_code = "B0811"
   project_name = "Single View"
   use_cloudfront_cert = false
-  hackney_cert_arn = "arn:aws:acm:us-east-1:492942404536:certificate/eafddce3-0259-4382-bc02-d5207b2a31f3"
+  hackney_cert_arn = "arn:aws:acm:us-east-1:851725205572:certificate/5d6ef76b-51f3-4c68-ad64-f8c82e16f194"
   compress = true
 }
 resource "aws_ssm_parameter" "cdn" {
