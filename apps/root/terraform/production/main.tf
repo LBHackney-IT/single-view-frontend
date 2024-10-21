@@ -33,7 +33,7 @@ module "cloudfront-production" {
   environment_name = "production"
   cost_code = "B0811"
   project_name = "Single View"
-  use_cloudfront_cert = false
+  use_cloudfront_cert = true #change this back when we use the .hackney.gov.uk certificate
   # hackney_cert_arn = "arn:aws:acm:us-east-1:851725205572:certificate/5d6ef76b-51f3-4c68-ad64-f8c82e16f194"
   compress = true
 }
