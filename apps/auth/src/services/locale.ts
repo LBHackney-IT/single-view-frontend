@@ -4,7 +4,7 @@ const locale = {
   contactToRequestPermission: "To request access please complete this form.",
   signIn: "Sign in",
   signInUsingHackney: "Sign in with Google",
-  authDomain: "https://auth-test.hackney.gov.uk",
+  authDomain: "https://auth.hackney.gov.uk",
 };
 
 // /apps/auth/src/views/login-view/login-view.tsx
