@@ -1,7 +1,7 @@
 const config = {
   appEnv: process.env.APP_ENV || "test",
   authAllowedGroups: process.env.AUTH_ALLOWED_GROUPS?.split(",") || ["TEST_GROUP"],
-  authDomain: process.env.AUTH_DOMAIN || "//auth.hackney.gov.uk/auth",
+  authDomain: process.env.AUTH_DOMAIN || "//auth-test.hackney.gov.uk/auth",
   cookieDomain: process.env.COOKIE_DOMAIN || "hackney.gov.uk",
   authToken: process.env.AUTH_TOKEN_NAME || "hackneyToken",
   configurationApiUrlV1: process.env.CONFIGURATION_API_URL_V1 || "",
