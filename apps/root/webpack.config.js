@@ -3,6 +3,8 @@ const singleSpaDefaults = require("webpack-config-single-spa-ts");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const dotenv = require("dotenv").config();
+
 module.exports = (webpackConfigEnv, argv) => {
   const orgName = "mfe";
   const defaultConfig = singleSpaDefaults({
@@ -34,12 +36,12 @@ module.exports = (webpackConfigEnv, argv) => {
         templateParameters: {
           isLocal: webpackConfigEnv && webpackConfigEnv.isLocal,
           orgName,
-          APP_ENV: process.env.APP_ENV || "development",
-          COMMON_APP_URL: process.env.COMMON_APP_URL || "//localhost:8040",
-          HEADER_APP_URL: process.env.HEADER_APP_URL || "//localhost:8091",
-          AUTH_APP_URL: process.env.AUTH_APP_URL || "//localhost:8080",
+          APP_ENV: process.env.APP_ENV || dotenv.parsed.APP_ENV || "development",
+          COMMON_APP_URL: process.env.COMMON_APP_URL || dotenv.parsed.COMMON_APP_URL || "//localhost:8040",
+          HEADER_APP_URL: process.env.HEADER_APP_URL || dotenv.parsed.HEADER_APP_URL || "//localhost:8091",
+          AUTH_APP_URL: process.env.AUTH_APP_URL || dotenv.parsed.AUTH_APP_URL || "//localhost:8080",
           SINGLE_VIEW_APP_URL:
-            process.env.SINGLE_VIEW_APP_URL || "//localhost:8005",
+            process.env.SINGLE_VIEW_APP_URL || dotenv.parsed.SINGLE_VIEW_APP_URL || "//localhost:8005",
         },
       }),
     ],
