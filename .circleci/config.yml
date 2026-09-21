@@ -19,6 +19,11 @@ parameters:
     default: true
     type: boolean
 
+  destroy_development:
+    description: When true, development workflows run terraform destroy instead of apply and skip S3 deploy
+    default: false
+    type: boolean
+
 references:
   workspace_root: &workspace_root "~"
   attach_workspace: &attach_workspace
@@ -77,6 +82,29 @@ commands:
           command: |
             cd ./apps/<<parameters.app>>/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
+
+  terraform-init-then-destroy:
+    description: "Initialize and destroy the terraform configuration"
+    parameters:
+      environment:
+        type: string
+      app:
+        type: string
+    steps:
+      - checkout
+      - *attach_workspace
+      - run:
+          name: Get and init <<parameters.app>>
+          command: |
+            cd ./apps/<<parameters.app>>/terraform/<<parameters.environment>>/
+            terraform get -update=true
+            terraform init
+      - run:
+          name: Destroy <<parameters.app>>
+          no_output_timeout: 60m
+          command: |
+            cd ./apps/<<parameters.app>>/terraform/<<parameters.environment>>/
+            terraform destroy -auto-approve
 
 jobs:
   install-dependencies-app:
@@ -310,6 +338,18 @@ jobs:
           environment: <<parameters.environment>>
           app: <<parameters.app>>
 
+  terraform-init-and-destroy:
+    executor: docker-terraform
+    parameters:
+      app:
+        type: string
+      environment:
+        type: string
+    steps:
+      - terraform-init-then-destroy:
+          environment: <<parameters.environment>>
+          app: <<parameters.app>>
+
 workflows:
   version: 2
   cypress:
@@ -322,7 +362,10 @@ workflows:
             - install-dependencies-app
 
   continuous-delivery-development-auth:
-    when: << pipeline.parameters.run_development_workflow >>
+    when:
+      and:
+        - << pipeline.parameters.run_development_workflow >>
+        - not: << pipeline.parameters.destroy_development >>
     jobs:
       - install-dependencies-app:
           app: "auth"
@@ -352,7 +395,10 @@ workflows:
             branches:
               only: development
   continuous-delivery-development-common:
-    when: << pipeline.parameters.run_development_workflow >>
+    when:
+      and:
+        - << pipeline.parameters.run_development_workflow >>
+        - not: << pipeline.parameters.destroy_development >>
     jobs:
       - install-dependencies-app:
           app: "common"
@@ -382,7 +428,10 @@ workflows:
             branches:
               only: development
   continuous-delivery-development-header:
-    when: << pipeline.parameters.run_development_workflow >>
+    when:
+      and:
+        - << pipeline.parameters.run_development_workflow >>
+        - not: << pipeline.parameters.destroy_development >>
     jobs:
       - install-dependencies-app:
           app: "header"
@@ -412,7 +461,10 @@ workflows:
             branches:
               only: development
   continuous-delivery-development-root:
-    when: << pipeline.parameters.run_development_workflow >>
+    when:
+      and:
+        - << pipeline.parameters.run_development_workflow >>
+        - not: << pipeline.parameters.destroy_development >>
     jobs:
       - install-dependencies-app:
           app: "root"
@@ -442,7 +494,10 @@ workflows:
             branches:
               only: development
   continuous-delivery-development-single-view:
-    when: << pipeline.parameters.run_development_workflow >>
+    when:
+      and:
+        - << pipeline.parameters.run_development_workflow >>
+        - not: << pipeline.parameters.destroy_development >>
     jobs:
       - e2e:
           filters:
@@ -479,6 +534,102 @@ workflows:
           stage: "development"
           requires:
             - terraform-init-and-apply
+          filters:
+            branches:
+              only: development
+
+  continuous-delivery-development-destroy-auth:
+    when:
+      and:
+        - << pipeline.parameters.run_development_workflow >>
+        - << pipeline.parameters.destroy_development >>
+    jobs:
+      - assume-role-development:
+          context: api-assume-role-corporate-development-context
+          filters:
+            branches:
+              only: development
+      - terraform-init-and-destroy:
+          app: "auth"
+          environment: "development"
+          requires:
+            - assume-role-development
+          filters:
+            branches:
+              only: development
+  continuous-delivery-development-destroy-common:
+    when:
+      and:
+        - << pipeline.parameters.run_development_workflow >>
+        - << pipeline.parameters.destroy_development >>
+    jobs:
+      - assume-role-development:
+          context: api-assume-role-corporate-development-context
+          filters:
+            branches:
+              only: development
+      - terraform-init-and-destroy:
+          app: "common"
+          environment: "development"
+          requires:
+            - assume-role-development
+          filters:
+            branches:
+              only: development
+  continuous-delivery-development-destroy-header:
+    when:
+      and:
+        - << pipeline.parameters.run_development_workflow >>
+        - << pipeline.parameters.destroy_development >>
+    jobs:
+      - assume-role-development:
+          context: api-assume-role-corporate-development-context
+          filters:
+            branches:
+              only: development
+      - terraform-init-and-destroy:
+          app: "header"
+          environment: "development"
+          requires:
+            - assume-role-development
+          filters:
+            branches:
+              only: development
+  continuous-delivery-development-destroy-root:
+    when:
+      and:
+        - << pipeline.parameters.run_development_workflow >>
+        - << pipeline.parameters.destroy_development >>
+    jobs:
+      - assume-role-development:
+          context: api-assume-role-corporate-development-context
+          filters:
+            branches:
+              only: development
+      - terraform-init-and-destroy:
+          app: "root"
+          environment: "development"
+          requires:
+            - assume-role-development
+          filters:
+            branches:
+              only: development
+  continuous-delivery-development-destroy-single-view:
+    when:
+      and:
+        - << pipeline.parameters.run_development_workflow >>
+        - << pipeline.parameters.destroy_development >>
+    jobs:
+      - assume-role-development:
+          context: api-assume-role-corporate-development-context
+          filters:
+            branches:
+              only: development
+      - terraform-init-and-destroy:
+          app: "single-view"
+          environment: "development"
+          requires:
+            - assume-role-development
           filters:
             branches:
               only: development
