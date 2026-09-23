@@ -13,6 +13,7 @@ terraform {
 resource "aws_s3_bucket" "frontend-bucket-staging" {
   bucket = "lbh-single-view-auth-frontend-staging.hackney.gov.uk"
   acl    = "private"
+  force_destroy = true
   versioning {
     enabled = true
   }
