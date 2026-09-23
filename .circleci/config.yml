@@ -24,6 +24,11 @@ parameters:
     default: false
     type: boolean
 
+  destroy_staging:
+    description: When true, staging workflows run terraform destroy instead of apply and skip S3 deploy
+    default: false
+    type: boolean
+
 references:
   workspace_root: &workspace_root "~"
   attach_workspace: &attach_workspace
@@ -635,7 +640,10 @@ workflows:
               only: development
 
   continuous-delivery-staging-auth:
-    when: << pipeline.parameters.run_staging_workflow >>
+    when:
+      and:
+        - << pipeline.parameters.run_staging_workflow >>
+        - not: << pipeline.parameters.destroy_staging >>
     jobs:
       - install-dependencies-app:
           app: "auth"
@@ -665,7 +673,10 @@ workflows:
             branches:
               only: main
   continuous-delivery-staging-common:
-    when: << pipeline.parameters.run_staging_workflow >>
+    when:
+      and:
+        - << pipeline.parameters.run_staging_workflow >>
+        - not: << pipeline.parameters.destroy_staging >>
     jobs:
       - install-dependencies-app:
           app: "common"
@@ -695,7 +706,10 @@ workflows:
             branches:
               only: main
   continuous-delivery-staging-header:
-    when: << pipeline.parameters.run_staging_workflow >>
+    when:
+      and:
+        - << pipeline.parameters.run_staging_workflow >>
+        - not: << pipeline.parameters.destroy_staging >>
     jobs:
       - install-dependencies-app:
           app: "header"
@@ -725,7 +739,10 @@ workflows:
             branches:
               only: main
   continuous-delivery-staging-root:
-    when: << pipeline.parameters.run_staging_workflow >>
+    when:
+      and:
+        - << pipeline.parameters.run_staging_workflow >>
+        - not: << pipeline.parameters.destroy_staging >>
     jobs:
       - install-dependencies-app:
           app: "root"
@@ -755,7 +772,10 @@ workflows:
             branches:
               only: main
   continuous-delivery-staging-single-view:
-    when: << pipeline.parameters.run_staging_workflow >>
+    when:
+      and:
+        - << pipeline.parameters.run_staging_workflow >>
+        - not: << pipeline.parameters.destroy_staging >>
     jobs:
       - e2e:
           filters:
@@ -796,8 +816,107 @@ workflows:
             branches:
               only: main
 
+  continuous-delivery-staging-destroy-auth:
+    when:
+      and:
+        - << pipeline.parameters.run_staging_workflow >>
+        - << pipeline.parameters.destroy_staging >>
+    jobs:
+      - assume-role-staging:
+          context: api-assume-role-corporate-staging-context
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-destroy:
+          app: "auth"
+          environment: "staging"
+          requires:
+            - assume-role-staging
+          filters:
+            branches:
+              only: main
+  continuous-delivery-staging-destroy-common:
+    when:
+      and:
+        - << pipeline.parameters.run_staging_workflow >>
+        - << pipeline.parameters.destroy_staging >>
+    jobs:
+      - assume-role-staging:
+          context: api-assume-role-corporate-staging-context
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-destroy:
+          app: "common"
+          environment: "staging"
+          requires:
+            - assume-role-staging
+          filters:
+            branches:
+              only: main
+  continuous-delivery-staging-destroy-header:
+    when:
+      and:
+        - << pipeline.parameters.run_staging_workflow >>
+        - << pipeline.parameters.destroy_staging >>
+    jobs:
+      - assume-role-staging:
+          context: api-assume-role-corporate-staging-context
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-destroy:
+          app: "header"
+          environment: "staging"
+          requires:
+            - assume-role-staging
+          filters:
+            branches:
+              only: main
+  continuous-delivery-staging-destroy-root:
+    when:
+      and:
+        - << pipeline.parameters.run_staging_workflow >>
+        - << pipeline.parameters.destroy_staging >>
+    jobs:
+      - assume-role-staging:
+          context: api-assume-role-corporate-staging-context
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-destroy:
+          app: "root"
+          environment: "staging"
+          requires:
+            - assume-role-staging
+          filters:
+            branches:
+              only: main
+  continuous-delivery-staging-destroy-single-view:
+    when:
+      and:
+        - << pipeline.parameters.run_staging_workflow >>
+        - << pipeline.parameters.destroy_staging >>
+    jobs:
+      - assume-role-staging:
+          context: api-assume-role-corporate-staging-context
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-destroy:
+          app: "single-view"
+          environment: "staging"
+          requires:
+            - assume-role-staging
+          filters:
+            branches:
+              only: main
+
   continuous-delivery-production:
-    when: << pipeline.parameters.run_production_workflow >>
+    when:
+      and:
+        - << pipeline.parameters.run_production_workflow >>
+        - not: << pipeline.parameters.destroy_staging >>
     jobs:
       - permit-production-terraform-release:
           type: approval
