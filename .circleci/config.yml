@@ -12,7 +12,8 @@ parameters:
     type: boolean
 
   run_staging_workflow:
-    default: true
+    description: Disabled after staging teardown so merge to main cannot recreate staging stacks
+    default: false
     type: boolean
 
   run_production_workflow:
