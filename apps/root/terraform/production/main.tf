@@ -22,24 +22,27 @@ resource "aws_s3_bucket" "frontend-bucket-production" {
     error_document = "error.html"
   }
 }
-module "cloudfront-production" {
-  source = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
-  s3_domain_name = aws_s3_bucket.frontend-bucket-production.bucket_regional_domain_name
-  origin_id = "single-view-root-frontend"
-  s3_bucket_arn = aws_s3_bucket.frontend-bucket-production.arn
-  s3_bucket_id = aws_s3_bucket.frontend-bucket-production.id
-  orginin_access_identity_desc = "Single View root frontend cloudfront identity"
-  cname_aliases = ["single-view.hackney.gov.uk"]
-  environment_name = "production"
-  cost_code = "B0811"
-  project_name = "Single View"
-  use_cloudfront_cert = false
-  hackney_cert_arn = "arn:aws:acm:us-east-1:492942404536:certificate/eafddce3-0259-4382-bc02-d5207b2a31f3"
-  compress = true
-}
-resource "aws_ssm_parameter" "cdn" {
-  name  = "/single-view/production/root-app-url"
-  type  = "String"
-  value = "https://${module.cloudfront-production.cloudfront_domain_name}"
-  overwrite = true
-}
+# Commented out for teardown. The distribution was deleted manually in the console, so
+# apply tried to recreate it and failed: hackney_cert_arn no longer exists in ACM.
+# The SSM parameter reads this module's output, so it has to go at the same time.
+# module "cloudfront-production" {
+#   source = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
+#   s3_domain_name = aws_s3_bucket.frontend-bucket-production.bucket_regional_domain_name
+#   origin_id = "single-view-root-frontend"
+#   s3_bucket_arn = aws_s3_bucket.frontend-bucket-production.arn
+#   s3_bucket_id = aws_s3_bucket.frontend-bucket-production.id
+#   orginin_access_identity_desc = "Single View root frontend cloudfront identity"
+#   cname_aliases = ["single-view.hackney.gov.uk"]
+#   environment_name = "production"
+#   cost_code = "B0811"
+#   project_name = "Single View"
+#   use_cloudfront_cert = false
+#   hackney_cert_arn = "arn:aws:acm:us-east-1:492942404536:certificate/eafddce3-0259-4382-bc02-d5207b2a31f3"
+#   compress = true
+# }
+# resource "aws_ssm_parameter" "cdn" {
+#   name  = "/single-view/production/root-app-url"
+#   type  = "String"
+#   value = "https://${module.cloudfront-production.cloudfront_domain_name}"
+#   overwrite = true
+# }

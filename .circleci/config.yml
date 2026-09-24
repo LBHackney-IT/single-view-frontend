@@ -70,6 +70,7 @@ commands:
             terraform init
       - run:
           name: Apply  <<parameters.app>>
+          no_output_timeout: 60m
           command: |
             cd ./apps/<<parameters.app>>/terraform/<<parameters.environment>>/
             terraform apply -auto-approve
@@ -562,10 +563,6 @@ workflows:
           environment: "production"
           requires:
             - terraform-force-destroy-apply-auth
-            - terraform-force-destroy-apply-common
-            - terraform-force-destroy-apply-header
-            - terraform-force-destroy-apply-root
-            - terraform-force-destroy-apply-single-view
           filters:
             branches:
               only: main
@@ -574,11 +571,7 @@ workflows:
           app: "common"
           environment: "production"
           requires:
-            - terraform-force-destroy-apply-auth
             - terraform-force-destroy-apply-common
-            - terraform-force-destroy-apply-header
-            - terraform-force-destroy-apply-root
-            - terraform-force-destroy-apply-single-view
           filters:
             branches:
               only: main
@@ -587,11 +580,7 @@ workflows:
           app: "header"
           environment: "production"
           requires:
-            - terraform-force-destroy-apply-auth
-            - terraform-force-destroy-apply-common
             - terraform-force-destroy-apply-header
-            - terraform-force-destroy-apply-root
-            - terraform-force-destroy-apply-single-view
           filters:
             branches:
               only: main
@@ -600,11 +589,7 @@ workflows:
           app: "root"
           environment: "production"
           requires:
-            - terraform-force-destroy-apply-auth
-            - terraform-force-destroy-apply-common
-            - terraform-force-destroy-apply-header
             - terraform-force-destroy-apply-root
-            - terraform-force-destroy-apply-single-view
           filters:
             branches:
               only: main
@@ -613,10 +598,6 @@ workflows:
           app: "single-view"
           environment: "production"
           requires:
-            - terraform-force-destroy-apply-auth
-            - terraform-force-destroy-apply-common
-            - terraform-force-destroy-apply-header
-            - terraform-force-destroy-apply-root
             - terraform-force-destroy-apply-single-view
           filters:
             branches:
