@@ -1,4 +1,9 @@
-# Single View Frontend
+# Single View Frontend - Decommissioned
+
+> [**IMPORTANT**]
+This application has been decommissioned all related resources have been destroyed.
+
+---
 
 This is the frontend for Single View 2.0, a monorepo comprising micro
 frontends taken from the @mtfh scope and repurposed for Single View.
