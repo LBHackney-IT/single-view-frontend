@@ -1,7 +1,7 @@
 # Single View Frontend - Decommissioned
 
 > [**IMPORTANT**]
-This application has been decommissioned all related resources have been destroyed.
+This application has been decommissioned and all related resources have been destroyed.
 
 ---
 
