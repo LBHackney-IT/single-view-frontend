@@ -6,27 +6,12 @@ orbs:
   aws_assume_role: lbh-hackit/aws_assume_role@0.1.0
 
 parameters:
-  run_development_workflow:
-    description: This will run by default when a code commit or merge is performed
-    default: false
-    type: boolean
-
-  run_staging_workflow:
-    description: Disabled after staging teardown so merge to main cannot recreate staging stacks
-    default: false
-    type: boolean
-
   run_production_workflow:
     default: true
     type: boolean
 
-  destroy_development:
-    description: When true, development workflows run terraform destroy instead of apply and skip S3 deploy
-    default: false
-    type: boolean
-
-  destroy_staging:
-    description: When true, staging workflows run terraform destroy instead of apply and skip S3 deploy
+  destroy_production:
+    description: When true, apply force_destroy then destroy all production stacks in one workflow
     default: false
     type: boolean
 
@@ -314,18 +299,6 @@ jobs:
       - store_artifacts:
           path: ~/project/cypress/videos
 
-  assume-role-development:
-    executor: docker-python
-    steps:
-      - assume-role-and-persist-workspace:
-          aws-account: $AWS_ACCOUNT_DEVELOPMENT
-
-  assume-role-staging:
-    executor: docker-python
-    steps:
-      - assume-role-and-persist-workspace:
-          aws-account: $AWS_ACCOUNT_STAGING
-
   assume-role-production:
     executor: docker-python
     steps:
@@ -359,6 +332,8 @@ jobs:
 workflows:
   version: 2
   cypress:
+    when:
+      not: << pipeline.parameters.destroy_production >>
     jobs:
       - e2e
       - install-dependencies-app:
@@ -367,557 +342,11 @@ workflows:
           requires:
             - install-dependencies-app
 
-  continuous-delivery-development-auth:
-    when:
-      and:
-        - << pipeline.parameters.run_development_workflow >>
-        - not: << pipeline.parameters.destroy_development >>
-    jobs:
-      - install-dependencies-app:
-          app: "auth"
-          filters:
-            branches:
-              only: development
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: development
-      - terraform-init-and-apply:
-          app: "auth"
-          environment: "development"
-          requires:
-            - assume-role-development
-          filters:
-            branches:
-              only: development
-      - build-and-deploy-auth:
-          stage: "development"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: development
-  continuous-delivery-development-common:
-    when:
-      and:
-        - << pipeline.parameters.run_development_workflow >>
-        - not: << pipeline.parameters.destroy_development >>
-    jobs:
-      - install-dependencies-app:
-          app: "common"
-          filters:
-            branches:
-              only: development
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: development
-      - terraform-init-and-apply:
-          app: "common"
-          environment: "development"
-          requires:
-            - assume-role-development
-          filters:
-            branches:
-              only: development
-      - build-and-deploy-common:
-          stage: "development"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: development
-  continuous-delivery-development-header:
-    when:
-      and:
-        - << pipeline.parameters.run_development_workflow >>
-        - not: << pipeline.parameters.destroy_development >>
-    jobs:
-      - install-dependencies-app:
-          app: "header"
-          filters:
-            branches:
-              only: development
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: development
-      - terraform-init-and-apply:
-          app: "header"
-          environment: "development"
-          requires:
-            - assume-role-development
-          filters:
-            branches:
-              only: development
-      - build-and-deploy-header:
-          stage: "development"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: development
-  continuous-delivery-development-root:
-    when:
-      and:
-        - << pipeline.parameters.run_development_workflow >>
-        - not: << pipeline.parameters.destroy_development >>
-    jobs:
-      - install-dependencies-app:
-          app: "root"
-          filters:
-            branches:
-              only: development
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: development
-      - terraform-init-and-apply:
-          app: "root"
-          environment: "development"
-          requires:
-            - assume-role-development
-          filters:
-            branches:
-              only: development
-      - build-and-deploy-root:
-          stage: "development"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: development
-  continuous-delivery-development-single-view:
-    when:
-      and:
-        - << pipeline.parameters.run_development_workflow >>
-        - not: << pipeline.parameters.destroy_development >>
-    jobs:
-      - e2e:
-          filters:
-            branches:
-              only: development
-      - install-dependencies-app:
-          app: "single-view"
-          filters:
-            branches:
-              only: development
-      - lint-and-test:
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: development
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
-          requires:
-            - lint-and-test
-            # - e2e
-          filters:
-            branches:
-              only: development
-      - terraform-init-and-apply:
-          app: "single-view"
-          environment: "development"
-          requires:
-            - assume-role-development
-          filters:
-            branches:
-              only: development
-      - build-and-deploy-single-view:
-          stage: "development"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: development
-
-  continuous-delivery-development-destroy-auth:
-    when:
-      and:
-        - << pipeline.parameters.run_development_workflow >>
-        - << pipeline.parameters.destroy_development >>
-    jobs:
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
-          filters:
-            branches:
-              only: development
-      - terraform-init-and-destroy:
-          app: "auth"
-          environment: "development"
-          requires:
-            - assume-role-development
-          filters:
-            branches:
-              only: development
-  continuous-delivery-development-destroy-common:
-    when:
-      and:
-        - << pipeline.parameters.run_development_workflow >>
-        - << pipeline.parameters.destroy_development >>
-    jobs:
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
-          filters:
-            branches:
-              only: development
-      - terraform-init-and-destroy:
-          app: "common"
-          environment: "development"
-          requires:
-            - assume-role-development
-          filters:
-            branches:
-              only: development
-  continuous-delivery-development-destroy-header:
-    when:
-      and:
-        - << pipeline.parameters.run_development_workflow >>
-        - << pipeline.parameters.destroy_development >>
-    jobs:
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
-          filters:
-            branches:
-              only: development
-      - terraform-init-and-destroy:
-          app: "header"
-          environment: "development"
-          requires:
-            - assume-role-development
-          filters:
-            branches:
-              only: development
-  continuous-delivery-development-destroy-root:
-    when:
-      and:
-        - << pipeline.parameters.run_development_workflow >>
-        - << pipeline.parameters.destroy_development >>
-    jobs:
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
-          filters:
-            branches:
-              only: development
-      - terraform-init-and-destroy:
-          app: "root"
-          environment: "development"
-          requires:
-            - assume-role-development
-          filters:
-            branches:
-              only: development
-  continuous-delivery-development-destroy-single-view:
-    when:
-      and:
-        - << pipeline.parameters.run_development_workflow >>
-        - << pipeline.parameters.destroy_development >>
-    jobs:
-      - assume-role-development:
-          context: api-assume-role-corporate-development-context
-          filters:
-            branches:
-              only: development
-      - terraform-init-and-destroy:
-          app: "single-view"
-          environment: "development"
-          requires:
-            - assume-role-development
-          filters:
-            branches:
-              only: development
-
-  continuous-delivery-staging-auth:
-    when:
-      and:
-        - << pipeline.parameters.run_staging_workflow >>
-        - not: << pipeline.parameters.destroy_staging >>
-    jobs:
-      - install-dependencies-app:
-          app: "auth"
-          filters:
-            branches:
-              only: main
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          app: "auth"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-auth:
-          stage: "staging"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-common:
-    when:
-      and:
-        - << pipeline.parameters.run_staging_workflow >>
-        - not: << pipeline.parameters.destroy_staging >>
-    jobs:
-      - install-dependencies-app:
-          app: "common"
-          filters:
-            branches:
-              only: main
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          app: "common"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-common:
-          stage: "staging"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-header:
-    when:
-      and:
-        - << pipeline.parameters.run_staging_workflow >>
-        - not: << pipeline.parameters.destroy_staging >>
-    jobs:
-      - install-dependencies-app:
-          app: "header"
-          filters:
-            branches:
-              only: main
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          app: "header"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-header:
-          stage: "staging"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-root:
-    when:
-      and:
-        - << pipeline.parameters.run_staging_workflow >>
-        - not: << pipeline.parameters.destroy_staging >>
-    jobs:
-      - install-dependencies-app:
-          app: "root"
-          filters:
-            branches:
-              only: main
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          app: "root"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-root:
-          stage: "staging"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-single-view:
-    when:
-      and:
-        - << pipeline.parameters.run_staging_workflow >>
-        - not: << pipeline.parameters.destroy_staging >>
-    jobs:
-      - e2e:
-          filters:
-            branches:
-              only: main
-      - install-dependencies-app:
-          app: "single-view"
-          filters:
-            branches:
-              only: main
-      - lint-and-test:
-          requires:
-            - install-dependencies-app
-          filters:
-            branches:
-              only: main
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          requires:
-            - lint-and-test
-            # - e2e
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-apply:
-          app: "single-view"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-      - build-and-deploy-single-view:
-          stage: "staging"
-          requires:
-            - terraform-init-and-apply
-          filters:
-            branches:
-              only: main
-
-  continuous-delivery-staging-destroy-auth:
-    when:
-      and:
-        - << pipeline.parameters.run_staging_workflow >>
-        - << pipeline.parameters.destroy_staging >>
-    jobs:
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-destroy:
-          app: "auth"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-destroy-common:
-    when:
-      and:
-        - << pipeline.parameters.run_staging_workflow >>
-        - << pipeline.parameters.destroy_staging >>
-    jobs:
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-destroy:
-          app: "common"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-destroy-header:
-    when:
-      and:
-        - << pipeline.parameters.run_staging_workflow >>
-        - << pipeline.parameters.destroy_staging >>
-    jobs:
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-destroy:
-          app: "header"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-destroy-root:
-    when:
-      and:
-        - << pipeline.parameters.run_staging_workflow >>
-        - << pipeline.parameters.destroy_staging >>
-    jobs:
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-destroy:
-          app: "root"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-  continuous-delivery-staging-destroy-single-view:
-    when:
-      and:
-        - << pipeline.parameters.run_staging_workflow >>
-        - << pipeline.parameters.destroy_staging >>
-    jobs:
-      - assume-role-staging:
-          context: api-assume-role-corporate-staging-context
-          filters:
-            branches:
-              only: main
-      - terraform-init-and-destroy:
-          app: "single-view"
-          environment: "staging"
-          requires:
-            - assume-role-staging
-          filters:
-            branches:
-              only: main
-
   continuous-delivery-production:
     when:
       and:
         - << pipeline.parameters.run_production_workflow >>
-        - not: << pipeline.parameters.destroy_staging >>
+        - not: << pipeline.parameters.destroy_production >>
     jobs:
       - permit-production-terraform-release:
           type: approval
@@ -1060,6 +489,135 @@ workflows:
           stage: "production"
           requires:
             - terraform-init-and-apply-single-view
+          filters:
+            branches:
+              only: main
+
+  continuous-delivery-production-destroy:
+    when:
+      and:
+        - << pipeline.parameters.run_production_workflow >>
+        - << pipeline.parameters.destroy_production >>
+    jobs:
+      - permit-production-destroy:
+          type: approval
+          filters:
+            branches:
+              only: main
+      - assume-role-production:
+          context: api-assume-role-corporate-production-context
+          requires:
+            - permit-production-destroy
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-apply:
+          name: terraform-force-destroy-apply-auth
+          app: "auth"
+          environment: "production"
+          requires:
+            - assume-role-production
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-apply:
+          name: terraform-force-destroy-apply-common
+          app: "common"
+          environment: "production"
+          requires:
+            - assume-role-production
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-apply:
+          name: terraform-force-destroy-apply-header
+          app: "header"
+          environment: "production"
+          requires:
+            - assume-role-production
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-apply:
+          name: terraform-force-destroy-apply-root
+          app: "root"
+          environment: "production"
+          requires:
+            - assume-role-production
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-apply:
+          name: terraform-force-destroy-apply-single-view
+          app: "single-view"
+          environment: "production"
+          requires:
+            - assume-role-production
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-destroy:
+          name: terraform-destroy-auth
+          app: "auth"
+          environment: "production"
+          requires:
+            - terraform-force-destroy-apply-auth
+            - terraform-force-destroy-apply-common
+            - terraform-force-destroy-apply-header
+            - terraform-force-destroy-apply-root
+            - terraform-force-destroy-apply-single-view
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-destroy:
+          name: terraform-destroy-common
+          app: "common"
+          environment: "production"
+          requires:
+            - terraform-force-destroy-apply-auth
+            - terraform-force-destroy-apply-common
+            - terraform-force-destroy-apply-header
+            - terraform-force-destroy-apply-root
+            - terraform-force-destroy-apply-single-view
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-destroy:
+          name: terraform-destroy-header
+          app: "header"
+          environment: "production"
+          requires:
+            - terraform-force-destroy-apply-auth
+            - terraform-force-destroy-apply-common
+            - terraform-force-destroy-apply-header
+            - terraform-force-destroy-apply-root
+            - terraform-force-destroy-apply-single-view
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-destroy:
+          name: terraform-destroy-root
+          app: "root"
+          environment: "production"
+          requires:
+            - terraform-force-destroy-apply-auth
+            - terraform-force-destroy-apply-common
+            - terraform-force-destroy-apply-header
+            - terraform-force-destroy-apply-root
+            - terraform-force-destroy-apply-single-view
+          filters:
+            branches:
+              only: main
+      - terraform-init-and-destroy:
+          name: terraform-destroy-single-view
+          app: "single-view"
+          environment: "production"
+          requires:
+            - terraform-force-destroy-apply-auth
+            - terraform-force-destroy-apply-common
+            - terraform-force-destroy-apply-header
+            - terraform-force-destroy-apply-root
+            - terraform-force-destroy-apply-single-view
           filters:
             branches:
               only: main
